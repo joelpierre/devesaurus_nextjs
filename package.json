@@ -1,0 +1,105 @@
+{
+  "name": "devesaurus",
+  "private": false,
+  "description": "Get simple definitions for industry terms",
+  "version": "0.1.0",
+  "author": "Joel Pierre-Powell <j.pierrepowell@gmail.com>",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "next": "9.0.5",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "@fortawesome/fontawesome-svg-core": "~1.2.19",
+    "@fortawesome/free-brands-svg-icons": "~5.9.0",
+    "@fortawesome/pro-light-svg-icons": "~5.9.0",
+    "@fortawesome/pro-regular-svg-icons": "~5.9.0",
+    "@fortawesome/pro-solid-svg-icons": "~5.9.0",
+    "@fortawesome/react-fontawesome": "~0.1.4",
+    "axios": "~0.19.0",
+    "classnames": "~2.2.6",
+    "dotenv": "~8.0.0",
+    "flexigridcss": "~0.6.3",
+    "html-loader": "~0.5.5",
+    "identity-obj-proxy": "~3.0.0",
+    "jsdom": "~15.1.1",
+    "jsdom-global": "~3.0.2",
+    "lodash": "~4.17.11",
+    "moxios": "~0.4.0",
+    "react-helmet": "~5.2.1",
+    "react-redux": "~7.1.0",
+    "react-router-dom": "~5.0.1",
+    "react-test-renderer": "~16.8.6",
+    "redux": "~4.0.1",
+    "redux-devtools-extension": "~2.13.8",
+    "redux-immutable": "~4.0.0",
+    "redux-mock-store": "~1.5.3",
+    "redux-thunk": "~2.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.2",
+    "typescript": "^3.6.3",
+    "faker": "~4.1.0",
+    "babel-jest": "~24.8.0",
+    "babel-plugin-inline-react-svg": "~1.1.0",
+    "babel-plugin-require-context-hook": "~1.0.0",
+    "babel-plugin-transform-require-context": "~0.1.1",
+    "babel-preset-gatsby": "~0.2.0",
+    "enzyme": "~3.10.0",
+    "enzyme-adapter-react-16": "~1.14.0",
+    "enzyme-to-json": "~3.3.5",
+    "eslint": "~6.0.1",
+    "eslint-config-airbnb": "~17.1.0",
+    "eslint-plugin-jsx-a11y": "~6.2.1",
+    "eslint-plugin-react": "~7.14.2",
+    "flexbox-grid-mixins": "~0.1.6",
+    "husky": "~2.5.0",
+    "imagemin-lint-staged": "~0.4.0",
+    "jest": "~24.8.0",
+    "jest-nyancat-reporter": "~2.0.0",
+    "jest-webpack": "~0.5.1",
+    "lint-staged": "~8.2.1",
+    "node-sass": "~4.12.0",
+    "postcss-calc": "~7.0.1",
+    "postcss-preset-env": "~6.6.0",
+    "postcss-safe-parser": "~4.0.1",
+    "prettier": "~1.18.2",
+    "pretty-quick": "~1.11.1",
+    "sass": "~1.22.0",
+    "stylelint": "~10.1.0",
+    "stylelint-config-standard": "~18.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joelpierre/devesaurus"
+  },
+  "bugs": {
+    "url": "https://github.com/joelpierre/devesaurus/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "jest --onlyChanged && lint-staged",
+      "pre-push": "lint-staged && jest --coverage --coverageReporters=text-summary"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.css": "stylelint",
+    "*.scss": "stylelint --syntax=scss",
+    "*.{png,jpeg,jpg,gif,svg}": [
+      "imagemin-lint-staged",
+      "git add"
+    ]
+  }
+}

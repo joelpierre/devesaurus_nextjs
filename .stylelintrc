@@ -1,0 +1,16 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "block-closing-brace-newline-before": null,
+    "block-closing-brace-newline-after": null,
+    "max-empty-lines": 2,
+    "at-rule-no-unknown": null,
+    "number-leading-zero": "never",
+    "color-hex-case": null,
+    "color-hex-length": null,
+    "selector-pseudo-element-colon-notation": "single",
+    "declaration-empty-line-before": null,
+    "at-rule-empty-line-before": null,
+    "declaration-block-no-shorthand-property-overrides": null
+  }
+}
