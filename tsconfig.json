@@ -1,22 +1,37 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "baseUrl": ".",
+    "outDir": "build",
+    "module": "esnext",
+    "target": "es6",
     "lib": [
-      "dom",
+      "es6",
       "dom.iterable",
-      "esnext"
+      "dom"
     ],
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
+    "sourceMap": true,
+    "jsx": "preserve",
     "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "paths": {
+      "lodash/*": [
+        "node_modules/@types/lodash-es/*"
+      ]
+    },
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules"
@@ -24,6 +39,18 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "__mocks__",
+    "src/**/__mocks__/*",
+    "config",
+    "coverage",
+    "next.config.js",
+    "postcss.config.js",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    ".next"
   ]
 }
