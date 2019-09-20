@@ -1,20 +1,18 @@
 import { combineReducers, Reducer } from 'redux';
 import pageReducer from './page/reducer';
-
-export interface IAppState {
-  page: any;
-}
-
-export interface IStateDispatch {
-  onGetPage(): any;
-}
+import coreReducer from './core/reducer';
+import postReducer from './post/reducer';
+import wordReducer from './word/reducer';
+import { IReduxState } from './createStore';
 
 /**
  * Root Reducer
- * @type {Reducer<any>}
  */
-export const rootReducer: Reducer<IAppState> = combineReducers<IAppState>({
-  page: pageReducer
+export const rootReducer: Reducer<IReduxState> = combineReducers<IReduxState>({
+  page: pageReducer,
+  core: coreReducer,
+  post: postReducer,
+  word: wordReducer
 });
 
 export default rootReducer;

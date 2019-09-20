@@ -1,0 +1,25 @@
+@import "../../../src/assets/sass/vars";
+
+$message: '/* This file was auto generated from scss in /src/sass/. Do not edit manually! */ ';
+
+@function create_config($name, $variables) {
+  @return (
+    $name: export(
+        export_path($name + '.ts'),
+        $variables,
+        (
+          prefix: $message + '/* tslint:disable */ export const ' + $name + ' = ()=>(',
+          suffix:');'
+        )
+    )
+  )
+}
+
+$export: (
+
+  colors: create_config(Colors, $colors),
+
+  settings: create_config(Settings, (
+    baseFontSize: $font-body,
+  )),
+);

@@ -2,20 +2,26 @@ import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import axios from '../../utils/axios/';
 
-import { IAppState, IStateDispatch } from '../rootReducer';
+import { GET_PAGE_FAILED, GET_PAGE_SUCCESS } from './constants';
+import { AxiosError, AxiosResponse } from 'axios';
+import { IReduxDispatch, IReduxState } from '../createStore';
+import { setAppError, setAppLoading } from '../rootActions';
 
-export const GET_PAGE = 'GET_PAGE';
-export const GET_PAGE_SUCCESS = 'GET_PAGE_SUCCESS';
-export const GET_PAGE_FAILED = 'GET_PAGE_FAILED';
-
-export const getPage: ActionCreator<ThunkAction<Promise<any>, IAppState, IStateDispatch, AnyAction>> = (slug: string) => {
+export const getPage: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = (slug: string) => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
+    dispatch(setAppLoading(true));
+    dispatch(setAppError(false));
+
     return axios
-      .get(`/post?page=${slug}`)
-      .then(response => {
+      .get(`/page/${slug}`)
+      .then((response: AxiosResponse) => {
+        dispatch(setAppLoading(false));
         return dispatch(getPageSuccess(response.data));
       })
-      .catch(error => {
+      .catch((error: AxiosError) => {
+        // console.warn(error);
+        dispatch(setAppError(true));
+        dispatch(setAppLoading(false));
         return dispatch(getPageFailed(error));
       });
   };
@@ -24,7 +30,6 @@ export const getPage: ActionCreator<ThunkAction<Promise<any>, IAppState, IStateD
 export const getPageSuccess = (data: any) => ({
   type: GET_PAGE_SUCCESS,
   payload: {
-    hasError: false,
     ...data
   }
 });
@@ -32,7 +37,6 @@ export const getPageSuccess = (data: any) => ({
 export const getPageFailed = (error: any) => ({
   type: GET_PAGE_FAILED,
   payload: {
-    hasError: true,
     ...error
   }
 });

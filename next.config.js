@@ -1,68 +1,189 @@
 /* eslint ignore */
 const path = require("path");
+const flowRight = require("lodash/flowRight");
 const webpack = require("webpack");
+
 const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
-// const WebappWebpackPlugin = require('webapp-webpack-plugin');
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const SassToTypescriptPlugin = require("./config/webpack/SassToTypescriptPlugin");
+
 const withSass = require("@zeit/next-sass");
+const withBundleAnalyzer = require("@zeit/next-bundle-analyzer");
+const withFonts = require("next-fonts");
 
-const dotenvVars = require("dotenv").config({
-  path: `./env/${process.env.NODE_ENV}.env`
-});
+const env = require("./config");
+const aliases = require("./config/webpack/aliases");
 
-const { parsed: parsedEnv } = dotenvVars;
-const nodeModules = path.resolve(process.cwd(), "node_modules");
-const stylesPath = path.resolve(process.cwd(), "src/assets/styles");
+const { PHASE_PRODUCTION_SERVER } = require("next/constants");
 
-if (dotenvVars) {
-  if (dotenvVars.error) {
-    throw dotenvVars.error;
-  }
-}
+const {
+  ...publicRuntimeConfig
+} = env;
 
-module.exports = withSass({
-  distDir: "build",
-  cssModules: true,
-  cssLoaderOptions: {
-    camelCase: true,
-    importLoaders: 1,
-    localIdentName: "[local]___[hash:base64:5]"
-  },
-  webpack: config => {
-    config.plugins.push(new webpack.EnvironmentPlugin(parsedEnv));
+const enhancer = flowRight(
+  withFonts,
+  withSass,
+  withBundleAnalyzer
+);
 
-    config.plugins.push(
-      new FilterWarningsPlugin({
-        exclude: /extract-css-chunks-plugin[^]*Conflicting order between:/
-        // exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
-      })
-    );
+module.exports = (phase) => {
+  return enhancer(
+    {
+      webpack(config, options) {
 
-    config.module.rules.push({
-      test: /\.(ttf|eot|woff|woff2|svg)(\?[a-z0-9]+)?$/,
-      loader: "file-loader",
-      options: {
-        publicPath: `/_next/static`,
-        outputPath: "static"
-      }
+        config.plugins.push(
+          new webpack.EnvironmentPlugin(env)
+        );
+
+        config.resolve.alias = Object.assign(config.resolve.alias, aliases);
+
+        if (options.dev) {
+          config.devtool = "cheap-module-eval-source-map";
+        }
+
+        config.output.globalObject = `(typeof self !== 'undefined' ? self : this)`;
+
+        config.module.rules.push({
+          test: /\.(jpe?g|png|gif|ico|webp)$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                limit: 8192,
+                fallback: "file-loader",
+                publicPath: "/_next/static/images/",
+                outputPath: `${options.isServer ? "../" : ""}static/images/`,
+                name: "[name]-[hash].[ext]"
+              }
+            }
+          ]
+        });
+
+        config.module.rules.push({
+          test: /\.svg$/,
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                limit: 8,
+                fallback: "file-loader",
+                publicPath: "/_next/static/images/",
+                outputPath: `${options.isServer ? "../" : ""}static/images/`,
+                name: "[name]-[hash].[ext]"
+              }
+            },
+            "svgo-loader"
+          ]
+        });
+
+        config.plugins.push(
+          new SassToTypescriptPlugin({
+            phase: options.isServer ? "server" : "client",
+            path: path.resolve("./config/webpack/SassToTypescriptPlugin/vars.scss")
+          })
+        );
+
+        if (options.isServer) {
+          // Do not run type checking twice:
+          config.plugins.push(new ForkTsCheckerWebpackPlugin({
+            watch: path.join(__dirname, "src"),
+            tsconfig: path.join(__dirname, "tsconfig.json"),
+            tslint: path.join(__dirname, "tslint.json")
+          }));
+        }
+
+        if (!options.isServer && phase !== PHASE_PRODUCTION_SERVER) {
+          const CopyWebpackPlugin = require("copy-webpack-plugin");
+
+          config.plugins.push(new CopyWebpackPlugin([
+            {
+              from: path.resolve(__dirname, "src/static/favicon"),
+              to: "static/favicon",
+              toType: "dir"
+            }
+          ]));
+        }
+
+        config.plugins.push(
+          new FilterWarningsPlugin({
+            exclude: /extract-css-chunks-plugin[^]*Conflicting order between:/
+            // exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
+          })
+        );
+
+        config.plugins.push(new webpack.DefinePlugin({
+          "process.env": JSON.stringify(env)
+        }));
+
+        config.module.rules.push({
+          test: /\.scss$/,
+          loader: "sass-resources-loader",
+          options: {
+            sourceMap: true,
+            resources: [
+              `${aliases.sass}/_vars.scss`,
+              `${aliases.sass}/mixins/_hover.scss`,
+              `${aliases.sass}/mixins/_image.scss`,
+              `${aliases.sass}/mixins/_overlay.scss`,
+              `${aliases.sass}/mixins/_screen-reader.scss`
+            ]
+          }
+        });
+
+        return config;
+      },
+      // expose config on server and client-side
+      // https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side
+      publicRuntimeConfig: {
+        ...publicRuntimeConfig,
+        NODE_ENV: process.env.NODE_ENV,
+        RUN_ENV: process.env.RUN_ENV,
+        APP_VERSION: process.env.APP_VERSION
+      },
+      assetPrefix: "",
+      analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
+      analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
+      bundleAnalyzerConfig: {
+        server: {
+          analyzerMode: "static",
+          reportFilename: "./server.html"
+        },
+        browser: {
+          analyzerMode: "static",
+          reportFilename: "./client.html"
+        }
+      },
+      poweredByHeader: false
     });
+};
+// withSass({
+// distDir: "build",
+// cssModules: true,
+// cssLoaderOptions: {
+//   camelCase: true,
+//   importLoaders: 1,
+//   localIdentName: "[local]___[hash:base64:5]"
+// },
+// webpack: config => {
+//   config.plugins.push(
+//     new webpack.EnvironmentPlugin(env)
+//   );
+//
 
-    // config.module.rules.push({
-    //   test: /\.scss$/,
-    //   loader: "sass-resources-loader",
-    //   options: {
-    //     sourceMap: true
-    //     //     resources: [
-    //     //       `${stylesPath}/_vars.scss`,
-    //     //       `${stylesPath}/mixins/_hover.scss`,
-    //     //       `${stylesPath}/mixins/_image.scss`,
-    //     //       `${stylesPath}/mixins/_overlay.scss`,
-    //     //       `${stylesPath}/mixins/_screen-reader.scss`,
-    //     //     ],
-    //   }
-    // });
+//
+//   config.module.rules.push({
+//     test: /\.(ttf|eot|woff|woff2|svg)(\?[a-z0-9]+)?$/,
+//     loader: "file-loader",
+//     options: {
+//       publicPath: `/_next/static`,
+//       outputPath: "static"
+//     }
+//   });
+//
 
-    return config;
-  }
-});
+//
+//   return config;
+// }
+// })
+// ;

@@ -1,16 +1,20 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import ConfigProvider from '../../services/configProvider';
 
-const defaultInstance = axios.create({
-  baseURL: `${process.env.PROTOCOL}://${process.env.API_URL}/wp-json`
+const PROTOCOL = ConfigProvider.getValue('PROTOCOL');
+const API_URL = ConfigProvider.getValue('API_URL');
+
+const defaultAxiosInstance: AxiosInstance = axios.create({
+  baseURL: `${PROTOCOL}://${API_URL}/wp-json/better-rest-endpoints/v1`
 });
 
-defaultInstance.interceptors.request.use(
-  request => {
-    return request;
+defaultAxiosInstance.interceptors.request.use(
+  (response: AxiosResponse) => {
+    return response;
   },
-  error => {
+  (error: AxiosError) => {
     return Promise.reject(error);
   }
 );
 
-export default defaultInstance;
+export default defaultAxiosInstance;

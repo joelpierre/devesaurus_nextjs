@@ -1,0 +1,86 @@
+// (max-width: 599px)
+@mixin mobile-only {
+  @media (max-width: $mobile-only) {
+    @content;
+  }
+}
+
+// (min-width: 600px)
+@mixin tablet-portrait {
+  @media (min-width: $tablet-portrait) {
+    @content;
+  }
+}
+
+// (min-width: 900px)
+@mixin tablet-landscape {
+  @media (min-width: $tablet-landscape) {
+    @content;
+  }
+}
+
+// (min-width: 1200px)
+@mixin desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+
+// (min-width: 1800px)
+@mixin big-desktop {
+  @media (min-width: $big-desktop) {
+    @content;
+  }
+}
+
+// ----------------------------------------------------------------------
+// BREAKPOINTS
+// ----------------------------------------------------------------------
+
+$break-xxs: 375 !default; // from "phone portrait" size
+$break-xs: 568 !default; // from "phone landscape" size
+$break-small: 768 !default; // from "tablet" size
+$break-medium: 1024 !default; // from "desktop" size
+$break-large: 1280 !default; // from bigger desktop size
+
+$break-points-map: (
+  xxs: $break-xxs,
+  xs: $break-xs,
+  small: $break-small,
+  medium: $break-medium,
+  large: $break-large
+);
+
+@function getbreakpoint($key) {
+  @return map-get($break-points-map, $key);
+}
+
+@mixin breakpoint($width) {
+  @if type-of($width) == number {
+    @media only screen and (min-width: $width*1px) {
+      @content;
+    }
+  } @else {
+    $break: getbreakpoint($width);
+    @media only screen and (min-width: $break*1px) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint-between($min, $max) {
+  $minWidth: $min;
+  $maxWidth: $max;
+
+  @if type-of($min) != number {
+    $minWidth: getbreakpoint($min);
+  }
+
+  @if type-of($max) != number {
+    $maxWidth: getbreakpoint($max);
+  }
+
+  @media only screen and (min-width: $minWidth*1px) and (max-width: ($maxWidth*1px) - 1) {
+    @content;
+  }
+}

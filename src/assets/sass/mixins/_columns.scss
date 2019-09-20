@@ -1,0 +1,27 @@
+@import "../../../../node_modules/flexbox-grid-mixins";
+
+@mixin dynamic-flex-columns($size: null, $columns: 12) {
+  @if ($size == null) {
+    @for $i from 1 through $columns {
+      &-#{$i} {
+        @include grid-col($i);
+      }
+    }
+  }
+
+  @if ($size != null) {
+    @for $i from 1 through $columns {
+      &-#{$size}-#{$i} {
+        @include grid-col($i) {
+          padding-left: $grid-space-mobile;
+          padding-right: $grid-space-mobile;
+
+          @include tablet-landscape {
+            padding-left: $grid-space-desktop;
+            padding-right: $grid-space-desktop;
+          }
+        }
+      }
+    }
+  }
+}

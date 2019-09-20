@@ -1,0 +1,18 @@
+@mixin center-xy {
+  transform: $center;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+}
+
+@mixin center-x {
+  transform: $centerX;
+  left: 50%;
+  position: absolute;
+}
+
+@mixin center-y {
+  transform: $centerY;
+  top: 50%;
+  position: absolute;
+}

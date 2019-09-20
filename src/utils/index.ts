@@ -1,6 +1,3 @@
-// import { IAcfModule } from 'src/utils/interfaces';
-// import { TTheme } from 'src/utils/types';
-
 /**
  * Update any object passed through
  * @param oldObject
@@ -169,6 +166,10 @@ export const sanitizeUrl = (link: string): string => {
 
   return link;
 };
+
+export const isNonEmptyString = value =>
+  typeof value === 'string'
+  && value.trim() !== '';
 
 export const mapPageIdToPage = (id: number): string => {
   switch (id) {

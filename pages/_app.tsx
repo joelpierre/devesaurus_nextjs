@@ -1,29 +1,34 @@
 import React from 'react';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
-import makeStore from '../src/store/createStore';
+import makeStore, { TReduxProps } from '../src/store/createStore';
+import { NextComponentType } from 'next';
 
 // import './_app.scss';
 
-class CoreApp extends App<any> {
-  static async getInitialProps({ Component, ctx }: any) {
-    const pageProps = Component.getInitialProps
-      ? await Component.getInitialProps(ctx)
-      : {};
+interface ICoreApp {
+  Component: NextComponentType;
+  ctx: any;
+  store?: any;
+}
 
-    return { pageProps };
+class CoreApp extends App<ICoreApp & TReduxProps> {
+  static async getInitialProps({ Component, ctx }: ICoreApp) {
+    return {
+      pageProps: Component.getInitialProps
+        ? await Component.getInitialProps(ctx)
+        : {}
+    };
   }
 
   render() {
-    const { Component, pageProps, store } = this.props;
+    const { Component, store: reduxStore, pageProps } = this.props;
 
     return (
-      <Container>
-        <Provider store={store}>
-          <Component {...pageProps} />
-        </Provider>
-      </Container>
+      <Provider store={reduxStore}>
+        <Component {...pageProps} />
+      </Provider>
     );
   }
 }

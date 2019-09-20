@@ -5,11 +5,12 @@ interface IHomeProps {
 }
 
 export class Home extends PureComponent<IHomeProps> {
-  static getInitialProps() {
+  static getInitianProps(ctx: any) {
+
+    console.log(ctx);
+
     return {
-      pageProps: {
-        joel: 'is awesome'
-      }
+      ctx: ctx.query
     };
   }
 
