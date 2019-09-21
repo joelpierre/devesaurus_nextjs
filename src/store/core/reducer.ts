@@ -6,6 +6,8 @@ import ConfigProvider from '../../services/configProvider';
 export interface ICoreStoreState {
   title: string;
   description: string;
+  hasError: boolean;
+  isLoading: boolean;
 }
 
 const SITE_TITLE = ConfigProvider.getValue('SITE_TITLE');
@@ -13,7 +15,9 @@ const SITE_DESCRIPTION = ConfigProvider.getValue('SITE_DESCRIPTION');
 
 const initialState: ICoreStoreState = {
   title: SITE_TITLE || '',
-  description: SITE_DESCRIPTION || ''
+  description: SITE_DESCRIPTION || '',
+  hasError: false,
+  isLoading: false
 };
 
 const coreReducer = (
@@ -29,6 +33,12 @@ const coreReducer = (
 
     case actions.GET_SITE_META_FAILED:
       return updateObject(state, action.payload);
+
+    case actions.SET_APP_ERROR:
+      return updateObject(state, { hasError: action.payload });
+
+    case actions.SET_APP_LOADING:
+      return updateObject(state, { isLoading: action.payload });
 
     default:
       return state;

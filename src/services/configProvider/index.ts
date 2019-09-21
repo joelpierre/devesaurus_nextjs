@@ -5,6 +5,7 @@ const { publicRuntimeConfig } = getConfig();
 
 const envConfig = publicRuntimeConfig;
 
+// @ts-ignore
 export type Config = {
   readonly PORT: string;
   readonly PROTOCOL: string;

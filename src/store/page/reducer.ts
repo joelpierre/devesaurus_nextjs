@@ -16,23 +16,10 @@ export interface IPageStoreState {
   acf: Core.IAcfComponents;
 }
 
-const initialState = {
-  id: 0,
-  title: '',
-  slug: '',
-  date: '',
-  date_modified: '',
-  excerpt: '',
-  content: '',
-  author: '',
-  // tslint:disable-next-line:no-object-literal-type-assertion
-  yoast_meta: {} as Core.IYoastMeta,
-  // tslint:disable-next-line:no-object-literal-type-assertion
-  acf: {} as Core.IAcfCore
-};
+const initialState = {};
 
 const pageReducer = (
-  state: IPageStoreState = initialState,
+  state: IPageStoreState = initialState as any,
   action: AnyAction
 ): IPageStoreState => {
   let updatedState;
@@ -43,10 +30,9 @@ const pageReducer = (
       return updateObject(state, updatedState);
 
     case actions.GET_PAGE_FAILED:
-      return updateObject(state, action.payload);
+      return { ...action.payload };
 
     default:
-
       return state;
   }
 };

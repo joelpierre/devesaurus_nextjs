@@ -16,12 +16,18 @@ export const getPage: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRedu
       .get(`/page/${slug}`)
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
+
+        // We check for the error as wordpress doesn't return a 404.
+        if (response.data.length === 0) {
+          dispatch(setAppError(true));
+        }
+
         return dispatch(getPageSuccess(response.data));
       })
       .catch((error: AxiosError) => {
         // console.warn(error);
-        dispatch(setAppError(true));
         dispatch(setAppLoading(false));
+        dispatch(setAppError(true));
         return dispatch(getPageFailed(error));
       });
   };

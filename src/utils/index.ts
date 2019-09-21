@@ -4,7 +4,7 @@
  * @param updatedValues
  * @returns updatedObject
  */
-export const updateObject = <T>(oldObject: T, updatedValues: T): T => ({
+export const updateObject = <T>(oldObject: T, updatedValues: Partial<T>): T => ({
   ...oldObject,
   ...updatedValues
 });

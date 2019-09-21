@@ -3,13 +3,15 @@ import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
 
 export interface IWordStoreState {
+  id: number;
+  title: string;
+  slug: string;
 }
 
-const initialState: IWordStoreState = {
-};
+const initialState = {};
 
 const wordReducer = (
-  state = initialState,
+  state = initialState as IWordStoreState,
   action: AnyAction
 ): IWordStoreState => {
   switch (action.type) {
@@ -20,7 +22,7 @@ const wordReducer = (
       return updateObject(state, action.payload);
 
     case actions.GET_WORD_FAILED:
-      return updateObject(state, action.payload);
+      return { ...action.payload };
 
     default:
       return state;

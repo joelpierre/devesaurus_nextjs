@@ -7,6 +7,8 @@ import { ICoreStoreState } from './core/reducer';
 import { IPageStoreState } from './page/reducer';
 import { IPostStoreState } from './post/reducer';
 import { IWordStoreState } from './word/reducer';
+import { getPage, getPost, getSiteMeta } from './rootActions';
+import { getWord } from './word/actions';
 
 export interface IReduxState {
   core: ICoreStoreState;
@@ -16,13 +18,13 @@ export interface IReduxState {
 }
 
 export interface IReduxDispatch {
-  onGetPage(slug: string): any;
+  onGetPage(slug: string): () => typeof getPage;
 
-  onGetSiteMeta(): any;
+  onGetSiteMeta(): () => typeof getSiteMeta;
 
-  onGetPost(slug: string): any;
+  onGetPost(slug: string): () => typeof getPost;
 
-  onGetWord(slug: string): any;
+  onGetWord(slug: string): typeof getWord;
 }
 
 export type TReduxProps = IReduxState & IReduxDispatch;
