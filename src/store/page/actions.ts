@@ -2,10 +2,11 @@ import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import axios from '../../utils/axios/';
 
-import { GET_PAGE_FAILED, GET_PAGE_SUCCESS } from './constants';
+import { CLEAR_PAGE, GET_PAGE_FAILED, GET_PAGE_SUCCESS } from './constants';
 import { AxiosError, AxiosResponse } from 'axios';
 import { IReduxDispatch, IReduxState } from '../createStore';
 import { setAppError, setAppLoading } from '../rootActions';
+import { IPageStoreState } from './reducer';
 
 export const getPage: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = (slug: string) => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
@@ -20,6 +21,7 @@ export const getPage: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRedu
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
           dispatch(setAppError(true));
+          return dispatch(getPageFailed({ message: 'Page not found', hasError: true, code: 404 }));
         }
 
         return dispatch(getPageSuccess(response.data));
@@ -33,16 +35,20 @@ export const getPage: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRedu
   };
 };
 
-export const getPageSuccess = (data: any) => ({
+export const getPageSuccess = (data: IPageStoreState) => ({
   type: GET_PAGE_SUCCESS,
   payload: {
     ...data
   }
 });
 
-export const getPageFailed = (error: any) => ({
+export const getPageFailed = (error: Core.IErrorResponse | AxiosError) => ({
   type: GET_PAGE_FAILED,
   payload: {
-    ...error
+    error
   }
+});
+
+export const clearPage = () => ({
+  type: CLEAR_PAGE
 });

@@ -19,7 +19,7 @@ export const getSiteMeta: ActionCreator<ThunkAction<Promise<any>, IReduxState, I
   };
 };
 
-export const getSiteMetaSuccess = (data: any) => ({
+export const getSiteMetaSuccess = (data: Core.ICoreOptions) => ({
   type: GET_SITE_META_SUCCESS,
   payload: {
     options: {
@@ -28,10 +28,10 @@ export const getSiteMetaSuccess = (data: any) => ({
   }
 });
 
-export const getSiteMetaFailed = (error: any) => ({
+export const getSiteMetaFailed = (error: Core.IErrorResponse | AxiosError) => ({
   type: GET_SITE_META_FAILED,
   payload: {
-    ...error
+    error
   }
 });
 

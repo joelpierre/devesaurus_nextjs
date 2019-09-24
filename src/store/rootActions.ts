@@ -1,7 +1,8 @@
 export {
   getPage,
   getPageSuccess,
-  getPageFailed
+  getPageFailed,
+  clearPage
 } from './page/actions';
 
 export {
@@ -15,5 +16,13 @@ export {
 export {
   getPost,
   getPostSuccess,
-  getPostFailed
+  getPostFailed,
+  clearPost
 } from './post/actions';
+
+export {
+  getWord,
+  getWordSuccess,
+  getWordFailed,
+  clearWord
+} from './word/actions';

@@ -8,6 +8,7 @@ export interface ICoreStoreState {
   description: string;
   hasError: boolean;
   isLoading: boolean;
+  options?: Core.ICoreOptions;
 }
 
 const SITE_TITLE = ConfigProvider.getValue('SITE_TITLE');
@@ -21,7 +22,7 @@ const initialState: ICoreStoreState = {
 };
 
 const coreReducer = (
-  state = initialState,
+  state: ICoreStoreState = initialState,
   action: AnyAction
 ): ICoreStoreState => {
   switch (action.type) {

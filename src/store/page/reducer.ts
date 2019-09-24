@@ -2,6 +2,7 @@ import * as actions from './constants';
 import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
 import pageTransform from './transform';
+import { AxiosError } from 'axios';
 
 export interface IPageStoreState {
   id: number;
@@ -14,6 +15,7 @@ export interface IPageStoreState {
   author: string;
   yoast_meta: Core.IYoastMeta;
   acf: Core.IAcfComponents;
+  error?: Core.IErrorResponse | AxiosError;
 }
 
 const initialState = {};
@@ -31,6 +33,9 @@ const pageReducer = (
 
     case actions.GET_PAGE_FAILED:
       return { ...action.payload };
+
+    case actions.CLEAR_PAGE:
+      return {} as any;
 
     default:
       return state;

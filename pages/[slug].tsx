@@ -4,12 +4,28 @@ import { connect } from 'react-redux';
 
 import { TTemplateInitialProps } from '@jpp/typings/index';
 
-import { getPage } from '../src/store/rootActions';
+import ErrorPage from './_error';
+import { clearPage, getPage } from '../src/store/rootActions';
 import { IReduxState } from '../src/store/createStore';
+import { IPageStoreState } from '../src/store/page/reducer';
 
 export class PageTemplate extends PureComponent<TTemplateInitialProps> {
-  static async getInitialProps({ query: { slug }, store, isServer }: TTemplateInitialProps) {
-    await store.dispatch(getPage(slug));
+  static async getInitialProps({ query: { slug }, store, isServer, res }: TTemplateInitialProps) {
+
+    if (slug) {
+      await store.dispatch(getPage(slug));
+    }
+
+    const page: IPageStoreState = store.getState().page;
+
+    if (page.error) {
+      res.statusCode = page.error.code;
+
+      return {
+        error: page.error
+      };
+    }
+
     return {
       isServer,
       slug
@@ -17,11 +33,23 @@ export class PageTemplate extends PureComponent<TTemplateInitialProps> {
   }
 
   async componentDidMount(): Promise<void> {
-    const { onGetPage, slug } = this.props;
-    await onGetPage(slug);
+    const { onGetPage, slug, page } = this.props;
+
+    if (Object.keys(page).length === 0) {
+      await onGetPage(slug);
+    }
+  }
+
+  async componentWillUnmount(): Promise<void> {
+    const { onClearPage } = this.props;
+    await onClearPage();
   }
 
   render() {
+    if (this.props.error) {
+      return (<ErrorPage {...this.props.error} />);
+    }
+
     return (
       <>
         This is the {this.props.page.title} page. We are {this.props.isServer ? 'SSR' : 'CSR'}
@@ -48,7 +76,8 @@ const mapStateToProps = ({ page }: IReduxState) => ({
 });
 
 const mapDispatchToProps = {
-  onGetPage: (slug: string) => getPage(slug)
+  onGetPage: (slug: string) => getPage(slug),
+  onClearPage: () => clearPage()
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageTemplate);

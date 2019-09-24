@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import Head from 'next/head';
 import { TTemplateInitialProps } from '@jpp/typings/index';
-import { getPage } from '../src/store/page/actions';
+import { clearPage, getPage } from '../src/store/page/actions';
 import { IReduxState } from '../src/store/createStore';
 import { connect } from 'react-redux';
 
 export class HomePage extends PureComponent<TTemplateInitialProps> {
-  static async getInitialProps({ query: { slug }, store, isServer }: TTemplateInitialProps) {
-    await store.dispatch(getPage(slug));
+  static async getInitialProps({ store, isServer }: TTemplateInitialProps) {
+    await store.dispatch(getPage('home'));
     return {
       isServer
     };
@@ -18,6 +18,14 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
     await onGetPage(slug);
   }
 
+  async componentWillUnmount(): Promise<void> {
+    const { onClearPage, page } = this.props;
+
+    if (Object.keys(page).length === 0) {
+      await onClearPage();
+    }
+  }
+
   render() {
     return (
       <>
@@ -25,7 +33,7 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
           <title>Home Page | Next 9 test</title>
         </Head>
 
-        Joel is awesome
+        Joel is awesome This is the homepage it is static at the moment... Should we make it dynamic? hmm... maybe.
       </>
     );
   }
@@ -36,7 +44,8 @@ const mapStateToProps = ({ page }: IReduxState) => ({
 });
 
 const mapDispatchToProps = {
-  onGetPage: (slug: string) => getPage(slug)
+  onGetPage: (slug: string) => getPage(slug),
+  onClearPage: () => clearPage()
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -1,17 +1,19 @@
 import * as actions from './constants';
 import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
+import { AxiosError } from 'axios';
 
 export interface IPostStoreState {
   id: number;
   title: string;
   slug: string;
+  error?: Core.IErrorResponse | AxiosError;
 }
 
 const initialState = {};
 
 const postReducer = (
-  state = initialState as IPostStoreState,
+  state: IPostStoreState = initialState as any,
   action: AnyAction
 ): IPostStoreState => {
   switch (action.type) {
@@ -23,6 +25,9 @@ const postReducer = (
 
     case actions.GET_POST_FAILED:
       return { ...action.payload };
+
+    case actions.CLEAR_POST:
+      return {} as any;
 
     default:
       return state;

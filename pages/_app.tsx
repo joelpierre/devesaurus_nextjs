@@ -19,9 +19,9 @@ class CoreApp extends App<ICoreApp & TReduxProps> {
     const store: { dispatch: any } = ctx.store;
 
     if (ctx.store) {
-      const contentFetched = ctx.store.getState().core.address;
+      const siteMetaFetched = ctx.store.getState().core.options;
 
-      if (!contentFetched) {
+      if (!siteMetaFetched) {
         await store.dispatch(getSiteMeta());
       }
     }
