@@ -358,4 +358,22 @@ declare namespace Core {
      **/
     code: TErrorCode;
   }
+
+  export interface IMetaTag {
+    /**
+     *
+     *
+     **/
+    name: string;
+    /**
+     *
+     *
+     **/
+    content: string;
+    /**
+     *
+     *
+     **/
+    property: string;
+  }
 }

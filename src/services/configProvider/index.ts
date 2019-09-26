@@ -10,6 +10,7 @@ export type Config = {
   readonly PORT: string;
   readonly PROTOCOL: string;
 
+  readonly APP_LANG: string;
   readonly API_URL: string;
   readonly BASE_URL: string;
   readonly SITE_URL: string;
@@ -17,8 +18,11 @@ export type Config = {
   readonly RUN_ENV: 'dev' | 'prod' | 'test' | 'local';
   readonly NODE_ENV: 'development' | 'production' | 'test';
 
+  readonly APP_TITLE: string;
   readonly SITE_TITLE: string;
   readonly SITE_DESCRIPTION: string;
+  readonly SITE_AUTHOR: string;
+  readonly APP_KEYWORDS: string;
 
   readonly GTM_ID: string;
   readonly GTM_AUTH: string;

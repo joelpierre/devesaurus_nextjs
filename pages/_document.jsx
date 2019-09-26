@@ -9,11 +9,12 @@ class CustomDocument extends Document {
   }
 
   render() {
-    const title = ConfigProvider.getValue("SITE_TITLE");
+    const title = ConfigProvider.getValue("APP_TITLE");
     const description = ConfigProvider.getValue("SITE_DESCRIPTION");
+    const appLang = ConfigProvider.getValue("APP_LANG");
 
     return (
-      <Html>
+      <Html lang={appLang}>
         <Head>
           <meta charSet="utf-8"/>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge, chrome=1"/>

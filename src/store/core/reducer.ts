@@ -11,11 +11,11 @@ export interface ICoreStoreState {
   options?: Core.ICoreOptions;
 }
 
-const SITE_TITLE = ConfigProvider.getValue('SITE_TITLE');
+const APP_TITLE = ConfigProvider.getValue('APP_TITLE');
 const SITE_DESCRIPTION = ConfigProvider.getValue('SITE_DESCRIPTION');
 
 const initialState: ICoreStoreState = {
-  title: SITE_TITLE || '',
+  title: APP_TITLE || '',
   description: SITE_DESCRIPTION || '',
   hasError: false,
   isLoading: false

@@ -13,7 +13,7 @@ export interface IPageStoreState {
   excerpt: string;
   content: string;
   author: string;
-  yoast_meta: Core.IYoastMeta;
+  yoast: Core.IYoastMeta;
   acf: Core.IAcfComponents;
   error?: Core.IErrorResponse | AxiosError;
 }
