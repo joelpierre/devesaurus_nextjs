@@ -9,6 +9,16 @@ export {
   getSiteMeta,
   getSiteMetaSuccess,
   getSiteMetaFailed,
+  getPrimaryMenu,
+  getPrimaryMenuSuccess,
+  getPrimaryMenuFailed,
+  getFooterMenu,
+  getFooterMenuSuccess,
+  getFooterMenuFailed,
+  getTermsMenu,
+  getTermsMenuSuccess,
+  getTermsMenuFailed,
+  setInitialFetch,
   setAppError,
   setAppLoading
 } from './core/actions';

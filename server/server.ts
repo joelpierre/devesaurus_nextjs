@@ -1,5 +1,5 @@
 import 'source-map-support/register';
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import path from 'path';
 import compression from 'compression';
 import bodyParser from 'body-parser';
@@ -59,10 +59,6 @@ app.prepare().then(() => {
       immutable: true
     })
   );
-
-  server.get('/favicon.icon', (_req: Request, _res: Response, next: NextFunction) => {
-    next();
-  });
 
   // THIS IS THE DEFAULT ROUTE, DON'T EDIT THIS
   server.get('*', (req: Request, res: Response) => {

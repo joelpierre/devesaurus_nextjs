@@ -9,16 +9,24 @@ export interface ICoreStoreState {
   hasError: boolean;
   isLoading: boolean;
   options?: Core.ICoreOptions;
+  primaryMenu: Core.IMenuItem[];
+  footerMenu: Core.IMenuItem[];
+  termsMenu: Core.IMenuItem[];
+  initialFetch: boolean;
 }
 
-const APP_TITLE = ConfigProvider.getValue('APP_TITLE');
-const SITE_DESCRIPTION = ConfigProvider.getValue('SITE_DESCRIPTION');
+const APP_TITLE = ConfigProvider.getValue('APP_TITLE') || '';
+const SITE_DESCRIPTION = ConfigProvider.getValue('SITE_DESCRIPTION') || '';
 
 const initialState: ICoreStoreState = {
-  title: APP_TITLE || '',
-  description: SITE_DESCRIPTION || '',
+  title: APP_TITLE,
+  description: SITE_DESCRIPTION,
   hasError: false,
-  isLoading: false
+  isLoading: false,
+  primaryMenu: [],
+  footerMenu: [],
+  termsMenu: [],
+  initialFetch: false
 };
 
 const coreReducer = (
@@ -26,14 +34,15 @@ const coreReducer = (
   action: AnyAction
 ): ICoreStoreState => {
   switch (action.type) {
-    case actions.GET_SITE_META:
-      return updateObject(state, action.payload);
-
+    case actions.GET_PRIMARY_MENU_SUCCESS:
+    case actions.GET_FOOTER_MENU_SUCCESS:
+    case actions.GET_TERMS_MENU_SUCCESS:
     case actions.GET_SITE_META_SUCCESS:
-      return updateObject(state, action.payload);
-
     case actions.GET_SITE_META_FAILED:
       return updateObject(state, action.payload);
+
+    case actions.SET_INITIAL_FETCH:
+      return updateObject(state, { initialFetch: action.payload });
 
     case actions.SET_APP_ERROR:
       return updateObject(state, { hasError: action.payload });

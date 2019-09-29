@@ -8,11 +8,11 @@ import Meta from '@jpp/shared/Meta/Meta';
 import ConfigProvider from '../src/services/configProvider';
 import ErrorPage from './_error';
 import { IPageStoreState } from '../src/store/page/reducer';
+import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
 
 export class HomePage extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
     await store.dispatch(getPage('home'));
-
     const page: IPageStoreState = store.getState().page;
 
     if (page.error) {
@@ -58,7 +58,11 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
       <>
         <Meta title={title} description={description}/>
 
-        Joel is awesome This is the homepage it is static at the moment... Should we make it dynamic? hmm... maybe.
+        <CoreLayout>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cumque cupiditate deserunt dignissimos
+          distinctio dolor dolorem doloremque enim minima, molestiae nulla obcaecati qui reiciendis reprehenderit,
+          tempora tenetur vero voluptates voluptatibus!
+        </CoreLayout>
       </>
     );
   }

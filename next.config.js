@@ -29,6 +29,36 @@ const enhancer = flowRight(
 module.exports = (phase) => {
   return enhancer(
     {
+      distDir: "build",
+      cssModules: true,
+      cssLoaderOptions: {
+        namedExports: true,
+        camelCase: true,
+        importLoaders: 1,
+        localIdentName: "[local]___[hash:base64:5]"
+      },
+      // expose config on server and client-side
+      // https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side
+      publicRuntimeConfig: {
+        ...publicRuntimeConfig,
+        NODE_ENV: process.env.NODE_ENV,
+        RUN_ENV: process.env.RUN_ENV,
+        APP_VERSION: process.env.APP_VERSION
+      },
+      assetPrefix: "",
+      analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
+      analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
+      bundleAnalyzerConfig: {
+        server: {
+          analyzerMode: "static",
+          reportFilename: "./server.html"
+        },
+        browser: {
+          analyzerMode: "static",
+          reportFilename: "./client.html"
+        }
+      },
+      poweredByHeader: false,
       webpack(config, options) {
 
         config.plugins.push(
@@ -132,30 +162,9 @@ module.exports = (phase) => {
         });
 
         return config;
-      },
-      // expose config on server and client-side
-      // https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side
-      publicRuntimeConfig: {
-        ...publicRuntimeConfig,
-        NODE_ENV: process.env.NODE_ENV,
-        RUN_ENV: process.env.RUN_ENV,
-        APP_VERSION: process.env.APP_VERSION
-      },
-      assetPrefix: "",
-      analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
-      analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
-      bundleAnalyzerConfig: {
-        server: {
-          analyzerMode: "static",
-          reportFilename: "./server.html"
-        },
-        browser: {
-          analyzerMode: "static",
-          reportFilename: "./client.html"
-        }
-      },
-      poweredByHeader: false
-    });
+      }
+    }
+  );
 };
 // withSass({
 // distDir: "build",

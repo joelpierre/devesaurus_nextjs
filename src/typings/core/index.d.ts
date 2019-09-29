@@ -376,4 +376,47 @@ declare namespace Core {
      **/
     property: string;
   }
+
+  export interface IMenuItem {
+    /**
+     *
+     *
+     **/
+    ID: number;
+    /**
+     *
+     *
+     **/
+    menu_order: number;
+    /**
+     *
+     *
+     **/
+    title: string;
+    /**
+     *
+     *
+     **/
+    slug: string;
+    /**
+     *
+     *
+     **/
+    url: string;
+    /**
+     *
+     *
+     **/
+    description: string;
+    /**
+     *
+     *
+     **/
+    classes: string[];
+    /**
+     *
+     *
+     **/
+    menu_item_parent: string;
+  }
 }

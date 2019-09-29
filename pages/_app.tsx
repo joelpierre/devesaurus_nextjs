@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore, { TReduxProps } from '../src/store/createStore';
 import { NextComponentType } from 'next';
-import { getSiteMeta } from '../src/store/rootActions';
+import preloadPageContent from '../src/store/preload';
 
 // import './_app.scss';
 
@@ -16,13 +16,13 @@ interface ICoreApp {
 
 class CoreApp extends App<ICoreApp & TReduxProps> {
   static async getInitialProps({ Component, ctx }: ICoreApp) {
-    const store: { dispatch: any } = ctx.store;
+    const store = ctx.store;
 
     if (ctx.store) {
-      const siteMetaFetched = ctx.store.getState().core.options;
+      const contentFetched = ctx.store.getState().initialFetch;
 
-      if (!siteMetaFetched) {
-        await store.dispatch(getSiteMeta());
+      if (!contentFetched) {
+        await preloadPageContent(store);
       }
     }
 

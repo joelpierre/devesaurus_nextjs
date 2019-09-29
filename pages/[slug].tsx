@@ -53,10 +53,6 @@ export class PageTemplate extends PureComponent<TTemplateInitialProps> {
     const title = yoast.yoast_wpseo_title || page.title || ConfigProvider.getValue('APP_TITLE');
     const description = yoast.yoast_wpseo_metadesc || ConfigProvider.getValue('SITE_DESCRIPTION');
 
-    console.log(yoast.yoast_wpseo_title);
-    console.log(page.title);
-    console.log(ConfigProvider.getValue('APP_TITLE'));
-
     if (this.props.error) {
       return (<ErrorPage {...this.props.error} />);
     }

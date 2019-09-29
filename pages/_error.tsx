@@ -13,14 +13,18 @@ class Error extends PureComponent<IErrorPage> {
   static getInitialProps({ res, err }: any) {
     const error = err ? err.statusCode : null;
     const statusCode = res ? res.statusCode : error;
-
     const { originalUrl, params, query } = res.req;
 
-    return { statusCode, originalUrl, params, query };
+    return {
+      statusCode,
+      originalUrl,
+      params,
+      query
+    };
   }
 
   render() {
-    console.log(this.props);
+    console.log('_error', this.props);
 
     return (
       <>
