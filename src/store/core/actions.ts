@@ -12,7 +12,7 @@ import {
   GET_TERMS_MENU_FAILED,
   GET_TERMS_MENU_SUCCESS,
   SET_APP_ERROR,
-  SET_APP_LOADING, SET_INITIAL_FETCH
+  SET_APP_LOADING, SET_INITIAL_FETCH, SET_MENU_STATE
 } from './constants';
 
 import { IReduxDispatch, IReduxState } from '../createStore';
@@ -164,6 +164,11 @@ export const setInitialFetch = (value: boolean) => ({
 
 export const setAppError = (value: boolean) => ({
   type: SET_APP_ERROR,
+  payload: value
+});
+
+export const setMenuState = (value: boolean) => ({
+  type: SET_MENU_STATE,
   payload: value
 });
 

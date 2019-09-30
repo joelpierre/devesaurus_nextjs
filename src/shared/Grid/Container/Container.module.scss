@@ -1,0 +1,17 @@
+@import '../../../../node_modules/flexigridcss/dist/flexigridcss/container';
+
+.container,
+.container--fluid {
+  padding-left: calc(#{$offset-menu-gap} / 4);
+  padding-right: calc(#{$offset-menu-gap} / 4);
+
+  @include breakpoint(599) {
+    padding-left: calc(#{$offset-menu-gap} / 3);
+    padding-right: calc(#{$offset-menu-gap} / 3);
+  }
+
+  @include breakpoint(768) {
+    padding-left: calc(#{$offset-menu-gap} / 4);
+    padding-right: calc(#{$offset-menu-gap} / 4);
+  }
+}

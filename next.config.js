@@ -133,10 +133,7 @@ module.exports = (phase) => {
             sourceMap: true,
             resources: [
               `${aliases.sass}/_vars.scss`,
-              `${aliases.sass}/mixins/_hover.scss`,
-              `${aliases.sass}/mixins/_image.scss`,
-              `${aliases.sass}/mixins/_overlay.scss`,
-              `${aliases.sass}/mixins/_screen-reader.scss`
+              `${aliases.sass}/_core.scss`
             ]
           }
         });

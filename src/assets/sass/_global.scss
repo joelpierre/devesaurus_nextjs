@@ -7,15 +7,3 @@ body {
     overflow: hidden;
   }
 }
-
-.push-wrapper {
-  transition: .4s all;
-  overflow: hidden;
-  position: relative;
-  background-color: $color-tint-psi;
-
-  &--active {
-    transform: translate3d(35%, -4%, 0) scale3d(.85, .85, 1);
-    box-shadow: -5px 5px 10px $color-tint-psi;
-  }
-}

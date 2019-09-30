@@ -19,6 +19,7 @@ export {
   getTermsMenuSuccess,
   getTermsMenuFailed,
   setInitialFetch,
+  setMenuState,
   setAppError,
   setAppLoading
 } from './core/actions';

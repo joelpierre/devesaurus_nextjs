@@ -8,6 +8,7 @@ export interface ICoreStoreState {
   description: string;
   hasError: boolean;
   isLoading: boolean;
+  isMenuOpen: boolean;
   options?: Core.ICoreOptions;
   primaryMenu: Core.IMenuItem[];
   footerMenu: Core.IMenuItem[];
@@ -23,6 +24,7 @@ const initialState: ICoreStoreState = {
   description: SITE_DESCRIPTION,
   hasError: false,
   isLoading: false,
+  isMenuOpen: false,
   primaryMenu: [],
   footerMenu: [],
   termsMenu: [],
@@ -49,6 +51,9 @@ const coreReducer = (
 
     case actions.SET_APP_LOADING:
       return updateObject(state, { isLoading: action.payload });
+
+    case actions.SET_MENU_STATE:
+      return updateObject(state, { isMenuOpen: action.payload });
 
     default:
       return state;

@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+
 import { TTemplateInitialProps } from '@jpp/typings/index';
+import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
+
 import { clearPage, getPage } from '../src/store/page/actions';
 import { IReduxState } from '../src/store/createStore';
-import { connect } from 'react-redux';
-import Meta from '@jpp/shared/Meta/Meta';
-
-import ConfigProvider from '../src/services/configProvider';
-import ErrorPage from './_error';
 import { IPageStoreState } from '../src/store/page/reducer';
-import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
+
+import ErrorPage from './_error';
+import Section from '@jpp/shared/Grid/Section/Section';
+import Row from '@jpp/shared/Grid/Row/Row';
+import Flex from '@jpp/shared/Grid/Flex/Flex';
 
 export class HomePage extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
@@ -46,22 +49,29 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
   }
 
   render() {
-    const { page, page: { yoast = {} } } = this.props;
-    const title = yoast.yoast_wpseo_title || page.title || ConfigProvider.getValue('APP_TITLE');
-    const description = yoast.yoast_wpseo_metadesc || ConfigProvider.getValue('SITE_DESCRIPTION');
+    const { page, page: { yoast = {} }, error } = this.props;
+    const title = yoast.yoast_wpseo_title || page.title;
+    const description = yoast.yoast_wpseo_metadesc;
 
-    if (this.props.error) {
+    if (error) {
       return (<ErrorPage {...this.props.error} />);
     }
 
     return (
       <>
-        <Meta title={title} description={description}/>
-
-        <CoreLayout>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cumque cupiditate deserunt dignissimos
-          distinctio dolor dolorem doloremque enim minima, molestiae nulla obcaecati qui reiciendis reprehenderit,
-          tempora tenetur vero voluptates voluptatibus!
+        <CoreLayout
+          title={title}
+          description={description}
+        >
+          <Section>
+            <Row>
+              <Flex>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cumque cupiditate deserunt dignissimos
+                distinctio dolor dolorem doloremque enim minima, molestiae nulla obcaecati qui reiciendis reprehenderit,
+                tempora tenetur vero voluptates voluptatibus!
+              </Flex>
+            </Row>
+          </Section>
         </CoreLayout>
       </>
     );

@@ -6,7 +6,7 @@ import makeStore, { TReduxProps } from '../src/store/createStore';
 import { NextComponentType } from 'next';
 import preloadPageContent from '../src/store/preload';
 
-// import './_app.scss';
+import './_app.scss';
 
 interface ICoreApp {
   Component: NextComponentType;

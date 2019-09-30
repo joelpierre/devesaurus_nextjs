@@ -1,0 +1,10 @@
+.section {
+  width: 100%;
+  position: relative;
+  padding: 8rem 0;
+
+  &.theme {
+    @include theme;
+    @include gradient-theme;
+  }
+}

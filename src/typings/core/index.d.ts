@@ -17,6 +17,88 @@ declare namespace Core {
 
   export type TMimeType = 'image/png' | string;
 
+  export type TTag = 'div' | 'section' | 'aside' | 'article' | 'span' | 'nav';
+
+  export type TPriority =
+    | '1'
+    | 1
+    | '2'
+    | 2
+    | '3'
+    | 3
+    | '4'
+    | 4
+    | '5'
+    | 5
+    | '6'
+    | 6 | string | number;
+
+  export type TColumn =
+    | '1'
+    | 1
+    | '2'
+    | 2
+    | '3'
+    | 3
+    | '4'
+    | 4
+    | '5'
+    | 5
+    | '6'
+    | 6
+    | '7'
+    | 7
+    | '8'
+    | 8
+    | '9'
+    | 9
+    | '10'
+    | 10
+    | '11'
+    | 11
+    | '12'
+    | 12;
+
+  export type TTheme =
+    | 'brand'
+    | 'alpha'
+    | 'beta'
+    | 'gamma'
+    | 'psi'
+    | 'omega'
+    | 'tint-alpha'
+    | 'tint-beta'
+    | 'tint-gamma'
+    | 'tint-psi'
+    | 'tint-omega'
+    | 'gradient-brand' | string;
+
+  export type TLinkBehaviour = 'router' | 'anchor' | 'action';
+
+  export type TSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+  export type TLinkType = 'button' | 'submit' | 'reset';
+
+  export type TOnClick = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLElement>
+  ) => void;
+
+  export type TOnSubmit = (
+    e: React.FormEvent<HTMLFormElement | HTMLElement>
+  ) => void;
+
+  export type TFormField = 'input' | 'select';
+
+  export type TInputType = 'text' | 'password' | 'date' | 'email' | 'number';
+
+  export type TFormFieldType =
+    | 'text'
+    | 'password'
+    | 'date'
+    | 'email'
+    | 'select'
+    | 'number';
+
   export type TSuccessCode = 200;
 
   export type TErrorCode = 404 | 500;
@@ -419,4 +501,5 @@ declare namespace Core {
      **/
     menu_item_parent: string;
   }
+
 }
