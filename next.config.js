@@ -29,36 +29,6 @@ const enhancer = flowRight(
 module.exports = (phase) => {
   return enhancer(
     {
-      distDir: "build",
-      cssModules: true,
-      cssLoaderOptions: {
-        namedExports: true,
-        camelCase: true,
-        importLoaders: 1,
-        localIdentName: "[local]___[hash:base64:5]"
-      },
-      // expose config on server and client-side
-      // https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side
-      publicRuntimeConfig: {
-        ...publicRuntimeConfig,
-        NODE_ENV: process.env.NODE_ENV,
-        RUN_ENV: process.env.RUN_ENV,
-        APP_VERSION: process.env.APP_VERSION
-      },
-      assetPrefix: "",
-      analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
-      analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
-      bundleAnalyzerConfig: {
-        server: {
-          analyzerMode: "static",
-          reportFilename: "./server.html"
-        },
-        browser: {
-          analyzerMode: "static",
-          reportFilename: "./client.html"
-        }
-      },
-      poweredByHeader: false,
       webpack(config, options) {
 
         config.plugins.push(
@@ -146,6 +116,16 @@ module.exports = (phase) => {
           "process.env": JSON.stringify(env)
         }));
 
+        // config.module.rules.push({
+        //   test: /\.scss$/,
+        //   loader: "typings-for-css-modules-loader?modules&sass"
+        // });
+        //
+        // config.module.rules.push({
+        //   test: /\.scss\.d\.ts$/,
+        //   loader: "ignore-loader"
+        // });
+
         config.module.rules.push({
           test: /\.scss$/,
           loader: "sass-resources-loader",
@@ -162,37 +142,37 @@ module.exports = (phase) => {
         });
 
         return config;
-      }
+      },
+      distDir: "build",
+      cssModules: true,
+      cssLoaderOptions: {
+        namedExports: true,
+        camelCase: true,
+        importLoaders: 1,
+        localIdentName: "[local]___[hash:base64:5]"
+      },
+      // expose config on server and client-side
+      // https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side
+      publicRuntimeConfig: {
+        ...publicRuntimeConfig,
+        NODE_ENV: process.env.NODE_ENV,
+        RUN_ENV: process.env.RUN_ENV,
+        APP_VERSION: process.env.APP_VERSION
+      },
+      assetPrefix: "",
+      analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
+      analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
+      bundleAnalyzerConfig: {
+        server: {
+          analyzerMode: "static",
+          reportFilename: "./server.html"
+        },
+        browser: {
+          analyzerMode: "static",
+          reportFilename: "./client.html"
+        }
+      },
+      poweredByHeader: false
     }
   );
 };
-// withSass({
-// distDir: "build",
-// cssModules: true,
-// cssLoaderOptions: {
-//   camelCase: true,
-//   importLoaders: 1,
-//   localIdentName: "[local]___[hash:base64:5]"
-// },
-// webpack: config => {
-//   config.plugins.push(
-//     new webpack.EnvironmentPlugin(env)
-//   );
-//
-
-//
-//   config.module.rules.push({
-//     test: /\.(ttf|eot|woff|woff2|svg)(\?[a-z0-9]+)?$/,
-//     loader: "file-loader",
-//     options: {
-//       publicPath: `/_next/static`,
-//       outputPath: "static"
-//     }
-//   });
-//
-
-//
-//   return config;
-// }
-// })
-// ;
