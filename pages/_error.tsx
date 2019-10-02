@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import { DefaultQuery } from 'next-server/router';
 
 interface IErrorPage<Q extends DefaultQuery = DefaultQuery> {
-  statusCode: Core.TErrorCode;
-  code: Core.TErrorCode;
-  originalUrl: string;
-  params: any;
-  query: Q;
+  statusCode?: Core.TErrorCode;
+  code?: Core.TErrorCode;
+  originalUrl?: string;
+  params?: any;
+  query?: Q;
 }
 
 class Error extends PureComponent<IErrorPage> {
@@ -24,7 +24,7 @@ class Error extends PureComponent<IErrorPage> {
   }
 
   render() {
-    console.log('_error', this.props);
+    console.log('_Error', this.props);
 
     return (
       <>

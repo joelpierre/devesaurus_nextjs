@@ -20,8 +20,9 @@ export const getWord: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRedu
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
+          const error = { message: 'Page not found', hasError: true, code: 404 as Core.TErrorCode };
           dispatch(setAppError(true));
-          return dispatch(getWordFailed({ message: 'Page not found', hasError: true, code: 404 }));
+          return dispatch(getWordFailed(error));
         }
 
         return dispatch(getWordSuccess(response.data));
@@ -29,7 +30,8 @@ export const getWord: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRedu
       .catch((error: AxiosError) => {
         dispatch(setAppLoading(false));
         dispatch(setAppError(true));
-        return dispatch(getWordFailed(error));
+        dispatch(getWordFailed(error));
+        throw error;
       });
   };
 };

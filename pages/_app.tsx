@@ -1,10 +1,11 @@
 import React from 'react';
 import App from 'next/app';
 import { Provider } from 'react-redux';
+import { NextComponentType } from 'next';
 import withRedux from 'next-redux-wrapper';
 import makeStore, { TReduxProps } from '../src/store/createStore';
-import { NextComponentType } from 'next';
-import preloadPageContent from '../src/store/preload';
+import preloadPageContent from '../src/store/preloadStore';
+import ErrorPage from './_error';
 
 import './_app.scss';
 
@@ -18,8 +19,8 @@ class CoreApp extends App<ICoreApp & TReduxProps> {
   static async getInitialProps({ Component, ctx }: ICoreApp) {
     const store = ctx.store;
 
-    if (ctx.store) {
-      const contentFetched = ctx.store.getState().initialFetch;
+    if (store) {
+      const contentFetched = store.getState().initialFetch;
 
       if (!contentFetched) {
         await preloadPageContent(store);
@@ -35,10 +36,15 @@ class CoreApp extends App<ICoreApp & TReduxProps> {
 
   render() {
     const { Component, store: reduxStore, pageProps } = this.props;
+    const { initialFetch } = reduxStore.getState().core;
 
     return (
       <Provider store={reduxStore}>
-        <Component {...pageProps} />
+        {initialFetch ? (
+          <Component {...pageProps} />
+        ) : (
+          <ErrorPage statusCode={500}/>
+        )}
       </Provider>
     );
   }

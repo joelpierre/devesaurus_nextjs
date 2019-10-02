@@ -13,7 +13,7 @@ export interface IPostStoreState {
 const initialState = {};
 
 const postReducer = (
-  state: IPostStoreState = initialState as any,
+  state = initialState as IPostStoreState,
   action: AnyAction
 ): IPostStoreState => {
   switch (action.type) {

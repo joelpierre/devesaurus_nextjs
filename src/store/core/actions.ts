@@ -7,88 +7,86 @@ import {
   GET_FOOTER_MENU_SUCCESS,
   GET_PRIMARY_MENU_FAILED,
   GET_PRIMARY_MENU_SUCCESS,
+  GET_SIMPLE_MENU_FAILED,
+  GET_SIMPLE_MENU_SUCCESS,
   GET_SITE_META_FAILED,
   GET_SITE_META_SUCCESS,
   GET_TERMS_MENU_FAILED,
   GET_TERMS_MENU_SUCCESS,
   SET_APP_ERROR,
-  SET_APP_LOADING, SET_INITIAL_FETCH, SET_MENU_STATE
+  SET_APP_LOADING,
+  SET_INITIAL_FETCH,
+  SET_MENU_STATE
 } from './constants';
 
 import { IReduxDispatch, IReduxState } from '../createStore';
 
 export const getSiteMeta: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
-    dispatch(setAppLoading(true));
-    dispatch(setAppError(false));
-
     return axios
       .get(`/options/acf`)
       .then((response: AxiosResponse) => {
-        dispatch(setAppLoading(false));
         return dispatch(getSiteMetaSuccess(response.data));
       })
       .catch((error: AxiosError) => {
-        dispatch(setAppLoading(false));
-        dispatch(setAppError(true));
-        return dispatch(getSiteMetaFailed(error));
+        dispatch(getSiteMetaFailed(error));
+        throw error;
       });
   };
 };
 
 export const getPrimaryMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
-    dispatch(setAppLoading(true));
-    dispatch(setAppError(false));
-
     return axios
       .get(`/menus/primary-menu`)
       .then((response: AxiosResponse) => {
-        dispatch(setAppLoading(false));
         return dispatch(getPrimaryMenuSuccess(response.data));
       })
       .catch((error: AxiosError) => {
-        dispatch(setAppLoading(false));
-        dispatch(setAppError(true));
-        return dispatch(getPrimaryMenuFailed(error));
+        dispatch(getPrimaryMenuFailed(error));
+        throw error;
+      });
+  };
+};
+
+export const getSimpleMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+  return (dispatch: Dispatch): Promise<AnyAction> => {
+    return axios
+      .get(`/menus/simple-menu`)
+      .then((response: AxiosResponse) => {
+        return dispatch(getSimpleMenuSuccess(response.data));
+      })
+      .catch((error: AxiosError) => {
+        dispatch(getSimpleMenuFailed(error));
+        throw error;
       });
   };
 };
 
 export const getFooterMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
-    dispatch(setAppLoading(true));
-    dispatch(setAppError(false));
-
     return axios
       .get(`/menus/footer-menu`)
       .then((response: AxiosResponse) => {
-        dispatch(setAppLoading(false));
         return dispatch(getFooterMenuSuccess(response.data));
       })
       .catch((error: AxiosError) => {
-        dispatch(setAppLoading(false));
-        dispatch(setAppError(true));
-        return dispatch(getFooterMenuFailed(error));
+        dispatch(getFooterMenuFailed(error));
+        throw error;
       });
   };
 };
 
 export const getTermsMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
-    dispatch(setAppLoading(true));
-    dispatch(setAppError(false));
-
     return axios
       .get(`/menus/terms-menu`)
       .then((response: AxiosResponse) => {
-        dispatch(setAppLoading(false));
         return dispatch(getTermsMenuSuccess(response.data));
       })
       .catch((error: AxiosError) => {
-        dispatch(setAppLoading(false));
-        dispatch(setAppError(true));
-        return dispatch(getTermsMenuFailed(error));
+        dispatch(getTermsMenuFailed(error));
+        throw error;
       });
   };
 };
@@ -111,10 +109,30 @@ export const getPrimaryMenuSuccess = (data: Core.IMenuItem[]) => ({
   }
 });
 
-export const getPrimaryMenuFailed = (error: Core.IErrorResponse | AxiosError) => ({
+export const getPrimaryMenuFailed = (error: AxiosError) => ({
   type: GET_PRIMARY_MENU_FAILED,
   payload: {
-    error
+    primaryMenu: {
+      error
+    }
+  }
+});
+
+export const getSimpleMenuSuccess = (data: Core.IMenuItem[]) => ({
+  type: GET_SIMPLE_MENU_SUCCESS,
+  payload: {
+    simpleMenu: {
+      ...data
+    }
+  }
+});
+
+export const getSimpleMenuFailed = (error: AxiosError) => ({
+  type: GET_SIMPLE_MENU_FAILED,
+  payload: {
+    simpleMenu: {
+      error
+    }
   }
 });
 
@@ -127,10 +145,12 @@ export const getFooterMenuSuccess = (data: Core.IMenuItem[]) => ({
   }
 });
 
-export const getFooterMenuFailed = (error: Core.IErrorResponse | AxiosError) => ({
+export const getFooterMenuFailed = (error: AxiosError) => ({
   type: GET_FOOTER_MENU_FAILED,
   payload: {
-    error
+    footerMenu: {
+      error
+    }
   }
 });
 
@@ -143,14 +163,16 @@ export const getTermsMenuSuccess = (data: Core.IMenuItem[]) => ({
   }
 });
 
-export const getTermsMenuFailed = (error: Core.IErrorResponse | AxiosError) => ({
+export const getTermsMenuFailed = (error: AxiosError) => ({
   type: GET_TERMS_MENU_FAILED,
   payload: {
-    error
+    termsMenu: {
+      error
+    }
   }
 });
 
-export const getSiteMetaFailed = (error: Core.IErrorResponse | AxiosError) => ({
+export const getSiteMetaFailed = (error: AxiosError) => ({
   type: GET_SITE_META_FAILED,
   payload: {
     error

@@ -21,7 +21,7 @@ export interface IPageStoreState {
 const initialState = {};
 
 const pageReducer = (
-  state: IPageStoreState = initialState as any,
+  state = initialState as IPageStoreState,
   action: AnyAction
 ): IPageStoreState => {
   let updatedState;

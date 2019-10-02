@@ -19,8 +19,9 @@ export const getPost: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRedu
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
+          const error = { message: 'Page not found', hasError: true, code: 404 as Core.TErrorCode };
           dispatch(setAppError(true));
-          return dispatch(getPostFailed({ message: 'Page not found', hasError: true, code: 404 }));
+          return dispatch(getPostFailed(error));
         }
 
         return dispatch(getPostSuccess(response.data));
@@ -28,7 +29,8 @@ export const getPost: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRedu
       .catch((error: AxiosError) => {
         dispatch(setAppLoading(false));
         dispatch(setAppError(true));
-        return dispatch(getPostFailed(error));
+        dispatch(getPostFailed(error));
+        throw error;
       });
   };
 };

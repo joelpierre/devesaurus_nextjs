@@ -6,7 +6,8 @@
     "tslint:latest",
     "tslint:recommended",
     "tslint-react",
-    "tslint-config-prettier"
+    "tslint-config-prettier",
+    "tslint-react-a11y"
   ],
   "rules": {
     "align": [

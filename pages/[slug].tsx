@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { TTemplateInitialProps } from '@jpp/typings/index';
 
 import ErrorPage from './_error';
-import { clearPage, getPage } from '../src/store/rootActions';
+import { clearPage, getPage, getSimpleMenu } from '../src/store/rootActions';
 import { IReduxState } from '../src/store/createStore';
 import { IPageStoreState } from '../src/store/page/reducer';
 import ConfigProvider from '../src/services/configProvider';
@@ -35,11 +35,12 @@ export class PageTemplate extends PureComponent<TTemplateInitialProps> {
   }
 
   async componentDidMount(): Promise<void> {
-    const { onGetPage, slug, page } = this.props;
+    const { onGetPage, slug, onGetSimpleMenu } = this.props;
 
-    if (Object.keys(page).length === 0) {
-      await onGetPage(slug);
-    }
+    // if (Object.keys(page).length === 0) {
+    await onGetPage(slug);
+    await onGetSimpleMenu();
+    // }
   }
 
   async componentWillUnmount(): Promise<void> {
@@ -85,7 +86,8 @@ const mapStateToProps = ({ page }: IReduxState) => ({
 
 const mapDispatchToProps = {
   onGetPage: (slug: string) => getPage(slug),
-  onClearPage: () => clearPage()
+  onClearPage: () => clearPage(),
+  onGetSimpleMenu: () => getSimpleMenu()
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageTemplate);

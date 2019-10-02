@@ -1,30 +1,27 @@
 import {
   getFooterMenu,
   getPrimaryMenu,
+  getSimpleMenu,
   getSiteMeta,
   getTermsMenu,
   setAppError,
-  setAppLoading,
   setInitialFetch
-} from '../rootActions';
+} from './rootActions';
 
-const preloadPageContent = async (store: any): Promise<void> => {
+const preloadStore = async (store: any): Promise<void> => {
   const { dispatch } = store;
 
   try {
     await dispatch(getSiteMeta());
     await dispatch(getPrimaryMenu());
+    await dispatch(getSimpleMenu());
     await dispatch(getTermsMenu());
     await dispatch(getFooterMenu());
-    await dispatch(setAppError(false));
-    await dispatch(setAppLoading(false));
     await dispatch(setInitialFetch(true));
-    await Promise.resolve();
   } catch (e) {
     await dispatch(setAppError(true));
     await dispatch(setInitialFetch(false));
-    await Promise.reject(e);
   }
 };
 
-export default preloadPageContent;
+export default preloadStore;

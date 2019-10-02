@@ -13,7 +13,7 @@ export interface IWordStoreState {
 const initialState = {};
 
 const wordReducer = (
-  state: IWordStoreState = initialState as any,
+  state = initialState as IWordStoreState,
   action: AnyAction
 ): IWordStoreState => {
   switch (action.type) {
