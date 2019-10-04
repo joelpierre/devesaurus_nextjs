@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import styles from './Container.module.scss';
+import styles from './Container.scss';
 
 interface ContainerInterface {
   fluid?: boolean;

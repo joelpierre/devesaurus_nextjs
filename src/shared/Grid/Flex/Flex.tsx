@@ -1,7 +1,7 @@
 import React, { CSSProperties, FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import styles from './Flex.module.scss';
+import styles from './Flex.scss';
 
 interface IFlexProps {
   style: CSSProperties;

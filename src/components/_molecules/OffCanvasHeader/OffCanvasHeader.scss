@@ -1,0 +1,11 @@
+.off-canvas-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8rem;
+
+  &__logo {
+    width: 100px;
+    height: auto;
+  }
+}

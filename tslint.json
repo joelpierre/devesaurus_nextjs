@@ -37,6 +37,10 @@
     "jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
     "label-position": true,
+    "react-a11y-anchors": false,
+    "no-object-literal-type-assertion": {
+      "severity": "warning"
+    },
     "max-line-length": [
       false,
       {

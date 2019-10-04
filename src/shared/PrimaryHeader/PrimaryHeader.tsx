@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import SimpleMenu from '@jpp/organisms/SimpleMenu/SimpleMenu';
 
-import styles from './PrimaryHeader.module.scss';
+import styles from './PrimaryHeader.scss';
 import { AnyAction } from 'redux';
 
 interface IPrimaryHeader {

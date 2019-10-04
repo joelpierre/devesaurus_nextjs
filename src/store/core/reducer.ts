@@ -10,7 +10,7 @@ export interface ICoreStoreState {
   hasError: boolean;
   isLoading: boolean;
   isMenuOpen: boolean;
-  options?: Core.ICoreOptions;
+  options: Core.ICoreOptions;
   primaryMenu: Core.IMenuItem[];
   simpleMenu: Core.IMenuItem[];
   footerMenu: Core.IMenuItem[];
@@ -27,7 +27,8 @@ const initialState: ICoreStoreState = {
   description: SITE_DESCRIPTION,
   hasError: false,
   isLoading: false,
-  isMenuOpen: false,
+  isMenuOpen: true,
+  options: {} as Core.ICoreOptions,
   primaryMenu: [],
   simpleMenu: [],
   footerMenu: [],

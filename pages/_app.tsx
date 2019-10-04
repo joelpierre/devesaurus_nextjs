@@ -6,6 +6,7 @@ import withRedux from 'next-redux-wrapper';
 import makeStore, { TReduxProps } from '../src/store/createStore';
 import preloadPageContent from '../src/store/preloadStore';
 import ErrorPage from './_error';
+import fontAwesomeLib from '../src/utils/fontAwesome';
 
 import './_app.scss';
 
@@ -14,6 +15,8 @@ interface ICoreApp {
   ctx: any;
   store?: any;
 }
+
+fontAwesomeLib.init();
 
 class CoreApp extends App<ICoreApp & TReduxProps> {
   static async getInitialProps({ Component, ctx }: ICoreApp) {

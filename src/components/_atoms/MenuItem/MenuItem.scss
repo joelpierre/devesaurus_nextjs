@@ -1,0 +1,28 @@
+.menu-item {
+  $root: &;
+
+  position: relative;
+  display: inline-flex;
+
+  &__link {
+    padding: 1rem 1.5rem;
+    color: inherit;
+    font-size: inherit;
+    display: block;
+    width: 100%;
+
+    @include hover-focus {
+      text-decoration: none;
+    }
+  }
+
+  &__icon {
+    width: 2rem !important;
+    height: auto !important;
+    margin-right: spacing(2);
+
+    &--red {
+      color: red;
+    }
+  }
+}

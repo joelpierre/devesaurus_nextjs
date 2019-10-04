@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import styles from './Row.module.scss';
+import styles from './Row.scss';
 
 interface RowInterface {
   row?: boolean;

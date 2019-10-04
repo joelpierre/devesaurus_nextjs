@@ -1,7 +1,7 @@
 import React, { CSSProperties, FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import styles from './Section.module.scss';
+import styles from './Section.scss';
 
 interface ISection {
   className?: string;

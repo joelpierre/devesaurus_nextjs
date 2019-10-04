@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import styles from './OffCanvasFooter.module.scss';
+import SocialMenu from '@jpp/molecules/SocialMenu/SocialMenu';
+
+import styles from './OffCanvasFooter.scss';
 
 interface IOffCanvasFooter {
   className?: string;
@@ -10,7 +12,7 @@ interface IOffCanvasFooter {
 const OffCanvasFooter: FunctionComponent<IOffCanvasFooter> = ({ className }) => {
   return (
     <footer className={classNames(styles.offCanvasFooter, className)}>
-      OffCanvasFooter
+      <SocialMenu className={styles.offCanvasFooterSocial}/>
     </footer>
   );
 };

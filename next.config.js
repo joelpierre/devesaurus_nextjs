@@ -146,7 +146,7 @@ module.exports = (phase) => {
         namedExports: true,
         camelCase: true,
         importLoaders: 1,
-        localIdentName: "[local]___[hash:base64:5]"
+        localIdentName: "[local]"
       },
       // expose config on server and client-side
       // https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side

@@ -103,9 +103,9 @@ export const getSiteMetaSuccess = (data: Core.ICoreOptions) => ({
 export const getPrimaryMenuSuccess = (data: Core.IMenuItem[]) => ({
   type: GET_PRIMARY_MENU_SUCCESS,
   payload: {
-    primaryMenu: {
+    primaryMenu: [
       ...data
-    }
+    ]
   }
 });
 
@@ -121,9 +121,9 @@ export const getPrimaryMenuFailed = (error: AxiosError) => ({
 export const getSimpleMenuSuccess = (data: Core.IMenuItem[]) => ({
   type: GET_SIMPLE_MENU_SUCCESS,
   payload: {
-    simpleMenu: {
+    simpleMenu: [
       ...data
-    }
+    ]
   }
 });
 
@@ -139,9 +139,9 @@ export const getSimpleMenuFailed = (error: AxiosError) => ({
 export const getFooterMenuSuccess = (data: Core.IMenuItem[]) => ({
   type: GET_FOOTER_MENU_SUCCESS,
   payload: {
-    footerMenu: {
+    footerMenu: [
       ...data
-    }
+    ]
   }
 });
 
@@ -157,9 +157,9 @@ export const getFooterMenuFailed = (error: AxiosError) => ({
 export const getTermsMenuSuccess = (data: Core.IMenuItem[]) => ({
   type: GET_TERMS_MENU_SUCCESS,
   payload: {
-    termsMenu: {
+    termsMenu: [
       ...data
-    }
+    ]
   }
 });
 

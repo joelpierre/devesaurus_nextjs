@@ -1,17 +1,45 @@
 import React, { PureComponent } from 'react';
+import classNames from 'classnames';
+
+import MenuItem from '@jpp/atoms/MenuItem/MenuItem';
+
+import styles from './PrimaryMenu.scss';
 
 interface IPrimaryMenu {
   className?: string;
   isMenuOpen: boolean;
   menuItems: Core.IMenuItem[];
-  setMenuState: () => void;
+  setMenuState: (e: any) => void;
 }
 
 export class PrimaryMenu extends PureComponent<IPrimaryMenu> {
   render() {
+    const { className, menuItems, setMenuState } = this.props;
+
     return (
-      <nav>
-        Primary Menu
+      <nav className={classNames(className, styles.primaryMenu)}>
+        <ul className={styles.primaryMenuList}>
+          {menuItems.map((menuItem: Core.IMenuItem) => {
+            if (menuItem.title === 'divider') {
+              return (
+                <li
+                  key={`${menuItem.ID}`}
+                  className={styles.primaryMenuDivider}
+                />
+              );
+            }
+
+            return (
+              <MenuItem
+                onClick={setMenuState}
+                key={`${menuItem.ID}`}
+                className={styles.primaryMenuItem}
+                linkClassName={styles.primaryMenuLink}
+                {...menuItem}
+              />
+            );
+          })}
+        </ul>
       </nav>
     );
   }

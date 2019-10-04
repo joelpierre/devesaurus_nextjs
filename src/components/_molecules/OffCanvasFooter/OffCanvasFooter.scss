@@ -1,0 +1,14 @@
+.off-canvas-footer {
+  &__social {
+    .social-menu {
+      &__list {
+
+      }
+
+      &__item {
+        color: $color-tint-alpha;
+        background-color: $color-brand;
+      }
+    }
+  }
+}
