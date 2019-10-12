@@ -1,0 +1,149 @@
+%heading-core {
+  line-height: 1.3;
+  position: relative;
+  margin-top: spacing(2);
+  margin-bottom: spacing(1);
+  font-family: $font-heading;
+}
+
+.WYSIWYG {
+  $root: &;
+  position: relative;
+  width: 100%;
+  text-align: left !important;
+  font-family: $font-default;
+
+  a {
+    color: $color-external-link;
+    font-weight: bold;
+    text-decoration: underline;
+
+    @include hover-focus {
+      text-decoration: none;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @extend %heading-core;
+    position: relative;
+  }
+
+  h1 {
+    display: none !important;
+  }
+
+  h2 {
+    font-size: $font-heading-2;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: $font-heading-3;
+    text-transform: uppercase;
+  }
+
+  h4 {
+    font-size: $font-heading-4;
+  }
+
+  h5 {
+    font-size: $font-heading-5;
+  }
+
+  h6 {
+    font-size: $font-heading-6;
+  }
+
+  p,
+  ul li,
+  address,
+  ol li {
+    font-family: $font-default;
+    font-size: $font-body;
+    line-height: 2;
+    margin-bottom: spacing();
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  ul,
+  ol {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding-left: 4rem;
+
+    li {
+      margin-bottom: 1rem;
+    }
+  }
+
+  blockquote {
+    padding: 1.5rem 0;
+    margin-bottom: 3rem;
+    border-left: .4rem solid $color-tint-delta;
+
+    @include breakpoint(768) {
+      border-left: .8rem solid $color-tint-delta;
+    }
+
+    p {
+      font-style: italic;
+      text-align: left;
+      font-size: 1.8rem;
+      padding-left: 3rem;
+      margin-bottom: 0;
+
+      &:first-letter {
+        font-size: 3rem;
+        font-weight: bold;
+        display: inline-block;
+        padding: 1rem .5rem 0 0;
+        line-height: 1;
+        font-family: $font-default;
+      }
+
+      @include breakpoint(768) {
+        text-align: left;
+
+        &:first-letter {
+          font-size: 4rem;
+        }
+      }
+    }
+  }
+
+  pre {
+    background-color: $color-tint-beta;
+    padding: 1rem;
+    font-size: 1.8rem;
+    font-family: "monospace", monospace;
+    line-height: 1;
+    border-radius: $radius-rounded;
+  }
+
+  hr {
+    width: 100%;
+    border-color: darken($color-tint-beta, 10%);
+    box-shadow: none;
+    color: darken($color-tint-beta, 10%);
+    border-style: solid;
+    display: block;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}

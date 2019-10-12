@@ -1,0 +1,158 @@
+$touch-size: spacing(3);
+
+.pagination {
+  width: 100%;
+  margin-left: auto;
+  padding-top: 0;
+  padding-bottom: 3rem;
+  font-family: $font-heading;
+
+  @include breakpoint(768) {
+    display: flex;
+    width: auto;
+  }
+
+  &__list {
+    display: flex;
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__item {
+    width: $touch-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    position: relative;
+
+    @include breakpoint(768) {
+      width: auto;
+    }
+  }
+
+  &__pages {
+    font-family: $font-heading;
+
+    @include breakpoint(768) {
+      margin-left: spacing();
+      margin-right: spacing();
+    }
+
+    &:first-of-type {
+      margin-left: auto;
+    }
+  }
+
+  &__next,
+  &__prev {
+    display: none;
+
+    @include breakpoint(768) {
+      display: block;
+      width: 100px;
+    }
+  }
+
+  &__next {
+    margin-left: auto;
+  }
+
+  &__prev {
+    margin-right: auto;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: $touch-size;
+    height: $touch-size;
+    line-height: $touch-size;
+    text-decoration: none;
+    text-align: center;
+    box-sizing: content-box;
+    width: $touch-size;
+    color: $color-brand;
+
+    @include breakpoint(768) {
+      width: spacing(2.5); // 40px
+    }
+
+    @include hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__ellipsis,
+  &__active {
+    cursor: default;
+  }
+
+  &__active {
+    font-weight: 600;
+    color: $color-tint-alpha;
+    background-color: $color-tint-psi;
+    border-radius: $radius-circle;
+    text-decoration: none;
+    width: spacing(2);
+    height: spacing(2);
+
+    @include hover-focus {
+      text-decoration: none;
+    }
+  }
+
+  &__active-icon {
+    position: absolute;
+    top: auto;
+    bottom: -#{spacing(1.5)};
+    font-size: 1.5rem;
+    left: 50%;
+    transform: $centerX;
+    color: $color-tint-psi;
+  }
+
+  &__prev-btn,
+  &__next-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: content-box;
+    color: $color-brand;
+  }
+
+  &__prev-btn {
+    text-align: left;
+  }
+
+  &__next-btn {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  &__prev-text,
+  &__next-text {
+    display: inline-block;
+  }
+
+  &__prev-icon {
+    display: inline-block;
+    @include breakpoint(768) {
+      margin-right: spacing();
+    }
+  }
+
+  &__next-icon {
+    display: inline-block;
+    @include breakpoint(768) {
+      margin-left: spacing();
+    }
+  }
+}

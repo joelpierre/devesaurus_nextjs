@@ -27,7 +27,7 @@ const initialState: ICoreStoreState = {
   description: SITE_DESCRIPTION,
   hasError: false,
   isLoading: false,
-  isMenuOpen: true,
+  isMenuOpen: false,
   options: {} as Core.ICoreOptions,
   primaryMenu: [],
   simpleMenu: [],

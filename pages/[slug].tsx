@@ -9,7 +9,7 @@ import { clearPage, getPage, getSimpleMenu } from '../src/store/rootActions';
 import { IReduxState } from '../src/store/createStore';
 import { IPageStoreState } from '../src/store/page/reducer';
 import ConfigProvider from '../src/services/configProvider';
-import Meta from '@jpp/shared/Meta/Meta';
+import Meta from '@jpp/components/_shared/Meta/Meta';
 
 export class PageTemplate extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ query: { slug }, store, isServer, res }: TTemplateInitialProps) {

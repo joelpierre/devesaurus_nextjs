@@ -1,0 +1,50 @@
+.cta-banner {
+  $root: &;
+  padding-bottom: 6rem;
+  position: relative;
+  width: 100%;
+  color: white;
+  text-align: center;
+
+  &__brand {
+    position: relative;
+    margin: 0 auto 3rem !important;
+    text-align: center;
+  }
+
+  &__heading {
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__copy {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  &__button {
+    text-transform: uppercase;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  &__cta {
+    text-align: center;
+  }
+
+  &__form {
+    display: block;
+    text-align: center;
+    margin-top: 4rem;
+
+    label {
+      display: block;
+      text-align: left;
+    }
+
+    button {
+      margin-top: 2rem;
+      box-shadow: $main-shadow;
+    }
+  }
+}

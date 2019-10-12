@@ -8,13 +8,32 @@ import { EFontAwesomeType } from '../../../utils/fontAwesome';
 
 import styles from './MenuItem.scss';
 
-interface IMenuItem extends Core.IMenuItem {
+interface IMenuItem {
   className?: string;
   linkClassName?: string;
-  onClick: Core.TOnClick;
+  onClick?: Core.TOnClick;
+  iconPosition?: EIconPosition;
 }
 
-const MenuItem: FunctionComponent<IMenuItem> = ({ className, linkClassName, title, classes, slug, url, onClick }) => {
+export enum EIconPosition {
+  Left = 'left',
+  Right = 'right'
+}
+
+type TMenuItemProps = IMenuItem & Core.IMenuItem;
+
+const MenuItem: FunctionComponent<TMenuItemProps> = (
+  {
+    className,
+    linkClassName,
+    iconPosition = EIconPosition.Left,
+    title,
+    classes,
+    slug,
+    url,
+    onClick
+  }
+) => {
 
   if (title === 'divider') {
     return null;
@@ -28,6 +47,26 @@ const MenuItem: FunctionComponent<IMenuItem> = ({ className, linkClassName, titl
     [styles.menuItemIconRed]: iconName === 'heart'
   });
 
+  const getDynamicPage = (): string => {
+    switch (slug) {
+      case 'categories':
+      case 'tags':
+        return `devinitions/${slug}`;
+      default:
+        return '[slug]';
+    }
+  };
+
+  const getDynamicAs = (): string | undefined => {
+    switch (slug) {
+      case 'categories':
+      case 'tags':
+        return undefined;
+      default:
+        return `/${slug}`;
+    }
+  };
+
   const getIconPrefix = (): EFontAwesomeType => {
     switch (iconName) {
       case 'heart':
@@ -39,14 +78,17 @@ const MenuItem: FunctionComponent<IMenuItem> = ({ className, linkClassName, titl
   };
 
   const getContent = (): JSX.Element => (
-    <>
-      {iconName && (
+    <div className={classNames(styles.menuItemContent, {
+      [styles.menuItemContentHasIcon]: !!iconName
+    })}>
+      {!!iconName && (
         <FontAwesomeIcon
           className={iconClasses}
           icon={[getIconPrefix(), iconName as IconName]}
         />
-      )} {title}
-    </>
+      )}
+      <span className={styles.menuItemText}>{title}</span>
+    </div>
   );
 
   const getEl = () => {
@@ -64,8 +106,8 @@ const MenuItem: FunctionComponent<IMenuItem> = ({ className, linkClassName, titl
 
     return (
       <Link
-        href="/[slug]"
-        as={`/${slug}`}
+        href={getDynamicPage()}
+        as={getDynamicAs()}
       >
         <a
           className={elClasses}
@@ -76,8 +118,25 @@ const MenuItem: FunctionComponent<IMenuItem> = ({ className, linkClassName, titl
     );
   };
 
+  const a11yProps = () => {
+    if (onClick) {
+      return {
+        role: 'button'
+      };
+    }
+
+    return {};
+  };
+
   return (
-    <li role="button" onClick={onClick} className={classNames(styles.menuItem, className)}>
+    // tslint:disable-next-line:react-a11y-event-has-role
+    <li {...a11yProps()} onClick={onClick} className={classNames(
+      styles.menuItem,
+      className,
+      {
+        [styles.menuItemIconLeft]: iconPosition === EIconPosition.Left && !!iconName,
+        [styles.menuItemIconRight]: iconPosition === EIconPosition.Right && !!iconName
+      })}>
       {getEl()}
     </li>
   );

@@ -9,9 +9,9 @@ import { IReduxState } from '../src/store/createStore';
 import { IPageStoreState } from '../src/store/page/reducer';
 
 import ErrorPage from './_error';
-import Section from '@jpp/shared/Grid/Section/Section';
-import Row from '@jpp/shared/Grid/Row/Row';
-import Flex from '@jpp/shared/Grid/Flex/Flex';
+import Section from '@jpp/components/_shared/Grid/Section/Section';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 
 export class HomePage extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
@@ -62,6 +62,7 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
         <CoreLayout
           title={title}
           description={description}
+          useSimpleHeader={true}
         >
           <Section>
             <Row>

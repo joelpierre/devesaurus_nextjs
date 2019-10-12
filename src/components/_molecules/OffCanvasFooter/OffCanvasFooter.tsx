@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import SocialMenu from '@jpp/molecules/SocialMenu/SocialMenu';
+import SocialMenu from '@jpp/organisms/SocialMenu/SocialMenu';
 
 import styles from './OffCanvasFooter.scss';
 

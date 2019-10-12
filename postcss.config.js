@@ -1,37 +1,26 @@
-module.exports = function () {
-	return {
-		plugins: [
-			require('postcss-flexbugs-fixes'),
-			require('autoprefixer'),
-			// config docs: https://github.com/cuth/postcss-pxtorem
-			require('postcss-pxtorem')({
-				propList: [
-					'font',
-					'font-size',
-					'line-height',
-					'letter-spacing',
-					'width',
-					'height',
-					'max-width',
-					'max-height',
-					'min-width',
-					'min-height',
-					'padding',
-					'margin',
-					'margin-top',
-					'margin-left',
-					'margin-bottom',
-					'margin-right',
-					'padding-top',
-					'padding-left',
-					'padding-bottom',
-					'padding-right',
-					'top',
-					'left',
-					'bottom',
-					'right',
-				],
-			})
-		]
-	};
+const postcssPresetEnv = require(`postcss-preset-env`);
+
+module.exports = function() {
+  return {
+    plugins: [
+      postcssPresetEnv({
+        stage: 0
+      }),
+      require("autoprefixer")({
+        grid: true
+      }),
+      require("postcss-flexbugs-fixes"),
+      require("autoprefixer"),
+      // config docs: https://github.com/cuth/postcss-pxtorem
+      require("postcss-pxtorem")({
+        rootValue: 16,
+        unitPrecision: 5,
+        propList: ['font', 'font-size', 'line-height', 'letter-spacing'],
+        selectorBlackList: [],
+        replace: true,
+        mediaQuery: false,
+        minPixelValue: 0,
+      })
+    ]
+  };
 };
