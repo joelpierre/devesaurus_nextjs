@@ -23,7 +23,7 @@ export class PrimaryMenu extends PureComponent<IPrimaryMenu> {
             if (menuItem.title === 'divider') {
               return (
                 <li
-                  key={`${menuItem.ID}`}
+                  key={`${menuItem.ID}_primary`}
                   className={styles.primaryMenuDivider}
                 />
               );
@@ -32,7 +32,7 @@ export class PrimaryMenu extends PureComponent<IPrimaryMenu> {
             return (
               <MenuItem
                 onClick={setMenuState}
-                key={`${menuItem.ID}`}
+                key={`${menuItem.ID}_primary`}
                 className={styles.primaryMenuItem}
                 linkClassName={styles.primaryMenuLink}
                 {...menuItem}

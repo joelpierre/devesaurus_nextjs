@@ -1,0 +1,22 @@
+.primary-footer {
+  $root: &;
+  background-color: $color-tint-beta;
+  padding: 0;
+
+  &__top {
+    padding: spacing(6) 0 spacing(6);
+  }
+
+  &__bottom {
+    padding: spacing(2) 0;
+  }
+
+  &__content {
+    margin-bottom: spacing(2);
+  }
+
+  &__logo {
+    max-width: 300px;
+    margin-bottom: spacing(2);
+  }
+}

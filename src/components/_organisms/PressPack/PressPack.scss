@@ -1,0 +1,23 @@
+.press-pack {
+  $root: &;
+  position: relative;
+
+  //&__heading {}
+  //&__copy {}
+
+  &__button {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  &__image-wrapper {
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 100% !important;
+    height: auto;
+    max-height: 300px !important;
+  }
+}

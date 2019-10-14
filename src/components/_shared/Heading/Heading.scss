@@ -1,0 +1,57 @@
+//@font-face {
+//  font-family: '{{NAME}}';
+//  src: url('{{SOURCE}}') format('woff2'),
+//  url('{{SOURCE}}') format('woff');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+
+%heading-core {
+  line-height: 1.3;
+  position: relative;
+  margin-bottom: 2rem;
+  font-family: $font-heading;
+}
+
+.heading-1 {
+  @extend %heading-core;
+
+  font-weight: bold;
+  font-size: $font-heading-1;
+}
+
+.heading-2 {
+  @extend %heading-core;
+
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: $font-heading-2;
+}
+
+.heading-3 {
+  @extend %heading-core;
+
+  font-size: $font-heading-3;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.heading-4 {
+  @extend %heading-core;
+
+  font-weight: normal;
+  font-size: $font-heading-4;
+}
+
+.heading-5 {
+  @extend %heading-core;
+
+  font-size: $font-heading-5;
+}
+
+.heading-6 {
+  @extend %heading-core;
+
+  font-size: $font-heading-6;
+}

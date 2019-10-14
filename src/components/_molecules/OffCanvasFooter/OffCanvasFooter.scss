@@ -2,12 +2,26 @@
   &__social {
     .social-menu {
       &__list {
-
+        width: 100%;
+        text-align: center;
       }
 
       &__item {
-        color: $color-tint-alpha;
         background-color: $color-brand;
+
+        @include hover-focus {
+          background-color: rgba($color-brand, .8);
+        }
+      }
+    }
+
+    .social-item {
+      &__icon {
+        color: $color-tint-alpha;
+
+        @include hover-focus {
+          color: $color-tint-alpha;
+        }
       }
     }
   }

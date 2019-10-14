@@ -2,16 +2,17 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 
-import Meta from '@jpp/shared/Meta/Meta';
-import PushWrapper from '@jpp/shared/PushWrapper/PushWrapper';
-import PrimaryMain from '@jpp/shared/PrimaryMain/PrimaryMain';
-import PrimaryFooter from '@jpp/shared/PrimaryFooter/PrimaryFooter';
-import PrimaryHeader from '@jpp/shared/PrimaryHeader/PrimaryHeader';
-import OffCanvas from '@jpp/shared/OffCanvas/OffCanvas';
+import Meta from '@jpp/components/_shared/Meta/Meta';
+import PushWrapper from '@jpp/components/_shared/PushWrapper/PushWrapper';
+import PrimaryMain from '@jpp/components/_shared/PrimaryMain/PrimaryMain';
+import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter/PrimaryFooter';
+import PrimaryHeader from '@jpp/components/_shared/PrimaryHeader/PrimaryHeader';
+import OffCanvas from '@jpp/components/_shared/OffCanvas/OffCanvas';
 
 import ConfigProvider from '../../services/configProvider';
 import { IReduxState } from '../../store/createStore';
 import { setMenuState } from '../../store/rootActions';
+import SimpleHeader from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
 
 interface ICoreLayout {
   title: string;
@@ -21,8 +22,7 @@ interface ICoreLayout {
   onSetMenuState: (value: boolean) => AnyAction;
   primaryMenu: Core.IMenuItem[];
   simpleMenu: Core.IMenuItem[];
-  footerMenu: Core.IMenuItem[];
-  termsMenu: Core.IMenuItem[];
+  useSimpleHeader?: boolean;
 }
 
 export class CoreLayout extends PureComponent<ICoreLayout> {
@@ -44,7 +44,7 @@ export class CoreLayout extends PureComponent<ICoreLayout> {
       onSetMenuState,
       primaryMenu,
       simpleMenu,
-      termsMenu
+      useSimpleHeader = false
     } = this.props;
 
     if (isLoading) {
@@ -64,13 +64,24 @@ export class CoreLayout extends PureComponent<ICoreLayout> {
         <OffCanvas isMenuOpen={isMenuOpen} setMenuState={onSetMenuState} menuItems={primaryMenu}/>
 
         <PushWrapper isMenuOpen={isMenuOpen} setMenuState={onSetMenuState}>
-          <PrimaryHeader menuItems={simpleMenu} isMenuOpen={isMenuOpen} setMenuState={onSetMenuState}/>
+          {useSimpleHeader ? (
+            <SimpleHeader
+              menuItems={simpleMenu}
+              isMenuOpen={isMenuOpen}
+              setMenuState={onSetMenuState}
+            />
+          ) : (
+            <PrimaryHeader
+              isMenuOpen={isMenuOpen}
+              setMenuState={onSetMenuState}
+            />
+          )}
 
           <PrimaryMain>
             {children}
           </PrimaryMain>
 
-          <PrimaryFooter footerMenu={termsMenu} termsMenu={termsMenu}/>
+          <PrimaryFooter/>
         </PushWrapper>
       </>
     );
@@ -83,8 +94,6 @@ const mapStateToProps = (
       isMenuOpen,
       isLoading,
       primaryMenu,
-      termsMenu,
-      footerMenu,
       simpleMenu
     }
   }: IReduxState) => (
@@ -92,8 +101,6 @@ const mapStateToProps = (
     isMenuOpen,
     isLoading,
     primaryMenu,
-    termsMenu,
-    footerMenu,
     simpleMenu
   }
 );

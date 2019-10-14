@@ -1,14 +1,25 @@
 .menu-item {
   $root: &;
-
   position: relative;
+  width: auto;
   display: inline-flex;
+  min-height: spacing(5);
+
+  &__content {
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+
+  }
 
   &__link {
-    padding: 1rem 1.5rem;
+    padding: 0 spacing(3);
     color: inherit;
     font-size: inherit;
-    display: block;
     width: 100%;
 
     @include hover-focus {
@@ -19,10 +30,47 @@
   &__icon {
     width: 2rem !important;
     height: auto !important;
-    margin-right: spacing(2);
+    @include center-y;
 
     &--red {
       color: red;
+    }
+
+    &--left {
+      #{$root} {
+        &__content {
+          &--has-icon {
+            text-indent: spacing(4);
+          }
+        }
+
+        &__text {
+          order: 1;
+        }
+
+        &__icon {
+          order: 0;
+        }
+      }
+    }
+
+    &--right {
+      #{$root} {
+        &__content {
+          padding-right: spacing(4);
+        }
+
+        &__text {
+          order: 0;
+        }
+
+        &__icon {
+          order: 1;
+          left: auto;
+          right: 24px;
+          margin-left: 0;
+        }
+      }
     }
   }
 }

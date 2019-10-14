@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
+import classNames from 'classnames';
+
+import MenuItem, { EIconPosition } from '@jpp/atoms/MenuItem/MenuItem';
 
 import styles from './SimpleMenu.scss';
-import classNames from 'classnames';
 
 interface ISimpleMenu {
   className?: string;
@@ -10,11 +12,23 @@ interface ISimpleMenu {
 
 export class SimpleMenu extends PureComponent<ISimpleMenu> {
   render() {
-    const { className } = this.props;
+    const { className, menuItems } = this.props;
 
     return (
       <nav className={classNames(className, styles.simpleMenu)}>
-        Simple Menu
+        <ul className={styles.simpleMenuList}>
+          {menuItems.map((menuItem: Core.IMenuItem) => {
+            return (
+              <MenuItem
+                key={`${menuItem.ID}_simple`}
+                className={styles.simpleMenuItem}
+                iconPosition={EIconPosition.Right}
+                linkClassName={styles.simpleMenuLink}
+                {...menuItem}
+              />
+            );
+          })}
+        </ul>
       </nav>
     );
   }

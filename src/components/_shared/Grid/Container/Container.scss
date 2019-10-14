@@ -1,0 +1,17 @@
+@import '../../../../../node_modules/flexigridcss/dist/flexigridcss/container.css';
+
+.container,
+.container--fluid {
+  padding-left: spacing(2);
+  padding-right: spacing(2);
+
+  @include breakpoint(599) {
+    padding-left: spacing(2);
+    padding-right: spacing(2);
+  }
+
+  @include breakpoint(768) {
+    padding-left: spacing(2);
+    padding-right: spacing(2);
+  }
+}
