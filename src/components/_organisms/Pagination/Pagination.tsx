@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactText } from 'react';
 import classNames from 'classnames';
 
-import styles from './Pagination.module.scss';
+import styles from './Pagination.scss';
 import Section from 'src/components/grid/Section/Section';
 import Container from 'src/components/grid/Container/Container';
 import Row from 'src/components/grid/Row/Row';

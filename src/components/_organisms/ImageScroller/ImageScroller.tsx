@@ -8,7 +8,7 @@ import Heading from 'src/components/shared/Heading/Heading';
 import { IAcfModule } from 'src/utils/interfaces';
 import { TSize } from 'src/utils/types';
 
-import styles from './ImageScroller.module.scss';
+import styles from './ImageScroller.scss';
 
 interface IImageScrollerProps {
   module?: Partial<IAcfModule>;

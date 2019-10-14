@@ -9,7 +9,7 @@ import Section from '../../grid/Section/Section';
 import Row from '../../grid/Row/Row';
 import Container from '../../grid/Container/Container';
 import Flex from '../../grid/Flex/Flex';
-import styles from './TextBlock.module.scss';
+import styles from './TextBlock.scss';
 
 const TextBlock: FunctionComponent<Partial<IAcfComponentProps>> = (
   {

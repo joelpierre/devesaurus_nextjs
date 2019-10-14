@@ -1,7 +1,7 @@
 import React, { CSSProperties, FunctionComponent } from 'react';
 import classNames from 'classnames';
 import { TPriority } from 'src/utils/types';
-import styles from './Heading.module.scss';
+import styles from './Heading.scss';
 
 interface IHeadingProps {
   priority: TPriority;

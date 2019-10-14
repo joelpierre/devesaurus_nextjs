@@ -11,7 +11,7 @@ import Heading from 'src/components/shared/Heading/Heading';
 import { IAcfModule } from 'src/utils/interfaces';
 import { TTheme } from 'src/utils/types';
 
-import styles from './Testimonials.module.scss';
+import styles from './Testimonials.scss';
 import './utils/slick-overrides.scss';
 
 interface IPureTestimonialsProps extends ITestimonialsProps {

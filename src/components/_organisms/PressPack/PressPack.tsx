@@ -9,7 +9,7 @@ import Heading from 'src/components/shared/Heading/Heading';
 import { IAcfModule } from 'src/utils/interfaces';
 import { TTheme } from 'src/utils/types';
 
-import styles from './PressPack.module.scss';
+import styles from './PressPack.scss';
 
 interface IPressPackProps {
   className: string;

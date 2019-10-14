@@ -6,7 +6,7 @@ import Section from '../../grid/Section/Section';
 import Row from '../../grid/Row/Row';
 import Container from '../../grid/Container/Container';
 import Flex from '../../grid/Flex/Flex';
-import styles from './ImageBlock.module.scss';
+import styles from './ImageBlock.scss';
 
 const ImageBlock: FunctionComponent<IAcfComponentProps> = ({
   module = {},

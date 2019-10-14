@@ -11,7 +11,7 @@ import Heading from 'src/components/shared/Heading/Heading';
 import { IAcfModule } from 'src/utils/interfaces';
 import { TTheme } from 'src/utils/types';
 
-import styles from './PageHero.module.scss';
+import styles from './PageHero.scss';
 
 interface IPageHeroProps {
   module: Partial<IAcfModule>;

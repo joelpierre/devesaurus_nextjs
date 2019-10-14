@@ -1,16 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import Container from 'src/components/grid/Container/Container';
-import Flex from 'src/components/grid/Flex/Flex';
-import Section from 'src/components/grid/Section/Section';
-import Brand from 'src/components/molecules/Brand/Brand';
-import Button from 'src/components/molecules/Buttons/Button';
-import FormBase, { IFormBaseProps } from 'src/components/molecules/FormBase/FormBase';
-import Heading from 'src/components/shared/Heading/Heading';
-import { IAcfComponentProps } from 'src/utils/interfaces';
-import { TTheme } from 'src/utils/types';
-import Row from 'src/components/grid/Row/Row';
-import styles from './CtaBanner.module.scss';
+import styles from './CtaBanner.scss';
 
 const CtaBanner: FunctionComponent<Partial<IAcfComponentProps>> = (
   {
