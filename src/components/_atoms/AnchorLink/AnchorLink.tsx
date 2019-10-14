@@ -22,7 +22,7 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
     onClick
   }
 ) => {
-  let Tag: JSX.Element;
+  let Element: JSX.Element;
 
   const defaultProps = {
     'data-test': 'component-anchor-link',
@@ -32,7 +32,7 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
 
   switch (behaviour) {
     case 'anchor':
-      Tag = (
+      Element = (
         <a href={link} {...defaultProps} >
           {children}
         </a>
@@ -40,7 +40,7 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
       break;
     default:
     case 'router':
-      Tag = (
+      Element = (
         <Link href={link} as={as} {...defaultProps}>
           {children}
         </Link>
@@ -48,7 +48,7 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
       break;
   }
 
-  return Tag;
+  return Element;
 };
 
 export default AnchorLink;
