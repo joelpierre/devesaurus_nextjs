@@ -13,7 +13,35 @@ declare namespace Core {
     'tint-gamma' |
     'tint-psi' |
     'tint-omega' |
-    'gradient-brand';
+    'gradient-brand' | ETheme;
+
+  export enum ETheme {
+    Brand = 'brand',
+    Alpha = 'alpha',
+    Beta = 'beta',
+    Gamma = 'gamma',
+    Psi = 'psi',
+    Omega = 'omega',
+    TintAlpha = 'tint-alpha',
+    TintBeta = 'tint-beta',
+    TintGamma = 'tint-gamma',
+    TintPsi = 'tint-psi',
+    TintOmega = 'tint-omega',
+    GradientBrand = 'gradient-brand'
+  }
+
+  export enum EContrast {
+    Light = 'light',
+    Gray = 'gray',
+    Dark = 'dark'
+  }
+
+  export enum ETaxonomy {
+    Category = 'category',
+    WordCategory = 'word_category',
+    PostTag = 'post_tag',
+    WordTag = 'word_tag'
+  }
 
   export type TMimeType = 'image/png' | string;
 

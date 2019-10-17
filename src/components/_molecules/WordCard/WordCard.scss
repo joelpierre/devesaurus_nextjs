@@ -1,0 +1,133 @@
+.word-card {
+  $root: &;
+  padding: 2rem 2rem 1rem;
+  border-radius: $radius-rounded;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: 0 0 10px 0 rgba($color-tint-alpha, .2);
+
+  &--theme {
+    @include theme;
+  }
+
+  &__icon {
+    margin-right: 1rem;
+    display: inline-block;
+
+    & > svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+
+    &-text {
+      @include sr-only();
+    }
+  }
+
+  &__category {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    border-bottom-left-radius: 5px;
+    line-height: 1;
+    z-index: 110;
+
+    &-text {
+      @include sr-only;
+    }
+
+    &-icon {
+      transition: transform .2s ease-in-out;
+      color: $color-tint-alpha;
+      transform: scale(1.3, 1.3);
+    }
+
+    &-link {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include hover {
+        #{$root} {
+          &__category {
+            &-icon {
+              transform: scale(1.5, 1.5);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__header {
+    flex-basis: 100%;
+    flex-grow: 0;
+    margin-bottom: 1rem;
+  }
+
+  &__heading {
+    text-transform: capitalize;
+    line-height: 1.2;
+    max-width: 80%;
+    font-weight: bold;
+  }
+
+  &__body {
+    flex-basis: 100%;
+    margin-bottom: 2rem;
+  }
+
+  &__copy {
+    font-style: italic;
+    font-family: 'Times', serif;
+    margin-bottom: 0;
+  }
+
+  &__syllables {
+    font-style: italic;
+  }
+
+  &__syllable {
+    display: inline-block;
+    margin: 0 .8rem;
+    position: relative;
+    font-style: italic;
+    font-weight: bold;
+
+    &:after {
+      content: '~';
+      position: absolute;
+      right: -1.2rem;
+    }
+
+    &:last-child {
+      &:after {
+        display: none;
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__tags {
+    width: 100%;
+    margin: 1rem 0 0;
+    display: block;
+  }
+}
