@@ -152,7 +152,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "jest --onlyChanged && lint-staged",
-      "pre-push": "lint-staged && jest --coverage --coverageReporters=text-summary"
+      "pre-push": "lint-staged && jest --coverage --coverageReporters=text-summary --passWithNoTests"
     }
   },
   "lint-staged": {
