@@ -1,0 +1,28 @@
+.label-cloud {
+  display: inline-flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+
+  &__item {
+    display: inline-flex;
+    margin-right: 1rem;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  &__label {
+    text-transform: none;
+  }
+
+  &__icon {
+    margin-right: 1rem;
+    display: inline-block;
+
+    & > svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

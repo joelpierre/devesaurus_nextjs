@@ -5,7 +5,7 @@
     "block-closing-brace-newline-after": null,
     "max-empty-lines": 2,
     "at-rule-no-unknown": null,
-    "number-leading-zero": "never",
+    "number-leading-zero": null,
     "color-hex-case": null,
     "color-hex-length": null,
     "selector-pseudo-element-colon-notation": "single",

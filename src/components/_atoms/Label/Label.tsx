@@ -1,41 +1,51 @@
 import React, { FunctionComponent } from 'react';
-import Link from 'next/link';
+
 import classNames from 'classnames';
+import Link from 'next/link';
 
 import styles from './Label.scss';
 
 interface ILabel {
-  link: string;
-  theme: Core.TTheme;
-  size: Core.TSize;
-  caps: boolean;
   className?: string;
+  caps?: boolean;
+  size?: Core.TSize;
+  theme?: Core.TTheme;
+  link?: string;
+  as?: string;
 }
 
 const Label: FunctionComponent<ILabel> = (
-  { children, link, theme, size, caps, className }
+  { children, link, theme, size, caps, className, as }
 ) => {
+
   const defaultProps = {
-    className: classNames([
-      styles.label,
-      styles[`label--${theme}`],
-      styles[`label--${size}`],
-      { [styles[`label--capitalise`]]: caps },
-      className
-    ])
+    className: classNames(
+      [
+        styles.label,
+        styles[`label--${theme}`],
+        styles[`label--${size}`],
+        { [styles[`label--capitalise`]]: caps },
+        className
+      ]
+    )
   };
 
-  return link ? (
-    <Link
-      href={link}
-    >
-      <a
-        {...defaultProps}
+  if (link && as) {
+    return (
+      <Link
+        href={as!}
+        as={link}
       >
-        <span className={classNames(styles.label__text)}>{children}</span>
-      </a>
-    </Link>
-  ) : (
+        <a
+          {...defaultProps}
+        >
+          <span className={classNames(styles.label__text)}>{children}</span>
+        </a>
+      </Link>
+    );
+  }
+
+  return (
     <span
       {...defaultProps}
     >
