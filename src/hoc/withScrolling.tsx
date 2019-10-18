@@ -1,4 +1,5 @@
 import React, { Component, ComponentType } from 'react';
+import { getDisplayName } from './utils';
 
 interface IWithScrolling {
   Component?: Component;
@@ -19,16 +20,10 @@ export interface IWithScrollingInjectedProps {
   isScrolling: boolean;
 }
 
-const getDisplayName = <T extends object>(
-  WrappedComponent: ComponentType<T>,
-) => {
-  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
-};
-
 const withScrolling = <P extends object>(WrappedComponent: ComponentType<P>) =>
   class WithScrolling extends Component<P & IWithScrolling> {
     public static displayName = `WithScrolling(${getDisplayName(
-      WrappedComponent,
+      WrappedComponent
     )})`;
 
     state: IWithScrollingState = {
@@ -36,7 +31,7 @@ const withScrolling = <P extends object>(WrappedComponent: ComponentType<P>) =>
       scroll: 0,
       isScrolling: false,
       isScrollingUp: false,
-      isScrollingDown: false,
+      isScrollingDown: false
     };
 
     constructor(props: any) {
@@ -54,7 +49,7 @@ const withScrolling = <P extends object>(WrappedComponent: ComponentType<P>) =>
 
     componentDidUpdate(
       _prevProps: Readonly<P & IWithScrolling>,
-      prevState: Readonly<IWithScrollingState>,
+      prevState: Readonly<IWithScrollingState>
     ): void {
       const { scroll, threshold } = this.state;
 
@@ -90,19 +85,19 @@ const withScrolling = <P extends object>(WrappedComponent: ComponentType<P>) =>
 
     setScrollPosition() {
       this.setState(() => ({
-        scroll: window.pageYOffset,
+        scroll: window.pageYOffset
       }));
     }
 
     setScrollState(
       isScrolling: boolean,
       isScrollingUp: boolean,
-      isScrollingDown: boolean,
+      isScrollingDown: boolean
     ) {
       this.setState({
         isScrolling,
         isScrollingUp,
-        isScrollingDown,
+        isScrollingDown
       });
     }
 
@@ -120,7 +115,7 @@ const withScrolling = <P extends object>(WrappedComponent: ComponentType<P>) =>
         scroll,
         isScrollingDown,
         isScrollingUp,
-        isScrolling,
+        isScrolling
       } = this.state;
 
       return (

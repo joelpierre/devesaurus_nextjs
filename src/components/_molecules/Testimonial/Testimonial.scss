@@ -1,0 +1,26 @@
+.testimonial {
+  text-align: left;
+  padding: 2rem 0;
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  $root: &;
+
+  &__heading {
+    margin-top: 2rem;
+    margin-bottom: 0;
+    font-weight: bold;
+    text-transform: none;
+  }
+
+  &__quote {
+    margin-bottom: 3rem;
+    border-left: spacing(.5) $color-brand solid;
+    padding: spacing() spacing(2);
+  }
+
+  &__link {
+    display: inline-block;
+    margin-top: spacing();
+  }
+}

@@ -2,12 +2,12 @@ import React, { FunctionComponent, ReactText } from 'react';
 import classNames from 'classnames';
 
 import styles from './Pagination.scss';
-import Section from 'src/components/grid/Section/Section';
-import Container from 'src/components/grid/Container/Container';
-import Row from 'src/components/grid/Row/Row';
-import Flex from 'src/components/grid/Flex/Flex';
-import { Link } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Section from '@jpp/components/_shared/Grid/Section/Section';
+import Container from '@jpp/components/_shared/Grid/Container/Container';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import Link from 'next/link';
 
 interface IPaginationProps {
   className?: string;
@@ -21,16 +21,17 @@ export const getPages = (totalPages: number, currentPage: number): ReactText[] =
     return [1, 2, 3, 4, 5, 6, 7].slice(0, totalPages);
   }
 
-  const pages = [];
+  const pages: any[] = [];
 
-  let start = currentPage - 2;
-  let end = currentPage + 2;
+  let start: number = currentPage - 2;
+  let end: number = currentPage + 2;
 
   if (start < 2) {
     const diff = 2 - start;
     end += diff;
     start += diff;
   }
+
   if (end > totalPages - 1) {
     const diff = end - (totalPages - 1);
     end -= diff;
@@ -46,6 +47,7 @@ export const getPages = (totalPages: number, currentPage: number): ReactText[] =
   for (let i = start + 1; i <= end - 1; i += 1) {
     pages.push(i);
   }
+
   pages.push(endEllipsis ? '...' : end);
   pages.push(totalPages);
 
@@ -101,23 +103,26 @@ const Pagination: FunctionComponent<IPaginationProps> = (
                     classNames(
                       [
                         styles[`pagination__prev`],
-                        styles[`pagination__item`],
+                        styles[`pagination__item`]
                       ]
                     )
                   }
                 >
                   {currentPage > 1 && (
                     <Link
-                      to={getUrlForPage(location, currentPage - 1)}
+                      href={getUrlForPage(location, currentPage - 1)}
                       aria-label="Previous"
                       data-test="prev-btn"
-                      className={classNames(
-                        styles[`pagination__btn`],
-                        styles[`pagination__prev-btn`],
-                        styles[`pagination__prev-text`]
-                      )}
                     >
-                      Previous
+                      <a
+                        className={classNames(
+                          styles[`pagination__btn`],
+                          styles[`pagination__prev-btn`],
+                          styles[`pagination__prev-text`]
+                        )}
+                      >
+                        Previous
+                      </a>
                     </Link>
                   )}
                 </li>
@@ -131,7 +136,7 @@ const Pagination: FunctionComponent<IPaginationProps> = (
                             classNames(
                               [
                                 styles[`pagination__pages`],
-                                styles[`pagination__item`],
+                                styles[`pagination__item`]
                               ]
                             )
                           }
@@ -152,7 +157,7 @@ const Pagination: FunctionComponent<IPaginationProps> = (
                             classNames(
                               [
                                 styles[`pagination__pages`],
-                                styles[`pagination__item`],
+                                styles[`pagination__item`]
                               ]
                             )
                           }
@@ -164,7 +169,7 @@ const Pagination: FunctionComponent<IPaginationProps> = (
                               classNames(
                                 [
                                   styles[`pagination__btn`],
-                                  styles[`pagination__active`],
+                                  styles[`pagination__active`]
                                 ]
                               )
                             }
@@ -182,26 +187,29 @@ const Pagination: FunctionComponent<IPaginationProps> = (
                             classNames(
                               [
                                 styles[`pagination__pages`],
-                                styles[`pagination__item`],
+                                styles[`pagination__item`]
                               ]
                             )
                           }
                         >
                           <Link
-                            to={getUrlForPage(location, page)} key={page}
+                            href={getUrlForPage(location, page)} key={page}
                             data-test="page-btn"
-                            className={
-                              classNames(
-                                [
-                                  styles[`pagination__btn`],
-                                  {
-                                    [styles[`pagination__active`]]: currentPage === page,
-                                  },
-                                ]
-                              )
-                            }
                           >
-                            {page}
+                            <a
+                              className={
+                                classNames(
+                                  [
+                                    styles[`pagination__btn`],
+                                    {
+                                      [styles[`pagination__active`]]: currentPage === page
+                                    }
+                                  ]
+                                )
+                              }
+                            >
+                              {page}
+                            </a>
                           </Link>
                         </li>
                       );
@@ -212,24 +220,26 @@ const Pagination: FunctionComponent<IPaginationProps> = (
                     classNames(
                       [
                         styles[`pagination__next`],
-                        styles[`pagination__item`],
+                        styles[`pagination__item`]
                       ]
                     )
                   }
                 >
                   {currentPage < totalPages && (
                     <Link
-                      to={getUrlForPage(location, currentPage + 1)}
-                      role="button"
+                      href={getUrlForPage(location, currentPage + 1)}
                       aria-label="Next"
-                      className={classNames(
-                        styles[`pagination__btn`],
-                        styles[`pagination__next-btn`],
-                        styles[`pagination__next-text`]
-                      )}
                       data-test="next-btn"
                     >
-                      Next
+                      <a
+                        className={classNames(
+                          styles[`pagination__btn`],
+                          styles[`pagination__next-btn`],
+                          styles[`pagination__next-text`]
+                        )}
+                      >
+                        Next
+                      </a>
                     </Link>
                   )}
                 </li>

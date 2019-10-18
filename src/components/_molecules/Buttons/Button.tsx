@@ -6,18 +6,18 @@ import Link from 'next/link';
 import styles from './Button.scss';
 
 export interface IButtonProps {
-  theme: Core.TTheme;
-  size: Core.TSize;
-  behaviour: Core.TLinkBehaviour;
-  caps: boolean;
-  className: string;
-  type: Core.TLinkType;
-  as: string;
-  link: string;
-  onClick: Core.TOnClick;
-  outline: boolean;
-  tabIndex: number;
-  icon: {
+  theme?: Core.TTheme;
+  size?: Core.TSize;
+  behaviour?: Core.TLinkBehaviour;
+  caps?: boolean;
+  className?: string;
+  onClick?: Core.TOnClick;
+  type?: Core.TLinkType;
+  as?: string;
+  link?: string;
+  outline?: boolean;
+  tabIndex?: number;
+  icon?: {
     weight: 'fab' | 'far' | 'fal' | 'fas' | 'fad';
     name: IconName;
   };
@@ -25,14 +25,14 @@ export interface IButtonProps {
 
 const Button: FunctionComponent<IButtonProps> = (
   {
-    children,
     behaviour = 'router',
-    theme = 'tint-omega',
-    link,
-    size = 'md',
+    theme = Core.ETheme.TintAlpha,
+    size = Core.ESize.Md,
     caps = false,
+    outline = false,
+    children,
+    link,
     className,
-    outline,
     as,
     type,
     onClick,
@@ -103,7 +103,7 @@ const Button: FunctionComponent<IButtonProps> = (
     case 'router':
     default:
       button = (
-        <Link href={as} as={link}>
+        <Link href={as!} as={link}>
           <a {...defaultProps}>
             {content}
           </a>

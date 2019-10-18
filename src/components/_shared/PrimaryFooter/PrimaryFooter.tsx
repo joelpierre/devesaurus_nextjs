@@ -24,15 +24,15 @@ export class PrimaryFooter extends PureComponent<IPrimaryFooter> {
   render() {
     const {
       className,
-      footerMenu,
-      termsMenu,
+      // footerMenu,
+      // termsMenu,
       company_name,
       company_slogan,
       general_email
     } = this.props;
 
-    console.log(termsMenu);
-    console.log(footerMenu);
+    // console.log(termsMenu);
+    // console.log(footerMenu);
 
     return (
       <footer className={classNames(styles.primaryFooter, className)}>
@@ -95,6 +95,9 @@ export class PrimaryFooter extends PureComponent<IPrimaryFooter> {
               </Flex>
 
               <Flex colMd={6}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid blanditiis dicta eius eum in itaque
+                libero? Ab asperiores beatae dicta est expedita, illum iure nihil provident, reprehenderit repudiandae,
+                sed veritatis?
               </Flex>
             </Row>
           </Container>

@@ -1,37 +1,32 @@
-import { StaticQuery, graphql } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import Container from 'src/components/grid/Container/Container';
-import Flex from 'src/components/grid/Flex/Flex';
-import Row from 'src/components/grid/Row/Row';
-import Section from 'src/components/grid/Section/Section';
-import Carousel from 'src/components/molecules/Carousel/Carousel';
-import Testimonial from 'src/components/molecules/Testimonial/Testimonial';
-import Heading from 'src/components/shared/Heading/Heading';
-import { IAcfModule } from 'src/utils/interfaces';
-import { TTheme } from 'src/utils/types';
 
-import styles from './Testimonials.scss';
+import Section from '@jpp/components/_shared/Grid/Section/Section';
+import Container from '@jpp/components/_shared/Grid/Container/Container';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import Heading from '@jpp/components/_shared/Heading/Heading';
+import Carousel from '@jpp/molecules/Carousel/Carousel';
+import Testimonial from '@jpp/molecules/Testimonial/Testimonial';
+
 import './utils/slick-overrides.scss';
+import styles from './Testimonials.scss';
 
-interface IPureTestimonialsProps extends ITestimonialsProps {
-  allWordpressAcfOptions: any;
+interface ITestimonials {
+  testimonials: Core.ITestimonials[];
 }
 
-interface ITestimonialsProps {
-  className?: string;
-  pageTheme?: TTheme;
-  module?: Partial<IAcfModule>;
-}
+type TTestimonialsProps = ITestimonials & Core.IAcfComponentCore;
 
-export const PureTestimonials: FunctionComponent<IPureTestimonialsProps> = ({
-  className,
-  pageTheme = 'tint-alpha',
-  allWordpressAcfOptions,
-  module = {},
-}) => {
-  const { testimonials = [] } = allWordpressAcfOptions.edges[0].node.options;
-  const { theme } = module;
+export const Testimonials: FunctionComponent<TTestimonialsProps> = (
+  {
+    className,
+    page_theme = Core.ETheme.TintAlpha,
+    component = {},
+    testimonials
+  }
+) => {
+  const { theme } = component;
 
   const settings = {
     dots: true,
@@ -40,12 +35,12 @@ export const PureTestimonials: FunctionComponent<IPureTestimonialsProps> = ({
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToScroll: 1
   };
 
   return (
     <Section
-      theme={theme ? theme : pageTheme}
+      theme={theme ? theme : page_theme}
       data-test="component-testimonials"
       className={classNames(styles.testimonials, className)}
     >
@@ -73,17 +68,16 @@ export const PureTestimonials: FunctionComponent<IPureTestimonialsProps> = ({
             className={classNames('mx-auto', styles.testimonialsWrapper)}
           >
             <Carousel
-              theme={module.theme}
+              theme={component.theme}
               className={classNames(
                 styles.testimonialsContainer,
                 'testimonials-slider'
               )}
               settings={settings}
             >
-              {testimonials &&
-                testimonials.map((testimonial: any, index: number) => {
-                  return <Testimonial key={index} {...testimonial} />;
-                })}
+              {testimonials && testimonials.map((testimonial: any, index: number) => {
+                return <Testimonial key={index} {...testimonial} />;
+              })}
             </Carousel>
           </Flex>
         </Row>
@@ -91,35 +85,5 @@ export const PureTestimonials: FunctionComponent<IPureTestimonialsProps> = ({
     </Section>
   );
 };
-
-const Testimonials: FunctionComponent<ITestimonialsProps> = ({ ...props }) => (
-  <StaticQuery
-    data-test="component-testimonials-query"
-    query={query}
-    render={queryProps => <PureTestimonials {...queryProps} {...props} />}
-  />
-);
-
-const query = graphql`
-  {
-    allWordpressAcfOptions {
-      edges {
-        node {
-          options {
-            testimonials {
-              name
-              content
-              company {
-                wordpress_id
-                post_name
-                post_title
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 export default Testimonials;

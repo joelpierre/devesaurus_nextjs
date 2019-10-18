@@ -22,7 +22,7 @@ const WYSIWYG: FunctionComponent<IWYSIWYGProps> = ({
   return (
     <div
       className={classNames(className, 'WYSIWYG')}
-      dangerouslySetInnerHTML={{ ...dangerouslySetInnerHTML }}
+      dangerouslySetInnerHTML={{ ...dangerouslySetInnerHTML! }}
     />
   );
 };

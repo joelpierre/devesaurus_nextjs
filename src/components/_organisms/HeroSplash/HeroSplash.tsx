@@ -1,39 +1,32 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import Heading from '@jpp/components/_shared/Heading/Heading';
 import Section from '@jpp/components/_shared/Grid/Section/Section';
+
+import withAcfComponent, { TWithAcfComponentInjectedProps } from '../../../hoc/withAcfComponent';
 
 import styles from './HeroSplash.scss';
 
-interface IHomeHeroProps {
-  className?: string;
-}
+type THeroSplash = Core.IAcfComponentCore & TWithAcfComponentInjectedProps;
 
-const HeroSplash: FunctionComponent<Partial<IHomeHeroProps>> = (
+const HeroSplash: FunctionComponent<THeroSplash> = (
   {
-    className
+    className,
+    component,
+    page_theme
   }
 ) => {
+  const theme = component.theme ? component.theme : page_theme;
+
   return (
     <Section
       data-test="component-home-hero"
-      className={classNames(styles.heroSplash, className)}
+      className={classNames(styles.heroSplash, className, `theme--${theme}`)}
     >
-      <div className={styles.heroSplashContent}>
-        <Heading
-          priority={1}
-          className={styles.heroSplashHeading}
-          innerHTML={false}
-        >
-          Some Heading here
-        </Heading>
-        <p className={styles.heroSplashCopy}>
-          Some copy here
-        </p>
-      </div>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque consectetur corporis debitis doloremque ea eius,
+      esse hic iusto minima modi nesciunt nobis pariatur quaerat rem unde voluptas voluptate. Distinctio!
     </Section>
   );
 };
 
-export default HeroSplash;
+export default withAcfComponent(HeroSplash);

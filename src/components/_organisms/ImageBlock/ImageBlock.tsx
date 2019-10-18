@@ -1,23 +1,29 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import { IAcfComponentProps } from 'src/utils/interfaces';
 
-import Section from '../../grid/Section/Section';
-import Row from '../../grid/Row/Row';
-import Container from '../../grid/Container/Container';
-import Flex from '../../grid/Flex/Flex';
 import styles from './ImageBlock.scss';
+import Section from '@jpp/components/_shared/Grid/Section/Section';
+import Container from '@jpp/components/_shared/Grid/Container/Container';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
+import withAcfComponent from '../../../hoc/withAcfComponent';
 
-const ImageBlock: FunctionComponent<IAcfComponentProps> = ({
-  module = {},
-  pageTheme = 'tint-alpha',
-}) => {
+type TImageBlock = Core.IAcfComponentCore;
+
+const ImageBlock: FunctionComponent<TImageBlock> = (
+  {
+    component = {},
+    page_theme = Core.ETheme.TintAlpha,
+    className
+  }
+) => {
   return (
     <Section
       data-test="component-"
       className={classNames([
-        `theme--${module.theme ? module.theme : pageTheme}`,
-        styles.imageBlock,
+        className,
+        `theme--${component.theme ? component.theme : page_theme}`,
+        styles.imageBlock
       ])}
     >
       <Container>
@@ -29,4 +35,4 @@ const ImageBlock: FunctionComponent<IAcfComponentProps> = ({
   );
 };
 
-export default ImageBlock;
+export default withAcfComponent(ImageBlock);
