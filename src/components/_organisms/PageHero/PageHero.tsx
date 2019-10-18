@@ -1,81 +1,76 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import { BannerLayer } from 'react-scroll-parallax/cjs';
-import Container from 'src/components/grid/Container/Container';
-import Flex from 'src/components/grid/Flex/Flex';
-import Row from 'src/components/grid/Row/Row';
-import Section from 'src/components/grid/Section/Section';
-import SocialShareMenu from 'src/components/molecules/SocialShareMenu/SocialShareMenu';
-import ImageScroller from 'src/components/organisms/ImageScroller/ImageScroller';
-import Heading from 'src/components/shared/Heading/Heading';
-import { IAcfModule } from 'src/utils/interfaces';
-import { TTheme } from 'src/utils/types';
+import withAcfComponent from '../../../hoc/withAcfComponent';
 
 import styles from './PageHero.scss';
+import Section from '@jpp/components/_shared/Grid/Section/Section';
+import { ImageScroller } from '@jpp/organisms/ImageScroller/ImageScroller';
+import Container from '@jpp/components/_shared/Grid/Container/Container';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import Heading from '@jpp/components/_shared/Heading/Heading';
 
 interface IPageHeroProps {
-  module: Partial<IAcfModule>;
-  pageTheme: TTheme;
-  className: string;
-  location: Location;
-  image: string;
-  pageContext?: any;
+  image?: string;
 }
 
-const PageHero: FunctionComponent<Partial<IPageHeroProps>> = ({
-  module = {},
-  pageTheme = 'brand',
-  className,
-  image,
-  pageContext = {},
-  location,
-}) => {
-  const imageObj: Partial<BannerLayer> = {
-    image: image
-      ? image
-      : pageContext.featured_media
-      ? pageContext.featured_media.source_url
-      : `${process.env.GATSBY_PROTOCOL}://${process.env.GATSBY_API_URL}/wp-content/uploads/2019/08/samuel-zeller-j0g8taxHZa0-unsplash.jpg`,
-  };
+type TPageHero = IPageHeroProps & Core.IAcfComponentCore;
 
-  const { heading, copy, theme } = module;
-  const { acf = {} } = pageContext;
+const PageHero: FunctionComponent<TPageHero> = (
+  {
+    component = {},
+    page_theme = 'brand',
+    className,
+    image
+  }
+) => {
+  let imageObj: Partial<BannerLayer> = {};
+
+  if (image) {
+    imageObj = {
+      image: `${image}`
+    };
+  }
+
+  const { heading, subheading, copy, theme } = component;
 
   return (
     <Section
-      theme={theme ? theme : pageTheme}
+      theme={theme ? theme : page_theme}
       className={classNames(styles.pageHero, className)}
     >
-      <ImageScroller className={styles.pageHeroImage} image={imageObj} />
+      <ImageScroller className={styles.pageHeroImage} image={imageObj} page_theme={page_theme}/>
 
       <Container fluid={false} className={styles.pageHeroContent}>
         <Row>
           <Flex colXl={8} colLg={7}>
             <Heading className={styles.pageHeroHeading} priority={1}>
-              {heading ? heading : pageContext.title}
+              {heading}
             </Heading>
-
-            <div className="w-100" />
-
-            {(copy || acf.subtitle) && (
+          </Flex>
+        </Row>
+        <Row>
+          <Flex colXl={8} colLg={7}>
+            {(copy || subheading) && (
               <p className={styles.pageHeroCopy}>
-                {copy ? copy : pageContext.acf.subtitle}
+                {copy ? copy : subheading}
               </p>
             )}
           </Flex>
         </Row>
       </Container>
 
-      {location && (
-        <Container fluid={false} className={styles.pageHeroSocialWrapper}>
-          <SocialShareMenu
-            className={styles.pageHeroSocial}
-            location={location}
-          />
-        </Container>
-      )}
+      {/*{location && (*/}
+      {/*  <Container fluid={false} className={styles.pageHeroSocialWrapper}>*/}
+      {/*    <SocialShareMenu*/}
+      {/*      className={styles.pageHeroSocial}*/}
+      {/*      location={location}*/}
+      {/*    />*/}
+      {/*  </Container>*/}
+      {/*)}*/}
     </Section>
   );
 };
 
-export default PageHero;
+export default withAcfComponent(PageHero);

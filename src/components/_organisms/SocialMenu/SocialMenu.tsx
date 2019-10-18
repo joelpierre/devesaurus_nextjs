@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { IReduxState } from '../../../store/createStore';
 import SocialItem from '@jpp/atoms/SocialItem/SocialItem';
 
 import styles from './SocialMenu.scss';
@@ -75,24 +73,4 @@ const SocialMenu: FunctionComponent<ISocialMenu> = (
   );
 };
 
-const mapStateToProps = (
-  {
-    core: {
-      options: {
-        facebook,
-        twitter,
-        linkedin,
-        instagram,
-        youtube
-      }
-    }
-  }: IReduxState
-) => ({
-  facebook,
-  twitter,
-  linkedin,
-  instagram,
-  youtube
-});
-
-export default connect(mapStateToProps)(SocialMenu);
+export default SocialMenu;

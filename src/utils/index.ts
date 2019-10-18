@@ -1,5 +1,4 @@
 import { IconName } from '@fortawesome/fontawesome-common-types';
-import { Icon } from '@fortawesome/fontawesome-svg-core';
 
 /**
  * Update any object passed through
@@ -11,17 +10,6 @@ export const updateObject = <T>(oldObject: T, updatedValues: Partial<T>): T => (
   ...oldObject,
   ...updatedValues
 });
-
-/**
- * Map over ACF Component array and amend the layout title
- * @returns {*}
- * @param component
- */
-export const mapOverACFComponents = (component: Partial<any>) => {
-  component.__typename = component.__typename.replace('WordPressAcf_', '');
-
-  return component;
-};
 
 /**
  * Slugify a string in order
@@ -258,7 +246,7 @@ export const mapTaxonomyTheme = (slug: string = 'default'): Core.TTheme => {
  * @returns {array}
  */
 export const mapTaxonomyIcon = (slug: string = 'default'): IconName => {
-  let icon: IconName;
+  let icon;
 
   switch (slug) {
     case 'news':

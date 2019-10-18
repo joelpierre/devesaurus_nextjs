@@ -3,15 +3,13 @@ import { connect } from 'react-redux';
 
 import { TTemplateInitialProps } from '@jpp/typings/index';
 import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
+import { AcfComponents } from '@jpp/components/_shared/AcfComponents/AcfComponents';
 
 import { clearPage, getPage } from '../src/store/page/actions';
 import { IReduxState } from '../src/store/createStore';
 import { IPageStoreState } from '../src/store/page/reducer';
 
 import ErrorPage from './_error';
-import Section from '@jpp/components/_shared/Grid/Section/Section';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 
 export class HomePage extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
@@ -49,7 +47,8 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
   }
 
   render() {
-    const { page, page: { yoast = {} }, error } = this.props;
+    const { page, page: { yoast = {}, acf = {} }, error } = this.props;
+    const { page_theme, components } = acf;
     const title = yoast.yoast_wpseo_title || page.title;
     const description = yoast.yoast_wpseo_metadesc;
 
@@ -64,15 +63,11 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
           description={description}
           useSimpleHeader={true}
         >
-          <Section>
-            <Row>
-              <Flex>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cumque cupiditate deserunt dignissimos
-                distinctio dolor dolorem doloremque enim minima, molestiae nulla obcaecati qui reiciendis reprehenderit,
-                tempora tenetur vero voluptates voluptatibus!
-              </Flex>
-            </Row>
-          </Section>
+          {components && components.map(
+            (component: Core.IAcfComponent, index: number) => (
+              <AcfComponents component={component} page_theme={page_theme} key={index}/>
+            )
+          )}
         </CoreLayout>
       </>
     );

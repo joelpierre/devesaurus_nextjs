@@ -1,28 +1,24 @@
 import React, { PureComponent } from 'react';
-import { mapOverACFComponents } from 'src/utils';
+
+import HeroSplash from '@jpp/organisms/HeroSplash/HeroSplash';
+
 import RenderChildren from '../../../utils/components/RenderChildren/RenderChildren';
-import { HeroSplash } from '@jpp/organisms/HeroSplash/HeroSplash';
 
-interface IAcfComponentsProps {
-  component: Partial<Core.IAcfComponents>;
-  pageTheme: Core.TTheme | string;
-}
+type TAcfComponents = Core.IAcfComponentCore;
 
-export class AcfComponents extends PureComponent<IAcfComponentsProps> {
+export class AcfComponents extends PureComponent<TAcfComponents> {
   render() {
-    const { component: rootComponent, pageTheme } = this.props;
-    const component = mapOverACFComponents(rootComponent);
-    const componentName = component.__typename;
+    const { component, page_theme } = this.props;
+    const componentName: string = component.acf_fc_layout!;
 
     const defaultProps = {
-      'data-test': `hoc-acf-${componentName}`,
-      module: component,
-      pageTheme
+      component,
+      page_theme
     };
 
     return (
       <>
-        <RenderChildren if={componentName === 'page_hero'}>
+        <RenderChildren if={componentName === 'hero_splash'}>
           <HeroSplash
             {...defaultProps}
           />

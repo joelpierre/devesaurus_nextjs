@@ -1,23 +1,27 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import { IAcfComponentProps } from 'src/utils/interfaces';
 
-import Section from '../../grid/Section/Section';
-import Row from '../../grid/Row/Row';
-import Container from '../../grid/Container/Container';
-import Flex from '../../grid/Flex/Flex';
-import styles from '../CtaBanner/CtaBanner.module.scss';
+import styles from './InlineQuote.scss';
+import withAcfComponent from '../../../hoc/withAcfComponent';
+import Section from '@jpp/components/_shared/Grid/Section/Section';
+import Container from '@jpp/components/_shared/Grid/Container/Container';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 
-const InlineQuote: FunctionComponent<IAcfComponentProps> = ({
-  module = {},
-  pageTheme = 'tint-alpha',
-}) => {
+type TInlineQuote = Core.IAcfComponentCore;
+
+const InlineQuote: FunctionComponent<TInlineQuote> = (
+  {
+    component = {},
+    page_theme = Core.ETheme.TintAlpha
+  }
+) => {
   return (
     <Section
       data-test="component-inline-quote"
       className={classNames([
-        `theme--${module.theme ? module.theme : pageTheme}`,
-        styles['inline-quote'],
+        `theme--${component.theme ? component.theme : page_theme}`,
+        styles['inline-quote']
       ])}
     >
       <Container>
@@ -31,4 +35,4 @@ const InlineQuote: FunctionComponent<IAcfComponentProps> = ({
   );
 };
 
-export default InlineQuote;
+export default withAcfComponent(InlineQuote);

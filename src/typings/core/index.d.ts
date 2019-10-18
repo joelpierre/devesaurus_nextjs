@@ -36,6 +36,12 @@ declare namespace Core {
     Dark = 'dark'
   }
 
+  export enum EPosition {
+    Left = 'left',
+    Right = 'right',
+    Center = ' center'
+  }
+
   export enum ETaxonomy {
     Category = 'category',
     WordCategory = 'word_category',
@@ -59,7 +65,16 @@ declare namespace Core {
     | '5'
     | 5
     | '6'
-    | 6 | string | number;
+    | 6 | EPriority;
+
+  export enum EPriority {
+    One = '1',
+    Two = '2',
+    Three = '3',
+    Four = '4',
+    Five = '5',
+    Six = '6'
+  }
 
   export type TColumn =
     | '1'
@@ -104,6 +119,14 @@ declare namespace Core {
   export type TLinkBehaviour = 'router' | 'anchor' | 'action';
 
   export type TSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+  export enum ESize {
+    Xs = 'xs',
+    Sm = 'sm',
+    Md = 'md',
+    Lg = 'lg',
+    Xl = 'xl'
+  }
 
   export type TLinkType = 'button' | 'submit' | 'reset';
 
@@ -154,11 +177,110 @@ declare namespace Core {
      *
      *
      **/
-    components: Partial<IAcfComponents>[];
+    component: Partial<IAcfComponentCore>[];
   }
 
-  export interface IAcfComponents {
+  export interface IAcfComponentCore {
+    /**
+     *
+     *
+     **/
+    className?: string;
+    /**
+     *
+     *
+     **/
+    component: Partial<IAcfComponent>;
+    /**
+     *
+     *
+     **/
+    page_theme: TTheme;
+  }
 
+  export interface IAcfComponent {
+    /**
+     *
+     *
+     */
+    acf_fc_layout: string;
+    /**
+     *
+     *
+     **/
+    heading: string;
+    /**
+     *
+     *
+     */
+    subheading: string;
+    /**
+     *
+     *
+     **/
+    copy: string;
+    /**
+     *
+     *
+     **/
+    cta: boolean;
+    /**
+     *
+     *
+     **/
+    cta_text: string;
+    /**
+     *
+     *
+     **/
+    cta_link: any;
+    /**
+     *
+     *
+     **/
+    cta_theme: ETheme;
+    /**
+     *
+     *
+     **/
+    theme: ETheme;
+    /**
+     *
+     *
+     */
+    brand_zip_file: any;
+    /**
+     *
+     *
+     */
+    image: any;
+    /**
+     *
+     *
+     */
+    text_content: string;
+    /**
+     *
+     *
+     */
+    fixed: boolean;
+    /**
+     *
+     *
+     */
+    position: EPosition;
+    /**
+     *
+     *
+     */
+    /**
+     *
+     *
+     */
+    /**
+     *
+     *
+     */
   }
 
   export interface ICoreOptions {

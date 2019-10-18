@@ -14,7 +14,7 @@ export interface IPageStoreState {
   content: string;
   author: string;
   yoast: Core.IYoastMeta;
-  acf: Core.IAcfComponents;
+  acf: Core.IAcfComponentCore;
   error?: Core.IErrorResponse | AxiosError;
 }
 
@@ -24,7 +24,7 @@ const pageReducer = (
   state = initialState as IPageStoreState,
   action: AnyAction
 ): IPageStoreState => {
-  let updatedState;
+  let updatedState: IPageStoreState;
 
   switch (action.type) {
     case actions.GET_PAGE_SUCCESS:

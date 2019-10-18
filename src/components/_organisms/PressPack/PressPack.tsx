@@ -1,34 +1,31 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import Container from 'src/components/grid/Container/Container';
-import Flex from 'src/components/grid/Flex/Flex';
-import Row from 'src/components/grid/Row/Row';
-import Section from 'src/components/grid/Section/Section';
-import Button from 'src/components/molecules/Buttons/Button';
-import Heading from 'src/components/shared/Heading/Heading';
-import { IAcfModule } from 'src/utils/interfaces';
-import { TTheme } from 'src/utils/types';
+
+import Section from '@jpp/components/_shared/Grid/Section/Section';
+import Container from '@jpp/components/_shared/Grid/Container/Container';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import Heading from '@jpp/components/_shared/Heading/Heading';
+import Button from '@jpp/molecules/Buttons/Button';
 
 import styles from './PressPack.scss';
 
-interface IPressPackProps {
-  className: string;
-  pageTheme: TTheme;
-  module: Partial<IAcfModule>;
-}
+type TPressPack = Core.IAcfComponentCore;
 
-const PressPack: FunctionComponent<Partial<IPressPackProps>> = ({
-  module = {},
-  pageTheme = 'tint-alpha',
-  className,
-}) => {
-  const { heading, copy, brand_zip_file, image, theme } = module;
+const PressPack: FunctionComponent<TPressPack> = (
+  {
+    component = {},
+    page_theme = Core.ETheme.TintAlpha,
+    className
+  }
+) => {
+  const { heading, copy, brand_zip_file, image, theme } = component;
   const {
-    url: { source_url: ZIP_URL },
+    url: { source_url: ZIP_URL }
   } = brand_zip_file;
   const {
     source_url,
-    media_details: { width, height },
+    media_details: { width, height }
   } = image;
 
   const imageAttrs = {
@@ -38,7 +35,7 @@ const PressPack: FunctionComponent<Partial<IPressPackProps>> = ({
   return (
     <Section
       data-test="component-press-pack"
-      theme={theme ? theme : pageTheme}
+      theme={theme ? theme : page_theme}
       className={classNames(styles.pressPack, className)}
     >
       <Container fluid={false}>
@@ -49,7 +46,7 @@ const PressPack: FunctionComponent<Partial<IPressPackProps>> = ({
             </Heading>
             <p
               className={styles.pressPackCopy}
-              dangerouslySetInnerHTML={{ __html: copy }}
+              dangerouslySetInnerHTML={{ __html: copy! }}
             />
             <Button
               className={styles.pressPackButton}

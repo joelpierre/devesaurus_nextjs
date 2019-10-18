@@ -2,30 +2,29 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import {
   BannerLayer,
-  ParallaxBanner,
+  ParallaxBanner
 } from 'react-scroll-parallax/cjs';
-import Heading from 'src/components/shared/Heading/Heading';
-import { IAcfModule } from 'src/utils/interfaces';
-import { TSize } from 'src/utils/types';
 
 import styles from './ImageScroller.scss';
+import Heading from '@jpp/components/_shared/Heading/Heading';
+import withAcfComponent from '../../../hoc/withAcfComponent';
 
 interface IImageScrollerProps {
-  module?: Partial<IAcfModule>;
-  size?: TSize;
+  size?: Core.TSize;
   image?: Partial<BannerLayer>;
-  className: string;
 }
 
-export class ImageScroller extends PureComponent<Partial<IImageScrollerProps>> {
+type TImageScroller = Partial<IImageScrollerProps> & Core.IAcfComponentCore;
+
+export class ImageScroller extends PureComponent<TImageScroller> {
   static defaultProps = {
-    size: 'md',
-    module: {},
+    size: Core.ESize.Md,
+    component: {}
   };
 
   render() {
-    const { className, image, children, size, module } = this.props;
-    const { heading, copy } = module;
+    const { className, image, children, size, component } = this.props;
+    const { heading, copy } = component;
 
     return (
       <ParallaxBanner
@@ -34,13 +33,13 @@ export class ImageScroller extends PureComponent<Partial<IImageScrollerProps>> {
           [styles.imageScrollerSm]: size === 'sm',
           [styles.imageScrollerMd]: size === 'md',
           [styles.imageScrollerLg]: size === 'lg',
-          [styles.imageScrollerXl]: size === 'xl',
+          [styles.imageScrollerXl]: size === 'xl'
         })}
         layers={
           [{
             amount: 0.3,
             children: undefined,
-            ...image,
+            ...image
           }]
         }
       >
@@ -49,12 +48,16 @@ export class ImageScroller extends PureComponent<Partial<IImageScrollerProps>> {
             ((heading || copy) ? (
               <>
                 heading && (
-                <Heading>
+                <Heading
+                  className={styles.imageScrollerHeading}
+                >
                   {heading}
                 </Heading>
                 )
                 copy && (
-                <p>
+                <p
+                  className={styles.imageScrollerCopy}
+                >
                   {copy}
                 </p>
                 )
@@ -67,4 +70,4 @@ export class ImageScroller extends PureComponent<Partial<IImageScrollerProps>> {
   }
 }
 
-export default ImageScroller;
+export default withAcfComponent(ImageScroller);
