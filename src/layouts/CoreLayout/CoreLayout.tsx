@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 
@@ -8,11 +8,11 @@ import PrimaryMain from '@jpp/components/_shared/PrimaryMain/PrimaryMain';
 import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter/PrimaryFooter';
 import PrimaryHeader from '@jpp/components/_shared/PrimaryHeader/PrimaryHeader';
 import OffCanvas from '@jpp/components/_shared/OffCanvas/OffCanvas';
+import SimpleHeader from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
 
 import ConfigProvider from '../../services/configProvider';
 import { IReduxState } from '../../store/createStore';
 import { setMenuState } from '../../store/rootActions';
-import SimpleHeader from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
 
 interface ICoreLayout {
   title: string;
@@ -23,6 +23,7 @@ interface ICoreLayout {
   primaryMenu: Core.IMenuItem[];
   simpleMenu: Core.IMenuItem[];
   useSimpleHeader?: boolean;
+  children: ReactNode;
 }
 
 export class CoreLayout extends PureComponent<ICoreLayout> {

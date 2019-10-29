@@ -7,6 +7,7 @@ interface RowInterface {
   column?: boolean;
   reverse?: boolean;
   className?: string;
+  tagElement?: Core.TTag;
 }
 
 const Row: FunctionComponent<RowInterface> = (
@@ -16,10 +17,13 @@ const Row: FunctionComponent<RowInterface> = (
     column = false,
     reverse = false,
     className,
+    tagElement = 'div',
     ...props
   }) => {
+  const Tag: any = `${tagElement}`;
+
   return (
-    <div
+    <Tag
       data-test="component-grid-row"
       className={classNames([
         className,
@@ -33,7 +37,7 @@ const Row: FunctionComponent<RowInterface> = (
       {...props}
     >
       {children}
-    </div>
+    </Tag>
   );
 };
 

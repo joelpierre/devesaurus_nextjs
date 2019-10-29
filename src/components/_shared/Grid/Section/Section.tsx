@@ -5,7 +5,7 @@ import styles from './Section.scss';
 
 interface ISection {
   className?: string;
-  type?: Core.TTag;
+  tagElement?: Core.TTag;
   contrast?: boolean;
   theme?: Core.TTheme;
   style?: CSSProperties;
@@ -15,13 +15,13 @@ const Section: FunctionComponent<ISection> = (
   {
     children,
     className,
-    type = 'section',
+    tagElement = 'section',
     contrast = false,
     theme,
     ...props
   }
 ) => {
-  const Tag: any = `${type}`;
+  const Tag: any = `${tagElement}`;
 
   return (
     <Tag

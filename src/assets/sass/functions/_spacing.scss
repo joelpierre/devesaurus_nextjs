@@ -1,0 +1,17 @@
+@function spacing($inc: 1) {
+  @if $inc <= .5 {
+    // 4
+    @return $space-base * .5;
+  }
+  @if $inc <=1 {
+    // 8
+    @return $space-base * 1;
+  }
+  @if $inc <=1.5 {
+    // 12
+    @return $space-base * 1.5;
+  }
+  // round to whole number increments to ensure only 8px steps
+  $roundedInc: round($inc);
+  @return $space-base * $roundedInc;
+}

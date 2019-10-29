@@ -6,7 +6,7 @@ import styles from './Container.scss';
 interface ContainerInterface {
   fluid?: boolean;
   className?: string;
-  type?: Core.TTag;
+  tagElement?: Core.TTag;
 }
 
 const Container: FunctionComponent<ContainerInterface> = (
@@ -14,10 +14,10 @@ const Container: FunctionComponent<ContainerInterface> = (
     fluid = true,
     children,
     className,
-    type = 'div',
+    tagElement = 'div',
     ...props
   }) => {
-  const Tag: any = `${type}`;
+  const Tag: any = `${tagElement}`;
 
   return (
     <Tag

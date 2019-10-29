@@ -4,7 +4,7 @@ import { EIconType, TIconProps } from '@jpp/atoms/Icon/utils/types';
 import IconComponents from '@jpp/atoms/Icon/utils/inline';
 import IconUrls from '@jpp/atoms/Icon/utils/external';
 
-const Icon = (type: EIconType) => ({ className, inline, ...rest }: TIconProps) => {
+const Icon = (type: EIconType) => ({ className, inline, ...rest }: TIconProps): JSX.Element => {
 
   const classes = classNames('Icon', className);
 
@@ -17,6 +17,7 @@ const Icon = (type: EIconType) => ({ className, inline, ...rest }: TIconProps) =
   }
 
   return (
+    // @ts-ignore
     <img src={IconUrls[type]} className={classes} {...rest} />
   );
 };

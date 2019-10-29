@@ -18,7 +18,7 @@ interface IFlexProps {
   colLg?: Core.TColumn;
   colXl?: Core.TColumn;
   auto?: boolean;
-  type?: Core.TTag;
+  tagElement?: Core.TTag;
   dangerouslySetInnerHTML?: {
     __html: string;
   };
@@ -28,7 +28,7 @@ const Flex: FunctionComponent<Partial<IFlexProps>> = (
   {
     children,
     auto = false,
-    type = 'div',
+    tagElement = 'div',
     className,
     xs,
     sm,
@@ -43,7 +43,8 @@ const Flex: FunctionComponent<Partial<IFlexProps>> = (
     colXl,
     ...props
   }) => {
-  const Tag: any = `${type}`;
+
+  const Tag = `${tagElement}` as any;
 
   const combinedClasses = {
     [styles.flex]: !col,
