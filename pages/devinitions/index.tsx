@@ -3,32 +3,32 @@ import { connect } from 'react-redux';
 
 import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
 
-import { getCategories } from '../../../src/store/rootActions';
-import { IPageStoreState } from '../../../src/store/page/reducer';
-import { IReduxState } from '../../../src/store/createStore';
+import { getCategories } from '../../src/store/rootActions';
+import { IPageStoreState } from '../../src/store/page/reducer';
+import { IReduxState } from '../../src/store/createStore';
 
-import ErrorPage from '../../_error';
-import { ICategoryStoreState } from '../../../src/store/categories/reducer';
+import ErrorPage from '../_error';
+import { ICategoryStoreState } from '../../src/store/categories/reducer';
 import { TTemplateInitialProps } from '@jpp/typings/index';
 
-interface IDevinitionsCategoriesPage {
+interface IDevinitionsPage {
   error: any;
 }
 
-interface IStoreDevinitionsCategoriesPageProps {
+interface IStoreDevinitionsPageProps {
   categories: ICategoryStoreState[];
 }
 
-interface IDispatchDevinitionsCategoriesPageProps {
+interface IDispatchDevinitionsPageProps {
   onGetCategories: () => void;
 }
 
-type TDevinitionsCategoriesPage =
-  IDevinitionsCategoriesPage
-  & IStoreDevinitionsCategoriesPageProps
-  & IDispatchDevinitionsCategoriesPageProps;
+type TDevinitionsPage =
+  IDevinitionsPage
+  & IStoreDevinitionsPageProps
+  & IDispatchDevinitionsPageProps;
 
-export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategoriesPage> {
+export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
   static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
     await store.dispatch(getCategories());
     const categories: IPageStoreState = store.getState().categories;
@@ -67,7 +67,7 @@ export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategor
         title={title}
         description={description}
       >
-        DEVINITION CATEGORIES PAGE
+        DEVINITIONS PAGE
 
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto corporis cum molestiae nisi officia
         perferendis quam reprehenderit similique vitae! Assumenda dolore eveniet fuga fugit natus, quas quibusdam
@@ -85,4 +85,4 @@ const mapDispatchToProps = {
   onGetCategories: () => getCategories()
 };
 
-export default connect<IStoreDevinitionsCategoriesPageProps, IDispatchDevinitionsCategoriesPageProps, IDevinitionsCategoriesPage>(mapStateToProps, mapDispatchToProps)(DevinitionsCategoriesPage);
+export default connect<IStoreDevinitionsPageProps, IDispatchDevinitionsPageProps, IDevinitionsPage>(mapStateToProps, mapDispatchToProps)(DevinitionsPage);

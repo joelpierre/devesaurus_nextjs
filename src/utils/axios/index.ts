@@ -4,6 +4,21 @@ import ConfigProvider from '../../services/configProvider';
 const PROTOCOL = ConfigProvider.getValue('PROTOCOL');
 const API_URL = ConfigProvider.getValue('API_URL');
 
+const wpV2AxiosInstance: AxiosInstance = axios.create({
+  baseURL: `${PROTOCOL}://${API_URL}/wp-json/wp/v2`
+});
+
+wpV2AxiosInstance.interceptors.request.use(
+  (response: AxiosResponse) => {
+    return response;
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  }
+);
+
+export { wpV2AxiosInstance };
+
 const defaultAxiosInstance: AxiosInstance = axios.create({
   baseURL: `${PROTOCOL}://${API_URL}/wp-json/better-rest-endpoints/v1`
 });

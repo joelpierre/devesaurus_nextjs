@@ -17,9 +17,6 @@ const wordReducer = (
   action: AnyAction
 ): IWordStoreState => {
   switch (action.type) {
-    case actions.GET_WORD:
-      return updateObject(state, action.payload);
-
     case actions.GET_WORD_SUCCESS:
       return updateObject(state, action.payload);
 

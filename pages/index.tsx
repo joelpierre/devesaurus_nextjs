@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
+import BasicLayout from '@jpp/layouts/BasicLayout/BasicLayout';
 import { TTemplateInitialProps } from '@jpp/typings/index';
-import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
 import { AcfComponents } from '@jpp/components/_shared/AcfComponents/AcfComponents';
 
 import { clearPage, getPage } from '../src/store/page/actions';
@@ -18,7 +18,6 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
 
     if (page.error) {
       res.statusCode = page.error.code;
-
       return {
         error: page.error
       };
@@ -57,19 +56,16 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
     }
 
     return (
-      <>
-        <CoreLayout
-          title={title}
-          description={description}
-          useSimpleHeader={true}
-        >
-          {components && components.map(
-            (component: Core.IAcfComponent, index: number) => (
-              <AcfComponents component={component} page_theme={page_theme} key={index}/>
-            )
-          )}
-        </CoreLayout>
-      </>
+      <BasicLayout
+        title={title}
+        description={description}
+      >
+        {components && components.map(
+          (component: Core.IAcfComponent, index: number) => (
+            <AcfComponents component={component} page_theme={page_theme} key={index}/>
+          )
+        )}
+      </BasicLayout>
     );
   }
 }

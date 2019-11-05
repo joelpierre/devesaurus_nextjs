@@ -8,7 +8,7 @@ import { IReduxState } from '../../src/store/createStore';
 import { IWordStoreState } from '../../src/store/word/reducer';
 import ErrorPage from '../_error';
 
-export class WordTemplate extends PureComponent<TTemplateInitialProps> {
+export class DevinitionPage extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ query: { slug }, store, isServer, res }: TTemplateInitialProps) {
     if (slug) {
       await store.dispatch(getWord(slug));
@@ -32,6 +32,8 @@ export class WordTemplate extends PureComponent<TTemplateInitialProps> {
 
   async componentDidMount(): Promise<void> {
     const { onGetWord, slug, word } = this.props;
+
+    console.log(word);
 
     if (Object.keys(word).length === 0) {
       await onGetWord(slug);
@@ -78,4 +80,4 @@ const mapDispatchToProps = {
   onClearWord: () => clearWord()
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WordTemplate);
+export default connect(mapStateToProps, mapDispatchToProps)(DevinitionPage);

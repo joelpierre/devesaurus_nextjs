@@ -8,7 +8,7 @@ import { TTemplateInitialProps } from '@jpp/typings/index';
 import { IPostStoreState } from '../../src/store/post/reducer';
 import ErrorPage from '../_error';
 
-export class PostTemplate extends PureComponent<TTemplateInitialProps> {
+export class DevegramPage extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ query: { slug }, store, isServer, res }: TTemplateInitialProps) {
     if (slug) {
       await store.dispatch(getPost(slug));
@@ -85,4 +85,4 @@ const mapDispatchToProps = {
   onClearPost: () => clearPost()
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostTemplate);
+export default connect(mapStateToProps, mapDispatchToProps)(DevegramPage);

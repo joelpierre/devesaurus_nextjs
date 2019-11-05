@@ -11,9 +11,8 @@ import { IPageStoreState } from '../src/store/page/reducer';
 import ConfigProvider from '../src/services/configProvider';
 import Meta from '@jpp/components/_shared/Meta/Meta';
 
-export class PageTemplate extends PureComponent<TTemplateInitialProps> {
+export class DefaultPage extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ query: { slug }, store, isServer, res }: TTemplateInitialProps) {
-
     if (slug) {
       await store.dispatch(getPage(slug));
     }
@@ -22,7 +21,6 @@ export class PageTemplate extends PureComponent<TTemplateInitialProps> {
 
     if (page.error) {
       res.statusCode = page.error.code;
-
       return {
         error: page.error
       };
@@ -35,12 +33,12 @@ export class PageTemplate extends PureComponent<TTemplateInitialProps> {
   }
 
   async componentDidMount(): Promise<void> {
-    const { onGetPage, slug, onGetSimpleMenu } = this.props;
+    const { onGetPage, slug, page, onGetSimpleMenu } = this.props;
 
-    // if (Object.keys(page).length === 0) {
-    await onGetPage(slug);
-    await onGetSimpleMenu();
-    // }
+    if (Object.keys(page).length === 0) {
+      await onGetPage(slug);
+      await onGetSimpleMenu();
+    }
   }
 
   async componentWillUnmount(): Promise<void> {
@@ -90,4 +88,4 @@ const mapDispatchToProps = {
   onGetSimpleMenu: () => getSimpleMenu()
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageTemplate);
+export default connect(mapStateToProps, mapDispatchToProps)(DefaultPage);

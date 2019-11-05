@@ -7,30 +7,62 @@ import { ICoreStoreState } from './core/reducer';
 import { IPageStoreState } from './page/reducer';
 import { IPostStoreState } from './post/reducer';
 import { IWordStoreState } from './word/reducer';
-import { getPage, getPost, getSiteMeta, setAppError, setAppLoading, setMenuState } from './rootActions';
-import { getWord } from './word/actions';
+import { ITagStoreState } from './tags/reducer';
+import { ICategoryStoreState } from './categories/reducer';
+import { IWordTagStoreState } from './word_tags/reducer';
+import { IWordCategoryStoreState } from './word_categories/reducer';
 
 export interface IReduxState {
   core: ICoreStoreState;
   page: IPageStoreState;
+  posts: IPostStoreState[];
   post: IPostStoreState;
+  tags: ITagStoreState[];
+  categories: ICategoryStoreState[];
+  words: IWordStoreState[];
   word: IWordStoreState;
+  word_tags: IWordTagStoreState[];
+  word_categories: IWordCategoryStoreState[];
 }
 
 export interface IReduxDispatch {
-  onGetPage(slug: string): () => typeof getPage;
+  onSetMenuState(value: boolean): () => void;
 
-  onSetMenuState(value: boolean): () => typeof setMenuState;
+  onSetAppLoading(value: boolean): () => void;
 
-  onSetAppLoading(value: boolean): () => typeof setAppLoading;
+  onSetAppError(value: boolean): () => void;
 
-  onSetAppError(value: boolean): () => typeof setAppError;
+  onGetSiteMeta(): () => ICoreStoreState;
 
-  onGetSiteMeta(): () => typeof getSiteMeta;
+  onGetPage(slug: string): (slug: string) => IPageStoreState;
 
-  onGetPost(slug: string): () => typeof getPost;
+  onGetPost(slug: string): (slug: string) => IPostStoreState;
 
-  onGetWord(slug: string): typeof getWord;
+  onGetPosts(): () => IPostStoreState[];
+
+  onGetCategoryPosts(): () => IPostStoreState[];
+
+  onGetTagPosts(): () => IPostStoreState[];
+
+  onGetCategories(): () => ICategoryStoreState[];
+
+  onGetWords(): () => IWordStoreState[];
+
+  onGetCategoryWords(): () => IWordStoreState[];
+
+  onGetTagWords(): () => IWordStoreState[];
+
+  onGetWord(slug: string): () => IWordStoreState;
+
+  onClearPage(): () => void;
+
+  onClearPost(): () => void;
+
+  onClearPosts(): () => void;
+
+  onClearWord(): () => void;
+
+  onClearWords(): () => void;
 }
 
 export type TReduxProps = IReduxState & IReduxDispatch;
@@ -39,7 +71,7 @@ export type TReduxProps = IReduxState & IReduxDispatch;
  * Configure Store for Application
  * @returns {any}
  */
-const makeStore = (initialState: IReduxState = {} as any): Store => {
+const makeStore = (initialState = {} as IReduxState): Store => {
   if (process.env.NODE_ENV === 'production') {
     return createStore(rootReducer, initialState, compose(applyMiddleware(thunk)));
   }

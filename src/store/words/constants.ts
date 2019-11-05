@@ -1,0 +1,4 @@
+export const CLEAR_WORDS = 'CLEAR_WORDS';
+export const GET_WORDS = 'GET_WORDS';
+export const GET_WORDS_SUCCESS = 'GET_WORDS_SUCCESS';
+export const GET_WORDS_FAILED = 'GET_WORDS_FAILED';

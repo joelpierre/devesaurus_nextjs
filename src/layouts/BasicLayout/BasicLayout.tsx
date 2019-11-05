@@ -6,24 +6,25 @@ import Meta from '@jpp/components/_shared/Meta/Meta';
 import PushWrapper from '@jpp/components/_shared/PushWrapper/PushWrapper';
 import PrimaryMain from '@jpp/components/_shared/PrimaryMain/PrimaryMain';
 import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter/PrimaryFooter';
-import PrimaryHeader from '@jpp/components/_shared/PrimaryHeader/PrimaryHeader';
 import OffCanvas from '@jpp/components/_shared/OffCanvas/OffCanvas';
+import SimpleHeader from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
 
 import ConfigProvider from '../../services/configProvider';
 import { IReduxState } from '../../store/createStore';
 import { setMenuState } from '../../store/rootActions';
 
-interface ICoreLayout {
+interface IBasicLayoutProps {
   title: string;
   description: string;
   isMenuOpen: boolean;
   isLoading: boolean;
   onSetMenuState: (value: boolean) => AnyAction;
   primaryMenu: Core.IMenuItem[];
+  simpleMenu: Core.IMenuItem[];
   children: ReactNode;
 }
 
-export class CoreLayout extends PureComponent<ICoreLayout> {
+export class BasicLayout extends PureComponent<IBasicLayoutProps> {
 
   getMeta = () => {
     const {
@@ -40,13 +41,15 @@ export class CoreLayout extends PureComponent<ICoreLayout> {
       isMenuOpen,
       isLoading,
       onSetMenuState,
-      primaryMenu
+      primaryMenu,
+      simpleMenu
     } = this.props;
 
     if (isLoading) {
       return (
         <>
           {this.getMeta()}
+
           The site is loading
         </>
       );
@@ -59,7 +62,8 @@ export class CoreLayout extends PureComponent<ICoreLayout> {
         <OffCanvas isMenuOpen={isMenuOpen} setMenuState={onSetMenuState} menuItems={primaryMenu}/>
 
         <PushWrapper isMenuOpen={isMenuOpen} setMenuState={onSetMenuState}>
-          <PrimaryHeader
+          <SimpleHeader
+            menuItems={simpleMenu}
             isMenuOpen={isMenuOpen}
             setMenuState={onSetMenuState}
           />
@@ -80,13 +84,15 @@ const mapStateToProps = (
     core: {
       isMenuOpen,
       isLoading,
-      primaryMenu
+      primaryMenu,
+      simpleMenu
     }
   }: IReduxState) => (
   {
     isMenuOpen,
     isLoading,
-    primaryMenu
+    primaryMenu,
+    simpleMenu
   }
 );
 
@@ -94,4 +100,4 @@ const mapDispatchToProps = {
   onSetMenuState: (value: boolean) => setMenuState(value)
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoreLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(BasicLayout);
