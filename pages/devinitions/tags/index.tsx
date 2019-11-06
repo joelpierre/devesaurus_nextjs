@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 
 import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
 
-import { IPageStoreState } from '../../../src/store/page/reducer';
 import { IReduxState } from '../../../src/store/createStore';
 
 import ErrorPage from '../../_error';
-import { TTemplateInitialProps } from '@jpp/typings/index';
-import { ITagStoreState } from '../../../src/store/tags/reducer';
+import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TTagStoreState } from '../../../src/store/tags/reducer';
 import { getTags } from '../../../src/store/rootActions';
+import { TPostsStoreState } from '../../../src/store/posts/reducer';
 
 interface IDevinitionsTagsPage {
-  error: any;
+  error: TReduxError;
 }
 
 interface IStoreDevinitionsTagsPageProps {
-  tags: ITagStoreState[];
+  tags: TTagStoreState;
 }
 
 interface IDispatchDevinitionsTagsPageProps {
@@ -29,28 +29,24 @@ type TDevinitionsTagsPage =
   & IDispatchDevinitionsTagsPageProps;
 
 export class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
-  static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
+  static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getTags());
-    const tags: IPageStoreState = store.getState().tags;
+    const tags: TPostsStoreState = store.getState().tags;
 
-    if (tags.error) {
-      res.statusCode = tags.error.code;
+    if (!Array.isArray(tags)) {
+      res.statusCode = tags.code;
       return {
-        error: tags.error
+        error: tags
       };
     }
 
-    return {
-      isServer
-    };
+    return {};
   }
 
   async componentDidMount(): Promise<void> {
     const { onGetTags, tags } = this.props;
 
-    console.log(tags);
-
-    if (tags.length === 0) {
+    if (Array.isArray(tags) && tags.length === 0) {
       await onGetTags();
     }
   }
@@ -61,7 +57,7 @@ export class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
     const description = 'Long description for meta data';
 
     if (error) {
-      return (<ErrorPage {...this.props.error} />);
+      return (<ErrorPage {...error} />);
     }
 
     return (

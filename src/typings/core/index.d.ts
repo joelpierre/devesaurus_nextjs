@@ -15,40 +15,6 @@ declare namespace Core {
     'tint-omega' |
     'gradient-brand' | ETheme;
 
-  export enum ETheme {
-    Brand = 'brand',
-    Alpha = 'alpha',
-    Beta = 'beta',
-    Gamma = 'gamma',
-    Psi = 'psi',
-    Omega = 'omega',
-    TintAlpha = 'tint-alpha',
-    TintBeta = 'tint-beta',
-    TintGamma = 'tint-gamma',
-    TintPsi = 'tint-psi',
-    TintOmega = 'tint-omega',
-    GradientBrand = 'gradient-brand'
-  }
-
-  export enum EContrast {
-    Light = 'light',
-    Gray = 'gray',
-    Dark = 'dark'
-  }
-
-  export enum EPosition {
-    Left = 'left',
-    Right = 'right',
-    Center = ' center'
-  }
-
-  export enum ETaxonomy {
-    Category = 'category',
-    WordCategory = 'word_category',
-    PostTag = 'post_tag',
-    WordTag = 'word_tag'
-  }
-
   export type TMimeType = 'image/png' | string;
 
   export type TTag = 'div' | 'section' | 'aside' | 'article' | 'span' | 'nav';
@@ -66,15 +32,6 @@ declare namespace Core {
     | 5
     | '6'
     | 6 | EPriority;
-
-  export enum EPriority {
-    One = '1',
-    Two = '2',
-    Three = '3',
-    Four = '4',
-    Five = '5',
-    Six = '6'
-  }
 
   export type TColumn =
     | '1'
@@ -120,14 +77,6 @@ declare namespace Core {
 
   export type TSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-  export enum ESize {
-    Xs = 'xs',
-    Sm = 'sm',
-    Md = 'md',
-    Lg = 'lg',
-    Xl = 'xl'
-  }
-
   export type TLinkType = 'button' | 'submit' | 'reset';
 
   export type TOnClick = (
@@ -150,9 +99,72 @@ declare namespace Core {
     | 'select'
     | 'number';
 
-  export type TSuccessCode = 200;
+  export type TSuccessCode = string | number;
 
-  export type TErrorCode = 404 | 500;
+  export type TErrorCode = string | number;
+
+  export enum EWordExample {
+    Codepen = 'codepen',
+    CodeBlock = 'code-block'
+  }
+
+  export enum ETheme {
+    Brand = 'brand',
+    Alpha = 'alpha',
+    Beta = 'beta',
+    Gamma = 'gamma',
+    Psi = 'psi',
+    Omega = 'omega',
+    TintAlpha = 'tint-alpha',
+    TintBeta = 'tint-beta',
+    TintGamma = 'tint-gamma',
+    TintPsi = 'tint-psi',
+    TintOmega = 'tint-omega',
+    GradientBrand = 'gradient-brand'
+  }
+
+  export enum EContrast {
+    Light = 'light',
+    Gray = 'gray',
+    Dark = 'dark'
+  }
+
+  export enum EPosition {
+    Left = 'left',
+    Right = 'right',
+    Center = ' center'
+  }
+
+  export enum ETaxonomy {
+    Category = 'category',
+    WordCategory = 'word_category',
+    PostTag = 'post_tag',
+    WordTag = 'word_tag'
+  }
+
+  export enum EPriority {
+    One = '1',
+    Two = '2',
+    Three = '3',
+    Four = '4',
+    Five = '5',
+    Six = '6'
+  }
+
+  export enum ESize {
+    Xs = 'xs',
+    Sm = 'sm',
+    Md = 'md',
+    Lg = 'lg',
+    Xl = 'xl'
+  }
+
+  export enum ETaxonomy {
+    Tag = 'post_tag',
+    Category = 'category',
+    WordCategory = 'word_category',
+    WordTag = 'word_tag',
+  }
 
   export interface IYoastMeta {
     /**
@@ -484,6 +496,29 @@ declare namespace Core {
     sizes: IMediaSizes;
   }
 
+  export interface IMediaSources {
+    /**
+     *
+     *
+     */
+    thumbnail: string;
+    /**
+     *
+     *
+     */
+    medium: string;
+    /**
+     *
+     *
+     */
+    medium_large: string;
+    /**
+     *
+     *
+     */
+    large: string;
+  }
+
   export interface IMediaSizes {
     /**
      *
@@ -652,4 +687,154 @@ declare namespace Core {
     menu_item_parent: string;
   }
 
+  export interface IWordAcf {
+    /**
+     *
+     *
+     **/
+    examples?: IWordExample[];
+    /**
+     *
+     *
+     **/
+    origin: Core.IWordOrigin;
+    /**
+     *
+     *
+     **/
+    page_theme: TTheme;
+    /**
+     *
+     *
+     **/
+    part_of_speech: string;
+    /**
+     *
+     *
+     **/
+    pronunciation: string;
+    /**
+     *
+     *
+     **/
+    syllables: IWordSyllables;
+    /**
+     *
+     *
+     **/
+    synonyms: IWordSynonym[]
+  }
+
+  export interface IWordExample {
+    /**
+     *
+     *
+     **/
+    type: EWordExample;
+    /**
+     *
+     *
+     **/
+    codepen_url?: string;
+    /**
+     *
+     *
+     **/
+    code?: string;
+  }
+
+  export interface IWordOrigin {
+    /**
+     *
+     *
+     **/
+    value: string;
+    /**
+     *
+     *
+     **/
+    label: string;
+  }
+
+  export interface IWordSynonym {
+    /**
+     *
+     *
+     **/
+    post_name: string;
+    /**
+     *
+     *
+     **/
+    post_title: string;
+  }
+
+  export interface IWordSyllables {
+    /**
+     *
+     *
+     **/
+    count: string | number;
+    /**
+     *
+     *
+     **/
+    list: IWordSyllableItem[]
+  }
+
+  export interface IWordSyllableItem {
+    /**
+     *
+     *
+     **/
+    item: string;
+  }
+
+  export interface ITaxonomyTerm {
+    /**
+     *
+     *
+     **/
+    term_id: number;
+    /**
+     *
+     *
+     **/
+    name: string;
+    /**
+     *
+     *
+     **/
+    slug: string;
+    /**
+     *
+     *
+     **/
+    term_group: number;
+    /**
+     *
+     *
+     **/
+    term_taxonomy_id: number;
+    /**
+     *
+     *
+     **/
+    taxonomy: ETaxonomy,
+    /**
+     *
+     *
+     **/
+    description: string,
+    /**
+     *
+     *
+     **/
+    parent: number,
+    /**
+     *
+     *
+     **/
+    count: number,
+  }
 }

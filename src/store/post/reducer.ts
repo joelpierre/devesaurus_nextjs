@@ -1,8 +1,8 @@
 import * as actions from './constants';
 import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
-import { AxiosError } from 'axios';
-import postTransform from './transform';
+import { postTransform } from './transform';
+import { TReduxError } from '@jpp/typings/index';
 
 export interface IPostStoreState {
   id: number;
@@ -14,23 +14,26 @@ export interface IPostStoreState {
   content: string;
   author: string;
   yoast: Core.IYoastMeta;
-  terms: any;
+  categories: Core.ITaxonomyTerm[];
+  tags: Core.ITaxonomyTerm[];
   acf: Core.IAcfComponentCore;
-  error?: Core.IErrorResponse | AxiosError;
+  error?: TReduxError;
 }
 
-const initialState = {};
+const initialState = {
+  yoast: {} as Core.IYoastMeta,
+  acf: {} as Core.IAcfComponentCore,
+  categories: [] as Core.ITaxonomyTerm[],
+  tags: [] as Core.ITaxonomyTerm[]
+};
 
 const postReducer = (
   state = initialState as IPostStoreState,
   action: AnyAction
 ): IPostStoreState => {
-  let updatedState: IPostStoreState;
-
   switch (action.type) {
     case actions.GET_POST_SUCCESS:
-      updatedState = postTransform(action.payload);
-      return updateObject(state, updatedState);
+      return updateObject(state, postTransform(action.payload));
 
     case actions.GET_POST_FAILED:
       return { ...action.payload };

@@ -1,23 +1,27 @@
 import * as actions from './constants';
-import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
 import { IWordStoreState } from '../word/reducer';
+import { wordsTransform } from '../word/transform';
+import { updateArray } from '../../utils';
+import { TReduxError } from '@jpp/typings/index';
 
 const initialState = [];
+
+export type TWordsStoreState = IWordStoreState[] | TReduxError;
 
 const wordsReducer = (
   state = initialState as IWordStoreState[],
   action: AnyAction
-): IWordStoreState[] => {
+): TWordsStoreState => {
   switch (action.type) {
     case actions.GET_WORDS_SUCCESS:
-      return updateObject(state, action.payload);
+      return updateArray(state, wordsTransform(action.payload));
 
     case actions.GET_WORDS_FAILED:
       return { ...action.payload };
 
     case actions.CLEAR_WORDS:
-      return [] as any;
+      return [] as IWordStoreState[];
 
     default:
       return state;

@@ -4,12 +4,28 @@ import { connect } from 'react-redux';
 
 import { clearPost, getPost } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
-import { TTemplateInitialProps } from '@jpp/typings/index';
+import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { IPostStoreState } from '../../src/store/post/reducer';
 import ErrorPage from '../_error';
 
-export class DevegramPage extends PureComponent<TTemplateInitialProps> {
-  static async getInitialProps({ query: { slug }, store, isServer, res }: TTemplateInitialProps) {
+interface IDevegramPageProps {
+  error: TReduxError;
+  slug: string;
+}
+
+interface IStoreDevegramPageProps {
+  post: IPostStoreState;
+}
+
+interface IDispatchDevegramPageProps {
+  onGetPost: (slug: string) => void;
+  onClearPost: () => void;
+}
+
+type TDevegramPageProps = IDevegramPageProps & IStoreDevegramPageProps & IDispatchDevegramPageProps;
+
+export class DevegramPage extends PureComponent<TDevegramPageProps> {
+  static async getInitialProps({ query: { slug }, store, res }: TTemplateInitialProps) {
     if (slug) {
       await store.dispatch(getPost(slug));
     }
@@ -25,7 +41,6 @@ export class DevegramPage extends PureComponent<TTemplateInitialProps> {
     }
 
     return {
-      isServer,
       slug
     };
   }
@@ -40,7 +55,6 @@ export class DevegramPage extends PureComponent<TTemplateInitialProps> {
 
   async componentWillUnmount(): Promise<void> {
     const { onClearPost } = this.props;
-
     await onClearPost();
   }
 
@@ -51,7 +65,7 @@ export class DevegramPage extends PureComponent<TTemplateInitialProps> {
 
     return (
       <>
-        This is the {this.props.post.title} page. We are {this.props.isServer ? 'SSR' : 'CSR'}
+        This is the {this.props.post.title} page.
         <br/>
         <br/>
         <Link href="/[slug]" as="/about">
@@ -85,4 +99,4 @@ const mapDispatchToProps = {
   onClearPost: () => clearPost()
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DevegramPage);
+export default connect<IStoreDevegramPageProps, IDispatchDevegramPageProps, IDevegramPageProps>(mapStateToProps, mapDispatchToProps)(DevegramPage);

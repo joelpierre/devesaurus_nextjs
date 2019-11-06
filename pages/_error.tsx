@@ -11,7 +11,7 @@ interface IErrorPage<Q extends DefaultQuery = DefaultQuery> {
 
 class Error extends PureComponent<IErrorPage> {
   static getInitialProps({ res, err }: any) {
-    const error = err ? err.statusCode : null;
+    const error = err ? err.statusCode : 500;
     const statusCode = res ? res.statusCode : error;
     const { originalUrl, params, query } = res.req;
 
@@ -24,12 +24,12 @@ class Error extends PureComponent<IErrorPage> {
   }
 
   render() {
-    console.log('_Error', this.props);
+    const { statusCode, code } = this.props;
 
     return (
       <>
         <main id="js-main">
-          <h1>Hang on {this.props.statusCode || this.props.code}</h1>
+          <h1>Hang on {statusCode || code}</h1>
           <p>
             We can&apos;t find the page you&apos;re looking for.
           </p>

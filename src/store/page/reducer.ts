@@ -2,7 +2,7 @@ import * as actions from './constants';
 import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
 import pageTransform from './transform';
-import { AxiosError } from 'axios';
+import { TReduxError } from '@jpp/typings/index';
 
 export interface IPageStoreState {
   id: number;
@@ -15,10 +15,13 @@ export interface IPageStoreState {
   author: string;
   yoast: Core.IYoastMeta;
   acf: Core.IAcfComponentCore;
-  error?: Core.IErrorResponse | AxiosError;
+  error?: TReduxError;
 }
 
-const initialState = {};
+const initialState = {
+  yoast: {} as Core.IYoastMeta,
+  acf: {} as Core.IAcfComponentCore
+};
 
 const pageReducer = (
   state = initialState as IPageStoreState,

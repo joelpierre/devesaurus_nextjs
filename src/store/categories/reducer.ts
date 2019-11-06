@@ -1,6 +1,6 @@
 import * as actions from './constants';
 import { AnyAction } from 'redux';
-import { AxiosError } from 'axios';
+import { TReduxError } from '@jpp/typings/index';
 
 export interface ICategoryStoreState {
   id: number;
@@ -8,17 +8,19 @@ export interface ICategoryStoreState {
   description: string;
   name: string;
   slug: string;
-  taxonomy: string;
+  taxonomy: Core.ETaxonomy;
   yoast: Core.IYoastMeta;
-  error?: Core.IErrorResponse | AxiosError;
+  error?: TReduxError;
 }
 
-const initialState = [];
+export type TCategoryStoreState = ICategoryStoreState[] | TReduxError;
+
+const initialState = [] as ICategoryStoreState[];
 
 const categoryReducer = (
-  state = initialState as ICategoryStoreState[],
+  state = initialState,
   action: AnyAction
-): ICategoryStoreState[] => {
+): TCategoryStoreState => {
   switch (action.type) {
     case actions.GET_CATEGORIES_SUCCESS:
       return [...state, ...action.payload];

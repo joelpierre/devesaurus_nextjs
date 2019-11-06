@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
 
 import { getCategories } from '../../../src/store/rootActions';
-import { IPageStoreState } from '../../../src/store/page/reducer';
 import { IReduxState } from '../../../src/store/createStore';
 
 import ErrorPage from '../../_error';
-import { ICategoryStoreState } from '../../../src/store/categories/reducer';
-import { TTemplateInitialProps } from '@jpp/typings/index';
+import { TCategoryStoreState } from '../../../src/store/categories/reducer';
+import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TPostsStoreState } from '../../../src/store/posts/reducer';
 
 interface IDevinitionsCategoriesPage {
-  error: any;
+  error: TReduxError;
 }
 
 interface IStoreDevinitionsCategoriesPageProps {
-  categories: ICategoryStoreState[];
+  categories: TCategoryStoreState;
 }
 
 interface IDispatchDevinitionsCategoriesPageProps {
@@ -29,26 +29,24 @@ type TDevinitionsCategoriesPage =
   & IDispatchDevinitionsCategoriesPageProps;
 
 export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategoriesPage> {
-  static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
+  static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getCategories());
-    const categories: IPageStoreState = store.getState().categories;
+    const categories: TPostsStoreState = store.getState().categories;
 
-    if (categories.error) {
-      res.statusCode = categories.error.code;
+    if (!Array.isArray(categories)) {
+      res.statusCode = categories.code;
       return {
-        error: categories.error
+        error: categories
       };
     }
 
-    return {
-      isServer
-    };
+    return {};
   }
 
   async componentDidMount(): Promise<void> {
     const { onGetCategories, categories } = this.props;
 
-    if (categories.length === 0) {
+    if (Array.isArray(categories) && categories.length === 0) {
       await onGetCategories();
     }
   }
@@ -59,7 +57,7 @@ export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategor
     const description = 'Long description for meta data';
 
     if (error) {
-      return (<ErrorPage {...this.props.error} />);
+      return (<ErrorPage {...error} />);
     }
 
     return (

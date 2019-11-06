@@ -1,16 +1,32 @@
 import * as actions from './constants';
 import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
-import { AxiosError } from 'axios';
+import { TReduxError } from '@jpp/typings/index';
 
 export interface IWordStoreState {
   id: number;
   title: string;
   slug: string;
-  error?: Core.IErrorResponse | AxiosError;
+  author: string;
+  author_id: number;
+  content: string;
+  date: string;
+  date_modified: string;
+  excerpt: string;
+  media: boolean | Core.IMediaSources;
+  yoast: Core.IYoastMeta;
+  word_categories: Core.ITaxonomyTerm[];
+  word_tags: Core.ITaxonomyTerm[];
+  acf: Core.IWordAcf;
+  error?: TReduxError;
 }
 
-const initialState = {};
+const initialState = {
+  acf: {} as Core.IWordAcf,
+  yoast: {} as Core.IYoastMeta,
+  word_categories: [] as Core.ITaxonomyTerm[],
+  word_tags: [] as Core.ITaxonomyTerm[]
+};
 
 const wordReducer = (
   state = initialState as IWordStoreState,

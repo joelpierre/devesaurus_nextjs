@@ -1,8 +1,8 @@
 import * as actions from './constants';
 import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
-import ConfigProvider from '../../services/configProvider';
-import { AxiosError } from 'axios';
+import { TReduxError } from '@jpp/typings/index';
+import { APP_TITLE, SITE_DESCRIPTION } from '../../utils/constants';
 
 export interface ICoreStoreState {
   title: string;
@@ -16,11 +16,8 @@ export interface ICoreStoreState {
   footerMenu: Core.IMenuItem[];
   termsMenu: Core.IMenuItem[];
   initialFetch: boolean;
-  error?: Core.IErrorResponse | AxiosError;
+  error?: TReduxError;
 }
-
-const APP_TITLE = ConfigProvider.getValue('APP_TITLE') || '';
-const SITE_DESCRIPTION = ConfigProvider.getValue('SITE_DESCRIPTION') || '';
 
 const initialState: ICoreStoreState = {
   title: APP_TITLE,

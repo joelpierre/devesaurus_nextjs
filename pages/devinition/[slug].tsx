@@ -1,15 +1,31 @@
 import React, { PureComponent } from 'react';
-import Link from 'next/link';
 import { connect } from 'react-redux';
 
-import { TTemplateInitialProps } from '@jpp/typings/index';
+import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { clearWord, getWord } from '../../src/store/word/actions';
 import { IReduxState } from '../../src/store/createStore';
 import { IWordStoreState } from '../../src/store/word/reducer';
 import ErrorPage from '../_error';
+import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
 
-export class DevinitionPage extends PureComponent<TTemplateInitialProps> {
-  static async getInitialProps({ query: { slug }, store, isServer, res }: TTemplateInitialProps) {
+interface IDevinitionPageProps {
+  error: TReduxError;
+  slug: string;
+}
+
+interface IStoreDevinitionPageProps {
+  word: IWordStoreState;
+}
+
+interface IDispatchDevinitionPageProps {
+  onGetWord: (slug: string) => void;
+  onClearWord: () => void;
+}
+
+type TDevinitionPageProps = IDevinitionPageProps & IStoreDevinitionPageProps & IDispatchDevinitionPageProps;
+
+export class DevinitionPage extends PureComponent<TDevinitionPageProps> {
+  static async getInitialProps({ query: { slug }, store, res }: TTemplateInitialProps) {
     if (slug) {
       await store.dispatch(getWord(slug));
     }
@@ -25,15 +41,12 @@ export class DevinitionPage extends PureComponent<TTemplateInitialProps> {
     }
 
     return {
-      isServer,
       slug
     };
   }
 
   async componentDidMount(): Promise<void> {
     const { onGetWord, slug, word } = this.props;
-
-    console.log(word);
 
     if (Object.keys(word).length === 0) {
       await onGetWord(slug);
@@ -46,27 +59,26 @@ export class DevinitionPage extends PureComponent<TTemplateInitialProps> {
   }
 
   render() {
-    if (this.props.error) {
-      return (<ErrorPage {...this.props.error} />);
+    const { error, word } = this.props;
+    const { yoast } = word;
+    // const { page_theme, components } = acf;
+    const title = yoast.yoast_wpseo_title || word.title;
+    const description = yoast.yoast_wpseo_metadesc;
+
+    if (error) {
+      return (<ErrorPage {...error} />);
     }
 
+    // console.log(word);
+    // console.log('acf', acf);
+
     return (
-      <>
-        This is the {this.props.word.title} page. We are {this.props.isServer ? 'SSR' : 'CSR'}
-        <br/>
-        <br/>
-        <Link href="/devegram/[slug]" as={'/devegram/hello-world'}>
-          <a>
-            Go to post example
-          </a>
-        </Link>
-        <br/><br/>
-        <Link href="/[slug]" as={'/about'}>
-          <a>
-            Go to page example
-          </a>
-        </Link>
-      </>
+      <CoreLayout
+        title={title}
+        description={description}
+      >
+        this is the {word.title} page
+      </CoreLayout>
     );
   }
 }

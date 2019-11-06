@@ -1,23 +1,27 @@
 import { AnyAction } from 'redux';
 import * as actions from './constants';
-import { updateObject } from '../../utils';
 import { IPostStoreState } from '../post/reducer';
+import { postsTransform } from '../post/transform';
+import { TReduxError } from '@jpp/typings/index';
+import { updateArray } from '../../utils';
 
-const initialState = [];
+const initialState = [] as IPostStoreState[];
+
+export type TPostsStoreState = IPostStoreState[] | TReduxError;
 
 const postsReducer = (
-  state = initialState as IPostStoreState[],
+  state = initialState,
   action: AnyAction
-): IPostStoreState[] => {
+): TPostsStoreState => {
   switch (action.type) {
     case actions.GET_POSTS_SUCCESS:
-      return updateObject(state, action.payload);
+      return updateArray(state, postsTransform(action.payload));
 
     case actions.GET_POSTS_FAILED:
       return { ...action.payload };
 
     case actions.CLEAR_POSTS:
-      return [] as any;
+      return initialState;
 
     default:
       return state;

@@ -1,6 +1,7 @@
 import * as actions from './constants';
 import { AnyAction } from 'redux';
-import { AxiosError } from 'axios';
+import { TReduxError } from '@jpp/typings/index';
+import { updateArray } from '../../utils';
 
 export interface IWordTagStoreState {
   id: number;
@@ -10,18 +11,20 @@ export interface IWordTagStoreState {
   slug: string;
   taxonomy: string;
   yoast: Core.IYoastMeta;
-  error?: Core.IErrorResponse | AxiosError;
+  error?: TReduxError;
 }
 
-const initialState = [];
+export type TWordTagStoreState = IWordTagStoreState[] | TReduxError;
+
+const initialState = [] as IWordTagStoreState[];
 
 const wordTagReducer = (
-  state = initialState as IWordTagStoreState[],
+  state = initialState,
   action: AnyAction
-): IWordTagStoreState[] => {
+): TWordTagStoreState => {
   switch (action.type) {
     case actions.GET_WORD_TAGS_SUCCESS:
-      return [...state, ...action.payload];
+      return updateArray(state, action.payload);
 
     case actions.GET_WORD_TAGS_FAILED:
       return { ...action.payload };

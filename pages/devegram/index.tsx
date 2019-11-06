@@ -3,39 +3,39 @@ import { connect } from 'react-redux';
 
 import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
 
-import { getCategories, getWords } from '../../src/store/rootActions';
+import { getCategories, getPosts } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
 
 import ErrorPage from '../_error';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
-import { TWordsStoreState } from '../../src/store/words/reducer';
+import { TPostsStoreState } from '../../src/store/posts/reducer';
 
-interface IDevinitionsPage {
+interface IDevegramPage {
   error: TReduxError;
 }
 
-interface IStoreDevinitionsPageProps {
-  words: TWordsStoreState;
+interface IStoreDevegramPageProps {
+  posts: TPostsStoreState;
 }
 
-interface IDispatchDevinitionsPageProps {
-  onGetWords: () => void;
+interface IDispatchDevegramPageProps {
+  onGetPosts: () => void;
 }
 
-type TDevinitionsPage =
-  IDevinitionsPage
-  & IStoreDevinitionsPageProps
-  & IDispatchDevinitionsPageProps;
+type TDevegramPage =
+  IDevegramPage
+  & IStoreDevegramPageProps
+  & IDispatchDevegramPageProps;
 
-export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
+export class DevegramPage extends PureComponent<TDevegramPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getCategories());
-    const words: TWordsStoreState = store.getState().words;
+    const posts: TPostsStoreState = store.getState().posts;
 
-    if (!Array.isArray(words)) {
-      res.statusCode = words.code;
+    if (!Array.isArray(posts)) {
+      res.statusCode = posts.code;
       return {
-        error: words
+        error: posts
       };
     }
 
@@ -43,10 +43,10 @@ export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
   }
 
   async componentDidMount(): Promise<void> {
-    const { words, onGetWords } = this.props;
+    const { posts, onGetPosts } = this.props;
 
-    if (Array.isArray(words) && words.length === 0) {
-      await onGetWords();
+    if (Array.isArray(posts) && posts.length === 0) {
+      await onGetPosts();
     }
   }
 
@@ -64,7 +64,7 @@ export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
         title={title}
         description={description}
       >
-        DEVINITIONS PAGE
+        DEVEGRAM PAGE
 
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto corporis cum molestiae nisi officia
         perferendis quam reprehenderit similique vitae! Assumenda dolore eveniet fuga fugit natus, quas quibusdam
@@ -74,12 +74,12 @@ export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
   }
 }
 
-const mapStateToProps = ({ words }: IReduxState) => ({
-  words
+const mapStateToProps = ({ posts }: IReduxState) => ({
+  posts
 });
 
 const mapDispatchToProps = {
-  onGetWords: () => getWords()
+  onGetPosts: () => getPosts()
 };
 
-export default connect<IStoreDevinitionsPageProps, IDispatchDevinitionsPageProps, IDevinitionsPage>(mapStateToProps, mapDispatchToProps)(DevinitionsPage);
+export default connect<IStoreDevegramPageProps, IDispatchDevegramPageProps, IDevegramPage>(mapStateToProps, mapDispatchToProps)(DevegramPage);

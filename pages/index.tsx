@@ -46,7 +46,8 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
   }
 
   render() {
-    const { page, page: { yoast = {}, acf = {} }, error } = this.props;
+    const { page, error } = this.props;
+    const { yoast = {}, acf = {} } = page;
     const { page_theme, components } = acf;
     const title = yoast.yoast_wpseo_title || page.title;
     const description = yoast.yoast_wpseo_metadesc;

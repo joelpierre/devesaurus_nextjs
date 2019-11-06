@@ -1,6 +1,6 @@
 import * as actions from './constants';
 import { AnyAction } from 'redux';
-import { AxiosError } from 'axios';
+import { TReduxError } from '@jpp/typings/index';
 
 export interface ITagStoreState {
   id: number;
@@ -10,15 +10,17 @@ export interface ITagStoreState {
   slug: string;
   taxonomy: string;
   yoast: Core.IYoastMeta;
-  error?: Core.IErrorResponse | AxiosError;
+  error?: TReduxError;
 }
 
-const initialState = [];
+export type TTagStoreState = ITagStoreState[] | TReduxError;
+
+const initialState = [] as ITagStoreState[];
 
 const tagReducer = (
-  state = initialState as ITagStoreState[],
+  state = initialState,
   action: AnyAction
-): ITagStoreState[] => {
+): TTagStoreState => {
   switch (action.type) {
     case actions.GET_TAGS_SUCCESS:
       return [...state, ...action.payload];

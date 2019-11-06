@@ -38,9 +38,7 @@
     "jsx-no-multiline-js": false,
     "label-position": true,
     "react-a11y-anchors": false,
-    "no-object-literal-type-assertion": {
-      "severity": "warning"
-    },
+    "no-object-literal-type-assertion": false,
     "max-line-length": [
       false,
       {

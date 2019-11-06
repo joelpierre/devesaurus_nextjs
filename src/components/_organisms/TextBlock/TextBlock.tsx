@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import RenderChildren from 'src/utils/components/RenderChildren/RenderChildren';
+import RenderChildren from 'src/components/_utils/RenderChildren/RenderChildren';
 
 import styles from './TextBlock.scss';
 import withAcfComponent from '../../../hoc/withAcfComponent';

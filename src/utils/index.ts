@@ -1,10 +1,7 @@
 import { IconName } from '@fortawesome/fontawesome-common-types';
 
 /**
- * Update any object passed through
- * @param oldObject
- * @param updatedValues
- * @returns updatedObject
+ * Update any Object passed through
  */
 export const updateObject = <T>(oldObject: T, updatedValues: Partial<T>): T => ({
   ...oldObject,
@@ -12,9 +9,15 @@ export const updateObject = <T>(oldObject: T, updatedValues: Partial<T>): T => (
 });
 
 /**
+ * Update any Array passed through
+ */
+export const updateArray = <T>(oldArray: T[], updatedValues: T[]): T[] => ([
+  ...oldArray,
+  ...updatedValues
+]);
+
+/**
  * Slugify a string in order
- * @param text
- * @returns {string}
  */
 export const slugify = (text: string | undefined): string | undefined => {
   // @ts-ignore

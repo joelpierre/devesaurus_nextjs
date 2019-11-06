@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 
 import HeroSplash from '@jpp/organisms/HeroSplash/HeroSplash';
 
-import RenderChildren from '../../../utils/components/RenderChildren/RenderChildren';
+import RenderChildren from '../../_utils/RenderChildren/RenderChildren';
 
 type TAcfComponents = Core.IAcfComponentCore;
 
