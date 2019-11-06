@@ -8,6 +8,7 @@ import {
 import styles from './ImageScroller.scss';
 import Heading from '@jpp/components/_shared/Heading/Heading';
 import withAcfComponent from '../../../hoc/withAcfComponent';
+import { ESize } from '@jpp/typings/enums';
 
 interface IImageScrollerProps {
   size?: Core.TSize;
@@ -18,7 +19,7 @@ type TImageScroller = Partial<IImageScrollerProps> & Core.IAcfComponentCore;
 
 export class ImageScroller extends PureComponent<TImageScroller> {
   static defaultProps = {
-    size: Core.ESize.Md,
+    size: ESize.Md,
     component: {}
   };
 

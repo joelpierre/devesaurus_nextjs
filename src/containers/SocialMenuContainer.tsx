@@ -1,6 +1,6 @@
 import { IReduxState } from '../store/createStore';
 import { connect } from 'react-redux';
-import SocialMenu from '@jpp/organisms/SocialMenu/SocialMenu';
+import SocialMenu, { ISocialMenuProps, IStoreSocialMenuProps } from '@jpp/organisms/SocialMenu/SocialMenu';
 
 const mapStateToProps = (
   {
@@ -14,7 +14,7 @@ const mapStateToProps = (
       }
     }
   }: IReduxState
-) => ({
+): IStoreSocialMenuProps => ({
   facebook,
   twitter,
   linkedin,
@@ -22,4 +22,4 @@ const mapStateToProps = (
   youtube
 });
 
-export default connect(mapStateToProps)(SocialMenu);
+export default connect<IStoreSocialMenuProps, never, ISocialMenuProps>(mapStateToProps)(SocialMenu);

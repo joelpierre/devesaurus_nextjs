@@ -1,4 +1,5 @@
 import { IWordStoreState } from './reducer';
+import { ETaxonomy } from '@jpp/typings/enums';
 
 interface IWordAPIState extends IWordStoreState {
   permalink: string;
@@ -20,13 +21,15 @@ export const wordTransform = (data: IWordAPIState): IWordStoreState => {
   delete data.tag_ids;
   delete data.tag_names;
 
-  data.word_categories = data.terms.filter((term: Core.ITaxonomyTerm) => {
-    return term.taxonomy === Core.ETaxonomy.WordCategory;
-  });
+  if (data.terms) {
+    data.word_categories = data.terms.filter((term: Core.ITaxonomyTerm) => {
+      return term.taxonomy === ETaxonomy.WordCategory;
+    });
 
-  data.word_tags = data.terms.filter((term: Core.ITaxonomyTerm) => {
-    return term.taxonomy === Core.ETaxonomy.WordTag;
-  });
+    data.word_tags = data.terms.filter((term: Core.ITaxonomyTerm) => {
+      return term.taxonomy === ETaxonomy.WordTag;
+    });
+  }
 
   return data;
 };

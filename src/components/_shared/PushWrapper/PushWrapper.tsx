@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { AnyAction } from 'redux';
 import classNames from 'classnames';
 
 import styles from './PushWrapper.scss';
@@ -7,7 +6,7 @@ import styles from './PushWrapper.scss';
 interface IPushWrapper {
   className?: string;
   isMenuOpen: boolean;
-  setMenuState: (value: boolean) => AnyAction;
+  setMenuState: (value: boolean) => void;
 }
 
 const PushWrapper: FunctionComponent<IPushWrapper> = ({ className, children, isMenuOpen, setMenuState }) => {

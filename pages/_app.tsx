@@ -10,7 +10,7 @@ import fontAwesomeLib from '../src/utils/fontAwesome';
 
 import './_app.scss';
 
-interface ICoreApp {
+interface ICoreAppProps {
   Component: NextComponentType;
   ctx: any;
   store?: any;
@@ -18,8 +18,10 @@ interface ICoreApp {
 
 fontAwesomeLib.init();
 
-class CoreApp extends App<ICoreApp & TReduxProps> {
-  static async getInitialProps({ Component, ctx }: ICoreApp) {
+type TCoreAppProps = ICoreAppProps & TReduxProps;
+
+class CoreApp extends App<TCoreAppProps> {
+  static async getInitialProps({ Component, ctx }: ICoreAppProps) {
     const store = ctx.store;
 
     if (store) {

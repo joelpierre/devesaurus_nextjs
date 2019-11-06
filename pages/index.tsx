@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import BasicLayout from '@jpp/layouts/BasicLayout/BasicLayout';
 import { TTemplateInitialProps } from '@jpp/typings/index';
 import { AcfComponents } from '@jpp/components/_shared/AcfComponents/AcfComponents';
 
@@ -10,6 +9,7 @@ import { IReduxState } from '../src/store/createStore';
 import { IPageStoreState } from '../src/store/page/reducer';
 
 import ErrorPage from './_error';
+import BasicLayoutContainer from '../src/containers/BasicLayoutContainer';
 
 export class HomePage extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
@@ -57,7 +57,7 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
     }
 
     return (
-      <BasicLayout
+      <BasicLayoutContainer
         title={title}
         description={description}
       >
@@ -66,7 +66,7 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
             <AcfComponents component={component} page_theme={page_theme} key={index}/>
           )
         )}
-      </BasicLayout>
+      </BasicLayoutContainer>
     );
   }
 }

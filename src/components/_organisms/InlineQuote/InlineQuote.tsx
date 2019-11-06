@@ -7,13 +7,14 @@ import Section from '@jpp/components/_shared/Grid/Section/Section';
 import Container from '@jpp/components/_shared/Grid/Container/Container';
 import Row from '@jpp/components/_shared/Grid/Row/Row';
 import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import { ETheme } from '@jpp/typings/enums';
 
 type TInlineQuote = Core.IAcfComponentCore;
 
 const InlineQuote: FunctionComponent<TInlineQuote> = (
   {
     component = {},
-    page_theme = Core.ETheme.TintAlpha
+    page_theme = ETheme.TintAlpha
   }
 ) => {
   return (

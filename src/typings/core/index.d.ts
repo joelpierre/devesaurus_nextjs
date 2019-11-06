@@ -1,6 +1,5 @@
 /* tslint:disable */
 declare namespace Core {
-
   export type TTheme =
     'brand' |
     'alpha' |
@@ -57,7 +56,7 @@ declare namespace Core {
     | '11'
     | 11
     | '12'
-    | 12;
+    | 12 | EColumn;
 
   export type TTheme =
     | 'brand'
@@ -71,11 +70,11 @@ declare namespace Core {
     | 'tint-gamma'
     | 'tint-psi'
     | 'tint-omega'
-    | 'gradient-brand' | string;
+    | 'gradient-brand' | ETheme;
 
   export type TLinkBehaviour = 'router' | 'anchor' | 'action';
 
-  export type TSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  export type TSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | ESize;
 
   export type TLinkType = 'button' | 'submit' | 'reset';
 
@@ -103,12 +102,12 @@ declare namespace Core {
 
   export type TErrorCode = string | number;
 
-  export enum EWordExample {
+  enum EWordExample {
     Codepen = 'codepen',
     CodeBlock = 'code-block'
   }
 
-  export enum ETheme {
+  enum ETheme {
     Brand = 'brand',
     Alpha = 'alpha',
     Beta = 'beta',
@@ -123,26 +122,26 @@ declare namespace Core {
     GradientBrand = 'gradient-brand'
   }
 
-  export enum EContrast {
+  enum EContrast {
     Light = 'light',
     Gray = 'gray',
     Dark = 'dark'
   }
 
-  export enum EPosition {
+  enum EPosition {
     Left = 'left',
     Right = 'right',
     Center = ' center'
   }
 
-  export enum ETaxonomy {
+  enum ETaxonomy {
     Category = 'category',
     WordCategory = 'word_category',
     PostTag = 'post_tag',
     WordTag = 'word_tag'
   }
 
-  export enum EPriority {
+  enum EPriority {
     One = '1',
     Two = '2',
     Three = '3',
@@ -151,19 +150,27 @@ declare namespace Core {
     Six = '6'
   }
 
-  export enum ESize {
+  enum EColumn {
+    One = '1',
+    Two = '2',
+    Three = '3',
+    Four = '4',
+    Five = '5',
+    Six = '6',
+    Seven = '7',
+    Eight = '8',
+    Nine = '9',
+    Ten = '10',
+    Eleven = '11',
+    Twelve = '12',
+  }
+
+  enum ESize {
     Xs = 'xs',
     Sm = 'sm',
     Md = 'md',
     Lg = 'lg',
     Xl = 'xl'
-  }
-
-  export enum ETaxonomy {
-    Tag = 'post_tag',
-    Category = 'category',
-    WordCategory = 'word_category',
-    WordTag = 'word_tag',
   }
 
   export interface IYoastMeta {

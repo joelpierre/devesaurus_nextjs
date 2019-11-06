@@ -4,8 +4,11 @@ import SocialItem from '@jpp/atoms/SocialItem/SocialItem';
 
 import styles from './SocialMenu.scss';
 
-interface ISocialMenu {
+export interface ISocialMenuProps {
   className?: string;
+}
+
+export interface IStoreSocialMenuProps {
   facebook: string;
   twitter: string;
   linkedin: string;
@@ -13,7 +16,9 @@ interface ISocialMenu {
   youtube: string;
 }
 
-const SocialMenu: FunctionComponent<ISocialMenu> = (
+type TSocialMenuProps = ISocialMenuProps & IStoreSocialMenuProps;
+
+const SocialMenu: FunctionComponent<TSocialMenuProps> = (
   {
     className,
     facebook,

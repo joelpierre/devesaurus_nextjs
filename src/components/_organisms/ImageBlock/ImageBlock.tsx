@@ -7,13 +7,14 @@ import Container from '@jpp/components/_shared/Grid/Container/Container';
 import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 import Row from '@jpp/components/_shared/Grid/Row/Row';
 import withAcfComponent from '../../../hoc/withAcfComponent';
+import { ETheme } from '@jpp/typings/enums';
 
 type TImageBlock = Core.IAcfComponentCore;
 
 const ImageBlock: FunctionComponent<TImageBlock> = (
   {
     component = {},
-    page_theme = Core.ETheme.TintAlpha,
+    page_theme = ETheme.TintAlpha,
     className
   }
 ) => {

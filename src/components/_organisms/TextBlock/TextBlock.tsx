@@ -9,13 +9,14 @@ import WYSIWYG from '@jpp/components/_shared/WYSIWYG/WYSIWYG';
 import Container from '@jpp/components/_shared/Grid/Container/Container';
 import Row from '@jpp/components/_shared/Grid/Row/Row';
 import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import { EPosition, ETheme } from '@jpp/typings/enums';
 
 type TTextBlock = Core.IAcfComponentCore;
 
 const TextBlock: FunctionComponent<TTextBlock> = (
   {
     component = {},
-    page_theme = Core.ETheme.TintAlpha
+    page_theme = ETheme.TintAlpha
   }
 ) => {
   const { text_content, theme, fixed = false, position } = component;
@@ -48,11 +49,11 @@ const TextBlock: FunctionComponent<TTextBlock> = (
         styles['text-block']
       ])}
     >
-      <RenderChildren if={position === Core.EPosition.Left}>
+      <RenderChildren if={position === EPosition.Left}>
         {getContent()}
       </RenderChildren>
 
-      <RenderChildren if={position === Core.EPosition.Center}>
+      <RenderChildren if={position === EPosition.Center}>
         {getContent()}
       </RenderChildren>
     </Section>

@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
 import ConfigProvider from '../../../services/configProvider';
 import { sanitizeEncodedChar } from '../../../utils';
+import { APP_TITLE, SITE_DESCRIPTION } from '../../../utils/constants';
 
 interface IMetaProps {
   description: string;
@@ -20,8 +21,8 @@ export const Meta: FunctionComponent<IMetaProps> = (
     ogType = 'website'
   }
 ) => {
-  const metaDescription = description || ConfigProvider.getValue('SITE_DESCRIPTION');
-  const pageTitle = title ? sanitizeEncodedChar(title) : sanitizeEncodedChar(ConfigProvider.getValue('APP_TITLE'));
+  const metaDescription = description || SITE_DESCRIPTION;
+  const pageTitle = title ? sanitizeEncodedChar(title) : sanitizeEncodedChar(APP_TITLE);
   const siteTitle = sanitizeEncodedChar(ConfigProvider.getValue('SITE_TITLE'));
   const siteAuthor = sanitizeEncodedChar(ConfigProvider.getValue('SITE_AUTHOR'));
   const siteKeywords = ConfigProvider.getValue('APP_KEYWORDS');

@@ -4,6 +4,7 @@ import { IconName } from '@fortawesome/fontawesome-common-types';
 import classNames from 'classnames';
 import Link from 'next/link';
 import styles from './Button.scss';
+import { ESize, ETheme } from '@jpp/typings/enums';
 
 export interface IButtonProps {
   theme?: Core.TTheme;
@@ -26,8 +27,8 @@ export interface IButtonProps {
 const Button: FunctionComponent<IButtonProps> = (
   {
     behaviour = 'router',
-    theme = Core.ETheme.TintAlpha,
-    size = Core.ESize.Md,
+    theme = ETheme.TintAlpha,
+    size = ESize.Md,
     caps = false,
     outline = false,
     children,

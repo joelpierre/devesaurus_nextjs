@@ -37,10 +37,11 @@ const HeroSplash: FunctionComponent<THeroSplash> = (
               excepturi fugit harum id in laborum maxime modi omnis porro possimus quasi sit voluptatum!
             </p>
           </Flex>
+
         </Row>
       </Container>
     </Section>
   );
 };
 
-export default withAcfComponent(HeroSplash);
+export default withAcfComponent<THeroSplash>(HeroSplash);

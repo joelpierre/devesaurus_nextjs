@@ -9,13 +9,14 @@ import Heading from '@jpp/components/_shared/Heading/Heading';
 import Button from '@jpp/molecules/Buttons/Button';
 
 import styles from './PressPack.scss';
+import { ETheme } from '@jpp/typings/enums';
 
 type TPressPack = Core.IAcfComponentCore;
 
 const PressPack: FunctionComponent<TPressPack> = (
   {
     component = {},
-    page_theme = Core.ETheme.TintAlpha,
+    page_theme = ETheme.TintAlpha,
     className
   }
 ) => {

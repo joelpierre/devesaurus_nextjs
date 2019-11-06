@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import CoreLayoutContainer from '../../src/containers/CoreLayoutContainer';
 import { clearWord, getWord } from '../../src/store/word/actions';
 import { IReduxState } from '../../src/store/createStore';
 import { IWordStoreState } from '../../src/store/word/reducer';
 import ErrorPage from '../_error';
-import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
 
 interface IDevinitionPageProps {
   error: TReduxError;
@@ -69,16 +69,13 @@ export class DevinitionPage extends PureComponent<TDevinitionPageProps> {
       return (<ErrorPage {...error} />);
     }
 
-    // console.log(word);
-    // console.log('acf', acf);
-
     return (
-      <CoreLayout
+      <CoreLayoutContainer
         title={title}
         description={description}
       >
         this is the {word.title} page
-      </CoreLayout>
+      </CoreLayoutContainer>
     );
   }
 }

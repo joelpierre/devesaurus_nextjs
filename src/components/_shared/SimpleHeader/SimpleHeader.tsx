@@ -2,13 +2,12 @@ import React, { PureComponent } from 'react';
 import SimpleMenu from '@jpp/organisms/SimpleMenu/SimpleMenu';
 
 import styles from './SimpleHeader.scss';
-import { AnyAction } from 'redux';
 import Hamburger from '@jpp/atoms/Hamburger/Hamburger';
 
 interface ISimpleHeader {
   className?: string;
   isMenuOpen: boolean;
-  setMenuState: (value: boolean) => AnyAction;
+  setMenuState: (value: boolean) => void;
   menuItems: Core.IMenuItem[];
 }
 

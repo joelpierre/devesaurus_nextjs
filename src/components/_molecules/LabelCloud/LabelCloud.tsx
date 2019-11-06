@@ -3,10 +3,11 @@ import CategoryCloud from './CategoryCloud/CategoryCloud';
 import WordCategoryCloud from './WordCategoryCloud/WordCategoryCloud';
 import TagCloud from './TagCloud/TagCloud';
 import WordTagCloud from './WordTagCloud/WordTagCloud';
+import { ETaxonomy } from '@jpp/typings/enums';
 
 interface ILabelCloud {
   className?: string;
-  taxonomy: Core.ETaxonomy;
+  taxonomy: ETaxonomy;
 }
 
 const LabelCloud: FunctionComponent<ILabelCloud> = ({ className, taxonomy }) => {

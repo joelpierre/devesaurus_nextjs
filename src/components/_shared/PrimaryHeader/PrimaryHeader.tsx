@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
-import { AnyAction } from 'redux';
 
 import styles from './PrimaryHeader.scss';
 
 interface IPrimaryHeader {
   className?: string;
   isMenuOpen: boolean;
-  setMenuState: (value: boolean) => AnyAction;
+  setMenuState: (value: boolean) => void;
 }
 
 export class PrimaryHeader extends PureComponent<IPrimaryHeader> {

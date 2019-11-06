@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
+import CoreLayoutContainer from '../../src/containers/CoreLayoutContainer';
 
-import { getCategories, getPosts } from '../../src/store/rootActions';
+import { getPosts } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
 
 import ErrorPage from '../_error';
@@ -29,7 +29,7 @@ type TDevegramPage =
 
 export class DevegramPage extends PureComponent<TDevegramPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
-    await store.dispatch(getCategories());
+    await store.dispatch(getPosts());
     const posts: TPostsStoreState = store.getState().posts;
 
     if (!Array.isArray(posts)) {
@@ -60,7 +60,7 @@ export class DevegramPage extends PureComponent<TDevegramPage> {
     }
 
     return (
-      <CoreLayout
+      <CoreLayoutContainer
         title={title}
         description={description}
       >
@@ -69,7 +69,7 @@ export class DevegramPage extends PureComponent<TDevegramPage> {
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto corporis cum molestiae nisi officia
         perferendis quam reprehenderit similique vitae! Assumenda dolore eveniet fuga fugit natus, quas quibusdam
         quisquam tempora.
-      </CoreLayout>
+      </CoreLayoutContainer>
     );
   }
 }

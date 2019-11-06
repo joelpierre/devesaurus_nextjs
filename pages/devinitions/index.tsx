@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
-
-import { getCategories, getWords } from '../../src/store/rootActions';
+import { getWords } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
 
 import ErrorPage from '../_error';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TWordsStoreState } from '../../src/store/words/reducer';
+import CoreLayoutContainer from '../../src/containers/CoreLayoutContainer';
 
 interface IDevinitionsPage {
   error: TReduxError;
@@ -29,7 +28,7 @@ type TDevinitionsPage =
 
 export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
-    await store.dispatch(getCategories());
+    await store.dispatch(getWords());
     const words: TWordsStoreState = store.getState().words;
 
     if (!Array.isArray(words)) {
@@ -60,7 +59,7 @@ export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
     }
 
     return (
-      <CoreLayout
+      <CoreLayoutContainer
         title={title}
         description={description}
       >
@@ -69,7 +68,7 @@ export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto corporis cum molestiae nisi officia
         perferendis quam reprehenderit similique vitae! Assumenda dolore eveniet fuga fugit natus, quas quibusdam
         quisquam tempora.
-      </CoreLayout>
+      </CoreLayoutContainer>
     );
   }
 }

@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
-
 import { IReduxState } from '../../../src/store/createStore';
 
 import ErrorPage from '../../_error';
@@ -10,6 +8,7 @@ import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TTagStoreState } from '../../../src/store/tags/reducer';
 import { getTags } from '../../../src/store/rootActions';
 import { TPostsStoreState } from '../../../src/store/posts/reducer';
+import CoreLayoutContainer from '../../../src/containers/CoreLayoutContainer';
 
 interface IDevinitionsTagsPage {
   error: TReduxError;
@@ -61,7 +60,7 @@ export class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
     }
 
     return (
-      <CoreLayout
+      <CoreLayoutContainer
         title={title}
         description={description}
       >
@@ -70,7 +69,7 @@ export class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto corporis cum molestiae nisi officia
         perferendis quam reprehenderit similique vitae! Assumenda dolore eveniet fuga fugit natus, quas quibusdam
         quisquam tempora.
-      </CoreLayout>
+      </CoreLayoutContainer>
     );
   }
 }

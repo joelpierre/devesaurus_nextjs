@@ -1,6 +1,4 @@
 import React, { PureComponent, ReactNode } from 'react';
-import { connect } from 'react-redux';
-import { AnyAction } from 'redux';
 
 import Meta from '@jpp/components/_shared/Meta/Meta';
 import PushWrapper from '@jpp/components/_shared/PushWrapper/PushWrapper';
@@ -9,27 +7,33 @@ import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter/PrimaryFooter';
 import OffCanvas from '@jpp/components/_shared/OffCanvas/OffCanvas';
 import SimpleHeader from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
 
-import ConfigProvider from '../../services/configProvider';
-import { IReduxState } from '../../store/createStore';
-import { setMenuState } from '../../store/rootActions';
+import { APP_TITLE, SITE_DESCRIPTION } from '../../utils/constants';
 
-interface IBasicLayoutProps {
+export interface IBasicLayoutProps {
   title: string;
   description: string;
-  isMenuOpen: boolean;
-  isLoading: boolean;
-  onSetMenuState: (value: boolean) => AnyAction;
-  primaryMenu: Core.IMenuItem[];
-  simpleMenu: Core.IMenuItem[];
-  children: ReactNode;
+  children?: ReactNode;
 }
 
-export class BasicLayout extends PureComponent<IBasicLayoutProps> {
+export interface IStoreBasicLayoutProps {
+  isMenuOpen: boolean;
+  isLoading: boolean;
+  simpleMenu: Core.IMenuItem[];
+  primaryMenu: Core.IMenuItem[];
+}
+
+export interface IDispatchBasicLayoutProps {
+  onSetMenuState: (value: boolean) => void;
+}
+
+type TBasicLayoutProps = IBasicLayoutProps & IStoreBasicLayoutProps & IDispatchBasicLayoutProps;
+
+export class BasicLayout extends PureComponent<TBasicLayoutProps> {
 
   getMeta = () => {
     const {
-      title = ConfigProvider.getValue('APP_TITLE'),
-      description = ConfigProvider.getValue('SITE_DESCRIPTION')
+      title = APP_TITLE,
+      description = SITE_DESCRIPTION
     } = this.props;
 
     return <Meta title={title} description={description}/>;
@@ -79,25 +83,4 @@ export class BasicLayout extends PureComponent<IBasicLayoutProps> {
   }
 }
 
-const mapStateToProps = (
-  {
-    core: {
-      isMenuOpen,
-      isLoading,
-      primaryMenu,
-      simpleMenu
-    }
-  }: IReduxState) => (
-  {
-    isMenuOpen,
-    isLoading,
-    primaryMenu,
-    simpleMenu
-  }
-);
-
-const mapDispatchToProps = {
-  onSetMenuState: (value: boolean) => setMenuState(value)
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BasicLayout);
+export default BasicLayout;

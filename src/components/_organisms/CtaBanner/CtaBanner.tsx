@@ -8,6 +8,7 @@ import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 import Heading from '@jpp/components/_shared/Heading/Heading';
 import Button from '@jpp/molecules/Buttons/Button';
 import withAcfComponent from '../../../hoc/withAcfComponent';
+import { ETheme } from '@jpp/typings/enums';
 
 type TCtaBanner = Core.IAcfComponentCore;
 
@@ -15,7 +16,7 @@ const CtaBanner: FunctionComponent<TCtaBanner> = (
   {
     className,
     component,
-    page_theme = Core.ETheme.Brand,
+    page_theme = ETheme.Brand,
     ...props
   }
 ) => {

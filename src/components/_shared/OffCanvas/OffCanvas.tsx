@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { AnyAction } from 'redux';
 import PrimaryMenu from '@jpp/organisms/PrimaryMenu/PrimaryMenu';
 import OffCanvasHeader from '@jpp/molecules/OffCanvasHeader/OffCanvasHeader';
 import OffCanvasFooter from '@jpp/molecules/OffCanvasFooter/OffCanvasFooter';
@@ -11,7 +10,7 @@ interface IOffCanvas {
   className?: string;
   isMenuOpen: boolean;
   menuItems: Core.IMenuItem[];
-  setMenuState: (value: boolean) => AnyAction;
+  setMenuState: (value: boolean) => void;
 }
 
 export class OffCanvas extends PureComponent<IOffCanvas> {

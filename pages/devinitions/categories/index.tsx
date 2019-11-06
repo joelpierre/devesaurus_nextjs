@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import CoreLayout from '@jpp/layouts/CoreLayout/CoreLayout';
-
 import { getCategories } from '../../../src/store/rootActions';
 import { IReduxState } from '../../../src/store/createStore';
 
@@ -10,6 +8,7 @@ import ErrorPage from '../../_error';
 import { TCategoryStoreState } from '../../../src/store/categories/reducer';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TPostsStoreState } from '../../../src/store/posts/reducer';
+import CoreLayoutContainer from '../../../src/containers/CoreLayoutContainer';
 
 interface IDevinitionsCategoriesPage {
   error: TReduxError;
@@ -61,7 +60,7 @@ export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategor
     }
 
     return (
-      <CoreLayout
+      <CoreLayoutContainer
         title={title}
         description={description}
       >
@@ -70,7 +69,7 @@ export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategor
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto corporis cum molestiae nisi officia
         perferendis quam reprehenderit similique vitae! Assumenda dolore eveniet fuga fugit natus, quas quibusdam
         quisquam tempora.
-      </CoreLayout>
+      </CoreLayoutContainer>
     );
   }
 }

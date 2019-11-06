@@ -1,4 +1,5 @@
 import { IPostStoreState } from './reducer';
+import { ETaxonomy } from '@jpp/typings/enums';
 
 interface IPostAPIState extends IPostStoreState {
   permalink: string;
@@ -20,13 +21,15 @@ export const postTransform = (data: IPostAPIState): IPostStoreState => {
   delete data.tag_ids;
   delete data.tag_names;
 
-  data.categories = data.terms.filter((term: Core.ITaxonomyTerm) => {
-    return term.taxonomy === Core.ETaxonomy.Category;
-  });
+  if (data.terms) {
+    data.categories = data.terms.filter((term: Core.ITaxonomyTerm) => {
+      return term.taxonomy === ETaxonomy.Category;
+    });
 
-  data.tags = data.terms.filter((term: Core.ITaxonomyTerm) => {
-    return term.taxonomy === Core.ETaxonomy.Tag;
-  });
+    data.tags = data.terms.filter((term: Core.ITaxonomyTerm) => {
+      return term.taxonomy === ETaxonomy.PostTag;
+    });
+  }
 
   return data;
 };

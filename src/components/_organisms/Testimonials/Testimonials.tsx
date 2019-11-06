@@ -11,6 +11,7 @@ import Testimonial from '@jpp/molecules/Testimonial/Testimonial';
 
 import './utils/slick-overrides.scss';
 import styles from './Testimonials.scss';
+import { ETheme } from '@jpp/typings/enums';
 
 interface ITestimonials {
   testimonials: Core.ITestimonials[];
@@ -21,7 +22,7 @@ type TTestimonialsProps = ITestimonials & Core.IAcfComponentCore;
 export const Testimonials: FunctionComponent<TTestimonialsProps> = (
   {
     className,
-    page_theme = Core.ETheme.TintAlpha,
+    page_theme = ETheme.TintAlpha,
     component = {},
     testimonials
   }

@@ -5,12 +5,11 @@ import Link from 'next/link';
 import Icon from '@jpp/atoms/Icon/Icon';
 
 import styles from './OffCanvasHeader.scss';
-import { AnyAction } from 'redux';
 
 interface IOffCanvasHeader {
   className?: string;
   isMenuOpen: boolean;
-  setMenuState: (value: boolean) => AnyAction;
+  setMenuState: (value: boolean) => void;
 }
 
 const OffCanvasHeader: FunctionComponent<IOffCanvasHeader> = ({ className, setMenuState, isMenuOpen }) => {
