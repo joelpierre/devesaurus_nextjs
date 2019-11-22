@@ -3,18 +3,28 @@ import { IconName } from '@fortawesome/fontawesome-common-types';
 /**
  * Update any Object passed through
  */
-export const updateObject = <T>(oldObject: T, updatedValues: Partial<T>): T => ({
-  ...oldObject,
-  ...updatedValues
-});
+export const updateObject = <T>(oldObject: T, updatedValues: Partial<T>): T => {
+  if (Object.keys(updatedValues).length > 0) {
+    return {
+      ...oldObject,
+      ...updatedValues
+    };
+  }
+  return {} as T;
+};
 
 /**
  * Update any Array passed through
  */
-export const updateArray = <T>(oldArray: T[], updatedValues: T[]): T[] => ([
-  ...oldArray,
-  ...updatedValues
-]);
+export const updateArray = <T>(oldArray: T[], updatedValues: T[]): T[] => {
+  if (Array.isArray(updatedValues)) {
+    return [
+      ...oldArray,
+      ...updatedValues
+    ];
+  }
+  return [] as T[];
+};
 
 /**
  * Slugify a string in order

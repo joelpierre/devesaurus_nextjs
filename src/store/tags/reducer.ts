@@ -1,3 +1,4 @@
+import { updateArray } from '../../utils';
 import * as actions from './constants';
 import { AnyAction } from 'redux';
 import { TReduxError } from '@jpp/typings/index';
@@ -23,7 +24,7 @@ const tagReducer = (
 ): TTagStoreState => {
   switch (action.type) {
     case actions.GET_TAGS_SUCCESS:
-      return [...state, ...action.payload];
+      return updateArray(state, action.payload);
 
     case actions.GET_TAGS_FAILED:
       return { ...action.payload };

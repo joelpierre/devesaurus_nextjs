@@ -6,14 +6,14 @@ import OffCanvasFooter from '@jpp/molecules/OffCanvasFooter/OffCanvasFooter';
 
 import styles from './OffCanvas.scss';
 
-interface IOffCanvas {
+interface IOffCanvasProps {
   className?: string;
   isMenuOpen: boolean;
   menuItems: Core.IMenuItem[];
   setMenuState: (value: boolean) => void;
 }
 
-export class OffCanvas extends PureComponent<IOffCanvas> {
+export class OffCanvas extends PureComponent<IOffCanvasProps> {
 
   handleSetMenuState = (event): void => {
     const { setMenuState, isMenuOpen } = this.props;

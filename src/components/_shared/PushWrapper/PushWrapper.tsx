@@ -3,13 +3,13 @@ import classNames from 'classnames';
 
 import styles from './PushWrapper.scss';
 
-interface IPushWrapper {
+interface IPushWrapperProps {
   className?: string;
   isMenuOpen: boolean;
   setMenuState: (value: boolean) => void;
 }
 
-const PushWrapper: FunctionComponent<IPushWrapper> = ({ className, children, isMenuOpen, setMenuState }) => {
+const PushWrapper: FunctionComponent<IPushWrapperProps> = ({ className, children, isMenuOpen, setMenuState }) => {
   return (
     <div className={classNames(styles.pushWrapper, className, {
       [styles.pushWrapperIsActive]: isMenuOpen

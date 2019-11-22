@@ -4,14 +4,14 @@ import SimpleMenu from '@jpp/organisms/SimpleMenu/SimpleMenu';
 import styles from './SimpleHeader.scss';
 import Hamburger from '@jpp/atoms/Hamburger/Hamburger';
 
-interface ISimpleHeader {
+interface ISimpleHeaderProps {
   className?: string;
   isMenuOpen: boolean;
   setMenuState: (value: boolean) => void;
   menuItems: Core.IMenuItem[];
 }
 
-export class SimpleHeader extends PureComponent<ISimpleHeader> {
+export class SimpleHeader extends PureComponent<ISimpleHeaderProps> {
 
   handleSetMenuState = (): void => {
     const { isMenuOpen, setMenuState } = this.props;
@@ -29,7 +29,7 @@ export class SimpleHeader extends PureComponent<ISimpleHeader> {
           descriptor="Menu"
         />
 
-        <SimpleMenu menuItems={menuItems}/>
+        <SimpleMenu menuItems={menuItems} />
       </header>
     );
   }

@@ -21,7 +21,7 @@ const wordsReducer = (
       return { ...action.payload };
 
     case actions.CLEAR_WORDS:
-      return [] as IWordStoreState[];
+      return initialState;
 
     default:
       return state;

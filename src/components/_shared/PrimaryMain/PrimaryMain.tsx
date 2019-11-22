@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 
-interface IPrimaryMain {
+interface IPrimaryMainProps {
   className?: string;
 }
 
-export class PrimaryMain extends PureComponent<IPrimaryMain> {
+export class PrimaryMain extends PureComponent<IPrimaryMainProps> {
   render() {
     return (
       <main className={classNames(this.props.className)}>

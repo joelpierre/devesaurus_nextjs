@@ -3,9 +3,9 @@ import React, { PureComponent, ReactNode } from 'react';
 import Meta from '@jpp/components/_shared/Meta/Meta';
 import PushWrapper from '@jpp/components/_shared/PushWrapper/PushWrapper';
 import PrimaryMain from '@jpp/components/_shared/PrimaryMain/PrimaryMain';
-import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter/PrimaryFooter';
 import OffCanvas from '@jpp/components/_shared/OffCanvas/OffCanvas';
 import SimpleHeader from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
+import FooterContainer from '../../containers/FooterContainer';
 
 import { APP_TITLE, SITE_DESCRIPTION } from '../../utils/constants';
 
@@ -36,7 +36,7 @@ export class BasicLayout extends PureComponent<TBasicLayoutProps> {
       description = SITE_DESCRIPTION
     } = this.props;
 
-    return <Meta title={title} description={description}/>;
+    return <Meta title={title} description={description} />;
   };
 
   render() {
@@ -63,7 +63,7 @@ export class BasicLayout extends PureComponent<TBasicLayoutProps> {
       <>
         {this.getMeta()}
 
-        <OffCanvas isMenuOpen={isMenuOpen} setMenuState={onSetMenuState} menuItems={primaryMenu}/>
+        <OffCanvas isMenuOpen={isMenuOpen} setMenuState={onSetMenuState} menuItems={primaryMenu} />
 
         <PushWrapper isMenuOpen={isMenuOpen} setMenuState={onSetMenuState}>
           <SimpleHeader
@@ -76,7 +76,7 @@ export class BasicLayout extends PureComponent<TBasicLayoutProps> {
             {children}
           </PrimaryMain>
 
-          <PrimaryFooter/>
+          <FooterContainer />
         </PushWrapper>
       </>
     );

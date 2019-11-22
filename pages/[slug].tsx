@@ -62,8 +62,8 @@ export class DefaultPage extends PureComponent<TDefaultPageProps> {
   render() {
     const { page, error } = this.props;
     const { yoast } = page;
-    const title = yoast.yoast_wpseo_title || page.title || APP_TITLE;
-    const description = yoast.yoast_wpseo_metadesc || SITE_DESCRIPTION;
+    const title = yoast && yoast.yoast_wpseo_title || page.title || APP_TITLE;
+    const description = yoast && yoast.yoast_wpseo_metadesc || SITE_DESCRIPTION;
 
     if (error) {
       return (<ErrorPage {...error} />);
