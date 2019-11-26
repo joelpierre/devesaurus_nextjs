@@ -1,7 +1,6 @@
 import * as actions from './constants';
 import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
-import { postTransform } from './transform';
 import { TReduxError } from '@jpp/typings/index';
 
 export interface IPostStoreState {
@@ -33,7 +32,7 @@ const postReducer = (
 ): IPostStoreState => {
   switch (action.type) {
     case actions.GET_POST_SUCCESS:
-      return updateObject(state, postTransform(action.payload));
+      return updateObject(state, action.payload);
 
     case actions.GET_POST_FAILED:
       return { ...action.payload };

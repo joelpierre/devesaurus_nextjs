@@ -1,4 +1,5 @@
 import 'source-map-support/register';
+import 'isomorphic-unfetch';
 import express, { Request, Response } from 'express';
 import path from 'path';
 import compression from 'compression';
@@ -11,10 +12,9 @@ import nextJs from 'next';
 
 // Import Middleware
 import cacheControlMiddleware from './middleware/cache-control';
-// const cacheControlMiddleware = require('./middleware/cache-control');
 
 // Routes
-// const apiRoutes = require('./routes/api');
+import apiRoutes from './routes/api';
 
 // Establish some basics
 const port = parseInt(process.env.SERVER_PORT || '3000', 10);
@@ -49,6 +49,8 @@ app.prepare().then(() => {
   server.get('/status', (req: Request, res: Response) => {
     res.send('ok');
   });
+
+  server.use('/api', apiRoutes);
 
   const staticPath = path.join(__dirname, './src/static');
 

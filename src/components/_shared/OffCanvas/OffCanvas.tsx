@@ -26,7 +26,7 @@ export class OffCanvas extends PureComponent<IOffCanvasProps> {
 
     return (
       <aside className={classNames(
-        styles.offCanvas,
+        styles.OffCanvas,
         className,
         {
           [styles.offCanvasIsActive]: isMenuOpen
@@ -57,7 +57,7 @@ export class OffCanvas extends PureComponent<IOffCanvasProps> {
             setMenuState={this.handleSetMenuState}
           />
 
-          <OffCanvasFooter className={styles.offCanvasFooter}/>
+          <OffCanvasFooter className={styles.offCanvasFooter} />
         </div>
 
       </aside>

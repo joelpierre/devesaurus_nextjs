@@ -1,9 +1,8 @@
-import * as actions from './constants';
 import { AnyAction } from 'redux';
-import { IWordStoreState } from '../word/reducer';
-import { wordsTransform } from '../word/transform';
-import { updateArray } from '../../utils';
 import { TReduxError } from '@jpp/typings/index';
+import * as actions from './constants';
+import { IWordStoreState } from '../word/reducer';
+import { updateArray } from '../../utils';
 
 const initialState = [];
 
@@ -15,7 +14,7 @@ const wordsReducer = (
 ): TWordsStoreState => {
   switch (action.type) {
     case actions.GET_WORDS_SUCCESS:
-      return updateArray(state, wordsTransform(action.payload));
+      return updateArray(state, action.payload);
 
     case actions.GET_WORDS_FAILED:
       return { ...action.payload };

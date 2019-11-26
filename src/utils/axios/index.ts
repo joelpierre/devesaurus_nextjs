@@ -2,13 +2,13 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import ConfigProvider from '../../services/configProvider';
 
 const PROTOCOL = ConfigProvider.getValue('PROTOCOL');
-const API_URL = ConfigProvider.getValue('API_URL');
+const BASE_URL = ConfigProvider.getValue('BASE_URL');
 
-const wpV2AxiosInstance: AxiosInstance = axios.create({
-  baseURL: `${PROTOCOL}://${API_URL}/wp-json/wp/v2`
+const internalAxiosInstance: AxiosInstance = axios.create({
+  baseURL: `${PROTOCOL}://${BASE_URL}/api`
 });
 
-wpV2AxiosInstance.interceptors.request.use(
+internalAxiosInstance.interceptors.request.use(
   (response: AxiosResponse) => {
     return response;
   },
@@ -17,19 +17,4 @@ wpV2AxiosInstance.interceptors.request.use(
   }
 );
 
-export { wpV2AxiosInstance };
-
-const defaultAxiosInstance: AxiosInstance = axios.create({
-  baseURL: `${PROTOCOL}://${API_URL}/wp-json/better-rest-endpoints/v1`
-});
-
-defaultAxiosInstance.interceptors.request.use(
-  (response: AxiosResponse) => {
-    return response;
-  },
-  (error: AxiosError) => {
-    return Promise.reject(error);
-  }
-);
-
-export default defaultAxiosInstance;
+export default internalAxiosInstance;

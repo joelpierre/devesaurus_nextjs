@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import Router from 'next/router';
 
 import Icon from '@jpp/atoms/Icon/Icon';
 
@@ -16,6 +17,7 @@ const OffCanvasHeader: FunctionComponent<IOffCanvasHeader> = ({ className, setMe
 
   const handleSetMenuState = (event) => {
     setMenuState(!isMenuOpen);
+    Router.push('/');
     event.preventDefault();
   };
 
@@ -23,7 +25,7 @@ const OffCanvasHeader: FunctionComponent<IOffCanvasHeader> = ({ className, setMe
     <header className={classNames(styles.offCanvasHeader, className)}>
       <Link href="/" as="/">
         <a role="button" onClick={handleSetMenuState}>
-          <Icon.LogoCharacter className={styles.offCanvasHeaderLogo}/>
+          <Icon.LogoCharacter className={styles.offCanvasHeaderLogo} />
         </a>
       </Link>
     </header>

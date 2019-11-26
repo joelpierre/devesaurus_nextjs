@@ -1,7 +1,7 @@
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
-import { wpV2AxiosInstance } from '../../utils/axios';
+import axios from '../../utils/axios';
 import { setAppError, setAppLoading } from '../rootActions';
 import { GET_WORD_TAGS_FAILED, GET_WORD_TAGS_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
@@ -12,8 +12,8 @@ export const getWordTags: ActionCreator<ThunkAction<Promise<any>, IReduxState, I
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
 
-    return wpV2AxiosInstance
-      .get(`/tags`)
+    return axios
+      .get(`/word_tags`)
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
 

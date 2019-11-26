@@ -1,7 +1,6 @@
 import * as actions from './constants';
 import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
-import pageTransform from './transform';
 import { TReduxError } from '@jpp/typings/index';
 
 export interface IPageStoreState {
@@ -27,12 +26,9 @@ const pageReducer = (
   state = initialState as IPageStoreState,
   action: AnyAction
 ): IPageStoreState => {
-  let updatedState: IPageStoreState;
-
   switch (action.type) {
     case actions.GET_PAGE_SUCCESS:
-      updatedState = pageTransform(action.payload);
-      return updateObject(state, updatedState);
+      return updateObject(state, action.payload);
 
     case actions.GET_PAGE_FAILED:
       return { ...action.payload };

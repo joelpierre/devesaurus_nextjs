@@ -1,7 +1,7 @@
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
-import { wpV2AxiosInstance } from '../../utils/axios';
+import axios  from '../../utils/axios';
 import { setAppError, setAppLoading } from '../rootActions';
 import { GET_WORD_CATEGORIES_FAILED, GET_WORD_CATEGORIES_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
@@ -12,8 +12,8 @@ export const getWordCategories: ActionCreator<ThunkAction<Promise<any>, IReduxSt
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
 
-    return wpV2AxiosInstance
-      .get(`/categories`)
+    return axios
+      .get(`/word_categories`)
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
 

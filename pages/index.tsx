@@ -30,19 +30,13 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
   }
 
   async componentDidMount(): Promise<void> {
-    const { onGetPage, slug, page } = this.props;
-
-    if (Object.keys(page).length === 0) {
-      await onGetPage(slug);
-    }
+    const { onGetPage, slug } = this.props;
+    await onGetPage(slug);
   }
 
   async componentWillUnmount(): Promise<void> {
-    const { onClearPage, page } = this.props;
-
-    if (Object.keys(page).length === 0) {
-      await onClearPage();
-    }
+    const { onClearPage } = this.props;
+    await onClearPage();
   }
 
   render() {
@@ -63,7 +57,7 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
       >
         {components && components.map(
           (component: Core.IAcfComponent, index: number) => (
-            <AcfComponents component={component} page_theme={page_theme} key={index}/>
+            <AcfComponents component={component} page_theme={page_theme} key={index} />
           )
         )}
       </BasicLayoutContainer>

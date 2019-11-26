@@ -107,8 +107,8 @@ module.exports = (phase) => {
 
         config.plugins.push(
           new FilterWarningsPlugin({
-            exclude: /extract-css-chunks-plugin[^]*Conflicting order between:/
-            // exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
+            // exclude: /extract-css-chunks-plugin[^]*Conflicting order between:/
+            exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
           })
         );
 

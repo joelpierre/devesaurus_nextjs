@@ -1,7 +1,7 @@
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
-import { wpV2AxiosInstance } from '../../utils/axios';
+import axios from '../../utils/axios';
 import { setAppError, setAppLoading } from '../rootActions';
 import { GET_CATEGORIES_FAILED, GET_CATEGORIES_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
@@ -12,7 +12,7 @@ export const getCategories: ActionCreator<ThunkAction<Promise<any>, IReduxState,
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
 
-    return wpV2AxiosInstance
+    return axios
       .get(`/categories`)
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));

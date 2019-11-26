@@ -14,7 +14,7 @@ export const getWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRed
     dispatch(setAppError(false));
 
     return axios
-      .get(`/word`)
+      .get(`/words`)
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
 

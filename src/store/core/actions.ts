@@ -1,7 +1,7 @@
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
+import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
 import axios from '../../utils/axios/';
-import { AxiosError, AxiosResponse } from 'axios';
 import {
   GET_FOOTER_MENU_FAILED,
   GET_FOOTER_MENU_SUCCESS,

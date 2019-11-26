@@ -1,7 +1,7 @@
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
-import { wpV2AxiosInstance } from '../../utils/axios';
+import axios  from '../../utils/axios';
 import { setAppError, setAppLoading } from '../rootActions';
 import { GET_TAGS_FAILED, GET_TAGS_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
@@ -12,7 +12,7 @@ export const getTags: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRedu
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
 
-    return wpV2AxiosInstance
+    return axios
       .get(`/tags`)
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
