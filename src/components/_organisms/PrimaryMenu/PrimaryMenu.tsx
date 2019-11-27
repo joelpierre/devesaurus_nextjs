@@ -19,11 +19,11 @@ export class PrimaryMenu extends PureComponent<IPrimaryMenu> {
     return (
       <nav className={classNames(className, styles.primaryMenu)}>
         <ul className={styles.primaryMenuList}>
-          {menuItems.map((menuItem: Core.IMenuItem) => {
+          {menuItems.map((menuItem: Core.IMenuItem, index: number) => {
             if (menuItem.title === 'divider') {
               return (
                 <li
-                  key={`${menuItem.ID}_primary`}
+                  key={`${index}_primary`}
                   className={styles.primaryMenuDivider}
                 />
               );
@@ -32,7 +32,7 @@ export class PrimaryMenu extends PureComponent<IPrimaryMenu> {
             return (
               <MenuItem
                 onClick={setMenuState}
-                key={`${menuItem.ID}_primary`}
+                key={`${index}_primary`}
                 className={styles.primaryMenuItem}
                 linkClassName={styles.primaryMenuLink}
                 {...menuItem}

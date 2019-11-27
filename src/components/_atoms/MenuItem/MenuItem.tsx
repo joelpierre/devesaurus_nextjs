@@ -8,7 +8,7 @@ import { EFontAwesomeType } from '../../../utils/fontAwesome';
 
 import styles from './MenuItem.scss';
 
-interface IMenuItem {
+interface IMenuItemProps {
   className?: string;
   linkClassName?: string;
   onClick?: Core.TOnClick;
@@ -20,7 +20,7 @@ export enum EIconPosition {
   Right = 'right'
 }
 
-type TMenuItemProps = IMenuItem & Core.IMenuItem;
+type TMenuItemProps = IMenuItemProps & Core.IMenuItem;
 
 const MenuItem: FunctionComponent<TMenuItemProps> = (
   {

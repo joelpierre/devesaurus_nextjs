@@ -17,10 +17,10 @@ export class SimpleMenu extends PureComponent<ISimpleMenu> {
     return (
       <nav className={classNames(className, styles.simpleMenu)}>
         <ul className={styles.simpleMenuList}>
-          {menuItems.map((menuItem: Core.IMenuItem) => {
+          {menuItems.map((menuItem: Core.IMenuItem, index: number) => {
             return (
               <MenuItem
-                key={`${menuItem.ID}_simple`}
+                key={`${index}_simple`}
                 className={styles.simpleMenuItem}
                 iconPosition={EIconPosition.Right}
                 linkClassName={styles.simpleMenuLink}

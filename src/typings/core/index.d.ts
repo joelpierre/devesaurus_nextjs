@@ -656,16 +656,6 @@ declare namespace Core {
      *
      *
      **/
-    ID: number;
-    /**
-     *
-     *
-     **/
-    menu_order: number;
-    /**
-     *
-     *
-     **/
     title: string;
     /**
      *
@@ -676,12 +666,12 @@ declare namespace Core {
      *
      *
      **/
-    url: string;
+    description: string;
     /**
      *
      *
      **/
-    description: string;
+    url: string;
     /**
      *
      *
