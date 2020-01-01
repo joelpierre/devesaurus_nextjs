@@ -3,6 +3,11 @@ export enum EWordExample {
   CodeBlock = 'code-block'
 }
 
+export enum ELayout {
+  Core = 'core',
+  Basic = 'basic'
+}
+
 export enum ETheme {
   Brand = 'brand',
   Alpha = 'alpha',
@@ -67,8 +72,4 @@ export enum EColumn {
   Ten = '10',
   Eleven = '11',
   Twelve = '12',
-}
-
-export enum EAcfComponentType {
-  HeroSplash = 'hero_splash',
 }

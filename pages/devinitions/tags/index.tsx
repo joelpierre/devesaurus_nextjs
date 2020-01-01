@@ -1,14 +1,15 @@
+import { PageHandler } from '../../../src/utils/PageHandler/PageHandler';
+import { ELayout } from '@jpp/typings/enums';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { IReduxState } from '../../../src/store/createStore';
+import { arrayHasLength } from '../../../src/utils';
 
-import ErrorPage from '../../_error';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TTagStoreState } from '../../../src/store/tags/reducer';
 import { getTags } from '../../../src/store/rootActions';
 import { TPostsStoreState } from '../../../src/store/posts/reducer';
-import CoreLayoutContainer from '../../../src/containers/CoreLayoutContainer';
 
 interface IDevinitionsTagsPage {
   error: TReduxError;
@@ -27,7 +28,7 @@ type TDevinitionsTagsPage =
   & IStoreDevinitionsTagsPageProps
   & IDispatchDevinitionsTagsPageProps;
 
-export class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
+class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getTags());
     const tags: TPostsStoreState = store.getState().tags;
@@ -45,36 +46,32 @@ export class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
   async componentDidMount(): Promise<void> {
     const { onGetTags, tags } = this.props;
 
-    if (Array.isArray(tags) && tags.length === 0) {
+    if (!arrayHasLength(tags)) {
       await onGetTags();
     }
   }
 
   render() {
-    const { error } = this.props;
-    const title = 'Devinition Tags';
-    const description = 'Long description for meta data';
-
-    if (error) {
-      return (<ErrorPage {...error} />);
-    }
-
     return (
-      <CoreLayoutContainer
-        title={title}
-        description={description}
+      <PageHandler
+        layout={ELayout.Basic}
+        title="Devinition Tags"
+        description="Long description for meta data"
+        {...this.props}
       >
         DEVINITION TAGS PAGE
 
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto corporis cum molestiae nisi officia
         perferendis quam reprehenderit similique vitae! Assumenda dolore eveniet fuga fugit natus, quas quibusdam
         quisquam tempora.
-      </CoreLayoutContainer>
+      </PageHandler>
     );
   }
 }
 
-const mapStateToProps = ({ tags }: IReduxState) => ({
+const mapStateToProps = (
+  { tags }: IReduxState
+) => ({
   tags
 });
 

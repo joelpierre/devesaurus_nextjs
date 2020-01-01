@@ -72,7 +72,7 @@ export const getUrlForPage = (location: Location, page: string | number): string
   return `${finalPath}/${page}`;
 };
 
-const Pagination: FunctionComponent<IPaginationProps> = (
+export const Pagination: FunctionComponent<IPaginationProps> = (
   {
     className,
     totalPages,
@@ -251,5 +251,3 @@ const Pagination: FunctionComponent<IPaginationProps> = (
     </Section>
   );
 };
-
-export default Pagination;

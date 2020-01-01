@@ -1,6 +1,6 @@
-import { IReduxState } from '../store/createStore';
 import { connect } from 'react-redux';
-import SocialMenu, { ISocialMenuProps, IStoreSocialMenuProps } from '@jpp/organisms/SocialMenu/SocialMenu';
+import { ISocialMenuProps, IStoreSocialMenuProps, SocialMenu } from '@jpp/organisms/SocialMenu/SocialMenu';
+import { IReduxState } from '../../../store/createStore';
 
 const mapStateToProps = (
   {

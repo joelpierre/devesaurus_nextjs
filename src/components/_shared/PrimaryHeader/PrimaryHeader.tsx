@@ -29,5 +29,3 @@ export class PrimaryHeader extends PureComponent<IPrimaryHeaderProps> {
     );
   }
 }
-
-export default PrimaryHeader;

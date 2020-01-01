@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import PrimaryMenu from '@jpp/organisms/PrimaryMenu/PrimaryMenu';
+import { PrimaryMenu } from '@jpp/organisms/PrimaryMenu/PrimaryMenu';
 import OffCanvasHeader from '@jpp/molecules/OffCanvasHeader/OffCanvasHeader';
 import OffCanvasFooter from '@jpp/molecules/OffCanvasFooter/OffCanvasFooter';
 
@@ -64,5 +64,3 @@ export class OffCanvas extends PureComponent<IOffCanvasProps> {
     );
   }
 }
-
-export default OffCanvas;

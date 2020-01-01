@@ -10,25 +10,23 @@ import Carousel from '@jpp/molecules/Carousel/Carousel';
 import Testimonial from '@jpp/molecules/Testimonial/Testimonial';
 
 import './utils/slick-overrides.scss';
-import styles from './Testimonials.scss';
-import { ETheme } from '@jpp/typings/enums';
 
-interface ITestimonials {
+import styles from './Testimonials.scss';
+
+interface ITestimonialsProps {
   testimonials: Core.ITestimonials[];
 }
 
-type TTestimonialsProps = ITestimonials & Core.IAcfComponentCore;
+type TTestimonials = ITestimonialsProps & Core.IAcfComponent;
 
-export const Testimonials: FunctionComponent<TTestimonialsProps> = (
+export const Testimonials: FunctionComponent<TTestimonials> = (
   {
     className,
-    page_theme = ETheme.TintAlpha,
-    component = {},
+    page_theme,
+    theme,
     testimonials
   }
 ) => {
-  const { theme } = component;
-
   const settings = {
     dots: true,
     arrows: false,
@@ -69,7 +67,7 @@ export const Testimonials: FunctionComponent<TTestimonialsProps> = (
             className={classNames('mx-auto', styles.testimonialsWrapper)}
           >
             <Carousel
-              theme={component.theme}
+              theme={theme}
               className={classNames(
                 styles.testimonialsContainer,
                 'testimonials-slider'
@@ -86,5 +84,3 @@ export const Testimonials: FunctionComponent<TTestimonialsProps> = (
     </Section>
   );
 };
-
-export default Testimonials;

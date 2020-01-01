@@ -16,9 +16,9 @@ export interface IStoreSocialMenuProps {
   youtube: string;
 }
 
-type TSocialMenuProps = ISocialMenuProps & IStoreSocialMenuProps;
+type TSocialMenu = ISocialMenuProps & IStoreSocialMenuProps;
 
-const SocialMenu: FunctionComponent<TSocialMenuProps> = (
+export const SocialMenu: FunctionComponent<TSocialMenu> = (
   {
     className,
     facebook,
@@ -28,6 +28,10 @@ const SocialMenu: FunctionComponent<TSocialMenuProps> = (
     youtube
   }
 ) => {
+  const defaultProps = {
+    className: styles['social-menu__item']
+  };
+
   return (
     <nav
       data-test="component-social-menu"
@@ -36,7 +40,7 @@ const SocialMenu: FunctionComponent<TSocialMenuProps> = (
       <ul className={styles['social-menu__list']}>
         {facebook && (
           <SocialItem
-            className={styles['social-menu__item']}
+            {...defaultProps}
             name="facebook"
             link={facebook}
           />
@@ -44,7 +48,7 @@ const SocialMenu: FunctionComponent<TSocialMenuProps> = (
 
         {twitter && (
           <SocialItem
-            className={styles['social-menu__item']}
+            {...defaultProps}
             name="twitter"
             link={twitter}
           />
@@ -52,7 +56,7 @@ const SocialMenu: FunctionComponent<TSocialMenuProps> = (
 
         {instagram && (
           <SocialItem
-            className={styles['social-menu__item']}
+            {...defaultProps}
             name="instagram"
             link={instagram}
           />
@@ -60,7 +64,7 @@ const SocialMenu: FunctionComponent<TSocialMenuProps> = (
 
         {linkedin && (
           <SocialItem
-            className={styles['social-menu__item']}
+            {...defaultProps}
             name="linkedin"
             link={linkedin}
           />
@@ -68,7 +72,7 @@ const SocialMenu: FunctionComponent<TSocialMenuProps> = (
 
         {youtube && (
           <SocialItem
-            className={styles['social-menu__item']}
+            {...defaultProps}
             name="youtube"
             link={youtube}
           />
@@ -77,5 +81,3 @@ const SocialMenu: FunctionComponent<TSocialMenuProps> = (
     </nav>
   );
 };
-
-export default SocialMenu;

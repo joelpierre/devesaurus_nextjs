@@ -1,37 +1,35 @@
-import React, { PureComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import MenuItem, { EIconPosition } from '@jpp/atoms/MenuItem/MenuItem';
 
 import styles from './SimpleMenu.scss';
 
-interface ISimpleMenu {
+interface ISimpleMenuProps {
   className?: string;
   menuItems: Core.IMenuItem[];
 }
 
-export class SimpleMenu extends PureComponent<ISimpleMenu> {
-  render() {
-    const { className, menuItems } = this.props;
-
-    return (
-      <nav className={classNames(className, styles.simpleMenu)}>
-        <ul className={styles.simpleMenuList}>
-          {menuItems.map((menuItem: Core.IMenuItem, index: number) => {
-            return (
-              <MenuItem
-                key={`${index}_simple`}
-                className={styles.simpleMenuItem}
-                iconPosition={EIconPosition.Right}
-                linkClassName={styles.simpleMenuLink}
-                {...menuItem}
-              />
-            );
-          })}
-        </ul>
-      </nav>
-    );
+export const SimpleMenu: FunctionComponent<ISimpleMenuProps> = (
+  {
+    className,
+    menuItems
   }
-}
+) => {
 
-export default SimpleMenu;
+  return (
+    <nav className={classNames(className, styles.simpleMenu)}>
+      <ul className={styles.simpleMenuList}>
+        {menuItems.map((menuItem: Core.IMenuItem, index: number) => (
+          <MenuItem
+            key={`${index}_simple`}
+            className={styles.simpleMenuItem}
+            iconPosition={EIconPosition.Right}
+            linkClassName={styles.simpleMenuLink}
+            {...menuItem}
+          />
+        ))}
+      </ul>
+    </nav>
+  );
+};

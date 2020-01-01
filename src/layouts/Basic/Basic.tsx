@@ -1,43 +1,45 @@
+import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter';
 import React, { PureComponent, ReactNode } from 'react';
 
-import Meta from '@jpp/components/_shared/Meta/Meta';
-import PushWrapper from '@jpp/components/_shared/PushWrapper/PushWrapper';
-import PrimaryMain from '@jpp/components/_shared/PrimaryMain/PrimaryMain';
-import OffCanvas from '@jpp/components/_shared/OffCanvas/OffCanvas';
+import { Meta } from '@jpp/components/_shared/Meta/Meta';
+import { PushWrapper } from '@jpp/components/_shared/PushWrapper/PushWrapper';
+import { PrimaryMain } from '@jpp/components/_shared/PrimaryMain/PrimaryMain';
+import { OffCanvas } from '@jpp/components/_shared/OffCanvas/OffCanvas';
 import SimpleHeader from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
-import FooterContainer from '../../containers/FooterContainer';
 
 import { APP_TITLE, SITE_DESCRIPTION } from '../../utils/constants';
 
-export interface IBasicLayoutProps {
+import styles from './Basic.scss';
+
+export interface IBasicProps {
   title: string;
   description: string;
   children?: ReactNode;
 }
 
-export interface IStoreBasicLayoutProps {
+export interface IStoreBasicProps {
   isMenuOpen: boolean;
   isLoading: boolean;
   simpleMenu: Core.IMenuItem[];
   primaryMenu: Core.IMenuItem[];
 }
 
-export interface IDispatchBasicLayoutProps {
+export interface IDispatchBasicProps {
   onSetMenuState: (value: boolean) => void;
 }
 
-type TBasicLayoutProps = IBasicLayoutProps & IStoreBasicLayoutProps & IDispatchBasicLayoutProps;
+type TBasic = IBasicProps & IStoreBasicProps & IDispatchBasicProps;
 
-export class BasicLayout extends PureComponent<TBasicLayoutProps> {
+export class Basic extends PureComponent<TBasic> {
 
-  getMeta = () => {
+  get metaData() {
     const {
       title = APP_TITLE,
       description = SITE_DESCRIPTION
     } = this.props;
 
     return <Meta title={title} description={description} />;
-  };
+  }
 
   render() {
     const {
@@ -49,19 +51,11 @@ export class BasicLayout extends PureComponent<TBasicLayoutProps> {
       simpleMenu
     } = this.props;
 
-    if (isLoading) {
-      return (
-        <>
-          {this.getMeta()}
-
-          The site is loading
-        </>
-      );
-    }
-
     return (
-      <>
-        {this.getMeta()}
+      <div className={styles.basicLayout}>
+        {this.metaData}
+
+        {isLoading && <></>}
 
         <OffCanvas isMenuOpen={isMenuOpen} setMenuState={onSetMenuState} menuItems={primaryMenu} />
 
@@ -76,11 +70,9 @@ export class BasicLayout extends PureComponent<TBasicLayoutProps> {
             {children}
           </PrimaryMain>
 
-          <FooterContainer />
+          <PrimaryFooter />
         </PushWrapper>
-      </>
+      </div>
     );
   }
 }
-
-export default BasicLayout;

@@ -4,7 +4,8 @@ import { EIconType, TIconProps } from '@jpp/atoms/Icon/utils/types';
 import IconComponents from '@jpp/atoms/Icon/utils/inline';
 import IconUrls from '@jpp/atoms/Icon/utils/external';
 
-const Icon = (type: EIconType) => ({ className, inline, ...rest }: TIconProps): JSX.Element => {
+const Icon = (type: EIconType) => (
+  { className, inline, ...rest }: TIconProps): JSX.Element => {
 
   const classes = classNames('Icon', className);
 
@@ -12,13 +13,13 @@ const Icon = (type: EIconType) => ({ className, inline, ...rest }: TIconProps): 
     const Component = IconComponents[type];
 
     return (
-      <Component className={classes}/>
+      <Component className={classes} />
     );
   }
 
   return (
     // @ts-ignore
-    <img src={IconUrls[type]} className={classes} {...rest} />
+    <img src={IconUrls[type]} alt="Devesaurus Icon" className={classes} {...rest} />
   );
 };
 

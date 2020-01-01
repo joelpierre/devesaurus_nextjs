@@ -1,7 +1,7 @@
-import * as actions from './constants';
-import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
 import { TReduxError } from '@jpp/typings/index';
+import * as actions from './constants';
+import { updateObject } from '../../utils';
 
 export interface IPostStoreState {
   id: number;
@@ -15,13 +15,13 @@ export interface IPostStoreState {
   yoast: Core.IYoastMeta;
   categories: Core.ITaxonomyTerm[];
   tags: Core.ITaxonomyTerm[];
-  acf: Core.IAcfComponentCore;
+  acf: Core.IAcfCore;
   error?: TReduxError;
 }
 
 const initialState = {
   yoast: {} as Core.IYoastMeta,
-  acf: {} as Core.IAcfComponentCore,
+  acf: {} as Core.IAcfCore,
   categories: [] as Core.ITaxonomyTerm[],
   tags: [] as Core.ITaxonomyTerm[]
 };

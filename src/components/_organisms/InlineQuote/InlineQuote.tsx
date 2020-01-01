@@ -2,26 +2,24 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import styles from './InlineQuote.scss';
-import withAcfComponent from '../../../hoc/withAcfComponent';
 import Section from '@jpp/components/_shared/Grid/Section/Section';
 import Container from '@jpp/components/_shared/Grid/Container/Container';
 import Row from '@jpp/components/_shared/Grid/Row/Row';
 import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
-import { ETheme } from '@jpp/typings/enums';
 
-type TInlineQuote = Core.IAcfComponentCore;
+type TInlineQuote = Core.IAcfComponent;
 
-const InlineQuote: FunctionComponent<TInlineQuote> = (
+export const InlineQuote: FunctionComponent<TInlineQuote> = (
   {
-    component = {},
-    page_theme = ETheme.TintAlpha
+    theme,
+    page_theme
   }
 ) => {
   return (
     <Section
       data-test="component-inline-quote"
       className={classNames([
-        `theme--${component.theme ? component.theme : page_theme}`,
+        `theme--${theme ? theme : page_theme}`,
         styles['inline-quote']
       ])}
     >
@@ -35,5 +33,3 @@ const InlineQuote: FunctionComponent<TInlineQuote> = (
     </Section>
   );
 };
-
-export default withAcfComponent(InlineQuote);

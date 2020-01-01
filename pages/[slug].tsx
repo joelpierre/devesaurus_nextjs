@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
+import { AcfComponents } from '@jpp/components/_shared/AcfComponents/AcfComponents';
+import { PageHandler } from '../src/utils/PageHandler/PageHandler';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 
-import ErrorPage from './_error';
 import { clearPage, getPage } from '../src/store/rootActions';
 import { IReduxState } from '../src/store/createStore';
 import { IPageStoreState } from '../src/store/page/reducer';
-import { APP_TITLE, SITE_DESCRIPTION } from '../src/utils/constants';
-import CoreLayoutContainer from '../src/containers/CoreLayoutContainer';
 
 interface IDefaultPageProps {
   slug: string;
@@ -24,9 +23,9 @@ interface IDispatchDefaultPageProps {
   onGetPage: (slug: string) => void;
 }
 
-type TDefaultPageProps = IDefaultPageProps & IStoreDefaultPageProps & IDispatchDefaultPageProps;
+export type TDefaultPage = IDefaultPageProps & IStoreDefaultPageProps & IDispatchDefaultPageProps;
 
-export class DefaultPage extends PureComponent<TDefaultPageProps> {
+class DefaultPage extends PureComponent<TDefaultPage> {
   static async getInitialProps({ query: { slug }, store, res }: TTemplateInitialProps) {
     if (slug) {
       await store.dispatch(getPage(slug));
@@ -36,22 +35,16 @@ export class DefaultPage extends PureComponent<TDefaultPageProps> {
 
     if (page.error) {
       res.statusCode = page.error.code;
-      return {
-        error: page.error
-      };
+
+      return { error: page.error };
     }
 
-    return {
-      slug
-    };
+    return { slug };
   }
 
   async componentDidMount(): Promise<void> {
-    const { onGetPage, slug, page } = this.props;
-
-    if (Object.keys(page).length === 0) {
-      await onGetPage(slug);
-    }
+    const { onGetPage, slug } = this.props;
+    await onGetPage(slug);
   }
 
   async componentWillUnmount(): Promise<void> {
@@ -60,21 +53,12 @@ export class DefaultPage extends PureComponent<TDefaultPageProps> {
   }
 
   render() {
-    const { page, error } = this.props;
-    const { yoast } = page;
-    const title = yoast && yoast.yoast_wpseo_title || page.title || APP_TITLE;
-    const description = yoast && yoast.yoast_wpseo_metadesc || SITE_DESCRIPTION;
-
-    if (error) {
-      return (<ErrorPage {...error} />);
-    }
+    const { page } = this.props;
 
     return (
-      <CoreLayoutContainer title={title} description={description}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur assumenda ea, natus, nesciunt obcaecati
-        perspiciatis praesentium provident quia saepe tempore vero? Commodi est expedita ipsum iure nisi nostrum
-        voluptas.
-      </CoreLayoutContainer>
+      <PageHandler {...this.props}>
+        {page && page.acf && <AcfComponents components={page.acf.components} page_theme={page.acf.page_theme} />}
+      </PageHandler>
     );
   }
 }

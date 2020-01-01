@@ -4,7 +4,7 @@ import {
   PrimaryFooter
 } from '@jpp/components/_shared/PrimaryFooter/PrimaryFooter';
 import { connect } from 'react-redux';
-import { IReduxState } from '../store/createStore';
+import { IReduxState } from '../../../store/createStore';
 
 const mapStateToProps = (
   {

@@ -47,5 +47,3 @@ export class PrimaryFooter extends PureComponent<TPrimaryFooterProps> {
     );
   }
 }
-
-export default PrimaryFooter;

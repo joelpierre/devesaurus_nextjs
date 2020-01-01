@@ -1,18 +1,16 @@
-import React, { PureComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 interface IPrimaryMainProps {
   className?: string;
 }
 
-export class PrimaryMain extends PureComponent<IPrimaryMainProps> {
-  render() {
-    return (
-      <main className={classNames(this.props.className)}>
-        {this.props.children}
-      </main>
-    );
-  }
-}
-
-export default PrimaryMain;
+export const PrimaryMain: FunctionComponent<IPrimaryMainProps> = (
+  { className, children }
+) => {
+  return (
+    <main className={classNames(className)}>
+      {children}
+    </main>
+  );
+};

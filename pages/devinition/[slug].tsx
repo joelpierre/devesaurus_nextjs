@@ -1,12 +1,13 @@
+import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
+import { ELayout } from '@jpp/typings/enums';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
-import CoreLayoutContainer from '../../src/containers/CoreLayoutContainer';
 import { clearWord, getWord } from '../../src/store/word/actions';
 import { IReduxState } from '../../src/store/createStore';
 import { IWordStoreState } from '../../src/store/word/reducer';
-import ErrorPage from '../_error';
+import { objectHasKeys } from '../../src/utils';
 
 interface IDevinitionPageProps {
   error: TReduxError;
@@ -48,7 +49,7 @@ export class DevinitionPage extends PureComponent<TDevinitionPageProps> {
   async componentDidMount(): Promise<void> {
     const { onGetWord, slug, word } = this.props;
 
-    if (Object.keys(word).length === 0) {
+    if (objectHasKeys(word)) {
       await onGetWord(slug);
     }
   }
@@ -59,23 +60,18 @@ export class DevinitionPage extends PureComponent<TDevinitionPageProps> {
   }
 
   render() {
-    const { error, word } = this.props;
-    const { yoast } = word;
-    // const { page_theme, components } = acf;
-    const title = yoast.yoast_wpseo_title || word.title;
-    const description = yoast.yoast_wpseo_metadesc;
-
-    if (error) {
-      return (<ErrorPage {...error} />);
-    }
+    const { word } = this.props;
+    const { yoast, title } = word;
 
     return (
-      <CoreLayoutContainer
-        title={title}
-        description={description}
+      <PageHandler
+        layout={ELayout.Basic}
+        title={yoast.yoast_wpseo_title || title}
+        description={yoast.yoast_wpseo_metadesc}
+        {...this.props}
       >
         this is the {word.title} page
-      </CoreLayoutContainer>
+      </PageHandler>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import SimpleMenu from '@jpp/organisms/SimpleMenu/SimpleMenu';
+import { SimpleMenu } from '@jpp/organisms/SimpleMenu/SimpleMenu';
 
 import styles from './SimpleHeader.scss';
 import Hamburger from '@jpp/atoms/Hamburger/Hamburger';
@@ -12,7 +12,6 @@ interface ISimpleHeaderProps {
 }
 
 export class SimpleHeader extends PureComponent<ISimpleHeaderProps> {
-
   handleSetMenuState = (): void => {
     const { isMenuOpen, setMenuState } = this.props;
     setMenuState(!isMenuOpen);

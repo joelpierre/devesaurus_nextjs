@@ -1,26 +1,28 @@
-import React, { FunctionComponent } from 'react';
-import classNames from 'classnames';
+import Container from '@jpp/components/_shared/Grid/Container/Container';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
 
 import Section from '@jpp/components/_shared/Grid/Section/Section';
-import Container from '@jpp/components/_shared/Grid/Container/Container';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 import Heading from '@jpp/components/_shared/Heading/Heading';
 import Button from '@jpp/molecules/Buttons/Button';
+import { ETheme } from '@jpp/typings/enums';
+import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 
 import styles from './PressPack.scss';
-import { ETheme } from '@jpp/typings/enums';
 
-type TPressPack = Core.IAcfComponentCore;
+type TPressPack = Core.IAcfComponent;
 
-const PressPack: FunctionComponent<TPressPack> = (
+export const PressPack: FunctionComponent<TPressPack> = (
   {
-    component = {},
-    page_theme = ETheme.TintAlpha,
-    className
+    className,
+    heading,
+    copy,
+    brand_zip_file,
+    image,
+    theme
   }
 ) => {
-  const { heading, copy, brand_zip_file, image, theme } = component;
   const {
     url: { source_url: ZIP_URL }
   } = brand_zip_file;
@@ -36,7 +38,7 @@ const PressPack: FunctionComponent<TPressPack> = (
   return (
     <Section
       data-test="component-press-pack"
-      theme={theme ? theme : page_theme}
+      theme={theme ? theme : ETheme.Brand}
       className={classNames(styles.pressPack, className)}
     >
       <Container fluid={false}>

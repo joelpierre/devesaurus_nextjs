@@ -1,20 +1,19 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import styles from './ImageBlock.scss';
 import Section from '@jpp/components/_shared/Grid/Section/Section';
 import Container from '@jpp/components/_shared/Grid/Container/Container';
 import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 import Row from '@jpp/components/_shared/Grid/Row/Row';
-import withAcfComponent from '../../../hoc/withAcfComponent';
-import { ETheme } from '@jpp/typings/enums';
 
-type TImageBlock = Core.IAcfComponentCore;
+import styles from './ImageBlock.scss';
 
-const ImageBlock: FunctionComponent<TImageBlock> = (
+type TImageBlock = Core.IAcfComponent;
+
+export const ImageBlock: FunctionComponent<TImageBlock> = (
   {
-    component = {},
-    page_theme = ETheme.TintAlpha,
+    theme,
+    page_theme,
     className
   }
 ) => {
@@ -23,7 +22,7 @@ const ImageBlock: FunctionComponent<TImageBlock> = (
       data-test="component-"
       className={classNames([
         className,
-        `theme--${component.theme ? component.theme : page_theme}`,
+        `theme--${theme ? theme : page_theme}`,
         styles.imageBlock
       ])}
     >
@@ -35,5 +34,3 @@ const ImageBlock: FunctionComponent<TImageBlock> = (
     </Section>
   );
 };
-
-export default withAcfComponent(ImageBlock);

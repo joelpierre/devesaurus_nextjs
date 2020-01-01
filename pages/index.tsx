@@ -3,30 +3,25 @@ import { connect } from 'react-redux';
 
 import { TTemplateInitialProps } from '@jpp/typings/index';
 import { AcfComponents } from '@jpp/components/_shared/AcfComponents/AcfComponents';
+import { ELayout } from '@jpp/typings/enums';
 
 import { clearPage, getPage } from '../src/store/page/actions';
+import { PageHandler } from '../src/utils/PageHandler/PageHandler';
 import { IReduxState } from '../src/store/createStore';
 import { IPageStoreState } from '../src/store/page/reducer';
 
-import ErrorPage from './_error';
-import BasicLayoutContainer from '../src/containers/BasicLayoutContainer';
-
-export class HomePage extends PureComponent<TTemplateInitialProps> {
+class HomePage extends PureComponent<TTemplateInitialProps> {
   static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
     await store.dispatch(getPage('home'));
     const page: IPageStoreState = store.getState().page;
 
     if (page.error) {
       res.statusCode = page.error.code;
-      return {
-        error: page.error
-      };
+
+      return { error: page.error };
     }
 
-    return {
-      isServer,
-      slug: 'home'
-    };
+    return { slug: 'home' };
   }
 
   async componentDidMount(): Promise<void> {
@@ -40,27 +35,12 @@ export class HomePage extends PureComponent<TTemplateInitialProps> {
   }
 
   render() {
-    const { page, error } = this.props;
-    const { yoast = {}, acf = {} } = page;
-    const { page_theme, components } = acf;
-    const title = yoast.yoast_wpseo_title || page.title;
-    const description = yoast.yoast_wpseo_metadesc;
-
-    if (error) {
-      return (<ErrorPage {...this.props.error} />);
-    }
+    const { page } = this.props;
 
     return (
-      <BasicLayoutContainer
-        title={title}
-        description={description}
-      >
-        {components && components.map(
-          (component: Core.IAcfComponent, index: number) => (
-            <AcfComponents component={component} page_theme={page_theme} key={index} />
-          )
-        )}
-      </BasicLayoutContainer>
+      <PageHandler layout={ELayout.Basic} {...this.props}>
+        {page && page.acf && <AcfComponents components={page.acf.components} page_theme={page.acf.page_theme} />}
+      </PageHandler>
     );
   }
 }

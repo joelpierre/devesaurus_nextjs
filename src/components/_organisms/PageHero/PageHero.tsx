@@ -1,31 +1,34 @@
-import React, { FunctionComponent } from 'react';
+import Container from '@jpp/components/_shared/Grid/Container/Container';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
+import Section from '@jpp/components/_shared/Grid/Section/Section';
+import Heading from '@jpp/components/_shared/Heading/Heading';
+import { ImageScroller } from '@jpp/organisms/ImageScroller/ImageScroller';
+import { ETheme } from '@jpp/typings/enums';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 import { BannerLayer } from 'react-scroll-parallax/cjs';
-import withAcfComponent from '../../../hoc/withAcfComponent';
 
 import styles from './PageHero.scss';
-import Section from '@jpp/components/_shared/Grid/Section/Section';
-import { ImageScroller } from '@jpp/organisms/ImageScroller/ImageScroller';
-import Container from '@jpp/components/_shared/Grid/Container/Container';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
-import Heading from '@jpp/components/_shared/Heading/Heading';
 
 interface IPageHeroProps {
   image?: string;
 }
 
-type TPageHero = IPageHeroProps & Core.IAcfComponentCore;
+type TPageHero = IPageHeroProps & Partial<Core.IAcfComponent>;
 
-const PageHero: FunctionComponent<TPageHero> = (
+export const PageHero: FunctionComponent<TPageHero> = (
   {
-    component = {},
-    page_theme = 'brand',
+    heading,
+    subheading,
+    copy,
+    theme: _theme,
     className,
     image
   }
 ) => {
   let imageObj: Partial<BannerLayer> = {};
+  const theme = _theme ? _theme : ETheme.Brand;
 
   if (image) {
     imageObj = {
@@ -33,14 +36,12 @@ const PageHero: FunctionComponent<TPageHero> = (
     };
   }
 
-  const { heading, subheading, copy, theme } = component;
-
   return (
     <Section
-      theme={theme ? theme : page_theme}
+      theme={theme}
       className={classNames(styles.pageHero, className)}
     >
-      <ImageScroller className={styles.pageHeroImage} image={imageObj} page_theme={page_theme}/>
+      <ImageScroller className={styles.pageHeroImage} image={imageObj} page_theme={theme}/>
 
       <Container fluid={false} className={styles.pageHeroContent}>
         <Row>
@@ -72,5 +73,3 @@ const PageHero: FunctionComponent<TPageHero> = (
     </Section>
   );
 };
-
-export default withAcfComponent(PageHero);

@@ -84,5 +84,3 @@ export const Meta: FunctionComponent<IMetaProps> = (
     </Head>
   );
 };
-
-export default Meta;

@@ -34,7 +34,7 @@ const Button: FunctionComponent<IButtonProps> = (
     children,
     link,
     className,
-    as,
+    as = '/[slug].tsx',
     type,
     onClick,
     icon,
@@ -72,7 +72,7 @@ const Button: FunctionComponent<IButtonProps> = (
         )}
         {icon && (
           <span className={styles.btnIconWrapper}>
-            <FontAwesomeIcon icon={[icon.weight, icon.name]}/>
+            <FontAwesomeIcon icon={[icon.weight, icon.name]} />
           </span>
         )}
       </span>

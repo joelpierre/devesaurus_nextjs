@@ -1,14 +1,14 @@
+import { PageHandler } from '../../../src/utils/PageHandler/PageHandler';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { getCategories } from '../../../src/store/rootActions';
 import { IReduxState } from '../../../src/store/createStore';
+import { arrayHasLength } from '../../../src/utils';
 
-import ErrorPage from '../../_error';
 import { TCategoryStoreState } from '../../../src/store/categories/reducer';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TPostsStoreState } from '../../../src/store/posts/reducer';
-import CoreLayoutContainer from '../../../src/containers/CoreLayoutContainer';
 
 interface IDevinitionsCategoriesPage {
   error: TReduxError;
@@ -45,31 +45,24 @@ export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategor
   async componentDidMount(): Promise<void> {
     const { onGetCategories, categories } = this.props;
 
-    if (Array.isArray(categories) && categories.length === 0) {
+    if (arrayHasLength(categories)) {
       await onGetCategories();
     }
   }
 
   render() {
-    const { error } = this.props;
-    const title = 'Devinition Categories';
-    const description = 'Long description for meta data';
-
-    if (error) {
-      return (<ErrorPage {...error} />);
-    }
-
     return (
-      <CoreLayoutContainer
-        title={title}
-        description={description}
+      <PageHandler
+        title="Devinition Categories"
+        description="Long description for meta data"
+        {...this.props}
       >
         DEVINITION CATEGORIES PAGE
 
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto corporis cum molestiae nisi officia
         perferendis quam reprehenderit similique vitae! Assumenda dolore eveniet fuga fugit natus, quas quibusdam
         quisquam tempora.
-      </CoreLayoutContainer>
+      </PageHandler>
     );
   }
 }

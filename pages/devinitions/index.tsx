@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
+import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
+import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+
 import { getWords } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
+import { arrayHasLength } from '../../src/utils';
 
-import ErrorPage from '../_error';
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TWordsStoreState } from '../../src/store/words/reducer';
-import CoreLayoutContainer from '../../src/containers/CoreLayoutContainer';
 
 interface IDevinitionsPage {
   error: TReduxError;
@@ -26,7 +27,7 @@ type TDevinitionsPage =
   & IStoreDevinitionsPageProps
   & IDispatchDevinitionsPageProps;
 
-export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
+class DevinitionsPage extends PureComponent<TDevinitionsPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getWords());
     const words: TWordsStoreState = store.getState().words;
@@ -44,31 +45,24 @@ export class DevinitionsPage extends PureComponent<TDevinitionsPage> {
   async componentDidMount(): Promise<void> {
     const { words, onGetWords } = this.props;
 
-    if (Array.isArray(words) && words.length === 0) {
+    if (!arrayHasLength(words)) {
       await onGetWords();
     }
   }
 
   render() {
-    const { error } = this.props;
-    const title = 'Devinitions';
-    const description = 'Long description for meta data';
-
-    if (error) {
-      return (<ErrorPage {...error} />);
-    }
-
     return (
-      <CoreLayoutContainer
-        title={title}
-        description={description}
+      <PageHandler
+        title="Devinitions"
+        description="Long description for meta data"
+        {...this.props}
       >
         DEVINITIONS PAGE
 
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto corporis cum molestiae nisi officia
         perferendis quam reprehenderit similique vitae! Assumenda dolore eveniet fuga fugit natus, quas quibusdam
         quisquam tempora.
-      </CoreLayoutContainer>
+      </PageHandler>
     );
   }
 }

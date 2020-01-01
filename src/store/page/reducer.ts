@@ -13,13 +13,13 @@ export interface IPageStoreState {
   content: string;
   author: string;
   yoast: Core.IYoastMeta;
-  acf: Core.IAcfComponentCore;
+  acf: Core.IAcfCore;
   error?: TReduxError;
 }
 
 const initialState = {
   yoast: {} as Core.IYoastMeta,
-  acf: {} as Core.IAcfComponentCore
+  acf: {} as Core.IAcfCore
 };
 
 const pageReducer = (

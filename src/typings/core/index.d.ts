@@ -14,6 +14,8 @@ declare namespace Core {
     'tint-omega' |
     'gradient-brand' | ETheme;
 
+  export type TLayout = 'core' | 'basic';
+
   export type TMimeType = 'image/png' | string;
 
   export type TTag = 'div' | 'section' | 'aside' | 'article' | 'span' | 'nav';
@@ -196,7 +198,7 @@ declare namespace Core {
      *
      *
      **/
-    component: Partial<IAcfComponentCore>[];
+    components: Partial<IAcfComponent>[];
   }
 
   export interface IAcfComponentCore {
@@ -209,7 +211,7 @@ declare namespace Core {
      *
      *
      **/
-    component: Partial<IAcfComponent>;
+    components: Partial<IAcfComponent>[];
     /**
      *
      *
@@ -218,6 +220,16 @@ declare namespace Core {
   }
 
   export interface IAcfComponent {
+    /**
+     *
+     *
+     */
+    className: string;
+    /**
+     *
+     *
+     */
+    page_theme: TTheme;
     /**
      *
      *

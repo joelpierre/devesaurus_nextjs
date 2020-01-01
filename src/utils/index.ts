@@ -14,6 +14,20 @@ export const updateObject = <T>(oldObject: T, updatedValues: Partial<T>): T => {
 };
 
 /**
+ * Has object got keys
+ */
+export const objectHasKeys = <T>(object: T): boolean => {
+  return Object.keys(object).length === 0;
+};
+
+/**
+ * Has array got length
+ */
+export const arrayHasLength = <T>(array: T): boolean => {
+  return Array.isArray(array) && array.length > 0;
+};
+
+/**
  * Update any Array passed through
  */
 export const updateArray = <T>(oldArray: T[], updatedValues: T[]): T[] => {

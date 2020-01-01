@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import SocialMenuContainer from '../../../containers/SocialMenuContainer';
+import SocialMenu from '@jpp/organisms/SocialMenu';
 
 import styles from './OffCanvasFooter.scss';
 
@@ -11,7 +11,7 @@ interface IOffCanvasFooter {
 const OffCanvasFooter: FunctionComponent<IOffCanvasFooter> = ({ className }) => {
   return (
     <footer className={classNames(styles.offCanvasFooter, className)}>
-      <SocialMenuContainer className={styles.offCanvasFooterSocial}/>
+      <SocialMenu className={styles.offCanvasFooterSocial} />
     </footer>
   );
 };

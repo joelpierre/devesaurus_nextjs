@@ -2,11 +2,13 @@ import React, { PureComponent } from 'react';
 import Link from 'next/link';
 import { connect } from 'react-redux';
 
+import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
+import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { ELayout } from '@jpp/typings/enums';
 import { clearPost, getPost } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { IPostStoreState } from '../../src/store/post/reducer';
-import ErrorPage from '../_error';
+import { objectHasKeys } from '../../src/utils';
 
 interface IDevegramPageProps {
   error: TReduxError;
@@ -24,7 +26,7 @@ interface IDispatchDevegramPageProps {
 
 type TDevegramPageProps = IDevegramPageProps & IStoreDevegramPageProps & IDispatchDevegramPageProps;
 
-export class DevegramPage extends PureComponent<TDevegramPageProps> {
+class DevegramPage extends PureComponent<TDevegramPageProps> {
   static async getInitialProps({ query: { slug }, store, res }: TTemplateInitialProps) {
     if (slug) {
       await store.dispatch(getPost(slug));
@@ -35,20 +37,16 @@ export class DevegramPage extends PureComponent<TDevegramPageProps> {
     if (post.error) {
       res.statusCode = post.error.code;
 
-      return {
-        error: post.error
-      };
+      return { error: post.error };
     }
 
-    return {
-      slug
-    };
+    return { slug };
   }
 
   async componentDidMount(): Promise<void> {
     const { onGetPost, slug, post } = this.props;
 
-    if (Object.keys(post).length === 0) {
+    if (objectHasKeys(post)) {
       await onGetPost(slug);
     }
   }
@@ -59,33 +57,37 @@ export class DevegramPage extends PureComponent<TDevegramPageProps> {
   }
 
   render() {
-    if (this.props.error) {
-      return (<ErrorPage {...this.props.error} />);
-    }
+    const { post } = this.props;
+    const { yoast, title } = post;
 
     return (
-      <>
-        This is the {this.props.post.title} page.
-        <br/>
-        <br/>
+      <PageHandler
+        layout={ELayout.Basic}
+        title={yoast.yoast_wpseo_title || title}
+        description={yoast.yoast_wpseo_metadesc}
+        {...this.props}
+      >
+        This is the {title} page.
+        <br />
+        <br />
         <Link href="/[slug]" as="/about">
           <a>
             Go to page example
           </a>
         </Link>
-        <br/><br/>
+        <br /><br />
         <Link href="/[slug]" as="/contact">
           <a>
             Go to contact page example
           </a>
         </Link>
-        <br/><br/>
+        <br /><br />
         <Link href="/devinitions/[slug]" as="/devinitions/visual-design">
           <a>
             Go to word example
           </a>
         </Link>
-      </>
+      </PageHandler>
     );
   }
 }

@@ -1,32 +1,31 @@
-import React, { FunctionComponent } from 'react';
-import classNames from 'classnames';
-import RenderChildren from 'src/components/_utils/RenderChildren/RenderChildren';
-
-import styles from './TextBlock.scss';
-import withAcfComponent from '../../../hoc/withAcfComponent';
+import Container from '@jpp/components/_shared/Grid/Container/Container';
+import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import Row from '@jpp/components/_shared/Grid/Row/Row';
 import Section from '@jpp/components/_shared/Grid/Section/Section';
 import WYSIWYG from '@jpp/components/_shared/WYSIWYG/WYSIWYG';
-import Container from '@jpp/components/_shared/Grid/Container/Container';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
-import { EPosition, ETheme } from '@jpp/typings/enums';
+import { EPosition } from '@jpp/typings/enums';
+import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 
-type TTextBlock = Core.IAcfComponentCore;
+import styles from './TextBlock.scss';
 
-const TextBlock: FunctionComponent<TTextBlock> = (
+type TTextBlock = Core.IAcfComponent;
+
+export const TextBlock: FunctionComponent<TTextBlock> = (
   {
-    component = {},
-    page_theme = ETheme.TintAlpha
+    text_content,
+    theme,
+    page_theme,
+    fixed = false,
+    position
   }
 ) => {
-  const { text_content, theme, fixed = false, position } = component;
-
   const getContent = () => {
     return fixed ? (
       <Container fluid={false}>
         <Row>
           <Flex className={styles.textBlockContent} colLg={8}>
-            <WYSIWYG dangerouslySetInnerHTML={{ __html: text_content! }}/>
+            <WYSIWYG dangerouslySetInnerHTML={{ __html: text_content! }} />
           </Flex>
         </Row>
       </Container>
@@ -34,7 +33,7 @@ const TextBlock: FunctionComponent<TTextBlock> = (
       <Container>
         <Row>
           <Flex className={styles.textBlockContent}>
-            <WYSIWYG dangerouslySetInnerHTML={{ __html: text_content! }}/>
+            <WYSIWYG dangerouslySetInnerHTML={{ __html: text_content! }} />
           </Flex>
         </Row>
       </Container>
@@ -49,15 +48,8 @@ const TextBlock: FunctionComponent<TTextBlock> = (
         styles['text-block']
       ])}
     >
-      <RenderChildren if={position === EPosition.Left}>
-        {getContent()}
-      </RenderChildren>
-
-      <RenderChildren if={position === EPosition.Center}>
-        {getContent()}
-      </RenderChildren>
+      {position === EPosition.Left && getContent()}
+      {position === EPosition.Center && getContent()}
     </Section>
   );
 };
-
-export default withAcfComponent(TextBlock);
