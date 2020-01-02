@@ -34,7 +34,7 @@ const Button: FunctionComponent<IButtonProps> = (
     children,
     link,
     className,
-    as = '/[slug].tsx',
+    as = '[slug]',
     type,
     onClick,
     icon,
@@ -104,7 +104,7 @@ const Button: FunctionComponent<IButtonProps> = (
     case 'router':
     default:
       button = (
-        <Link href={as!} as={link}>
+        <Link href={as} as={link}>
           <a {...defaultProps}>
             {content}
           </a>

@@ -6,7 +6,6 @@ import { PageHandler } from '../src/utils/PageHandler/PageHandler';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 
 import { clearPage, getPage } from '../src/store/rootActions';
-import { IReduxState } from '../src/store/createStore';
 import { IPageStoreState } from '../src/store/page/reducer';
 
 interface IDefaultPageProps {
@@ -20,7 +19,6 @@ interface IStoreDefaultPageProps {
 
 interface IDispatchDefaultPageProps {
   onClearPage: () => void;
-  onGetPage: (slug: string) => void;
 }
 
 export type TDefaultPage = IDefaultPageProps & IStoreDefaultPageProps & IDispatchDefaultPageProps;
@@ -35,41 +33,30 @@ class DefaultPage extends PureComponent<TDefaultPage> {
 
     if (page.error) {
       res.statusCode = page.error.code;
-
       return { error: page.error };
     }
 
-    return { slug };
+    return { slug, page };
   }
 
-  async componentDidMount(): Promise<void> {
-    const { onGetPage, slug } = this.props;
-    await onGetPage(slug);
-  }
-
-  async componentWillUnmount(): Promise<void> {
+  componentWillUnmount(): void {
     const { onClearPage } = this.props;
-    await onClearPage();
+    onClearPage();
   }
 
   render() {
-    const { page } = this.props;
+    const { page: { acf } } = this.props;
 
     return (
       <PageHandler {...this.props}>
-        {page && page.acf && <AcfComponents components={page.acf.components} page_theme={page.acf.page_theme} />}
+        {acf && <AcfComponents components={acf.components} page_theme={acf.page_theme} />}
       </PageHandler>
     );
   }
 }
 
-const mapStateToProps = ({ page }: IReduxState) => ({
-  page
-});
-
 const mapDispatchToProps = {
-  onGetPage: (slug: string) => getPage(slug),
   onClearPage: () => clearPage()
 };
 
-export default connect<IStoreDefaultPageProps, IDispatchDefaultPageProps, IDefaultPageProps>(mapStateToProps, mapDispatchToProps)(DefaultPage);
+export default connect<IStoreDefaultPageProps, IDispatchDefaultPageProps, IDefaultPageProps>(null, mapDispatchToProps)(DefaultPage);

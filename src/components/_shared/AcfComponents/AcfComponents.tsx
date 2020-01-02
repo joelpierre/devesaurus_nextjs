@@ -1,11 +1,10 @@
+import React, { ComponentType, PureComponent } from 'react';
 import { ImageBlock } from '@jpp/organisms/ImageBlock/ImageBlock';
 import { ImageScroller } from '@jpp/organisms/ImageScroller/ImageScroller';
 import { PageHero } from '@jpp/organisms/PageHero/PageHero';
-import PressPack from '@jpp/organisms/PressPack/PressPack';
+import { PressPack } from '@jpp/organisms/PressPack/PressPack';
 import { Testimonials } from '@jpp/organisms/Testimonials/Testimonials';
 import { TextBlock } from '@jpp/organisms/TextBlock/TextBlock';
-import React, { ComponentType, PureComponent } from 'react';
-
 import { InlineQuote } from '@jpp/organisms/InlineQuote/InlineQuote';
 import { HeroSplash } from '@jpp/organisms/HeroSplash/HeroSplash';
 import { CtaBanner } from '@jpp/organisms/CtaBanner/CtaBanner';
@@ -39,7 +38,7 @@ const ACF_COMPONENT_MAP: IAcfComponentMap = {
 };
 
 export class AcfComponents extends PureComponent<Core.IAcfComponentCore> {
-  getComponent(): JSX.Element[] | null {
+  get component(): JSX.Element[] | null {
     const { components, page_theme } = this.props;
 
     return components && components.map((component, index) => {
@@ -52,7 +51,7 @@ export class AcfComponents extends PureComponent<Core.IAcfComponentCore> {
 
       const Component: ComponentType<any> = ACF_COMPONENT_MAP[componentName];
 
-      if (Component === undefined) {
+      if (!Component) {
         return <></>;
       }
 
@@ -66,10 +65,6 @@ export class AcfComponents extends PureComponent<Core.IAcfComponentCore> {
   }
 
   render() {
-    return (
-      <article className="AcfComponent">
-        {this.getComponent()}
-      </article>
-    );
+    return this.component;
   }
 }

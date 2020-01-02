@@ -28,7 +28,7 @@ const Flex: FunctionComponent<Partial<IFlexProps>> = (
   {
     children,
     auto = false,
-    tagElement = 'div',
+    tagElement = 'section',
     className,
     xs,
     sm,

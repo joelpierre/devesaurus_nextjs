@@ -6,7 +6,6 @@ import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 
 import { getPosts } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
-import { arrayHasLength } from '../../src/utils';
 import { TPostsStoreState } from '../../src/store/posts/reducer';
 
 interface IDevegramPage {
@@ -42,11 +41,9 @@ export class DevegramPage extends PureComponent<TDevegramPage> {
   }
 
   async componentDidMount(): Promise<void> {
-    const { posts, onGetPosts } = this.props;
+    const { onGetPosts } = this.props;
 
-    if (!arrayHasLength(posts)) {
-      await onGetPosts();
-    }
+    await onGetPosts();
   }
 
   render() {

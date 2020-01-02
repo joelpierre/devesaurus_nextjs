@@ -79,5 +79,3 @@ export const PressPack: FunctionComponent<TPressPack> = (
     </Section>
   );
 };
-
-export default PressPack;

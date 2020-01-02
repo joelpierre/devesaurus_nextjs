@@ -7,12 +7,14 @@ import Container from '@jpp/components/_shared/Grid/Container/Container';
 import Row from '@jpp/components/_shared/Grid/Row/Row';
 import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 
-type TInlineQuote = Core.IAcfComponent;
+type TInlineQuote = Partial<Core.IAcfComponent>;
 
 export const InlineQuote: FunctionComponent<TInlineQuote> = (
   {
     theme,
-    page_theme
+    page_theme,
+    author,
+    quote
   }
 ) => {
   return (
@@ -26,7 +28,8 @@ export const InlineQuote: FunctionComponent<TInlineQuote> = (
       <Container>
         <Row>
           <Flex className="flex">
-            <blockquote>This is a blockquote</blockquote>
+            <blockquote>{quote}</blockquote>
+            {author && author}
           </Flex>
         </Row>
       </Container>

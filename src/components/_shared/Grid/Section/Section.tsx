@@ -15,7 +15,7 @@ const Section: FunctionComponent<ISection> = (
   {
     children,
     className,
-    tagElement = 'section',
+    tagElement = 'article',
     contrast = false,
     theme,
     ...props

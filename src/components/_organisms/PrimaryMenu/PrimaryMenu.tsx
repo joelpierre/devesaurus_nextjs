@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import MenuItem from '@jpp/atoms/MenuItem/MenuItem';
+import { MenuItem } from '@jpp/atoms/MenuItem/MenuItem';
 
 import styles from './PrimaryMenu.scss';
 

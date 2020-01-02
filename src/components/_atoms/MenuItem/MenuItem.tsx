@@ -22,7 +22,7 @@ export enum EIconPosition {
 
 type TMenuItemProps = IMenuItemProps & Core.IMenuItem;
 
-const MenuItem: FunctionComponent<TMenuItemProps> = (
+export const MenuItem: FunctionComponent<TMenuItemProps> = (
   {
     className,
     linkClassName,
@@ -52,6 +52,9 @@ const MenuItem: FunctionComponent<TMenuItemProps> = (
       case 'categories':
       case 'tags':
         return `devinitions/${slug}`;
+      case 'devinitions':
+      case 'devegram':
+        return `/${slug}`;
       default:
         return '[slug]';
     }
@@ -78,9 +81,11 @@ const MenuItem: FunctionComponent<TMenuItemProps> = (
   };
 
   const getContent = (): JSX.Element => (
-    <div className={classNames(styles.menuItemContent, {
-      [styles.menuItemContentHasIcon]: !!iconName
-    })}>
+    <div
+      className={classNames(styles.menuItemContent, {
+        [styles.menuItemContentHasIcon]: !!iconName
+      })}
+    >
       {!!iconName && (
         <FontAwesomeIcon
           className={iconClasses}
@@ -118,29 +123,20 @@ const MenuItem: FunctionComponent<TMenuItemProps> = (
     );
   };
 
-  const a11yProps = () => {
-    if (onClick) {
-      return {
-        role: 'button'
-      };
-    }
-
-    return {};
-  };
-
   return (
-    // tslint:disable-next-line:react-a11y-event-has-role
-    <li {...a11yProps()} onClick={onClick} className={classNames(
-      styles.menuItem,
-      className,
-      {
-        [styles.menuItemIconLeft]: iconPosition === EIconPosition.Left && !!iconName,
-        [styles.menuItemIconRight]: iconPosition === EIconPosition.Right && !!iconName
-      })}>
+    <li
+      role={!classes.includes('external') && onClick ? 'button' : undefined}
+      onClick={!classes.includes('external') ? onClick : undefined}
+      className={classNames(
+        styles.menuItem,
+        className,
+        {
+          [styles.menuItemIconLeft]: iconPosition === EIconPosition.Left && !!iconName,
+          [styles.menuItemIconRight]: iconPosition === EIconPosition.Right && !!iconName
+        })
+      }
+    >
       {getEl()}
     </li>
   );
-
 };
-
-export default MenuItem;

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { getCategories } from '../../../src/store/rootActions';
 import { IReduxState } from '../../../src/store/createStore';
-import { arrayHasLength } from '../../../src/utils';
 
 import { TCategoryStoreState } from '../../../src/store/categories/reducer';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
@@ -43,11 +42,9 @@ export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategor
   }
 
   async componentDidMount(): Promise<void> {
-    const { onGetCategories, categories } = this.props;
+    const { onGetCategories } = this.props;
 
-    if (arrayHasLength(categories)) {
-      await onGetCategories();
-    }
+    await onGetCategories();
   }
 
   render() {

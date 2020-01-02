@@ -49,6 +49,7 @@ export const CtaBanner: FunctionComponent<TCtaBanner> = (
               <Button
                 caps
                 link={cta_link ? `/${cta_link.post_name}` : `/contact`}
+                as="[slug]"
                 theme={cta_theme}
                 behaviour={'router'}
                 className={styles.ctaBannerButton}

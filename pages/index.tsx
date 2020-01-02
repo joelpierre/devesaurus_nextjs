@@ -1,16 +1,30 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { TTemplateInitialProps } from '@jpp/typings/index';
+import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { AcfComponents } from '@jpp/components/_shared/AcfComponents/AcfComponents';
 import { ELayout } from '@jpp/typings/enums';
 
 import { clearPage, getPage } from '../src/store/page/actions';
 import { PageHandler } from '../src/utils/PageHandler/PageHandler';
-import { IReduxState } from '../src/store/createStore';
 import { IPageStoreState } from '../src/store/page/reducer';
 
-class HomePage extends PureComponent<TTemplateInitialProps> {
+interface IHomePageProps {
+  slug: string;
+  error?: TReduxError;
+}
+
+interface IStoreHomePageProps {
+  page: IPageStoreState;
+}
+
+interface IDispatchHomePageProps {
+  onClearPage: () => void;
+}
+
+type THomePage = IHomePageProps & IStoreHomePageProps & IDispatchHomePageProps;
+
+class HomePage extends PureComponent<THomePage> {
   static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
     await store.dispatch(getPage('home'));
     const page: IPageStoreState = store.getState().page;
@@ -21,37 +35,30 @@ class HomePage extends PureComponent<TTemplateInitialProps> {
       return { error: page.error };
     }
 
-    return { slug: 'home' };
+    return { slug: 'home', page };
   }
 
-  async componentDidMount(): Promise<void> {
-    const { onGetPage, slug } = this.props;
-    await onGetPage(slug);
-  }
-
-  async componentWillUnmount(): Promise<void> {
+  componentWillUnmount(): void {
     const { onClearPage } = this.props;
-    await onClearPage();
+    onClearPage();
   }
 
   render() {
-    const { page } = this.props;
+    const { page: { acf } } = this.props;
 
     return (
       <PageHandler layout={ELayout.Basic} {...this.props}>
-        {page && page.acf && <AcfComponents components={page.acf.components} page_theme={page.acf.page_theme} />}
+        {acf && <AcfComponents components={acf.components} page_theme={acf.page_theme} />}
       </PageHandler>
     );
   }
 }
 
-const mapStateToProps = ({ page }: IReduxState) => ({
-  page
-});
-
 const mapDispatchToProps = {
-  onGetPage: (slug: string) => getPage(slug),
   onClearPage: () => clearPage()
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect<IStoreHomePageProps, IDispatchHomePageProps, IHomePageProps>(
+  null,
+  mapDispatchToProps
+)(HomePage);

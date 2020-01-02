@@ -234,7 +234,27 @@ declare namespace Core {
      *
      *
      */
+    highlight: TTheme;
+    /**
+     *
+     *
+     */
     acf_fc_layout: string;
+    /**
+     *
+     *
+     */
+    content: string;
+    /**
+     *
+     *
+     */
+    author: string;
+    /**
+     *
+     *
+     */
+    quote: string;
     /**
      *
      *

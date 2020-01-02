@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import MenuItem, { EIconPosition } from '@jpp/atoms/MenuItem/MenuItem';
+import { MenuItem, EIconPosition } from '@jpp/atoms/MenuItem/MenuItem';
 
 import styles from './SimpleMenu.scss';
 

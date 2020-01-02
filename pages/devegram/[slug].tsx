@@ -8,7 +8,6 @@ import { ELayout } from '@jpp/typings/enums';
 import { clearPost, getPost } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
 import { IPostStoreState } from '../../src/store/post/reducer';
-import { objectHasKeys } from '../../src/utils';
 
 interface IDevegramPageProps {
   error: TReduxError;
@@ -44,11 +43,8 @@ class DevegramPage extends PureComponent<TDevegramPageProps> {
   }
 
   async componentDidMount(): Promise<void> {
-    const { onGetPost, slug, post } = this.props;
-
-    if (objectHasKeys(post)) {
-      await onGetPost(slug);
-    }
+    const { onGetPost, slug } = this.props;
+    await onGetPost(slug);
   }
 
   async componentWillUnmount(): Promise<void> {

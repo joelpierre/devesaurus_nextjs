@@ -1,12 +1,9 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 
 import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 
 import { getWords } from '../../src/store/rootActions';
-import { IReduxState } from '../../src/store/createStore';
-import { arrayHasLength } from '../../src/utils';
 
 import { TWordsStoreState } from '../../src/store/words/reducer';
 
@@ -39,15 +36,7 @@ class DevinitionsPage extends PureComponent<TDevinitionsPage> {
       };
     }
 
-    return {};
-  }
-
-  async componentDidMount(): Promise<void> {
-    const { words, onGetWords } = this.props;
-
-    if (!arrayHasLength(words)) {
-      await onGetWords();
-    }
+    return { words };
   }
 
   render() {
@@ -67,12 +56,4 @@ class DevinitionsPage extends PureComponent<TDevinitionsPage> {
   }
 }
 
-const mapStateToProps = ({ words }: IReduxState) => ({
-  words
-});
-
-const mapDispatchToProps = {
-  onGetWords: () => getWords()
-};
-
-export default connect<IStoreDevinitionsPageProps, IDispatchDevinitionsPageProps, IDevinitionsPage>(mapStateToProps, mapDispatchToProps)(DevinitionsPage);
+export default DevinitionsPage;

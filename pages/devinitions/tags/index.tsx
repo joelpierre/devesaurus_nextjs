@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { IReduxState } from '../../../src/store/createStore';
-import { arrayHasLength } from '../../../src/utils';
 
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TTagStoreState } from '../../../src/store/tags/reducer';
@@ -44,11 +43,8 @@ class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
   }
 
   async componentDidMount(): Promise<void> {
-    const { onGetTags, tags } = this.props;
-
-    if (!arrayHasLength(tags)) {
-      await onGetTags();
-    }
+    const { onGetTags } = this.props;
+    await onGetTags();
   }
 
   render() {

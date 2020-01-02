@@ -5,16 +5,16 @@ import './WYSIWYG.scss';
 
 interface IWYSIWYGProps {
   className?: string;
-  dangerouslySetInnerHTML?: {
-    __html: string;
-  };
+  content: string;
 }
 
-const WYSIWYG: FunctionComponent<IWYSIWYGProps> = ({
-  className,
-  children,
-  dangerouslySetInnerHTML,
-}) => {
+export const WYSIWYG: FunctionComponent<IWYSIWYGProps> = (
+  {
+    className,
+    children,
+    content
+  }
+) => {
   if (children) {
     return <div className={classNames(className, 'WYSIWYG')}>{children}</div>;
   }
@@ -22,9 +22,7 @@ const WYSIWYG: FunctionComponent<IWYSIWYGProps> = ({
   return (
     <div
       className={classNames(className, 'WYSIWYG')}
-      dangerouslySetInnerHTML={{ ...dangerouslySetInnerHTML! }}
+      dangerouslySetInnerHTML={{ __html: content }}
     />
   );
 };
-
-export default WYSIWYG;
