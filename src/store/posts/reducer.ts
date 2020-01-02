@@ -8,7 +8,7 @@ const initialState = [] as IPostStoreState[];
 
 export type TPostsStoreState = IPostStoreState[] | TReduxError;
 
-const postsReducer = (
+export const postsReducer = (
   state = initialState,
   action: AnyAction
 ): TPostsStoreState => {
@@ -26,5 +26,3 @@ const postsReducer = (
       return state;
   }
 };
-
-export default postsReducer;

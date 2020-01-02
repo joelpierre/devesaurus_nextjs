@@ -28,7 +28,7 @@ export const PageHandler: FunctionComponent<TPageHandler> = (
 
   const defaultProps = {
     title: title || APP_TITLE,
-    description: description || SITE_DESCRIPTION
+    description: `${APP_TITLE} - ${description || SITE_DESCRIPTION}`
   };
 
   if (error) {

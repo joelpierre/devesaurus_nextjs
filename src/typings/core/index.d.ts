@@ -133,7 +133,7 @@ declare namespace Core {
   enum EPosition {
     Left = 'left',
     Right = 'right',
-    Center = ' center'
+    Center = 'center'
   }
 
   enum ETaxonomy {

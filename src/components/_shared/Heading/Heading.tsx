@@ -10,7 +10,7 @@ interface IHeadingProps {
   innerHTML: boolean;
 }
 
-const Heading: FunctionComponent<Partial<IHeadingProps>> = (
+export const Heading: FunctionComponent<Partial<IHeadingProps>> = (
   {
     priority = EPriority.One,
     children,
@@ -34,5 +34,3 @@ const Heading: FunctionComponent<Partial<IHeadingProps>> = (
 
   return <Tag {...defaultProps}>{children}</Tag>;
 };
-
-export default Heading;

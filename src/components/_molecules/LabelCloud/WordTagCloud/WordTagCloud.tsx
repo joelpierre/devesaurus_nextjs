@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import Label from '@jpp/atoms/Label/Label';
+import { Label } from '@jpp/atoms/Label/Label';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { mapTaxonomyIcon, mapTaxonomyTheme } from '../../../../utils';
 

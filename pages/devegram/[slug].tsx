@@ -19,7 +19,6 @@ interface IStoreDevegramPageProps {
 }
 
 interface IDispatchDevegramPageProps {
-  onGetPost: (slug: string) => void;
   onClearPost: () => void;
 }
 
@@ -39,12 +38,7 @@ class DevegramPage extends PureComponent<TDevegramPageProps> {
       return { error: post.error };
     }
 
-    return { slug };
-  }
-
-  async componentDidMount(): Promise<void> {
-    const { onGetPost, slug } = this.props;
-    await onGetPost(slug);
+    return { slug, post };
   }
 
   async componentWillUnmount(): Promise<void> {
@@ -93,7 +87,6 @@ const mapStateToProps = ({ post }: IReduxState) => ({
 });
 
 const mapDispatchToProps = {
-  onGetPost: (slug: string) => getPost(slug),
   onClearPost: () => clearPost()
 };
 

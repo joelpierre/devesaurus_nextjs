@@ -18,7 +18,7 @@ export type TTagStoreState = ITagStoreState[] | TReduxError;
 
 const initialState = [] as ITagStoreState[];
 
-const tagReducer = (
+export const tagReducer = (
   state = initialState,
   action: AnyAction
 ): TTagStoreState => {
@@ -33,5 +33,3 @@ const tagReducer = (
       return state;
   }
 };
-
-export default tagReducer;

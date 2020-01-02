@@ -3,8 +3,8 @@ import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 import Row from '@jpp/components/_shared/Grid/Row/Row';
 
 import Section from '@jpp/components/_shared/Grid/Section/Section';
-import Heading from '@jpp/components/_shared/Heading/Heading';
-import Button from '@jpp/molecules/Buttons/Button';
+import { Heading } from '@jpp/components/_shared/Heading/Heading';
+import { Button } from '@jpp/molecules/Buttons/Button';
 import { ETheme } from '@jpp/typings/enums';
 import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';

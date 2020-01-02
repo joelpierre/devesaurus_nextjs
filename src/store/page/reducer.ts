@@ -22,7 +22,7 @@ const initialState = {
   acf: {} as Core.IAcfCore
 };
 
-const pageReducer = (
+export const pageReducer = (
   state = initialState as IPageStoreState,
   action: AnyAction
 ): IPageStoreState => {
@@ -40,5 +40,3 @@ const pageReducer = (
       return state;
   }
 };
-
-export default pageReducer;

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Label from '@jpp/atoms/Label/Label';
+import { Label } from '@jpp/atoms/Label/Label';
 
 import { mapTaxonomyIcon, mapTaxonomyTheme } from '../../../../utils';
 
@@ -12,7 +12,9 @@ interface ICategoryCloud {
   items?: any[];
 }
 
-const CategoryCloud: FunctionComponent<ICategoryCloud> = ({ className, items }) => (
+const CategoryCloud: FunctionComponent<ICategoryCloud> = (
+  { className, items }
+) => (
   <ul
     data-test="component-category-cloud"
     className={classNames(styles['label-cloud'], className)}

@@ -24,7 +24,7 @@ export interface IButtonProps {
   };
 }
 
-const Button: FunctionComponent<IButtonProps> = (
+export const Button: FunctionComponent<IButtonProps> = (
   {
     behaviour = 'router',
     theme = ETheme.TintAlpha,
@@ -115,5 +115,3 @@ const Button: FunctionComponent<IButtonProps> = (
 
   return button;
 };
-
-export default Button;

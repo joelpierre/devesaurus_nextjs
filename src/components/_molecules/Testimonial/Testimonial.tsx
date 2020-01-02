@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import styles from './Testimonial.scss';
-import Heading from '@jpp/components/_shared/Heading/Heading';
+import { Heading } from '@jpp/components/_shared/Heading/Heading';
 
 interface ITestimonial {
   className?: string;

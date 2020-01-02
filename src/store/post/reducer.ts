@@ -26,7 +26,7 @@ const initialState = {
   tags: [] as Core.ITaxonomyTerm[]
 };
 
-const postReducer = (
+export const postReducer = (
   state = initialState as IPostStoreState,
   action: AnyAction
 ): IPostStoreState => {
@@ -44,5 +44,3 @@ const postReducer = (
       return state;
   }
 };
-
-export default postReducer;

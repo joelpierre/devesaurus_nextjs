@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { SimpleMenu } from '@jpp/organisms/SimpleMenu/SimpleMenu';
+import { Hamburger } from '@jpp/atoms/Hamburger/Hamburger';
 
 import styles from './SimpleHeader.scss';
-import Hamburger from '@jpp/atoms/Hamburger/Hamburger';
 
 interface ISimpleHeaderProps {
   className?: string;
@@ -33,5 +33,3 @@ export class SimpleHeader extends PureComponent<ISimpleHeaderProps> {
     );
   }
 }
-
-export default SimpleHeader;

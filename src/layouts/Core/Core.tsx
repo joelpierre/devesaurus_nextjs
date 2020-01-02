@@ -44,7 +44,8 @@ export class Core extends PureComponent<TCore> {
       isMenuOpen,
       isLoading,
       onSetMenuState,
-      primaryMenu
+      primaryMenu,
+      title
     } = this.props;
 
     return (
@@ -59,6 +60,7 @@ export class Core extends PureComponent<TCore> {
           <PrimaryHeader
             isMenuOpen={isMenuOpen}
             setMenuState={onSetMenuState}
+            title={title}
           />
 
           <PrimaryMain>

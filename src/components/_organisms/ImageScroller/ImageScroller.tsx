@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
 import { BannerLayer, ParallaxBanner } from 'react-scroll-parallax/cjs';
 
-import Heading from '@jpp/components/_shared/Heading/Heading';
+import { Heading } from '@jpp/components/_shared/Heading/Heading';
 import { ESize } from '@jpp/typings/enums';
 
 import styles from './ImageScroller.scss';

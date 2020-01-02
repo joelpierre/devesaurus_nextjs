@@ -8,7 +8,7 @@ const initialState = [];
 
 export type TWordsStoreState = IWordStoreState[] | TReduxError;
 
-const wordsReducer = (
+export const wordsReducer = (
   state = initialState as IWordStoreState[],
   action: AnyAction
 ): TWordsStoreState => {
@@ -26,5 +26,3 @@ const wordsReducer = (
       return state;
   }
 };
-
-export default wordsReducer;

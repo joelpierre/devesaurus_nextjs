@@ -1,3 +1,15 @@
-import { PrimaryHeader } from '@jpp/components/_shared/PrimaryHeader/PrimaryHeader';
+import { connect } from 'react-redux';
+import {
+  IDispatchPrimaryHeaderProps,
+  IPrimaryHeaderProps,
+  PrimaryHeader
+} from '@jpp/components/_shared/PrimaryHeader/PrimaryHeader';
+import { getWordsSearch } from '../../../store/search/words/actions';
 
-export default PrimaryHeader;
+const mapDispatchToProps = {
+  onWordSearch: (searchTerm: string) => getWordsSearch(searchTerm)
+};
+
+export default connect<never, IDispatchPrimaryHeaderProps, IPrimaryHeaderProps>(
+  null, mapDispatchToProps
+)(PrimaryHeader);

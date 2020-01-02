@@ -18,7 +18,7 @@ export type TCategoryStoreState = ICategoryStoreState[] | TReduxError;
 
 const initialState = [] as ICategoryStoreState[];
 
-const categoryReducer = (
+export const categoryReducer = (
   state = initialState,
   action: AnyAction
 ): TCategoryStoreState => {
@@ -33,5 +33,3 @@ const categoryReducer = (
       return state;
   }
 };
-
-export default categoryReducer;

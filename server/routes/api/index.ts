@@ -6,6 +6,7 @@ import menuRoutes from './menus';
 import pageRoutes from './page';
 import postRoutes from './post';
 import postsRoutes from './posts';
+import searchRoutes from './search/index';
 import tagRoutes from './tag';
 import tagsRoutes from './tags';
 import wordRoutes from './word';
@@ -30,5 +31,6 @@ wordRoutes(server, isDev);
 wordCategoriesRoutes(server, isDev);
 wordTagsRoutes(server, isDev);
 wordsRoutes(server, isDev);
+searchRoutes(server, isDev);
 
 export default server;

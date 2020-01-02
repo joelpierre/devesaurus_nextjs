@@ -1,9 +1,46 @@
 .primary-header {
   $root: &;
-  padding: spacing() 0;
+  padding: spacing() spacing(2);
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background-color: white;
+  background-color: $color-brand;
+  background: $color-gradient-brand;
+
+  &__brand-link {
+    margin-right: 0;
+    margin-left: spacing(2);
+  }
+
+  &__brand {
+    width: auto;
+    height: 5rem;
+  }
+
+  &__heading {
+    color: white;
+    margin: 0 auto 0 spacing(2);
+    padding: 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    user-select: none;
+  }
+
+  &__search {
+    margin-left: auto;
+    align-self: center;
+    display: none;
+    position: relative;
+    max-height: 40px;
+    overflow: hidden;
+
+    @include breakpoint(992) {
+      display: inline-flex;
+      width: 100%;
+      max-width: 400px;
+      margin-left: auto;
+    }
+  }
 }

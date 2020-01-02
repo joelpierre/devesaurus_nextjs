@@ -2,12 +2,12 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import Section from '@jpp/components/_shared/Grid/Section/Section';
-
-import styles from './HeroSplash.scss';
 import Container from '@jpp/components/_shared/Grid/Container/Container';
 import Row from '@jpp/components/_shared/Grid/Row/Row';
 import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
 import Icon from '@jpp/atoms/Icon/Icon';
+
+import styles from './HeroSplash.scss';
 
 type THeroSplash = Core.IAcfComponent;
 
@@ -21,7 +21,7 @@ export const HeroSplash: FunctionComponent<THeroSplash> = (
   return (
     <Section
       className={
-        classNames(styles.heroSplash, className, `theme--${theme || page_theme}`)
+        classNames(styles.HeroSplash, className, `theme--${theme || page_theme}`)
       }
     >
       <Container fluid={true}>

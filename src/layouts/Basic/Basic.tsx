@@ -5,7 +5,7 @@ import { Meta } from '@jpp/components/_shared/Meta/Meta';
 import { PushWrapper } from '@jpp/components/_shared/PushWrapper/PushWrapper';
 import { PrimaryMain } from '@jpp/components/_shared/PrimaryMain/PrimaryMain';
 import { OffCanvas } from '@jpp/components/_shared/OffCanvas/OffCanvas';
-import SimpleHeader from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
+import { SimpleHeader } from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
 
 import { APP_TITLE, SITE_DESCRIPTION } from '../../utils/constants';
 

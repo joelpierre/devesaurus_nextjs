@@ -28,7 +28,7 @@ const initialState = {
   word_tags: [] as Core.ITaxonomyTerm[]
 };
 
-const wordReducer = (
+export const wordReducer = (
   state = initialState as IWordStoreState,
   action: AnyAction
 ): IWordStoreState => {
@@ -46,5 +46,3 @@ const wordReducer = (
       return state;
   }
 };
-
-export default wordReducer;

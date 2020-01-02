@@ -8,3 +8,5 @@ export const PROD_FETCH_URL = `${PROD_PROTOCOL}://${PROD_API_URL}`;
 
 export const BETTER_REST_ENDPOINT = 'wp-json/better-rest-endpoints/v1';
 export const WP_V2_ENDPOINT = 'wp-json/wp/v2';
+
+export const ITEMS_PER_REQUEST = 100;

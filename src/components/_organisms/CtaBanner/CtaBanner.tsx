@@ -4,8 +4,8 @@ import Section from '@jpp/components/_shared/Grid/Section/Section';
 import Container from '@jpp/components/_shared/Grid/Container/Container';
 import Row from '@jpp/components/_shared/Grid/Row/Row';
 import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
-import Heading from '@jpp/components/_shared/Heading/Heading';
-import Button from '@jpp/molecules/Buttons/Button';
+import { Heading } from '@jpp/components/_shared/Heading/Heading';
+import { Button } from '@jpp/molecules/Buttons/Button';
 
 import styles from './CtaBanner.scss';
 

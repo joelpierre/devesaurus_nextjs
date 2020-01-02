@@ -44,11 +44,16 @@ class HomePage extends PureComponent<THomePage> {
   }
 
   render() {
-    const { page: { acf } } = this.props;
+    const { page } = this.props;
 
     return (
-      <PageHandler layout={ELayout.Basic} {...this.props}>
-        {acf && <AcfComponents components={acf.components} page_theme={acf.page_theme} />}
+      <PageHandler
+        title={page && page.title || page.yoast && page.yoast.yoast_wpseo_title}
+        description={page && page.yoast && page.yoast.yoast_wpseo_metadesc}
+        layout={ELayout.Basic}
+        {...this.props}
+      >
+        {page && page.acf && <AcfComponents components={page.acf.components} page_theme={page.acf.page_theme} />}
       </PageHandler>
     );
   }

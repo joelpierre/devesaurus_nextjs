@@ -33,7 +33,7 @@ const initialState: ICoreStoreState = {
   initialFetch: false
 };
 
-const coreReducer = (
+export const coreReducer = (
   state: ICoreStoreState = initialState,
   action: AnyAction
 ): ICoreStoreState => {
@@ -68,5 +68,3 @@ const coreReducer = (
       return state;
   }
 };
-
-export default coreReducer;

@@ -28,12 +28,12 @@ import {
   faArrowUp,
   faChartLine,
   faBrowser,
-  faPalette,
-  faSearch
+  faPalette
 } from '@fortawesome/pro-regular-svg-icons';
 import {
   faHeart,
-  faPhone
+  faPhone,
+  faSearch
 } from '@fortawesome/pro-solid-svg-icons';
 import {
   faFacebookSquare,

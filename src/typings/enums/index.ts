@@ -32,7 +32,7 @@ export enum EContrast {
 export enum EPosition {
   Left = 'left',
   Right = 'right',
-  Center = ' center'
+  Center = 'center'
 }
 
 export enum ETaxonomy {

@@ -18,7 +18,7 @@ export type TWordTagStoreState = IWordTagStoreState[] | TReduxError;
 
 const initialState = [] as IWordTagStoreState[];
 
-const wordTagReducer = (
+export const wordTagReducer = (
   state = initialState,
   action: AnyAction
 ): TWordTagStoreState => {
@@ -33,5 +33,3 @@ const wordTagReducer = (
       return state;
   }
 };
-
-export default wordTagReducer;

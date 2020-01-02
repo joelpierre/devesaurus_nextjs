@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as styles from './WordCard.scss';
 import Link from 'next/link';
-import Heading from '@jpp/components/_shared/Heading/Heading';
+import { Heading } from '@jpp/components/_shared/Heading/Heading';
 import { mapTaxonomyIcon, mapTaxonomyTheme } from '../../../utils';
-import Label from '@jpp/atoms/Label/Label';
+import { Label } from '@jpp/atoms/Label/Label';
 
 interface IWordCard {
   title: string;

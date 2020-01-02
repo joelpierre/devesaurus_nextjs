@@ -18,7 +18,7 @@ export type TWordCategoryStoreState = IWordCategoryStoreState[] | TReduxError;
 
 const initialState = [] as IWordCategoryStoreState[];
 
-const wordCategoriesReducer = (
+export const wordCategoriesReducer = (
   state = initialState,
   action: AnyAction
 ): TWordCategoryStoreState => {
@@ -33,5 +33,3 @@ const wordCategoriesReducer = (
       return state;
   }
 };
-
-export default wordCategoriesReducer;

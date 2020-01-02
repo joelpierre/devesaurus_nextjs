@@ -1,4 +1,4 @@
-import React, { FunctionComponent, memo } from 'react';
+import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import styles from './Hamburger.scss';
@@ -13,7 +13,7 @@ interface HamburgerInterface {
   alt?: boolean;
 }
 
-const Hamburger: FunctionComponent<HamburgerInterface> = (
+export const Hamburger: FunctionComponent<HamburgerInterface> = (
   {
     descriptor = 'Menu',
     className,
@@ -60,5 +60,3 @@ const Hamburger: FunctionComponent<HamburgerInterface> = (
     </button>
   );
 };
-
-export default memo(Hamburger);

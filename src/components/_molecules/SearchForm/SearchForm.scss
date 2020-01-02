@@ -1,0 +1,32 @@
+.SearchForm {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+
+  &__icon {
+    margin-left: 0;
+  }
+
+  &__input {
+    height: 3.5rem;
+    padding-right: 5.5rem;
+    border-radius: 25px;
+    border: none;
+  }
+
+  &__btn {
+    position: absolute;
+    top: 50%;
+    transform: $centerY;
+    background-color: transparent !important;
+    color: $color-alpha !important;
+    right: 0;
+    width: 4rem !important;
+    height: 4rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+}

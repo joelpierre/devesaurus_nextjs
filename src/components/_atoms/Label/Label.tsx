@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import styles from './Label.scss';
 
-interface ILabel {
+interface ILabelProps {
   className?: string;
   caps?: boolean;
   size?: Core.TSize;
@@ -14,7 +14,7 @@ interface ILabel {
   as?: string;
 }
 
-const Label: FunctionComponent<ILabel> = (
+export const Label: FunctionComponent<ILabelProps> = (
   { children, link, theme, size, caps, className, as }
 ) => {
 
@@ -33,7 +33,7 @@ const Label: FunctionComponent<ILabel> = (
   if (link && as) {
     return (
       <Link
-        href={as!}
+        href={as}
         as={link}
       >
         <a
@@ -53,5 +53,3 @@ const Label: FunctionComponent<ILabel> = (
     </span>
   );
 };
-
-export default Label;

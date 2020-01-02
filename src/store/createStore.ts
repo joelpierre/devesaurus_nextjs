@@ -6,6 +6,7 @@ import rootReducer from './rootReducer';
 import { ICoreStoreState } from './core/reducer';
 import { IPageStoreState } from './page/reducer';
 import { IPostStoreState } from './post/reducer';
+import { ISearchStoreState } from './search/reducer';
 import { IWordStoreState } from './word/reducer';
 import { TTagStoreState } from './tags/reducer';
 import { TCategoryStoreState } from './categories/reducer';
@@ -26,6 +27,7 @@ export interface IReduxState {
   word: IWordStoreState;
   word_tags: TWordTagStoreState;
   word_categories: TWordCategoryStoreState;
+  search: ISearchStoreState;
 }
 
 export interface IReduxDispatch {
@@ -48,6 +50,8 @@ export interface IReduxDispatch {
   onClearPosts: () => void;
   onClearWord: () => void;
   onClearWords: () => void;
+  onWordSearch: () => void;
+  onPostSearch: () => void;
 }
 
 export type TReduxProps = IReduxState & IReduxDispatch;

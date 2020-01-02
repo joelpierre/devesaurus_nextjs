@@ -1,4 +1,4 @@
-import React, { CSSProperties, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import styles from './Section.scss';
@@ -8,7 +8,6 @@ interface ISection {
   tagElement?: Core.TTag;
   contrast?: boolean;
   theme?: Core.TTheme;
-  style?: CSSProperties;
 }
 
 const Section: FunctionComponent<ISection> = (
@@ -25,8 +24,6 @@ const Section: FunctionComponent<ISection> = (
 
   return (
     <Tag
-      data-test="component-section"
-      data-theme={theme}
       className={classNames(
         className,
         styles.section,
