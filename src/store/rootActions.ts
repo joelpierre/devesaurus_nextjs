@@ -66,3 +66,5 @@ export { getWordTags, getWordTagsFailed, getWordTagsSuccess } from './word_tags/
 export { getWordCategories, getWordCategoriesFailed, getWordCategoriesSuccess } from './word_categories/actions';
 
 export { getWordsSearch, getSearchWordsSuccess, getSearchWordsFailed, clearSearchWords } from './search/words/actions';
+
+export { getPostsSearch, getSearchPostsSuccess, getSearchPostsFailed, clearSearchPosts } from './search/posts/actions';

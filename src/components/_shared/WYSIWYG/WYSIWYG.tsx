@@ -5,23 +5,20 @@ import './WYSIWYG.scss';
 
 interface IWYSIWYGProps {
   className?: string;
+  textCenter?: boolean;
   content: string;
 }
 
 export const WYSIWYG: FunctionComponent<IWYSIWYGProps> = (
   {
     className,
-    children,
+    textCenter = false,
     content
   }
 ) => {
-  if (children) {
-    return <div className={classNames(className, 'WYSIWYG')}>{children}</div>;
-  }
-
   return (
     <div
-      className={classNames(className, 'WYSIWYG')}
+      className={classNames(className, 'WYSIWYG', { 'WYSIWYG--text-center': textCenter })}
       dangerouslySetInnerHTML={{ __html: content }}
     />
   );

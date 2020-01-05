@@ -1,0 +1,54 @@
+.ScrollingMouse {
+  $root: &;
+  width: 26px;
+  border-radius: 25px;
+  height: 43px;
+  border-style: solid;
+  border-width: .2rem;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  overflow: hidden;
+
+  &__theme {
+    @include theme;
+  }
+
+  &__border {
+    @include theme-border;
+  }
+
+  &__scroll-wheel {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    border-radius: 25px;
+    transform: $centerX;
+    width: 2px;
+    height: 8px;
+    animation-name: scroll;
+    animation-duration: 1.5s;
+    animation-timing-function: cubic-bezier(.65, -.55, .25, 1.5);
+    animation-iteration-count: 5;
+    transform-origin: 50% 2.5px;
+    will-change: transform;
+  }
+}
+
+@keyframes scroll {
+  0%,
+  20% {
+    left: 46%;
+    transform: translateY(0) scaleY(1);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(36px) scaleY(2);
+    opacity: .01;
+  }
+}

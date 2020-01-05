@@ -1,7 +1,7 @@
-import Container from '@jpp/components/_shared/Grid/Container/Container';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
-import Section from '@jpp/components/_shared/Grid/Section/Section';
+import { Container } from '@jpp/components/_shared/Grid/Container/Container';
+import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
+import { Section } from '@jpp/components/_shared/Grid/Section/Section';
 import { Heading } from '@jpp/components/_shared/Heading/Heading';
 import { ImageScroller } from '@jpp/organisms/ImageScroller/ImageScroller';
 import { ETheme } from '@jpp/typings/enums';
@@ -41,7 +41,7 @@ export const PageHero: FunctionComponent<TPageHero> = (
       theme={theme}
       className={classNames(styles.pageHero, className)}
     >
-      <ImageScroller className={styles.pageHeroImage} image={imageObj} page_theme={theme}/>
+      <ImageScroller className={styles.pageHeroImage} image={imageObj} page_theme={theme} />
 
       <Container fluid={false} className={styles.pageHeroContent}>
         <Row>

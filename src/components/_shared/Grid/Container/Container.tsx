@@ -3,13 +3,13 @@ import classNames from 'classnames';
 
 import styles from './Container.scss';
 
-interface ContainerInterface {
+interface IContainerProps {
   fluid?: boolean;
   className?: string;
   tagElement?: Core.TTag;
 }
 
-const Container: FunctionComponent<ContainerInterface> = (
+export const Container: FunctionComponent<IContainerProps> = (
   {
     fluid = true,
     children,
@@ -35,5 +35,3 @@ const Container: FunctionComponent<ContainerInterface> = (
     </Tag>
   );
 };
-
-export default Container;

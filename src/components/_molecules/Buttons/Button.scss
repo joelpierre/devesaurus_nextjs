@@ -15,6 +15,7 @@
   font-family: $font-heading;
   letter-spacing: 1px;
   text-align: center;
+  user-select: none;
   transition: background-color $transition-base, color $transition-base;
 
   &__content {
@@ -27,6 +28,9 @@
 
   &__text {
     color: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
 
     &--with-icon {
       margin-right: .8rem;

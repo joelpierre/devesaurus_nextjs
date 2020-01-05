@@ -24,7 +24,7 @@ interface IFlexProps {
   };
 }
 
-const Flex: FunctionComponent<Partial<IFlexProps>> = (
+export const Flex: FunctionComponent<Partial<IFlexProps>> = (
   {
     children,
     auto = false,
@@ -64,7 +64,6 @@ const Flex: FunctionComponent<Partial<IFlexProps>> = (
 
   return (
     <Tag
-      data-test="component-flex"
       {...props}
       className={classNames(className, combinedClasses)}
     >
@@ -72,5 +71,3 @@ const Flex: FunctionComponent<Partial<IFlexProps>> = (
     </Tag>
   );
 };
-
-export default Flex;

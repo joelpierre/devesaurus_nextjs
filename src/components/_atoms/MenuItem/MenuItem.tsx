@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 import { EFontAwesomeType } from '../../../utils/fontAwesome';
+import { getDynamicAs, getDynamicPage } from '../../../utils/index';
 
 import styles from './MenuItem.scss';
 
@@ -47,33 +48,11 @@ export const MenuItem: FunctionComponent<TMenuItemProps> = (
     [styles.menuItemIconRed]: iconName === 'heart'
   });
 
-  const getDynamicPage = (): string => {
-    switch (slug) {
-      case 'categories':
-      case 'tags':
-        return `devinitions/${slug}`;
-      case 'devinitions':
-      case 'devegram':
-        return `/${slug}`;
-      default:
-        return '[slug]';
-    }
-  };
-
-  const getDynamicAs = (): string | undefined => {
-    switch (slug) {
-      case 'categories':
-      case 'tags':
-        return undefined;
-      default:
-        return `/${slug}`;
-    }
-  };
-
   const getIconPrefix = (): EFontAwesomeType => {
     switch (iconName) {
       case 'heart':
       case 'phone':
+      case 'hands-helping':
         return EFontAwesomeType.solid;
       default:
         return EFontAwesomeType.regular;
@@ -111,8 +90,8 @@ export const MenuItem: FunctionComponent<TMenuItemProps> = (
 
     return (
       <Link
-        href={getDynamicPage()}
-        as={getDynamicAs()}
+        href={getDynamicPage(slug)}
+        as={getDynamicAs(slug)}
       >
         <a
           className={elClasses}

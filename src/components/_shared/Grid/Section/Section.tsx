@@ -10,7 +10,7 @@ interface ISection {
   theme?: Core.TTheme;
 }
 
-const Section: FunctionComponent<ISection> = (
+export const Section: FunctionComponent<ISection> = (
   {
     children,
     className,
@@ -41,5 +41,3 @@ const Section: FunctionComponent<ISection> = (
     </Tag>
   );
 };
-
-export default Section;

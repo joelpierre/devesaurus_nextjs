@@ -1,0 +1,89 @@
+.ContentBlock {
+  $root: &;
+  $paddingY: spacing(12);
+  $paddingX: 4.5%;
+  padding: 0;
+  position: relative;
+
+  &__image,
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: $paddingY;
+    padding-bottom: $paddingY;
+  }
+
+  &__content {
+    padding-left: $paddingX;
+    padding-right: $paddingX;
+  }
+
+  &__heading {
+    text-transform: uppercase;
+  }
+
+  &__button {
+    margin-top: spacing(2);
+  }
+
+  &__image {
+    min-height: 30rem;
+    padding: 0;
+    background-color: red;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  // Modifiers
+  &--left {
+    #{$root} {
+      &__content {
+        order: 1;
+
+        @include breakpoint(1024) {
+          order: 0;
+        }
+      }
+
+      &__image {
+        order: 0;
+
+        @include breakpoint(1024) {
+          order: 1;
+        }
+      }
+    }
+  }
+
+  &--right {
+    #{$root} {
+      &__content {
+        order: 1;
+      }
+
+      &__image {
+        order: 0;
+      }
+    }
+  }
+
+  &--center {
+    #{$root} {
+      &__content {
+        padding: 8rem spacing(2);
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &__image {
+        display: none;
+      }
+
+      &__button {
+        margin: spacing(2) auto;
+      }
+    }
+  }
+}

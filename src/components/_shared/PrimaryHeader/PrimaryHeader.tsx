@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
 
-import { Hamburger } from '@jpp/atoms/Hamburger/Hamburger';
 import Icons from '@jpp/atoms/Icon/Icon';
+import SearchForm from '@jpp/molecules/SearchForm';
+import { Hamburger } from '@jpp/atoms/Hamburger/Hamburger';
 import { Heading } from '@jpp/components/_shared/Heading/Heading';
-import { SearchForm } from '@jpp/molecules/SearchForm/SearchForm';
 
 import styles from './PrimaryHeader.scss';
 
@@ -16,40 +16,18 @@ export interface IPrimaryHeaderProps {
   setMenuState: (value: boolean) => void;
 }
 
-export interface IDispatchPrimaryHeaderProps {
-  onWordSearch: (searchTerm: string) => void;
-}
-
-type TPrimaryHeader = IPrimaryHeaderProps & IDispatchPrimaryHeaderProps;
+type TPrimaryHeader = IPrimaryHeaderProps;
 
 export const PrimaryHeader: FunctionComponent<TPrimaryHeader> = (
   {
     isMenuOpen,
     setMenuState,
-    onWordSearch,
     title
   }
 ) => {
-  const [state, setState] = useState({ searchInput: '' });
 
   const handleSetMenuState = (): void => {
     setMenuState(!isMenuOpen);
-  };
-
-  const handleSearchInputOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const { target: { value } } = event;
-    setState({ searchInput: value });
-  };
-
-  const handleSearchSubmit = (event: React.FormEvent<EventTarget>): void => {
-    event.preventDefault();
-    const { searchInput } = state;
-
-    if (!searchInput) {
-      return;
-    }
-
-    onWordSearch(searchInput);
   };
 
   return (
@@ -69,8 +47,6 @@ export const PrimaryHeader: FunctionComponent<TPrimaryHeader> = (
       <div className={styles['primary-header__search']}>
         <SearchForm
           className={styles['primary-header__search-form']}
-          onSubmit={handleSearchSubmit}
-          inputOnChange={handleSearchInputOnChange}
         />
       </div>
     </header>

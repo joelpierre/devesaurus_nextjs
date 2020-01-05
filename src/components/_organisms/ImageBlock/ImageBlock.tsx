@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
-import Section from '@jpp/components/_shared/Grid/Section/Section';
-import Container from '@jpp/components/_shared/Grid/Container/Container';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
+import { Section } from '@jpp/components/_shared/Grid/Section/Section';
+import { Container } from '@jpp/components/_shared/Grid/Container/Container';
+import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
 
 import styles from './ImageBlock.scss';
 

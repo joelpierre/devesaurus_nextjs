@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
 import Icons from '@jpp/atoms/Icon/Icon';
-import Container from '@jpp/components/_shared/Grid/Container/Container';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
+import { Container } from '@jpp/components/_shared/Grid/Container/Container';
+import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
 
 import footerStyles from '../../PrimaryFooter.scss';
 import styles from './FooterTop.scss';
@@ -16,7 +16,7 @@ interface IFooterTopProps {
   footerMenu: Core.IMenuItem[];
 }
 
-const FooterTop: FunctionComponent<IFooterTopProps> = (
+export const FooterTop: FunctionComponent<IFooterTopProps> = (
   {
     className,
     companySlogan,
@@ -60,5 +60,3 @@ const FooterTop: FunctionComponent<IFooterTopProps> = (
     </article>
   );
 };
-
-export default FooterTop;

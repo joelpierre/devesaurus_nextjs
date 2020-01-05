@@ -1,8 +1,8 @@
-import Container from '@jpp/components/_shared/Grid/Container/Container';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import { Container } from '@jpp/components/_shared/Grid/Container/Container';
+import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
 
 import styles from './FooterBottom.scss';
 import footerStyles from '../../PrimaryFooter.scss';
@@ -13,7 +13,12 @@ interface IFooterBottomProps {
   termsMenu: Core.IMenuItem[];
 }
 
-const FooterBottom: FunctionComponent<IFooterBottomProps> = ({ className, companyName }) => {
+export const FooterBottom: FunctionComponent<IFooterBottomProps> = (
+  {
+    className,
+    companyName
+  }
+) => {
   return (
     <article className={classNames(className, styles.FooterBottom)}>
       <Container>
@@ -34,5 +39,3 @@ const FooterBottom: FunctionComponent<IFooterBottomProps> = ({ className, compan
     </article>
   );
 };
-
-export default FooterBottom;

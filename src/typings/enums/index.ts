@@ -73,3 +73,9 @@ export enum EColumn {
   Eleven = '11',
   Twelve = '12',
 }
+
+export enum EPostStatus {
+  Publish = 'publish',
+  Draft = 'draft',
+  Private = 'private'
+}

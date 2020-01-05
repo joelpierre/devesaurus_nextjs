@@ -6,7 +6,10 @@ interface IPrimaryMainProps {
 }
 
 export const PrimaryMain: FunctionComponent<IPrimaryMainProps> = (
-  { className, children }
+  {
+    className,
+    children
+  }
 ) => {
   return (
     <main className={classNames(className)}>

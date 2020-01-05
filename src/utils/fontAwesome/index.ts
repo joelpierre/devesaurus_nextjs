@@ -33,7 +33,8 @@ import {
 import {
   faHeart,
   faPhone,
-  faSearch
+  faSearch,
+  faHandsHelping
 } from '@fortawesome/pro-solid-svg-icons';
 import {
   faFacebookSquare,
@@ -72,6 +73,7 @@ export enum EFontAwesomeType {
 export default {
   init: () =>
     library.add(
+      faHandsHelping,
       faHtml5,
       faCss3,
       faPhone,

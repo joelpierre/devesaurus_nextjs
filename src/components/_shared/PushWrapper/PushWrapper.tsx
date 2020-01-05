@@ -9,7 +9,13 @@ interface IPushWrapperProps {
   setMenuState: (value: boolean) => void;
 }
 
-export const PushWrapper: FunctionComponent<IPushWrapperProps> = ({ className, children, isMenuOpen, setMenuState }) => {
+export const PushWrapper: FunctionComponent<IPushWrapperProps> = (
+  {
+    className,
+    children,
+    isMenuOpen
+  }
+) => {
   return (
     <div className={classNames(styles.pushWrapper, className, {
       [styles.pushWrapperIsActive]: isMenuOpen

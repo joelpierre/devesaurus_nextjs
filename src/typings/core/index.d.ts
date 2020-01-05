@@ -14,9 +14,7 @@ declare namespace Core {
     'tint-omega' |
     'gradient-brand' | ETheme;
 
-  export type TLayout = 'core' | 'basic';
-
-  export type TMimeType = 'image/png' | string;
+  export type TMimeType = 'image/png' | 'image/jpeg' | 'image/jpg' | string;
 
   export type TTag = 'div' | 'section' | 'aside' | 'article' | 'span' | 'nav';
 
@@ -104,6 +102,8 @@ declare namespace Core {
 
   export type TErrorCode = string | number;
 
+  export type TFaIconWeight = 'fab' | 'far' | 'fal' | 'fas' | 'fad';
+
   enum EWordExample {
     Codepen = 'codepen',
     CodeBlock = 'code-block'
@@ -175,6 +175,12 @@ declare namespace Core {
     Xl = 'xl'
   }
 
+  enum EPostStatus {
+    Publish = 'publish',
+    Draft = 'draft',
+    Private = 'private'
+  }
+
   export interface IYoastMeta {
     /**
      *
@@ -199,24 +205,6 @@ declare namespace Core {
      *
      **/
     components: Partial<IAcfComponent>[];
-  }
-
-  export interface IAcfComponentCore {
-    /**
-     *
-     *
-     **/
-    className?: string;
-    /**
-     *
-     *
-     **/
-    components: Partial<IAcfComponent>[];
-    /**
-     *
-     *
-     **/
-    page_theme: TTheme;
   }
 
   export interface IAcfComponent {
@@ -284,17 +272,17 @@ declare namespace Core {
      *
      *
      **/
-    cta_link: any;
+    cta_link: IWpLink;
     /**
      *
      *
      **/
-    cta_theme: ETheme;
+    cta_theme: TTheme;
     /**
      *
      *
      **/
-    theme: ETheme;
+    theme: TTheme;
     /**
      *
      *
@@ -324,6 +312,7 @@ declare namespace Core {
      *
      *
      */
+    image: IWpImage;
     /**
      *
      *
@@ -681,6 +670,135 @@ declare namespace Core {
      *
      **/
     property: string;
+  }
+
+  export interface IWpLink {
+    /**
+     *
+     *
+     **/
+    post_name: string;
+    /**
+     *
+     *
+     **/
+    post_title: string;
+    /**
+     *
+     *
+     **/
+    post_status: EPostStatus;
+    /**
+     *
+     *
+     **/
+    post_type: 'page' | 'post';
+    /**
+     *
+     *
+     **/
+    post_parent: number;
+  }
+
+  export interface IWpImage {
+    /**
+     *
+     *
+     **/
+    id: number;
+    /**
+     *
+     *
+     **/
+    url: string;
+    /**
+     *
+     *
+     **/
+    alt: string;
+    /**
+     *
+     *
+     **/
+    mime_type: TMimeType;
+    /**
+     *
+     *
+     **/
+    width: number;
+    /**
+     *
+     *
+     **/
+    height: number;
+    /**
+     *
+     *
+     **/
+    sizes: IWpImageSizes;
+  }
+
+  export interface IWpImageSizes {
+    /**
+     *
+     *
+     **/
+    thumbnail: string;
+    /**
+     *
+     *
+     **/
+    'thumbnail-width': number;
+    /**
+     *
+     *
+     **/
+    'thumbnail-height': number;
+    /**
+     *
+     *
+     **/
+    medium: string;
+    /**
+     *
+     *
+     **/
+    'medium-width': number;
+    /**
+     *
+     *
+     **/
+    'medium-height': number;
+    /**
+     *
+     *
+     **/
+    medium_large: string;
+    /**
+     *
+     *
+     **/
+    'medium_large-width': number;
+    /**
+     *
+     *
+     **/
+    'medium_large-height': number;
+    /**
+     *
+     *
+     **/
+    large: string;
+    /**
+     *
+     *
+     **/
+    'large-width': number;
+    /**
+     *
+     *
+     **/
+    'large-height': number;
   }
 
   export interface IMenuItem {

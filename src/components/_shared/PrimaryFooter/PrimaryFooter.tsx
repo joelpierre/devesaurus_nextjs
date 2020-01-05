@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import FooterBottom from '@jpp/components/_shared/PrimaryFooter/components/FooterBottom/FooterBottom';
-import FooterTop from '@jpp/components/_shared/PrimaryFooter/components/FooterTop/FooterTop';
+import { FooterBottom } from './components/FooterBottom/FooterBottom';
+import { FooterTop } from './components/FooterTop/FooterTop';
 
 import styles from './PrimaryFooter.scss';
 

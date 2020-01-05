@@ -10,7 +10,7 @@ interface RowInterface {
   tagElement?: Core.TTag;
 }
 
-const Row: FunctionComponent<RowInterface> = (
+export const Row: FunctionComponent<RowInterface> = (
   {
     children,
     row = true,
@@ -40,5 +40,3 @@ const Row: FunctionComponent<RowInterface> = (
     </Tag>
   );
 };
-
-export default Row;

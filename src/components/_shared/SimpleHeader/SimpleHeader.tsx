@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { SimpleMenu } from '@jpp/organisms/SimpleMenu/SimpleMenu';
 import { Hamburger } from '@jpp/atoms/Hamburger/Hamburger';
 
@@ -11,25 +11,26 @@ interface ISimpleHeaderProps {
   menuItems: Core.IMenuItem[];
 }
 
-export class SimpleHeader extends PureComponent<ISimpleHeaderProps> {
-  handleSetMenuState = (): void => {
-    const { isMenuOpen, setMenuState } = this.props;
+export const SimpleHeader: FunctionComponent<ISimpleHeaderProps> = (
+  {
+    menuItems,
+    isMenuOpen,
+    setMenuState
+  }
+) => {
+  const handleSetMenuState = (): void => {
     setMenuState(!isMenuOpen);
   };
 
-  render() {
-    const { menuItems } = this.props;
+  return (
+    <header className={styles.simpleHeader}>
+      <Hamburger
+        theme={'brand'}
+        onClick={handleSetMenuState}
+        descriptor="Menu"
+      />
 
-    return (
-      <header className={styles.simpleHeader}>
-        <Hamburger
-          theme={'brand'}
-          onClick={this.handleSetMenuState}
-          descriptor="Menu"
-        />
-
-        <SimpleMenu menuItems={menuItems} />
-      </header>
-    );
-  }
-}
+      <SimpleMenu menuItems={menuItems} />
+    </header>
+  );
+};

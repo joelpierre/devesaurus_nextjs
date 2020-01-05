@@ -393,3 +393,30 @@ export const mapTaxonomyIcon = (slug: string = 'default'): IconName => {
 
   return icon;
 };
+
+export const getDynamicPage = (slug): string => {
+  switch (slug) {
+    case 'categories':
+    case 'tags':
+      return `devinitions/${slug}`;
+    case 'devinitions':
+    case 'devegram':
+      return `/${slug}`;
+    case 'home':
+      return '/';
+    default:
+      return '[slug]';
+  }
+};
+
+export const getDynamicAs = (slug): string | undefined => {
+  switch (slug) {
+    case 'categories':
+    case 'tags':
+      return undefined;
+    case 'home':
+      return '/';
+    default:
+      return `/${slug}`;
+  }
+};

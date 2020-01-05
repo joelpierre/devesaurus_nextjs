@@ -1,12 +1,14 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { FunctionComponent } from 'react';
-import { IconName } from '@fortawesome/fontawesome-common-types';
-import classNames from 'classnames';
 import Link from 'next/link';
-import styles from './Button.scss';
+import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconName } from '@fortawesome/fontawesome-common-types';
 import { ESize, ETheme } from '@jpp/typings/enums';
+import { getDynamicAs, getDynamicPage } from '../../../utils';
 
-export interface IButtonProps {
+import styles from './Button.scss';
+
+interface IButtonProps {
   theme?: Core.TTheme;
   size?: Core.TSize;
   behaviour?: Core.TLinkBehaviour;
@@ -19,7 +21,7 @@ export interface IButtonProps {
   outline?: boolean;
   tabIndex?: number;
   icon?: {
-    weight: 'fab' | 'far' | 'fal' | 'fas' | 'fad';
+    weight: Core.TFaIconWeight;
     name: IconName;
   };
 }
@@ -34,15 +36,13 @@ export const Button: FunctionComponent<IButtonProps> = (
     children,
     link,
     className,
-    as = '[slug]',
+    as,
     type,
     onClick,
     icon,
     ...props
   }
 ) => {
-  let button: JSX.Element;
-
   const defaultProps: Partial<IButtonProps> = {
     className: classNames([
       styles.btn,
@@ -81,7 +81,7 @@ export const Button: FunctionComponent<IButtonProps> = (
 
   switch (behaviour) {
     case 'anchor':
-      button = (
+      return (
         <a
           href={link}
           target="_blank"
@@ -91,27 +91,22 @@ export const Button: FunctionComponent<IButtonProps> = (
           {content}
         </a>
       );
-      break;
 
     case 'action':
-      button = (
+      return (
         <button type={type || 'button'} {...defaultProps}>
           {content}
         </button>
       );
-      break;
 
     case 'router':
     default:
-      button = (
-        <Link href={as} as={link}>
+      return (
+        <Link href={as ? as : getDynamicPage(link)} as={getDynamicAs(link)}>
           <a {...defaultProps}>
             {content}
           </a>
         </Link>
       );
-      break;
   }
-
-  return button;
 };

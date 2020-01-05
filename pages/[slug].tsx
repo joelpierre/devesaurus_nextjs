@@ -36,6 +36,13 @@ class DefaultPage extends PureComponent<TDefaultPage> {
       return { error: page.error };
     }
 
+    // Because /home is a page in Wordpress we have to ensure that
+    // users cannot navigate to this page
+    if (slug === 'home') {
+      res.writeHead(301, { Location: '/' });
+      res.end();
+    }
+
     return { slug, page };
   }
 

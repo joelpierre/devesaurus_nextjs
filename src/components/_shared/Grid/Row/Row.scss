@@ -1,1 +1,16 @@
 @import '../../../../../node_modules/flexigridcss/dist/flexigridcss/row';
+
+.row {
+  $margin: spacing(2);
+  $margin2X: spacing(2 * 2);
+  margin: 0 -#{$margin};
+  max-width: calc(100% + #{$margin2X});
+
+  @include breakpoint(568) {
+    margin: 0 -#{$margin};
+  }
+
+  @include breakpoint(768) {
+    margin: 0 -#{$margin};
+  }
+}

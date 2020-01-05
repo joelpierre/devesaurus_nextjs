@@ -1,13 +1,14 @@
 import React, { FunctionComponent, ReactText } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import Link from 'next/link';
+
+import { Section } from '@jpp/components/_shared/Grid/Section/Section';
+import { Container } from '@jpp/components/_shared/Grid/Container/Container';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
+import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
 
 import styles from './Pagination.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Section from '@jpp/components/_shared/Grid/Section/Section';
-import Container from '@jpp/components/_shared/Grid/Container/Container';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
-import Link from 'next/link';
 
 interface IPaginationProps {
   className?: string;
@@ -174,7 +175,7 @@ export const Pagination: FunctionComponent<IPaginationProps> = (
                               )
                             }
                           >
-                            <FontAwesomeIcon className={styles.paginationActiveIcon} icon={['far', 'arrow-up']}/>
+                            <FontAwesomeIcon className={styles.paginationActiveIcon} icon={['far', 'arrow-up']} />
                             {page}
                           </span>
                         </li>

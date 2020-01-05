@@ -2,14 +2,12 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import styles from './InlineQuote.scss';
-import Section from '@jpp/components/_shared/Grid/Section/Section';
-import Container from '@jpp/components/_shared/Grid/Container/Container';
-import Row from '@jpp/components/_shared/Grid/Row/Row';
-import Flex from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Section } from '@jpp/components/_shared/Grid/Section/Section';
+import { Container } from '@jpp/components/_shared/Grid/Container/Container';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
+import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
 
-type TInlineQuote = Partial<Core.IAcfComponent>;
-
-export const InlineQuote: FunctionComponent<TInlineQuote> = (
+export const InlineQuote: FunctionComponent<Partial<Core.IAcfComponent>> = (
   {
     theme,
     page_theme,
