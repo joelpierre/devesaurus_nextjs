@@ -1,4 +1,5 @@
 import { IconName } from '@fortawesome/fontawesome-common-types';
+import { ETaxonomy } from '@jpp/typings/enums';
 
 /**
  * Update any Object passed through
@@ -394,7 +395,7 @@ export const mapTaxonomyIcon = (slug: string = 'default'): IconName => {
   return icon;
 };
 
-export const getDynamicPage = (slug): string => {
+export const getDynamicPage = (slug: string | undefined): string => {
   switch (slug) {
     case 'categories':
     case 'tags':
@@ -409,7 +410,7 @@ export const getDynamicPage = (slug): string => {
   }
 };
 
-export const getDynamicAs = (slug): string | undefined => {
+export const getDynamicAs = (slug: string | undefined): string | undefined => {
   switch (slug) {
     case 'categories':
     case 'tags':
@@ -418,5 +419,19 @@ export const getDynamicAs = (slug): string | undefined => {
       return '/';
     default:
       return `/${slug}`;
+  }
+};
+
+export const getTaxonomySlug = (slug: ETaxonomy): string => {
+  switch (slug) {
+    case ETaxonomy.Category:
+      return 'category';
+    case ETaxonomy.PostTag:
+      return 'tag';
+    case ETaxonomy.WordTag:
+      return 'devinitions/tag';
+    default:
+    case ETaxonomy.WordCategory:
+      return 'devinitions/category';
   }
 };

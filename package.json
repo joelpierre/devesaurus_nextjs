@@ -15,11 +15,11 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.25",
-    "@fortawesome/free-brands-svg-icons": "~5.9.0",
-    "@fortawesome/pro-light-svg-icons": "~5.9.0",
-    "@fortawesome/pro-regular-svg-icons": "~5.9.0",
-    "@fortawesome/pro-solid-svg-icons": "~5.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-brands-svg-icons": "^5.12.0",
+    "@fortawesome/pro-light-svg-icons": "^5.9.0",
+    "@fortawesome/pro-regular-svg-icons": "^5.9.0",
+    "@fortawesome/pro-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.5",
     "@types/next-redux-wrapper": "~2.0.2",
     "@zeit/next-bundle-analyzer": "~0.1.2",

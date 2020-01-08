@@ -1,11 +1,18 @@
-.label-cloud {
-  display: inline-flex;
+.LabelCloud {
+  display: flex;
   flex-wrap: wrap;
-  list-style-type: none;
+
+  &__list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    align-items: center;
+    justify-content: center;
+  }
 
   &__item {
     display: inline-flex;
-    margin-right: 1rem;
+    margin-right: spacing(2);
 
     &:last-of-type {
       margin-right: 0;
@@ -14,10 +21,12 @@
 
   &__label {
     text-transform: none;
+    padding: spacing(.5) spacing(2);
   }
 
   &__icon {
-    margin-right: 1rem;
+    margin-right: spacing(2);
+    width: 19px;
     display: inline-block;
 
     & > svg {

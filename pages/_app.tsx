@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { NextComponentType } from 'next';
 import withRedux from 'next-redux-wrapper';
 import makeStore, { TReduxProps } from '../src/store/createStore';
-import preloadPageContent from '../src/store/preloadStore';
+import { preloadStore } from '../src/store/preloadStore';
 import ErrorPage from './_error';
 import fontAwesomeLib from '../src/utils/fontAwesome';
 
@@ -16,11 +16,12 @@ interface ICoreAppProps {
   store?: any;
 }
 
-fontAwesomeLib.init();
-
 type TCoreAppProps = ICoreAppProps & TReduxProps;
 
+fontAwesomeLib.init();
+
 class CoreApp extends App<TCoreAppProps> {
+
   static async getInitialProps({ Component, ctx }: ICoreAppProps) {
     const store = ctx.store;
 
@@ -28,7 +29,7 @@ class CoreApp extends App<TCoreAppProps> {
       const contentFetched = store.getState().initialFetch;
 
       if (!contentFetched) {
-        await preloadPageContent(store);
+        await preloadStore(store);
       }
     }
 
@@ -48,7 +49,7 @@ class CoreApp extends App<TCoreAppProps> {
         {initialFetch ? (
           <Component {...pageProps} />
         ) : (
-          <ErrorPage statusCode={500}/>
+          <ErrorPage statusCode={500} />
         )}
       </Provider>
     );
