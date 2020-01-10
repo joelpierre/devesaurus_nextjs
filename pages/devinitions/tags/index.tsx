@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { IReduxState } from '../../../src/store/createStore';
 
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
-import { TTagStoreState } from '../../../src/store/tags/reducer';
+import { TTagsStoreState } from '../../../src/store/tags/reducer';
 import { getTags } from '../../../src/store/rootActions';
 import { TPostsStoreState } from '../../../src/store/posts/reducer';
 
@@ -15,7 +15,7 @@ interface IDevinitionsTagsPage {
 }
 
 interface IStoreDevinitionsTagsPageProps {
-  tags: TTagStoreState;
+  tags: TTagsStoreState;
 }
 
 interface IDispatchDevinitionsTagsPageProps {

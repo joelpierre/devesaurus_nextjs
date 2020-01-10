@@ -1,4 +1,4 @@
-import React, { ComponentType, FunctionComponent } from 'react';
+import React, { ComponentType, FunctionComponent, memo } from 'react';
 import { ContentBlock } from '@jpp/organisms/ContentBlock/ContentBlock';
 import { ImageBlock } from '@jpp/organisms/ImageBlock/ImageBlock';
 import { ImageScroller } from '@jpp/organisms/ImageScroller/ImageScroller';
@@ -7,7 +7,7 @@ import { PressPack } from '@jpp/organisms/PressPack/PressPack';
 import { Testimonials } from '@jpp/organisms/Testimonials/Testimonials';
 import { TextBlock } from '@jpp/organisms/TextBlock/TextBlock';
 import { InlineQuote } from '@jpp/organisms/InlineQuote/InlineQuote';
-import { HeroSplash } from '@jpp/organisms/HeroSplash/HeroSplash';
+import HeroSplash from '@jpp/organisms/HeroSplash/HeroSplash';
 import { CtaBanner } from '@jpp/organisms/CtaBanner/CtaBanner';
 
 interface IAcfComponentsProps {
@@ -76,3 +76,5 @@ export const AcfComponents: FunctionComponent<IAcfComponentsProps> = (
     </>
   );
 };
+
+export default memo(AcfComponents);

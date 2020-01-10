@@ -1,6 +1,7 @@
 .LabelCloud {
   display: flex;
   flex-wrap: wrap;
+  user-select: none;
 
   &__list {
     display: inline-flex;
@@ -25,7 +26,7 @@
   }
 
   &__icon {
-    margin-right: spacing(2);
+    margin-right: spacing(1.5);
     width: 19px;
     display: inline-block;
 

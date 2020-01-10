@@ -11,6 +11,8 @@ import tagRoutes from './tag';
 import tagsRoutes from './tags';
 import wordRoutes from './word';
 import wordCategoriesRoutes from './word_categories';
+import wordCategoryRoutes from './word_category/index';
+import wordTagRoutes from './word_tag/index';
 import wordTagsRoutes from './word_tags';
 import wordsRoutes from './words';
 
@@ -28,7 +30,9 @@ postsRoutes(server, isDev);
 tagRoutes(server, isDev);
 tagsRoutes(server, isDev);
 wordRoutes(server, isDev);
+wordCategoryRoutes(server, isDev);
 wordCategoriesRoutes(server, isDev);
+wordTagRoutes(server, isDev);
 wordTagsRoutes(server, isDev);
 wordsRoutes(server, isDev);
 searchRoutes(server, isDev);

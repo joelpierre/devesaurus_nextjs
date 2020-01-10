@@ -14,14 +14,14 @@ export interface ICategoryStoreState {
   error?: TReduxError;
 }
 
-export type TCategoryStoreState = ICategoryStoreState[] | TReduxError;
+export type TCategoriesStoreState = ICategoryStoreState[] | TReduxError;
 
 const initialState = [] as ICategoryStoreState[];
 
-export const categoryReducer = (
+export const categoriesReducer = (
   state = initialState,
   action: AnyAction
-): TCategoryStoreState => {
+): TCategoriesStoreState => {
   switch (action.type) {
     case actions.GET_CATEGORIES_SUCCESS:
       return updateArray(state, action.payload);

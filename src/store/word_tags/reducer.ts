@@ -14,14 +14,14 @@ export interface IWordTagStoreState {
   error?: TReduxError;
 }
 
-export type TWordTagStoreState = IWordTagStoreState[] | TReduxError;
+export type TWordTagsStoreState = IWordTagStoreState[] | TReduxError;
 
 const initialState = [] as IWordTagStoreState[];
 
-export const wordTagReducer = (
+export const wordTagsReducer = (
   state = initialState,
   action: AnyAction
-): TWordTagStoreState => {
+): TWordTagsStoreState => {
   switch (action.type) {
     case actions.GET_WORD_TAGS_SUCCESS:
       return updateArray(state, action.payload);

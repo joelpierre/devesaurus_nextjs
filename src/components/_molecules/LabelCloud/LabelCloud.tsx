@@ -1,26 +1,26 @@
-import React, { FunctionComponent } from 'react';
-import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Label } from '@jpp/atoms/Label/Label';
-import { TCategoryStoreState } from '../../../store/categories/reducer';
-import { TTagStoreState } from '../../../store/tags/reducer';
-import { TWordCategoryStoreState } from '../../../store/word_categories/reducer';
-import { TWordTagStoreState } from '../../../store/word_tags/reducer';
-import { getTaxonomySlug, mapTaxonomyIcon, mapTaxonomyTheme } from '../../../utils/index';
+import React, { FunctionComponent, memo } from 'react';
+import classNames from 'classnames';
+import { TCategoriesStoreState } from '../../../store/categories/reducer';
+import { TTagsStoreState } from '../../../store/tags/reducer';
+import { TWordCategoriesStoreState } from '../../../store/word_categories/reducer';
+import { TWordTagsStoreState } from '../../../store/word_tags/reducer';
 import { ETaxonomy } from '@jpp/typings/enums';
+import { getTaxonomySlug, mapTaxonomyIcon, mapTaxonomyTheme } from '../../../utils/index';
 
 import styles from './LabelCloud.scss';
 
 export interface ILabelCloudProps {
   className?: string;
-  taxonomy?: ETaxonomy;
+  taxonomy: ETaxonomy;
 }
 
 export interface IStoreLabelCloudProps {
-  word_categories: TWordCategoryStoreState;
-  word_tags: TWordTagStoreState;
-  categories: TCategoryStoreState;
-  tags: TTagStoreState;
+  word_categories: TWordCategoriesStoreState;
+  word_tags: TWordTagsStoreState;
+  categories: TCategoriesStoreState;
+  tags: TTagsStoreState;
 }
 
 type TLabelCloud = ILabelCloudProps & IStoreLabelCloudProps;
@@ -28,50 +28,57 @@ type TLabelCloud = ILabelCloudProps & IStoreLabelCloudProps;
 export const LabelCloud: FunctionComponent<TLabelCloud> = (
   {
     className,
-    taxonomy = ETaxonomy.WordCategory,
+    taxonomy,
     word_categories,
     word_tags,
     categories,
     tags
   }
 ) => {
-  let items;
+  const getItems = () => {
+    switch (taxonomy) {
+      case ETaxonomy.Category:
+        return categories;
+      case ETaxonomy.PostTag:
+        return tags;
+      case ETaxonomy.WordTag:
+        return word_tags;
+      default:
+      case ETaxonomy.WordCategory:
+        return word_categories;
+    }
+  };
 
-  switch (taxonomy) {
-    case ETaxonomy.Category:
-      items = categories;
-      break;
-    case ETaxonomy.PostTag:
-      items = tags;
-      break;
-    case ETaxonomy.WordTag:
-      items = word_tags;
-      break;
-    default:
-    case ETaxonomy.WordCategory:
-      items = word_categories;
-      break;
-  }
+  const items: any = getItems();
 
-  if (!items || items && items.length === 0) {
+  if (!items || items && Array.isArray(items) && items.length === 0) {
     return null;
   }
 
-  items = items.splice(0, 10);
+  const splicedItems = items.splice(0, 10);
 
   return (
     <nav className={classNames(styles.LabelCloud, styles[`LabelCloud--${taxonomy}`])}>
       <ul
         className={classNames(styles.LabelCloud__list, className)}
       >
-        {items && items.map(({ slug, id, name }) => (
+        {splicedItems && splicedItems.map((
+          {
+            slug,
+            id,
+            name,
+            taxonomy: itemTaxonomy
+          },
+          index
+        ) => (
           <li
-            key={id}
+            key={`${slug}_${index}`}
             className={classNames(styles.LabelCloud__item)}
           >
             <Label
+              taxonomy={itemTaxonomy}
               className={styles.LabelCloud__label}
-              link={`/${getTaxonomySlug(taxonomy)}/${slug}`}
+              link={`${getTaxonomySlug(taxonomy)}/${slug}`}
               theme={mapTaxonomyTheme(slug)}
             >
               <FontAwesomeIcon
@@ -86,3 +93,5 @@ export const LabelCloud: FunctionComponent<TLabelCloud> = (
     </nav>
   );
 };
+
+export default memo(LabelCloud);

@@ -1,4 +1,4 @@
-import { ILabelCloudProps, IStoreLabelCloudProps, LabelCloud } from '@jpp/molecules/LabelCloud/LabelCloud';
+import LabelCloud, { ILabelCloudProps, IStoreLabelCloudProps } from '@jpp/molecules/LabelCloud/LabelCloud';
 import { connect } from 'react-redux';
 import { IReduxState } from '../../../store/createStore';
 

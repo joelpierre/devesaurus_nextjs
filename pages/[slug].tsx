@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { AcfComponents } from '@jpp/components/_shared/AcfComponents/AcfComponents';
+import AcfComponents from '@jpp/components/_shared/AcfComponents/AcfComponents';
 import { PageHandler } from '../src/utils/PageHandler/PageHandler';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 

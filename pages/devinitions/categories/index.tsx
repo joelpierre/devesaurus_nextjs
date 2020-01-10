@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getCategories } from '../../../src/store/rootActions';
 import { IReduxState } from '../../../src/store/createStore';
 
-import { TCategoryStoreState } from '../../../src/store/categories/reducer';
+import { TCategoriesStoreState } from '../../../src/store/categories/reducer';
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TPostsStoreState } from '../../../src/store/posts/reducer';
 
@@ -14,7 +14,7 @@ interface IDevinitionsCategoriesPage {
 }
 
 interface IStoreDevinitionsCategoriesPageProps {
-  categories: TCategoryStoreState;
+  categories: TCategoriesStoreState;
 }
 
 interface IDispatchDevinitionsCategoriesPageProps {

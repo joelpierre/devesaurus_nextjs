@@ -1,7 +1,8 @@
+import { ETaxonomy } from '@jpp/typings/enums';
 import React, { FunctionComponent } from 'react';
-
 import classNames from 'classnames';
 import Link from 'next/link';
+import { getDynamicAs, getDynamicPage } from '../../../utils/index';
 
 import styles from './Label.scss';
 
@@ -12,10 +13,20 @@ interface ILabelProps {
   theme?: Core.TTheme;
   link?: string;
   as?: string;
+  taxonomy?: ETaxonomy;
 }
 
 export const Label: FunctionComponent<ILabelProps> = (
-  { children, link, theme, size, caps, className, as }
+  {
+    children,
+    link,
+    theme,
+    size,
+    caps,
+    className,
+    taxonomy,
+    as
+  }
 ) => {
 
   const defaultProps = {
@@ -30,15 +41,16 @@ export const Label: FunctionComponent<ILabelProps> = (
     )
   };
 
-  if (link && as) {
+  if (link) {
+    const linkHref = as ? as : taxonomy ? getDynamicPage(taxonomy) : getDynamicPage(link);
+    const linkAs = getDynamicAs(link);
+
     return (
       <Link
-        href={as}
-        as={link}
+        href={linkHref}
+        as={linkAs}
       >
-        <a
-          {...defaultProps}
-        >
+        <a {...defaultProps} >
           <span className={classNames(styles.label__text)}>{children}</span>
         </a>
       </Link>

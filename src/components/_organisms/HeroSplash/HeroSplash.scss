@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  width: 100%;
 
   &::before {
     display: none;
@@ -23,7 +24,7 @@
   &__logo {
     width: 100%;
     max-width: 600px;
-    margin-bottom: spacing(4);
+    margin-bottom: spacing(5);
   }
 
   &__reveal {
@@ -111,6 +112,17 @@
 
   &__copy {
     margin-bottom: spacing(1) !important;
+  }
+
+  &__search {
+    width: 80%;
+    position: relative;
+    margin: 0 auto spacing(5);
+  }
+
+  &__SearchForm {
+    border: $border-width solid $color-alpha;
+    border-radius: 20px;
   }
 
   &__link {

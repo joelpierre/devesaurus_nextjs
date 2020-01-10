@@ -1,3 +1,4 @@
+import { IWordStoreState } from '../word/reducer';
 import * as actions from './constants';
 import { AnyAction } from 'redux';
 import { TReduxError } from '@jpp/typings/index';
@@ -11,17 +12,18 @@ export interface IWordCategoryStoreState {
   slug: string;
   taxonomy: string;
   yoast: Core.IYoastMeta;
+  words: IWordStoreState[];
   error?: TReduxError;
 }
 
-export type TWordCategoryStoreState = IWordCategoryStoreState[] | TReduxError;
+export type TWordCategoriesStoreState = IWordCategoryStoreState[] | TReduxError;
 
 const initialState = [] as IWordCategoryStoreState[];
 
 export const wordCategoriesReducer = (
   state = initialState,
   action: AnyAction
-): TWordCategoryStoreState => {
+): TWordCategoriesStoreState => {
   switch (action.type) {
     case actions.GET_WORD_CATEGORIES_SUCCESS:
       return updateArray(state, action.payload);

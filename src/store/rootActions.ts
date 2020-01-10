@@ -68,3 +68,19 @@ export { getWordCategories, getWordCategoriesFailed, getWordCategoriesSuccess } 
 export { getWordsSearch, getSearchWordsSuccess, getSearchWordsFailed, clearSearchWords } from './search/words/actions';
 
 export { getPostsSearch, getSearchPostsSuccess, getSearchPostsFailed, clearSearchPosts } from './search/posts/actions';
+
+export {
+  getWordCategory,
+  clearWordCategory,
+  getWordCategoryFailed,
+  getWordCategorySuccess,
+  getWordCategoryWords,
+  getWordCategoryWordsSuccess,
+  getWordCategoryWordsFailed
+} from './word_category/actions';
+
+export { getWordTag, clearWordTag, getWordTagFailed, getWordTagSuccess } from './word_tag/actions';
+
+export { getCategory, getCategoryFailed, getCategorySuccess, clearCategory } from './category/actions';
+
+export { getTag, getTagFailed, getTagSuccess, clearTag } from './tag/actions';

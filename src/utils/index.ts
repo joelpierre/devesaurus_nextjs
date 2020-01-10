@@ -399,12 +399,27 @@ export const getDynamicPage = (slug: string | undefined): string => {
   switch (slug) {
     case 'categories':
     case 'tags':
-      return `devinitions/${slug}`;
+      return `/devinitions/${slug}`;
+
     case 'devinitions':
     case 'devegram':
       return `/${slug}`;
+
+    case ETaxonomy.WordCategory:
+      return '/devinitions/category/[slug]';
+
+    case ETaxonomy.WordTag:
+      return '/devinitions/tag/[slug]';
+
+    case ETaxonomy.Category:
+      return '/devegram/category/[slug]';
+
+    case ETaxonomy.PostTag:
+      return '/devegram/tag/[slug]';
+
     case 'home':
       return '/';
+
     default:
       return '[slug]';
   }

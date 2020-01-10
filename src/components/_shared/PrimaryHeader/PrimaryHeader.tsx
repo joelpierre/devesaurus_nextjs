@@ -44,11 +44,11 @@ export const PrimaryHeader: FunctionComponent<TPrimaryHeader> = (
         {title}
       </Heading>
 
-      <div className={styles['primary-header__search']}>
+      <section className={styles['primary-header__search']}>
         <SearchForm
           className={styles['primary-header__search-form']}
         />
-      </div>
+      </section>
     </header>
   );
 };

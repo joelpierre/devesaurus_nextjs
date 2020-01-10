@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 import Icon from '@jpp/atoms/Icon/Icon';
+import SearchForm from '@jpp/molecules/SearchForm';
 import { ScrollingMouse } from '@jpp/atoms/ScrollingMouse/ScrollingMouse';
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
@@ -12,9 +13,7 @@ import LabelCloud from '@jpp/molecules/LabelCloud';
 
 import styles from './HeroSplash.scss';
 
-type THeroSplash = Core.IAcfComponent;
-
-export const HeroSplash: FunctionComponent<THeroSplash> = (
+export const HeroSplash: FunctionComponent<Core.IAcfComponent> = (
   {
     className,
     page_theme,
@@ -31,19 +30,19 @@ export const HeroSplash: FunctionComponent<THeroSplash> = (
         <Row>
           <Flex className="text-center mx-auto" colMd={8}>
             <Icon.Logo className={styles.HeroSplash__logo} />
-            <p className={styles.HeroSplash__copy}>
-              We need a form here
 
-              <br />
-              <br />
-            </p>
+            <section className={styles.HeroSplash__search}>
+              <SearchForm className={styles.HeroSplash__SearchForm} />
+            </section>
+
             <LabelCloud taxonomy={ETaxonomy.WordCategory} className={styles.HeroSplash__LabelCloud} />
 
             <ScrollingMouse className={styles.HeroSplash__ScrollingMouse} theme={ETheme.TintOmega} />
           </Flex>
-
         </Row>
       </Container>
     </Section>
   );
 };
+
+export default memo(HeroSplash);

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
-import { AcfComponents } from '@jpp/components/_shared/AcfComponents/AcfComponents';
+import AcfComponents from '@jpp/components/_shared/AcfComponents/AcfComponents';
 import { ELayout } from '@jpp/typings/enums';
 
 import { clearPage, getPage } from '../src/store/page/actions';

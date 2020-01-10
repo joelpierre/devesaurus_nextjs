@@ -14,14 +14,14 @@ export interface ITagStoreState {
   error?: TReduxError;
 }
 
-export type TTagStoreState = ITagStoreState[] | TReduxError;
+export type TTagsStoreState = ITagStoreState[] | TReduxError;
 
 const initialState = [] as ITagStoreState[];
 
-export const tagReducer = (
+export const tagsReducer = (
   state = initialState,
   action: AnyAction
-): TTagStoreState => {
+): TTagsStoreState => {
   switch (action.type) {
     case actions.GET_TAGS_SUCCESS:
       return updateArray(state, action.payload);

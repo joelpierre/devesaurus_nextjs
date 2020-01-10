@@ -1,0 +1,4 @@
+export const GET_WORD_TAG = 'GET_WORD_TAG';
+export const GET_WORD_TAG_SUCCESS = 'GET_WORD_TAG_SUCCESS';
+export const GET_WORD_TAG_FAILED = 'GET_WORD_TAG_FAILED';
+export const CLEAR_WORD_TAG = 'CLEAR_WORD_TAG';
