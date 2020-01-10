@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
 import axios from '../../utils/axios';
 import { setAppError, setAppLoading } from '../rootActions';
-import { GET_WORD_TAGS_FAILED, GET_WORD_TAGS_SUCCESS } from './constants';
+import { CLEAR_WORD_TAGS, GET_WORD_TAGS_FAILED, GET_WORD_TAGS_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
 import { IWordTagStoreState } from './reducer';
 
@@ -47,4 +47,8 @@ export const getWordTagsFailed = (error: Core.IErrorResponse | AxiosError) => ({
   payload: {
     error
   }
+});
+
+export const clearWordTags = () => ({
+  type: CLEAR_WORD_TAGS
 });

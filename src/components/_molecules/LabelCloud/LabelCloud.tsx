@@ -1,11 +1,12 @@
+import React, { PureComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Label } from '@jpp/atoms/Label/Label';
-import React, { FunctionComponent, memo } from 'react';
 import classNames from 'classnames';
 import { TCategoriesStoreState } from '../../../store/categories/reducer';
-import { TTagsStoreState } from '../../../store/tags/reducer';
-import { TWordCategoriesStoreState } from '../../../store/word_categories/reducer';
-import { TWordTagsStoreState } from '../../../store/word_tags/reducer';
+import { ITagStoreState, TTagsStoreState } from '../../../store/tags/reducer';
+import { IWordStoreState } from '../../../store/word/reducer';
+import { IWordCategoryStoreState, TWordCategoriesStoreState } from '../../../store/word_categories/reducer';
+import { IWordTagStoreState, TWordTagsStoreState } from '../../../store/word_tags/reducer';
 import { ETaxonomy } from '@jpp/typings/enums';
 import { getTaxonomySlug, mapTaxonomyIcon, mapTaxonomyTheme } from '../../../utils/index';
 
@@ -23,75 +24,113 @@ export interface IStoreLabelCloudProps {
   tags: TTagsStoreState;
 }
 
-type TLabelCloud = ILabelCloudProps & IStoreLabelCloudProps;
+export interface IDispatchLabelCloudProps {
+  onGetWordCategories: () => void;
+  onGetWordTags: () => void;
+  onGetTags: () => void;
+  onGetCategories: () => void;
+  onClearWordCategories: () => void;
+  onClearWordTags: () => void;
+  onClearTags: () => void;
+  onClearCategories: () => void;
+}
 
-export const LabelCloud: FunctionComponent<TLabelCloud> = (
-  {
-    className,
-    taxonomy,
-    word_categories,
-    word_tags,
-    categories,
-    tags
-  }
-) => {
-  const getItems = () => {
+type TLabelCloud = ILabelCloudProps & IStoreLabelCloudProps & IDispatchLabelCloudProps;
+
+export class LabelCloud extends PureComponent<TLabelCloud> {
+
+  componentDidMount(): void {
+    const { taxonomy, onGetCategories, onGetWordCategories, onGetTags, onGetWordTags } = this.props;
+
     switch (taxonomy) {
       case ETaxonomy.Category:
-        return categories;
+        return onGetCategories();
       case ETaxonomy.PostTag:
-        return tags;
+        return onGetTags();
       case ETaxonomy.WordTag:
-        return word_tags;
+        return onGetWordTags();
       default:
       case ETaxonomy.WordCategory:
-        return word_categories;
+        return onGetWordCategories();
     }
-  };
-
-  const items: any = getItems();
-
-  if (!items || items && Array.isArray(items) && items.length === 0) {
-    return null;
   }
 
-  const splicedItems = items.splice(0, 10);
+  componentWillUnmount(): void {
+    const { taxonomy, onClearCategories, onClearTags, onClearWordCategories, onClearWordTags } = this.props;
 
-  return (
-    <nav className={classNames(styles.LabelCloud, styles[`LabelCloud--${taxonomy}`])}>
-      <ul
-        className={classNames(styles.LabelCloud__list, className)}
-      >
-        {splicedItems && splicedItems.map((
-          {
-            slug,
-            id,
-            name,
-            taxonomy: itemTaxonomy
-          },
-          index
-        ) => (
-          <li
-            key={`${slug}_${index}`}
-            className={classNames(styles.LabelCloud__item)}
-          >
-            <Label
-              taxonomy={itemTaxonomy}
-              className={styles.LabelCloud__label}
-              link={`${getTaxonomySlug(taxonomy)}/${slug}`}
-              theme={mapTaxonomyTheme(slug)}
-            >
-              <FontAwesomeIcon
-                icon={mapTaxonomyIcon(slug)}
-                className={styles.LabelCloud__icon}
-              />
-              {name}
-            </Label>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
+    switch (taxonomy) {
+      case ETaxonomy.Category:
+        return onClearCategories();
+      case ETaxonomy.PostTag:
+        return onClearTags();
+      case ETaxonomy.WordTag:
+        return onClearWordTags();
+      default:
+      case ETaxonomy.WordCategory:
+        return onClearWordCategories();
+    }
+  }
 
-export default memo(LabelCloud);
+  get items(): any[] {
+    const { taxonomy, categories, word_tags, word_categories, tags } = this.props;
+
+    switch (taxonomy) {
+      case ETaxonomy.Category:
+        return categories as unknown as IWordStoreState[];
+      case ETaxonomy.PostTag:
+        return tags as unknown as ITagStoreState[];
+      case ETaxonomy.WordTag:
+        return word_tags as unknown as IWordTagStoreState[];
+      default:
+      case ETaxonomy.WordCategory:
+        return word_categories as unknown as IWordCategoryStoreState[];
+    }
+  }
+
+  render() {
+    const { className, taxonomy } = this.props;
+
+    const splicedItems = this.items.splice(0, 10);
+
+    if (!this.items || this.items && Array.isArray(this.items) && this.items.length === 0) {
+      return null;
+    }
+
+    return (
+      <nav className={classNames(styles.LabelCloud, styles[`LabelCloud--${taxonomy}`])}>
+        <ul
+          className={classNames(styles.LabelCloud__list, className)}
+        >
+          {splicedItems && splicedItems.map((
+            {
+              slug,
+              id,
+              name,
+              taxonomy: itemTaxonomy
+            }
+          ) => {
+            return (
+              <li
+                key={id}
+                className={classNames(styles.LabelCloud__item)}
+              >
+                <Label
+                  taxonomy={itemTaxonomy}
+                  className={styles.LabelCloud__label}
+                  link={`${getTaxonomySlug(taxonomy)}/${slug}`}
+                  theme={mapTaxonomyTheme(slug)}
+                >
+                  <FontAwesomeIcon
+                    icon={mapTaxonomyIcon(slug)}
+                    className={styles.LabelCloud__icon}
+                  />
+                  {name}
+                </Label>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    );
+  }
+}

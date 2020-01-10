@@ -31,6 +31,9 @@ export const wordCategoriesReducer = (
     case actions.GET_WORD_CATEGORIES_FAILED:
       return { ...action.payload };
 
+    case actions.CLEAR_WORD_CATEGORIES:
+      return initialState;
+
     default:
       return state;
   }

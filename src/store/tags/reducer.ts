@@ -29,6 +29,9 @@ export const tagsReducer = (
     case actions.GET_TAGS_FAILED:
       return { ...action.payload };
 
+    case actions.CLEAR_TAGS:
+      return initialState;
+
     default:
       return state;
   }

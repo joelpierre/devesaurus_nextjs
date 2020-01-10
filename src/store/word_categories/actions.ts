@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
 import axios  from '../../utils/axios';
 import { setAppError, setAppLoading } from '../rootActions';
-import { GET_WORD_CATEGORIES_FAILED, GET_WORD_CATEGORIES_SUCCESS } from './constants';
+import { CLEAR_WORD_CATEGORIES, GET_WORD_CATEGORIES_FAILED, GET_WORD_CATEGORIES_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
 import { IWordCategoryStoreState } from './reducer';
 
@@ -47,4 +47,8 @@ export const getWordCategoriesFailed = (error: Core.IErrorResponse | AxiosError)
   payload: {
     error
   }
+});
+
+export const clearWordCategories = () => ({
+  type: CLEAR_WORD_CATEGORIES
 });

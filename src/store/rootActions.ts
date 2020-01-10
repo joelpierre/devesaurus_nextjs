@@ -41,9 +41,9 @@ export {
   clearPosts
 } from './posts/actions';
 
-export { getTags, getTagsFailed, getTagsSuccess } from './tags/actions';
+export { getTags, getTagsFailed, getTagsSuccess, clearTags } from './tags/actions';
 
-export { getCategories, getCategoriesFailed, getCategoriesSuccess } from './categories/actions';
+export { getCategories, getCategoriesFailed, getCategoriesSuccess, clearCategories } from './categories/actions';
 
 export {
   getWord,
@@ -61,9 +61,11 @@ export {
   clearWords
 } from './words/actions';
 
-export { getWordTags, getWordTagsFailed, getWordTagsSuccess } from './word_tags/actions';
+export { getWordTags, getWordTagsFailed, getWordTagsSuccess, clearWordTags } from './word_tags/actions';
 
-export { getWordCategories, getWordCategoriesFailed, getWordCategoriesSuccess } from './word_categories/actions';
+export {
+  getWordCategories, getWordCategoriesFailed, getWordCategoriesSuccess, clearWordCategories
+} from './word_categories/actions';
 
 export { getWordsSearch, getSearchWordsSuccess, getSearchWordsFailed, clearSearchWords } from './search/words/actions';
 

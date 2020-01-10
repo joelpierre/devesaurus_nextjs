@@ -51,9 +51,13 @@ export interface IReduxDispatch {
   onGetWord: (slug: string) => IWordStoreState;
   onClearPage: () => void;
   onClearCategory: () => void;
+  onClearCategories: () => void;
   onClearTag: () => void;
+  onClearTags: () => void;
   onClearWordCategory: () => void;
+  onClearWordCategories: () => void;
   onClearWordTag: () => void;
+  onClearWordTags: () => void;
   onClearPost: () => void;
   onClearPosts: () => void;
   onClearWord: () => void;

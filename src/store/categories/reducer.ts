@@ -29,6 +29,9 @@ export const categoriesReducer = (
     case actions.GET_CATEGORIES_FAILED:
       return { ...action.payload };
 
+    case actions.CLEAR_CATEGORIES:
+      return initialState;
+
     default:
       return state;
   }

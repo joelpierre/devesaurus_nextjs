@@ -29,6 +29,9 @@ export const wordTagsReducer = (
     case actions.GET_WORD_TAGS_FAILED:
       return { ...action.payload };
 
+    case actions.CLEAR_WORD_TAGS:
+      return initialState;
+
     default:
       return state;
   }

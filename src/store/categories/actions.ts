@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
 import axios from '../../utils/axios';
 import { setAppError, setAppLoading } from '../rootActions';
-import { GET_CATEGORIES_FAILED, GET_CATEGORIES_SUCCESS } from './constants';
+import { CLEAR_CATEGORIES, GET_CATEGORIES_FAILED, GET_CATEGORIES_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
 import { ICategoryStoreState } from './reducer';
 
@@ -47,4 +47,8 @@ export const getCategoriesFailed = (error: Core.IErrorResponse | AxiosError) => 
   payload: {
     error
   }
+});
+
+export const clearCategories = () => ({
+  type: CLEAR_CATEGORIES
 });

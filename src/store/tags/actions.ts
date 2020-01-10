@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
 import axios  from '../../utils/axios';
 import { setAppError, setAppLoading } from '../rootActions';
-import { GET_TAGS_FAILED, GET_TAGS_SUCCESS } from './constants';
+import { CLEAR_TAGS, GET_TAGS_FAILED, GET_TAGS_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
 import { ITagStoreState } from './reducer';
 
@@ -47,4 +47,8 @@ export const getTagsFailed = (error: Core.IErrorResponse | AxiosError) => ({
   payload: {
     error
   }
+});
+
+export const clearTags = () => ({
+  type: CLEAR_TAGS
 });

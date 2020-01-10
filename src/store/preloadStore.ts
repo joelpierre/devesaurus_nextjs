@@ -1,10 +1,9 @@
 import {
-  getCategories,
   getFooterMenu,
   getPrimaryMenu,
   getSimpleMenu,
-  getSiteMeta, getTags,
-  getTermsMenu, getWordCategories, getWordTags,
+  getSiteMeta,
+  getTermsMenu,
   setAppError,
   setInitialFetch
 } from './rootActions';
@@ -18,11 +17,6 @@ export const preloadStore = async (store: any): Promise<void> => {
     await dispatch(getSimpleMenu());
     await dispatch(getTermsMenu());
     await dispatch(getFooterMenu());
-    await dispatch(getWordCategories());
-    await dispatch(getCategories());
-    await dispatch(getWordTags());
-    await dispatch(getTags());
-    await dispatch(getWordCategories());
     await dispatch(setInitialFetch(true));
   } catch (e) {
     await dispatch(setAppError(true));
