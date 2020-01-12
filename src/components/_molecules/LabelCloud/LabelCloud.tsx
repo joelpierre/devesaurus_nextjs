@@ -108,8 +108,7 @@ export class LabelCloud extends PureComponent<TLabelCloud> {
               name,
               taxonomy: itemTaxonomy
             }
-          ) => {
-            return (
+            ) => (
               <li
                 key={id}
                 className={classNames(styles.LabelCloud__item)}
@@ -127,8 +126,8 @@ export class LabelCloud extends PureComponent<TLabelCloud> {
                   {name}
                 </Label>
               </li>
-            );
-          })}
+            )
+          )}
         </ul>
       </nav>
     );
