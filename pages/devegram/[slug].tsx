@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { connect } from 'react-redux';
 
 import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { ELayout } from '@jpp/typings/enums';
 import { clearPost, getPost } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
@@ -19,7 +19,7 @@ interface IStoreDevegramPageProps {
 }
 
 interface IDispatchDevegramPageProps {
-  onClearPost: () => void;
+  onClearPost: TFuncVoid;
 }
 
 type TDevegramPageProps = IDevegramPageProps & IStoreDevegramPageProps & IDispatchDevegramPageProps;

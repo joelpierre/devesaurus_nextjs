@@ -1,0 +1,88 @@
+.FeaturedWords {
+  $root: &;
+  padding: 0;
+
+  &--is-loaded {
+    padding: 6rem 0 9rem;
+  }
+
+  &__heading {
+    color: white;
+    margin-bottom: spacing(2);
+  }
+
+  &__copy {
+    color: white;
+
+    &:last-of-type {
+      margin-bottom: spacing(4);
+    }
+  }
+
+  &__slider {
+    width: calc(100% + #{spacing(4)});
+    height: 100%;
+    position: relative;
+    margin-left: -#{spacing(2)};
+    margin-right: -#{spacing(2)};
+
+    .slick-list {
+      height: 100%;
+
+      .slick-track {
+        display: flex;
+        height: 100%;
+
+        .slick-slide {
+          height: auto;
+          filter: blur(1px);
+
+          > div {
+            height: 100%;
+          }
+
+          &.slick-active {
+            filter: blur(0);
+          }
+        }
+      }
+    }
+
+    .slick-arrow {
+      position: absolute;
+      top: -#{spacing(8)};
+      transform: none;
+
+      &.slick-prev {
+        left: auto;
+        right: spacing(8);
+      }
+
+      &.slick-next {
+        right: spacing(1.5);
+      }
+    }
+  }
+
+  &__word-card {
+    height: 100%;
+    padding: 0 spacing(2);
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding-right: spacing(5) !important;
+
+    &-icon {
+      position: absolute;
+      top: 50%;
+      right: 2rem;
+      transform: translateY(-50%);
+      height: 18px;
+    }
+  }
+}

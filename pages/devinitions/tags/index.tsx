@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { IReduxState } from '../../../src/store/createStore';
 
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TTagsStoreState } from '../../../src/store/tags/reducer';
 import { getTags } from '../../../src/store/rootActions';
 import { TPostsStoreState } from '../../../src/store/posts/reducer';
@@ -19,7 +19,7 @@ interface IStoreDevinitionsTagsPageProps {
 }
 
 interface IDispatchDevinitionsTagsPageProps {
-  onGetTags: () => void;
+  onGetTags: TFuncVoid;
 }
 
 type TDevinitionsTagsPage =

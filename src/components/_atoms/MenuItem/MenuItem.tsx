@@ -48,60 +48,6 @@ export const MenuItem: FunctionComponent<TMenuItemProps> = (
     [styles.menuItemIconRed]: iconName === 'heart'
   });
 
-  const getIconPrefix = (): EFontAwesomeType => {
-    switch (iconName) {
-      case 'heart':
-      case 'phone':
-      case 'hands-helping':
-        return EFontAwesomeType.solid;
-      default:
-        return EFontAwesomeType.regular;
-    }
-  };
-
-  const getContent = (): JSX.Element => (
-    <div
-      className={classNames(styles.menuItemContent, {
-        [styles.menuItemContentHasIcon]: !!iconName
-      })}
-    >
-      {!!iconName && (
-        <FontAwesomeIcon
-          className={iconClasses}
-          icon={[getIconPrefix(), iconName as IconName]}
-        />
-      )}
-      <span className={styles.menuItemText}>{title}</span>
-    </div>
-  );
-
-  const getEl = () => {
-    if (classes.includes('external')) {
-      return (
-        <a
-          href={url}
-          target="_blank"
-          className={elClasses}
-        >
-          {getContent()}
-        </a>
-      );
-    }
-
-    return (
-      <Link
-        href={getDynamicPage(slug)}
-        as={getDynamicAs(slug)}
-      >
-        <a
-          className={elClasses}
-        >
-          {getContent()}
-        </a>
-      </Link>
-    );
-  };
-
   return (
     <li
       role={!classes.includes('external') && onClick ? 'button' : undefined}
@@ -115,7 +61,61 @@ export const MenuItem: FunctionComponent<TMenuItemProps> = (
         })
       }
     >
-      {getEl()}
+      {getEl(title, url, slug, classes, elClasses, iconName, iconClasses)}
     </li>
+  );
+};
+
+const getIconPrefix = (iconName): EFontAwesomeType => {
+  switch (iconName) {
+    case 'heart':
+    case 'phone':
+    case 'hands-helping':
+      return EFontAwesomeType.solid;
+    default:
+      return EFontAwesomeType.regular;
+  }
+};
+
+const getContent = (title: string, iconName?: string, iconClasses?: string): JSX.Element => (
+  <div
+    className={classNames(styles.menuItemContent, {
+      [styles.menuItemContentHasIcon]: !!iconName
+    })}
+  >
+    {!!iconName && (
+      <FontAwesomeIcon
+        className={iconClasses}
+        icon={[getIconPrefix(iconName), iconName as IconName]}
+      />
+    )}
+    <span className={styles.menuItemText}>{title}</span>
+  </div>
+);
+
+const getEl = (title: string, url: string, slug: string, menuClasses: string[], elClasses?: string, iconName?: string, iconClasses?: string) => {
+  if (menuClasses.includes('external')) {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        className={elClasses}
+      >
+        {getContent(title, iconName, iconClasses)}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      href={getDynamicPage(slug)}
+      as={getDynamicAs(slug)}
+    >
+      <a
+        className={elClasses}
+      >
+        {getContent(title, iconName, iconClasses)}
+      </a>
+    </Link>
   );
 };

@@ -13,6 +13,17 @@ const wordsRoutes = (server: Application, isDev: boolean) => {
       response.status(error.res ? error.res.status : 404).send(error);
     }
   });
+
+  server.get('/featured-words', async (request: Request, response: Response) => {
+    const url = `${isDev ? DEV_FETCH_URL : PROD_FETCH_URL}/${BETTER_REST_ENDPOINT}/word_tag/featured`;
+
+    try {
+      const words = await fetch(url).then(res => res.json());
+      response.status(200).send(wordsTransform(words));
+    } catch (error) {
+      response.status(error.res ? error.res.status : 404).send(error);
+    }
+  });
 };
 
 export default wordsRoutes;

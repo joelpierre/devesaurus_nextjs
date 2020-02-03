@@ -1,3 +1,4 @@
+import { TFuncBooleanVoid } from '@jpp/typings/index';
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -6,6 +7,7 @@ import Icons from '@jpp/atoms/Icon/Icon';
 import SearchForm from '@jpp/molecules/SearchForm';
 import { Hamburger } from '@jpp/atoms/Hamburger/Hamburger';
 import { Heading } from '@jpp/components/_shared/Heading/Heading';
+import { handleSetMenuState } from '../../../store/core/utils';
 
 import styles from './PrimaryHeader.scss';
 
@@ -13,7 +15,7 @@ export interface IPrimaryHeaderProps {
   className?: string;
   isMenuOpen: boolean;
   title: string;
-  setMenuState: (value: boolean) => void;
+  setMenuState: TFuncBooleanVoid;
 }
 
 type TPrimaryHeader = IPrimaryHeaderProps;
@@ -25,14 +27,9 @@ export const PrimaryHeader: FunctionComponent<TPrimaryHeader> = (
     title
   }
 ) => {
-
-  const handleSetMenuState = (): void => {
-    setMenuState(!isMenuOpen);
-  };
-
   return (
     <header className={styles.primaryHeader}>
-      <Hamburger onClick={handleSetMenuState} />
+      <Hamburger onClick={() => handleSetMenuState(setMenuState, isMenuOpen)} />
 
       <Link href="/" as="/">
         <a className={classNames(styles.primaryHeaderBrandLink)}>

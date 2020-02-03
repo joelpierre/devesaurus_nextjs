@@ -1,4 +1,5 @@
 import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter';
+import { TFuncBooleanVoid } from '@jpp/typings/index';
 import React, { PureComponent, ReactNode } from 'react';
 
 import { Meta } from '@jpp/components/_shared/Meta/Meta';
@@ -25,7 +26,7 @@ export interface IStoreBasicProps {
 }
 
 export interface IDispatchBasicProps {
-  onSetMenuState: (value: boolean) => void;
+  onSetMenuState: TFuncBooleanVoid;
 }
 
 type TBasic = IBasicProps & IStoreBasicProps & IDispatchBasicProps;

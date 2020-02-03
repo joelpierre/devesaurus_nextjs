@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { ICategoryStoreState } from '../../../src/store/categories/reducer';
 import { clearWordCategory, getWordCategory, getWordCategoryWords } from '../../../src/store/rootActions';
 import { IWordCategoryStoreState } from '../../../src/store/word_categories/reducer';
@@ -17,7 +17,7 @@ interface IStoreDevinitionCategoryProps {
 }
 
 interface IDispatchDevinitionCategoryProps {
-  onClearWordCategory: () => void;
+  onClearWordCategory: TFuncVoid;
 }
 
 export type TDevinitionCategory =
@@ -48,8 +48,6 @@ class DevinitionCategory extends PureComponent<TDevinitionCategory> {
 
   render() {
     const { word_category } = this.props;
-
-    console.log(word_category);
 
     return (
       <PageHandler

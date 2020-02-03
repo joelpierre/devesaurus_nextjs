@@ -1,38 +1,29 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as styles from './WordCard.scss';
 import Link from 'next/link';
 import { Heading } from '@jpp/components/_shared/Heading/Heading';
 import { mapTaxonomyIcon, mapTaxonomyTheme } from '../../../utils';
 import { Label } from '@jpp/atoms/Label/Label';
+import { IWordStoreState } from '../../../store/word/reducer';
 
-interface IWordCard {
-  title: string;
-  slug: string;
+import styles from './WordCard.scss';
+
+interface IWordCardProps {
   className?: string;
-  contrast?: boolean;
-  acf: any;
-  tags: any[];
-  category: any;
+  word: IWordStoreState;
 }
 
-class WordCard extends PureComponent<IWordCard> {
+class WordCard extends PureComponent<IWordCardProps> {
   render() {
-    const {
-      title,
-      slug,
-      className,
-      contrast = false,
-      acf = {},
-      tags,
-      category
-    } = this.props;
+    const { className, word = {} as IWordStoreState } = this.props;
+    const { title, slug, acf = {} as Core.IWordAcf, word_tags } = word;
+    const { contrast, origin, pronunciation } = acf;
 
     return (
       <section
         className={classNames([
-          styles['word-card'],
+          styles.WordCard,
           className,
           {
             'theme--tint-alpha': !contrast,
@@ -40,76 +31,51 @@ class WordCard extends PureComponent<IWordCard> {
           }
         ])}
       >
-        {category && (
-          <div
-            data-test="word-card-category"
-            className={classNames(
-              styles['word-card__category'],
-              styles[`word-card--theme--${mapTaxonomyTheme(category.slug)}`]
-            )}
-          >
-            <Link
-              href={`/devinitions/category/[slug]`}
-              as={`/devinitions/category/${category.slug}`}
-            >
-              <a
-                className={styles['word-card__category-link']}
-              >
-              <span className={styles['word-card__category-text']}>
-                {category.name}
-              </span>
-
-                <span className={styles['word-card__category-icon']}>
-                <FontAwesomeIcon icon={mapTaxonomyIcon(category.slug)}/>
-              </span>
-              </a>
-            </Link>
-          </div>
-        )}
-
-        <Link
-          href={`/devinition/[slug]`}
-          as={`/devinition/${slug}`}
-        >
-          <a
-            className={styles['word-card__link']}
-          >
-            <span className={styles['word-card__link-text']}>{title}</span>
+        <Link href={`/devinition/[slug]`} as={`/devinition/${slug}`}>
+          <a className={styles.WordCard__link}>
+            <span className={styles['WordCard__link-text']}>{title}</span>
           </a>
         </Link>
 
         <header
-          className={styles['word-card__header']}
+          className={styles.WordCard__header}
         >
           <Heading
             priority="3"
-            data-test="word-card-heading"
-            className={styles['word-card__heading']}
+            className={styles.WordCard__heading}
           >
             {title}
           </Heading>
         </header>
 
-        {acf && (
-          <div data-test="word-card-body" className={styles['word-card__body']}>
-            <p className={styles['word-card__copy']}>
-              <strong>Origin:</strong> {acf.origin.label} ({acf.origin.value})
-            </p>
-            <p className={styles['word-card__copy']}>
-              <strong>Pronunciation:</strong> {acf.pronunciation}
-            </p>
+        {(origin || pronunciation) && (
+          <div className={styles.WordCard__body}>
+            {origin && (
+              <p className={styles.WordCard__copy}>
+                <strong className={styles['WordCard__copy--strong']}>Origin:&nbsp;</strong>
+                {acf.origin.label} ({acf.origin.value})
+              </p>
+            )}
+
+            {pronunciation && (
+              <p className={styles.WordCard__copy}>
+                <strong
+                  className={classNames(styles['WordCard__copy--strong'], 'display-block')}
+                >Pronunciation:&nbsp;</strong>
+                {acf.pronunciation}
+              </p>
+            )}
           </div>
         )}
 
-        <footer className={classNames(styles['word-card__footer'])}>
-          {tags && (
-            <div className={styles['word-card__tags']}>
-              {tags.map((tag, index) => {
-                if (index <= 2) {
+        <div className={classNames(styles.WordCard__footer)}>
+          {word_tags && (
+            <div className={styles.WordCard__tags}>
+              {word_tags.map((tag, index) => {
+                if (index <= 1) {
                   return (
                     <Label
-                      data-test="word-card-tag"
-                      className={styles['word-card__label']}
+                      className={styles.WordCard__label}
                       key={tag.slug}
                       as={`/devinitions/tag/${tag.slug}`}
                       link={`/devinitions/tag/${tag.slug}`}
@@ -117,7 +83,7 @@ class WordCard extends PureComponent<IWordCard> {
                     >
                       <FontAwesomeIcon
                         icon={mapTaxonomyIcon(tag.slug)}
-                        className={styles['word-card__icon']}
+                        className={styles.WordCard__icon}
                       />
                       {tag.name}
                     </Label>
@@ -128,7 +94,7 @@ class WordCard extends PureComponent<IWordCard> {
               })}
             </div>
           )}
-        </footer>
+        </div>
       </section>
     );
   }

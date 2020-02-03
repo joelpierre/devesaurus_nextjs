@@ -839,6 +839,11 @@ declare namespace Core {
      *
      *
      **/
+    contrast?: boolean;
+    /**
+     *
+     *
+     **/
     examples?: IWordExample[];
     /**
      *

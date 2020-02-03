@@ -1,3 +1,4 @@
+import { TFuncVoid } from '@jpp/typings/index';
 import React, { PureComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Label } from '@jpp/atoms/Label/Label';
@@ -25,14 +26,14 @@ export interface IStoreLabelCloudProps {
 }
 
 export interface IDispatchLabelCloudProps {
-  onGetWordCategories: () => void;
-  onGetWordTags: () => void;
-  onGetTags: () => void;
-  onGetCategories: () => void;
-  onClearWordCategories: () => void;
-  onClearWordTags: () => void;
-  onClearTags: () => void;
-  onClearCategories: () => void;
+  onGetWordCategories: TFuncVoid;
+  onGetWordTags: TFuncVoid;
+  onGetTags: TFuncVoid;
+  onGetCategories: TFuncVoid;
+  onClearWordCategories: TFuncVoid;
+  onClearWordTags: TFuncVoid;
+  onClearTags: TFuncVoid;
+  onClearCategories: TFuncVoid;
 }
 
 type TLabelCloud = ILabelCloudProps & IStoreLabelCloudProps & IDispatchLabelCloudProps;

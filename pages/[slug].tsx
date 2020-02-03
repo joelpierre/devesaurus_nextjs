@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import AcfComponents from '@jpp/components/_shared/AcfComponents/AcfComponents';
 import { PageHandler } from '../src/utils/PageHandler/PageHandler';
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 
 import { clearPage, getPage } from '../src/store/rootActions';
 import { IPageStoreState } from '../src/store/page/reducer';
@@ -18,7 +18,7 @@ interface IStoreDefaultPageProps {
 }
 
 interface IDispatchDefaultPageProps {
-  onClearPage: () => void;
+  onClearPage: TFuncVoid;
 }
 
 export type TDefaultPage = IDefaultPageProps & IStoreDefaultPageProps & IDispatchDefaultPageProps;

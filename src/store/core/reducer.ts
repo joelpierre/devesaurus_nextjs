@@ -1,7 +1,7 @@
-import * as actions from './constants';
-import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
 import { TReduxError } from '@jpp/typings/index';
+import * as actions from './constants';
+import { updateObject } from '../../utils';
 import { APP_TITLE, SITE_DESCRIPTION } from '../../utils/constants';
 
 export interface ICoreStoreState {

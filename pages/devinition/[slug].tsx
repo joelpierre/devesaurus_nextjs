@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { ELayout } from '@jpp/typings/enums';
 import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
 import { clearWord, getWord } from '../../src/store/word/actions';
@@ -17,7 +17,7 @@ interface IStoreDevinitionPageProps {
 }
 
 interface IDispatchDevinitionPageProps {
-  onClearWord: () => void;
+  onClearWord: TFuncVoid;
 }
 
 type TDevinitionPageProps = IDevinitionPageProps & IStoreDevinitionPageProps & IDispatchDevinitionPageProps;

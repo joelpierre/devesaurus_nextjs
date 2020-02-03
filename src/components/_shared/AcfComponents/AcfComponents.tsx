@@ -1,4 +1,5 @@
 import React, { ComponentType, FunctionComponent, memo } from 'react';
+import FeaturedWords from '@jpp/organisms/FeaturedWords';
 import { ContentBlock } from '@jpp/organisms/ContentBlock/ContentBlock';
 import { ImageBlock } from '@jpp/organisms/ImageBlock/ImageBlock';
 import { ImageScroller } from '@jpp/organisms/ImageScroller/ImageScroller';
@@ -9,6 +10,7 @@ import { TextBlock } from '@jpp/organisms/TextBlock/TextBlock';
 import { InlineQuote } from '@jpp/organisms/InlineQuote/InlineQuote';
 import HeroSplash from '@jpp/organisms/HeroSplash/HeroSplash';
 import { CtaBanner } from '@jpp/organisms/CtaBanner/CtaBanner';
+import Sponsors from '@jpp/organisms/Sponsors';
 
 interface IAcfComponentsProps {
   className?: string;
@@ -17,7 +19,7 @@ interface IAcfComponentsProps {
 }
 
 interface IAcfComponentMap {
-  [key: string]: React.ComponentType<any>;
+  [key: string]: React.ComponentType<Partial<Core.IAcfComponent>>;
 }
 
 enum EAcfComponentType {
@@ -30,7 +32,9 @@ enum EAcfComponentType {
   PageHero = 'page_hero',
   PressPack = 'press_pack',
   Testimonials = 'testimonials',
-  TextBlock = 'text_block'
+  TextBlock = 'text_block',
+  FeaturedWords = 'featured_words',
+  Sponsors = 'sponsors'
 }
 
 const ACF_COMPONENT_MAP: IAcfComponentMap = {
@@ -43,7 +47,9 @@ const ACF_COMPONENT_MAP: IAcfComponentMap = {
   [EAcfComponentType.PageHero]: PageHero,
   [EAcfComponentType.PressPack]: PressPack,
   [EAcfComponentType.Testimonials]: Testimonials,
-  [EAcfComponentType.TextBlock]: TextBlock
+  [EAcfComponentType.TextBlock]: TextBlock,
+  [EAcfComponentType.FeaturedWords]: FeaturedWords,
+  [EAcfComponentType.Sponsors]: Sponsors
 };
 
 export const AcfComponents: FunctionComponent<IAcfComponentsProps> = (
@@ -65,12 +71,18 @@ export const AcfComponents: FunctionComponent<IAcfComponentsProps> = (
 
           const Component: ComponentType<any> = ACF_COMPONENT_MAP[componentName];
 
+          if (!Component) {
+            console.warn('componentName', componentName);
+          }
+
           return Component ? (
             <Component
               key={index}
               {...componentProps}
             />
-          ) : <React.Fragment key={index} />;
+          ) : (
+            <React.Fragment key={index} />
+          );
         }
       )}
     </>

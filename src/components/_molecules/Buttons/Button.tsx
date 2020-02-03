@@ -20,10 +20,12 @@ interface IButtonProps {
   link?: string;
   outline?: boolean;
   tabIndex?: number;
-  icon?: {
-    weight: Core.TFaIconWeight;
-    name: IconName;
-  };
+  icon?: IButtonIcon;
+}
+
+interface IButtonIcon {
+  weight: Core.TFaIconWeight;
+  name: IconName;
 }
 
 export const Button: FunctionComponent<IButtonProps> = (
@@ -58,7 +60,7 @@ export const Button: FunctionComponent<IButtonProps> = (
     ...props
   };
 
-  const content = (
+  const getContent = (
     <>
       <span className={styles.btnContent}>
         {children && (
@@ -88,14 +90,14 @@ export const Button: FunctionComponent<IButtonProps> = (
           rel="noopener noreferrer nofollow"
           {...defaultProps}
         >
-          {content}
+          {getContent}
         </a>
       );
 
     case 'action':
       return (
         <button type={type || 'button'} {...defaultProps}>
-          {content}
+          {getContent}
         </button>
       );
 
@@ -104,7 +106,7 @@ export const Button: FunctionComponent<IButtonProps> = (
       return (
         <Link href={as ? as : getDynamicPage(link)} as={getDynamicAs(link)}>
           <a {...defaultProps}>
-            {content}
+            {getContent}
           </a>
         </Link>
       );

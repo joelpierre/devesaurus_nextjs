@@ -41,11 +41,11 @@ class CoreApp extends App<TCoreAppProps> {
   }
 
   render() {
-    const { Component, store: reduxStore, pageProps } = this.props;
-    const { initialFetch } = reduxStore.getState().core;
+    const { Component, store, pageProps } = this.props;
+    const { initialFetch } = store.getState().core;
 
     return (
-      <Provider store={reduxStore}>
+      <Provider store={store}>
         {initialFetch ? (
           <Component {...pageProps} />
         ) : (

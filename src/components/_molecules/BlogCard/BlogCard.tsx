@@ -8,7 +8,7 @@ interface IBlogCard {
 }
 
 const BlogCard: FunctionComponent<IBlogCard> = ({ className }) => {
-  return <section className={classNames(className, styles.blogCard)}/>;
+  return <section className={classNames(className, styles.blogCard)} />;
 };
 
 export default BlogCard;

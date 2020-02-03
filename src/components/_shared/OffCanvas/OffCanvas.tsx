@@ -1,3 +1,4 @@
+import { TFuncBooleanVoid } from '@jpp/typings/index';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { PrimaryMenu } from '@jpp/organisms/PrimaryMenu/PrimaryMenu';
@@ -10,7 +11,7 @@ interface IOffCanvasProps {
   className?: string;
   isMenuOpen: boolean;
   menuItems: Core.IMenuItem[];
-  setMenuState: (value: boolean) => void;
+  setMenuState: TFuncBooleanVoid;
 }
 
 export class OffCanvas extends PureComponent<IOffCanvasProps> {

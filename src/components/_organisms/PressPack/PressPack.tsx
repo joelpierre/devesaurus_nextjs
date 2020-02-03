@@ -21,17 +21,9 @@ export const PressPack: FunctionComponent<Partial<Core.IAcfComponent>> = (
     theme
   }
 ) => {
-  const {
-    url: { source_url: ZIP_URL }
-  } = brand_zip_file;
-  const {
-    source_url,
-    media_details: { width, height }
-  } = image;
-
-  const imageAttrs = {
-    loading: 'lazy'
-  };
+  const { url: { source_url: ZIP_URL } } = brand_zip_file;
+  const { source_url, media_details: { width, height } } = image;
+  const imageAttrs = { loading: 'lazy' };
 
   return (
     <Section

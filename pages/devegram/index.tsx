@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 
 import { getPosts } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
@@ -17,7 +17,7 @@ interface IStoreDevegramPageProps {
 }
 
 interface IDispatchDevegramPageProps {
-  onGetPosts: () => void;
+  onGetPosts: TFuncVoid;
 }
 
 type TDevegramPage =
@@ -49,7 +49,7 @@ export class DevegramPage extends PureComponent<TDevegramPage> {
   render() {
     return (
       <PageHandler
-        title="Devinitions"
+        title="Devegram"
         description="Long description for meta data"
       >
         DEVEGRAM PAGE

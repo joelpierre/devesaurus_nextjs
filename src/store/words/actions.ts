@@ -2,7 +2,14 @@ import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import axios from '../../utils/axios/';
 
-import { CLEAR_WORDS, GET_WORDS_FAILED, GET_WORDS_SUCCESS } from './constants';
+import {
+  CLEAR_FEATURED_WORDS,
+  CLEAR_WORDS,
+  GET_FEATURED_WORDS_FAILED,
+  GET_FEATURED_WORDS_SUCCESS,
+  GET_WORDS_FAILED,
+  GET_WORDS_SUCCESS
+} from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
 import { setAppError, setAppLoading } from '../core/actions';
 import { AxiosError, AxiosResponse } from 'axios';
@@ -20,7 +27,7 @@ export const getWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRed
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'Page not found', hasError: true, code: 404 as Core.TErrorCode };
+          const error = { message: 'Words not found', hasError: true, code: 404 as Core.TErrorCode };
           dispatch(setAppError(true));
           return dispatch(getWordsFailed(error));
         }
@@ -31,6 +38,34 @@ export const getWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRed
         dispatch(setAppLoading(false));
         dispatch(setAppError(true));
         dispatch(getWordsFailed(error));
+        throw error;
+      });
+  };
+};
+
+export const getFeaturedWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+  return (dispatch: Dispatch): Promise<AnyAction> => {
+    dispatch(setAppLoading(true));
+    dispatch(setAppError(false));
+
+    return axios
+      .get(`/featured-words`)
+      .then((response: AxiosResponse) => {
+        dispatch(setAppLoading(false));
+
+        // We check for the error as wordpress doesn't return a 404.
+        if (response.data.length === 0) {
+          const error = { message: 'Words not found', hasError: true, code: 404 as Core.TErrorCode };
+          dispatch(setAppError(true));
+          return dispatch(getFeaturedWordsFailed(error));
+        }
+
+        return dispatch(getFeaturedWordsSuccess(response.data));
+      })
+      .catch((error: AxiosError) => {
+        dispatch(setAppLoading(false));
+        dispatch(setAppError(true));
+        dispatch(getFeaturedWordsFailed(error));
         throw error;
       });
   };
@@ -106,6 +141,24 @@ export const getWordsFailed = (error: Core.IErrorResponse | AxiosError) => ({
   }
 });
 
+export const getFeaturedWordsSuccess = (data: IWordStoreState[]) => ({
+  type: GET_FEATURED_WORDS_SUCCESS,
+  payload: [
+    ...data
+  ]
+});
+
+export const getFeaturedWordsFailed = (error: Core.IErrorResponse | AxiosError) => ({
+  type: GET_FEATURED_WORDS_FAILED,
+  payload: {
+    error
+  }
+});
+
 export const clearWords = () => ({
   type: CLEAR_WORDS
+});
+
+export const clearFeaturedWords = () => ({
+  type: CLEAR_FEATURED_WORDS
 });

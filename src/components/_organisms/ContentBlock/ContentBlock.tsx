@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
@@ -11,36 +11,25 @@ import { EPosition } from '@jpp/typings/enums';
 
 import styles from './ContentBlock.scss';
 
-export const ContentBlock: FunctionComponent<Core.IAcfComponent> = (
-  {
-    className,
-    highlight,
-    position,
-    image,
-    heading,
-    copy,
-    cta,
-    cta_text,
-    cta_link,
-    cta_theme,
-    theme,
-    page_theme
-  }
-) => {
-  const getCta = (): JSX.Element => {
+export class ContentBlock extends React.PureComponent<Core.IAcfComponent> {
+  get cta(): JSX.Element {
+    const { cta_text, cta_link, cta_theme } = this.props;
+
     return (
       <Button className={styles.ContentBlock__button} theme={cta_theme} link={cta_link.post_name}>
         {cta_text}
       </Button>
     );
-  };
+  }
 
-  const getContent = (): JSX.Element => {
+  get content(): JSX.Element {
+    const { position, image, heading, copy, cta } = this.props;
+
     if (position === EPosition.Center) {
       return (
         <Flex colLg={6} className={styles.ContentBlock__content}>
           <WYSIWYG textCenter={true} content={copy} />
-          {cta && getCta()}
+          {cta && this.cta}
         </Flex>
       );
     }
@@ -54,7 +43,7 @@ export const ContentBlock: FunctionComponent<Core.IAcfComponent> = (
             </Heading>
           )}
           <WYSIWYG content={copy} />
-          {cta && getCta()}
+          {cta && this.cta}
         </Flex>
 
         <Flex
@@ -66,25 +55,34 @@ export const ContentBlock: FunctionComponent<Core.IAcfComponent> = (
         />
       </>
     );
-  };
+  }
 
-  const ROOT_CLASSES = classNames(
-    styles.ContentBlock,
-    className,
-    styles[`ContentBlock--${position}`],
-    `theme--${theme ? theme : page_theme}`
-  );
+  render() {
+    const {
+      className,
+      position,
+      theme,
+      page_theme
+    } = this.props;
 
-  return (
-    <Section
-      tagElement="article"
-      className={ROOT_CLASSES}
-    >
-      <Container fluid={true}>
-        <Row>
-          {getContent()}
-        </Row>
-      </Container>
-    </Section>
-  );
-};
+    const ROOT_CLASSES = classNames(
+      styles.ContentBlock,
+      className,
+      styles[`ContentBlock--${position}`],
+      `theme--${theme ? theme : page_theme}`
+    );
+
+    return (
+      <Section
+        tagElement="article"
+        className={ROOT_CLASSES}
+      >
+        <Container fluid={true}>
+          <Row>
+            {this.content}
+          </Row>
+        </Container>
+      </Section>
+    );
+  }
+}

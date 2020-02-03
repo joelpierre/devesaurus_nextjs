@@ -8,7 +8,7 @@ interface IBreadcrumbs {
 }
 
 const Breadcrumbs: FunctionComponent<IBreadcrumbs> = ({ className }) => {
-  return <article className={classNames(className, styles.breadcrumbs)}/>;
+  return <article className={classNames(className, styles.breadcrumbs)} />;
 };
 
 export default Breadcrumbs;

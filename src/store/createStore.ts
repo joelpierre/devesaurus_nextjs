@@ -1,3 +1,4 @@
+import { TFuncBooleanVoid, TFuncVoid } from '@jpp/typings/index';
 import { applyMiddleware, compose, createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
@@ -13,7 +14,7 @@ import { ICategoryStoreState, TCategoriesStoreState } from './categories/reducer
 import { IWordTagStoreState, TWordTagsStoreState } from './word_tags/reducer';
 import { IWordCategoryStoreState, TWordCategoriesStoreState } from './word_categories/reducer';
 import { TPostsStoreState } from './posts/reducer';
-import { TWordsStoreState } from './words/reducer';
+import { IWordsStoreState, TWordsStoreState } from './words/reducer';
 import ConfigProvider from '../services/configProvider';
 
 export interface IReduxState {
@@ -25,7 +26,7 @@ export interface IReduxState {
   tags: TTagsStoreState;
   category: ICategoryStoreState;
   categories: TCategoriesStoreState;
-  words: TWordsStoreState;
+  words: IWordsStoreState;
   word: IWordStoreState;
   word_tag: IWordTagStoreState;
   word_tags: TWordTagsStoreState;
@@ -35,9 +36,9 @@ export interface IReduxState {
 }
 
 export interface IReduxDispatch {
-  onSetMenuState: (value: boolean) => void;
-  onSetAppLoading: (value: boolean) => void;
-  onSetAppError: (value: boolean) => void;
+  onSetMenuState: TFuncBooleanVoid;
+  onSetAppLoading: TFuncBooleanVoid;
+  onSetAppError: TFuncBooleanVoid;
   onGetSiteMeta: () => ICoreStoreState;
   onGetPage: (slug: string) => IPageStoreState;
   onGetPost: (slug: string) => IPostStoreState;
@@ -46,24 +47,26 @@ export interface IReduxDispatch {
   onGetTagPosts: () => TPostsStoreState;
   onGetCategories: () => TCategoriesStoreState;
   onGetWords: () => TWordsStoreState;
+  onGetFeaturedWords: () => TWordsStoreState;
   onGetCategoryWords: () => TWordsStoreState;
   onGetTagWords: () => TWordsStoreState;
   onGetWord: (slug: string) => IWordStoreState;
-  onClearPage: () => void;
-  onClearCategory: () => void;
-  onClearCategories: () => void;
-  onClearTag: () => void;
-  onClearTags: () => void;
-  onClearWordCategory: () => void;
-  onClearWordCategories: () => void;
-  onClearWordTag: () => void;
-  onClearWordTags: () => void;
-  onClearPost: () => void;
-  onClearPosts: () => void;
-  onClearWord: () => void;
-  onClearWords: () => void;
-  onWordSearch: () => void;
-  onPostSearch: () => void;
+  onClearPage: TFuncVoid;
+  onClearCategory: TFuncVoid;
+  onClearCategories: TFuncVoid;
+  onClearTag: TFuncVoid;
+  onClearTags: TFuncVoid;
+  onClearWordCategory: TFuncVoid;
+  onClearWordCategories: TFuncVoid;
+  onClearWordTag: TFuncVoid;
+  onClearWordTags: TFuncVoid;
+  onClearPost: TFuncVoid;
+  onClearPosts: TFuncVoid;
+  onClearWord: TFuncVoid;
+  onClearWords: TFuncVoid;
+  onClearFeaturedWords: TFuncVoid;
+  onWordSearch: TFuncVoid;
+  onPostSearch: TFuncVoid;
 }
 
 export type TReduxProps = IReduxState & IReduxDispatch;

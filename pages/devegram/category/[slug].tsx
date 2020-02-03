@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { ICategoryStoreState } from '../../../src/store/categories/reducer';
 import { clearCategory, getCategory } from '../../../src/store/rootActions';
 
@@ -15,7 +15,7 @@ interface IStoreDevinitionCategoryProps {
 }
 
 interface IDispatchDevinitionCategoryProps {
-  onClearCategory: () => void;
+  onClearCategory: TFuncVoid;
 }
 
 export type TDevinitionCategory =

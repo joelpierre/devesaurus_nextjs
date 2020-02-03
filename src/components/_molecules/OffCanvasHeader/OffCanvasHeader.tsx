@@ -1,3 +1,4 @@
+import { TFuncBooleanVoid } from '@jpp/typings/index';
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -10,10 +11,12 @@ import styles from './OffCanvasHeader.scss';
 interface IOffCanvasHeader {
   className?: string;
   isMenuOpen: boolean;
-  setMenuState: (value: boolean) => void;
+  setMenuState: TFuncBooleanVoid;
 }
 
-const OffCanvasHeader: FunctionComponent<IOffCanvasHeader> = ({ className, setMenuState, isMenuOpen }) => {
+const OffCanvasHeader: FunctionComponent<IOffCanvasHeader> = (
+  { className, setMenuState, isMenuOpen }
+) => {
 
   const handleSetMenuState = (event) => {
     setMenuState(!isMenuOpen);

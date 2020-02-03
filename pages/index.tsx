@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import AcfComponents from '@jpp/components/_shared/AcfComponents/AcfComponents';
 import { ELayout } from '@jpp/typings/enums';
 
@@ -19,7 +19,7 @@ interface IStoreHomePageProps {
 }
 
 interface IDispatchHomePageProps {
-  onClearPage: () => void;
+  onClearPage: TFuncVoid;
 }
 
 type THomePage = IHomePageProps & IStoreHomePageProps & IDispatchHomePageProps;

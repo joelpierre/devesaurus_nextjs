@@ -58,7 +58,11 @@ export {
   getTagWords,
   getWordsFailed,
   getWordsSuccess,
-  clearWords
+  clearWords,
+  getFeaturedWords,
+  getFeaturedWordsFailed,
+  getFeaturedWordsSuccess,
+  clearFeaturedWords
 } from './words/actions';
 
 export { getWordTags, getWordTagsFailed, getWordTagsSuccess, clearWordTags } from './word_tags/actions';

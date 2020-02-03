@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { BannerLayer, ParallaxBanner } from 'react-scroll-parallax/cjs';
 
 import { Heading } from '@jpp/components/_shared/Heading/Heading';
@@ -14,19 +14,14 @@ interface IImageScrollerProps {
 
 type TImageScroller = IImageScrollerProps & Partial<Core.IAcfComponent>;
 
-export const ImageScroller: FunctionComponent<TImageScroller> = (
-  {
-    className,
-    image,
-    theme,
-    page_theme,
-    children,
-    size = ESize.Md,
-    heading,
-    copy
-  }
-) => {
-  const getContent = (): JSX.Element | null => {
+export class ImageScroller extends React.PureComponent<TImageScroller> {
+  get content(): JSX.Element | null {
+    const {
+      children,
+      heading,
+      copy
+    } = this.props;
+
     if (children) {
       return <>{children}</>;
     }
@@ -49,28 +44,36 @@ export const ImageScroller: FunctionComponent<TImageScroller> = (
     }
 
     return null;
-  };
+  }
 
-  return (
-    <ParallaxBanner
-      className={classNames(className, styles.imageScroller, {
-        [styles.imageScrollerXs]: size === ESize.Xs,
-        [styles.imageScrollerSm]: size === ESize.Sm,
-        [styles.imageScrollerMd]: size === ESize.Md,
-        [styles.imageScrollerLg]: size === ESize.Lg,
-        [styles.imageScrollerXl]: size === ESize.Xl
-      })}
-      layers={
-        [{
-          amount: 0.3,
-          children: undefined,
-          ...image
-        }]
-      }
-    >
-      <article className={styles.imageScrollerContent}>
-        {getContent()}
-      </article>
-    </ParallaxBanner>
-  );
-};
+  render() {
+    const {
+      className,
+      image,
+      size = ESize.Md
+    } = this.props;
+
+    return (
+      <ParallaxBanner
+        className={classNames(className, styles.imageScroller, {
+          [styles.imageScrollerXs]: size === ESize.Xs,
+          [styles.imageScrollerSm]: size === ESize.Sm,
+          [styles.imageScrollerMd]: size === ESize.Md,
+          [styles.imageScrollerLg]: size === ESize.Lg,
+          [styles.imageScrollerXl]: size === ESize.Xl
+        })}
+        layers={
+          [{
+            amount: 0.3,
+            children: undefined,
+            ...image
+          }]
+        }
+      >
+        <article className={styles.imageScrollerContent}>
+          {this.content}
+        </article>
+      </ParallaxBanner>
+    );
+  }
+}

@@ -5,23 +5,21 @@ import {
   IDispatchBasicProps,
   IStoreBasicProps
 } from '@jpp/layouts/Basic/Basic';
+import {
+  getLoadingState,
+  getMenuState,
+  getPrimaryMenuFromState,
+  getSimpleMenuFromState
+} from '../../store/core/selectors';
 import { IReduxState } from '../../store/createStore';
 import { setMenuState } from '../../store/rootActions';
 
-const mapStateToProps = (
+const mapStateToProps = (state: IReduxState): IStoreBasicProps => (
   {
-    core: {
-      isMenuOpen,
-      isLoading,
-      primaryMenu,
-      simpleMenu
-    }
-  }: IReduxState): IStoreBasicProps => (
-  {
-    isMenuOpen,
-    isLoading,
-    primaryMenu,
-    simpleMenu
+    isMenuOpen: getMenuState(state),
+    isLoading: getLoadingState(state),
+    primaryMenu: getPrimaryMenuFromState(state),
+    simpleMenu: getSimpleMenuFromState(state)
   }
 );
 

@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
-
 import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
-
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { getWords } from '../../src/store/rootActions';
-
 import { TWordsStoreState } from '../../src/store/words/reducer';
 
 interface IDevinitionsPage {
@@ -16,7 +13,7 @@ interface IStoreDevinitionsPageProps {
 }
 
 interface IDispatchDevinitionsPageProps {
-  onGetWords: () => void;
+  onGetWords: TFuncVoid;
 }
 
 type TDevinitionsPage =
@@ -27,7 +24,7 @@ type TDevinitionsPage =
 class DevinitionsPage extends PureComponent<TDevinitionsPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getWords());
-    const words: TWordsStoreState = store.getState().words;
+    const words: TWordsStoreState = store.getState().words.allWords;
 
     if (!Array.isArray(words)) {
       res.statusCode = words.code;

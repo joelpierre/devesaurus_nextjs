@@ -1,3 +1,4 @@
+import { TFuncBooleanVoid } from '@jpp/typings/index';
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
@@ -6,7 +7,7 @@ import styles from './PushWrapper.scss';
 interface IPushWrapperProps {
   className?: string;
   isMenuOpen: boolean;
-  setMenuState: (value: boolean) => void;
+  setMenuState: TFuncBooleanVoid;
 }
 
 export const PushWrapper: FunctionComponent<IPushWrapperProps> = (

@@ -6,7 +6,7 @@ import { getCategories } from '../../../src/store/rootActions';
 import { IReduxState } from '../../../src/store/createStore';
 
 import { TCategoriesStoreState } from '../../../src/store/categories/reducer';
-import { TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TPostsStoreState } from '../../../src/store/posts/reducer';
 
 interface IDevinitionsCategoriesPage {
@@ -18,7 +18,7 @@ interface IStoreDevinitionsCategoriesPageProps {
 }
 
 interface IDispatchDevinitionsCategoriesPageProps {
-  onGetCategories: () => void;
+  onGetCategories: TFuncVoid;
 }
 
 type TDevinitionsCategoriesPage =
