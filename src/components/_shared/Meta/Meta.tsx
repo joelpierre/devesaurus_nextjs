@@ -79,7 +79,7 @@ export const Meta: FunctionComponent<IMetaProps> = (
     <Head>
       <title>{`${pageTitle} | ${siteTitle}`}</title>
       {metaTags.map((metaTag: Core.IMetaTag, index) => (
-        <meta key={index} name={metaTag.name} property={metaTag.property} content={metaTag.content}/>
+        <meta key={index} name={metaTag.name} property={metaTag.property} content={metaTag.content} />
       ))}
     </Head>
   );

@@ -11,20 +11,18 @@ export interface IPrimaryFooterProps {
 
 export interface IStorePrimaryFooterProps {
   footerMenu: Core.IMenuItem[];
-  termsMenu: Core.IMenuItem[];
   company_name: string;
   company_slogan: string;
   general_email: string;
 }
 
-type TPrimaryFooterProps = IPrimaryFooterProps & IStorePrimaryFooterProps;
+type TPrimaryFooter = IPrimaryFooterProps & IStorePrimaryFooterProps;
 
-export class PrimaryFooter extends PureComponent<TPrimaryFooterProps> {
+export class PrimaryFooter extends PureComponent<TPrimaryFooter> {
   render() {
     const {
       className,
       footerMenu,
-      termsMenu,
       company_name,
       company_slogan,
       general_email
@@ -41,7 +39,6 @@ export class PrimaryFooter extends PureComponent<TPrimaryFooterProps> {
         <FooterBottom
           companyName={company_name}
           className={styles.primaryFooterBottom}
-          termsMenu={termsMenu}
         />
       </footer>
     );

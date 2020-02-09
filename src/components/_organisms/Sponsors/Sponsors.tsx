@@ -1,32 +1,56 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Section } from '@jpp/components/_shared/Grid/Section/Section';
-
-import styles from './Sponsors.scss';
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
 import { Row } from '@jpp/components/_shared/Grid/Row/Row';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Sponsor } from '@jpp/molecules/Sponsor/Sponsor';
+import { Heading } from '@jpp/components/_shared/Heading/Heading';
 
-export const Sponsors: React.FunctionComponent<Core.IAcfComponent> = (
+import styles from './Sponsors.scss';
+
+export interface IStoreSponsorsProps {
+  sponsors: Core.ISponsor[];
+}
+
+export type TSponsors = Core.IAcfComponent & IStoreSponsorsProps;
+
+export const Sponsors: React.FunctionComponent<TSponsors> = (
   {
     className,
     theme,
-    page_theme
+    page_theme,
+    sponsors
   }
 ) => {
+  const sponsorsLength = sponsors.length;
+
+  if (sponsorsLength === 0) {
+    return null;
+  }
+
   return (
     <Section
       className={
         classNames(styles.Sponsors, className, `theme--${theme || page_theme}`)
       }
     >
-      <Container>
+      <Container fluid={false}>
         <Row>
-          <Flex colLg={12}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, illum sequi. Accusamus ad, corporis
-            doloremque,
-            doloribus ex, facilis impedit incidunt magnam minus necessitatibus nemo odio officiis quis quos reiciendis
-            vel!
+          <Flex colLg={3}>
+            <Heading priority={2} className={styles.Sponsors__heading}>
+              Proudly sponsored by:
+            </Heading>
+          </Flex>
+
+          <Flex colLg={9} className={classNames(styles['Sponsors__sponsor-wrapper'])}>
+            {sponsors.map((sponsor, index) => (
+              <Sponsor
+                key={index}
+                className={styles.Sponsors__sponsor}
+                sponsor={sponsor}
+              />
+            ))}
           </Flex>
         </Row>
       </Container>

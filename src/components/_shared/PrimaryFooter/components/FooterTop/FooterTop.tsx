@@ -25,35 +25,35 @@ export const FooterTop: FunctionComponent<IFooterTopProps> = (
 ) => {
   return (
     <article className={classNames(className, styles.FooterTop)}>
-      <Container>
+      <Container fluid={true}>
         <Row>
           <Flex colLg={3} colMd={12}>
             <Link href="/" as="/">
               <a>
-                <Icons.LogoText className={footerStyles.primaryFooterLogo} />
+                <Icons.LogoText className={footerStyles.PrimaryFooter__logo} />
               </a>
             </Link>
 
-            <div className={footerStyles.primaryFooterContent}>
-              <p className={footerStyles.primaryFooterCopy}>
+            <div className={footerStyles.PrimaryFooter__content}>
+              <p className={footerStyles.PrimaryFooter__copy}>
                 {companySlogan}
               </p>
-              <p className={footerStyles.primaryFooterCopy}>
+              <p className={footerStyles.PrimaryFooter__copy}>
                 {generalEmail}
               </p>
             </div>
           </Flex>
 
           <Flex colLg={3} colMd={6}>
-            <div className={footerStyles.primaryFooterContent} />
+            <div className={footerStyles.PrimaryFooter__content} />
           </Flex>
 
           <Flex colLg={3} colMd={6}>
-            <div className={footerStyles.primaryFooterContent} />
+            <div className={footerStyles.PrimaryFooter__content} />
           </Flex>
 
           <Flex colLg={3} colMd={6}>
-            <div className={footerStyles.primaryFooterContent} />
+            <div className={footerStyles.PrimaryFooter__content} />
           </Flex>
         </Row>
       </Container>

@@ -86,21 +86,23 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
         theme={'gradient-brand'}
       >
         <Container fluid={false}>
-          <Row>
-            <Flex col={6}>
-              {heading && (
-                <Heading priority={2} className={styles.FeaturedWords__heading}>
-                  {heading}
-                </Heading>
-              )}
+          {(heading || copy) && (
+            <Row>
+              <Flex col={6}>
+                {heading && (
+                  <Heading priority={2} className={styles.FeaturedWords__heading}>
+                    {heading}
+                  </Heading>
+                )}
 
-              {copy && (
-                <p className={styles.FeaturedWords__copy}>
-                  {copy}
-                </p>
-              )}
-            </Flex>
-          </Row>
+                {copy && (
+                  <p className={styles.FeaturedWords__copy}>
+                    {copy}
+                  </p>
+                )}
+              </Flex>
+            </Row>
+          )}
 
           {featuredWordsLength && (
             <>
@@ -108,8 +110,8 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
                 <Flex col={12}>
                   <Carousel settings={carouselSettings}>
                     {featuredWords.map((word) => (
-                      <div className={styles['FeaturedWords__word-card']}>
-                        <WordCard key={word.slug} word={word} />
+                      <div key={word.slug} className={styles['FeaturedWords__word-card']}>
+                        <WordCard word={word} />
                       </div>
                     ))}
                   </Carousel>
@@ -121,7 +123,7 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
                   <Button
                     behaviour={'router'}
                     link={'devinitions'}
-                    className={classNames('mb-0', styles.FeaturedWords__button)}
+                    className={classNames(styles.FeaturedWords__button)}
                   >
                     View all word categories
 

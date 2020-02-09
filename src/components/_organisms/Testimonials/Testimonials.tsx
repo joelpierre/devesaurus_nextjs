@@ -14,7 +14,7 @@ import './utils/slick-overrides.scss';
 import styles from './Testimonials.scss';
 
 interface ITestimonialsProps {
-  testimonials: Core.ITestimonials[];
+  testimonials: Core.ITestimonial[];
 }
 
 type TTestimonials = ITestimonialsProps & Core.IAcfComponent;

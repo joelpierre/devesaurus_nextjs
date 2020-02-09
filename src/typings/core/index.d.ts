@@ -393,12 +393,12 @@ declare namespace Core {
      *
      *
      **/
-    sponsors?: ISponsors[];
+    sponsors?: ISponsor[];
     /**
      *
      *
      */
-    testimonials?: ITestimonials[];
+    testimonials?: ITestimonial[];
   }
 
   export interface IMedia {
@@ -610,7 +610,7 @@ declare namespace Core {
     height: number;
   }
 
-  export interface ISponsors {
+  export interface ISponsor {
     /**
      *
      *
@@ -621,9 +621,19 @@ declare namespace Core {
      *
      **/
     image: IMedia;
+    /**
+     *
+     *
+     **/
+    website_url: string;
+    /**
+     *
+     *
+     **/
+    short_description: string;
   }
 
-  export interface ITestimonials {
+  export interface ITestimonial {
     /**
      *
      *

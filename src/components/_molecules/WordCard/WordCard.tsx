@@ -18,7 +18,7 @@ class WordCard extends PureComponent<IWordCardProps> {
   render() {
     const { className, word = {} as IWordStoreState } = this.props;
     const { title, slug, acf = {} as Core.IWordAcf, word_tags } = word;
-    const { contrast, origin, pronunciation } = acf;
+    const { contrast, pronunciation } = acf;
 
     return (
       <section
@@ -48,15 +48,8 @@ class WordCard extends PureComponent<IWordCardProps> {
           </Heading>
         </header>
 
-        {(origin || pronunciation) && (
+        {(pronunciation) && (
           <div className={styles.WordCard__body}>
-            {origin && (
-              <p className={styles.WordCard__copy}>
-                <strong className={styles['WordCard__copy--strong']}>Origin:&nbsp;</strong>
-                {acf.origin.label} ({acf.origin.value})
-              </p>
-            )}
-
             {pronunciation && (
               <p className={styles.WordCard__copy}>
                 <strong

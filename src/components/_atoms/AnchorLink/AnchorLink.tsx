@@ -3,11 +3,12 @@ import classNames from 'classnames';
 import Link from 'next/link';
 
 import styles from './AnchorLink.scss';
+import { getDynamicAs, getDynamicPage } from '../../../utils';
 
 interface IAnchorLinkProps {
   className?: string;
   link: string;
-  as: string;
+  as?: string;
   behaviour?: Core.TLinkBehaviour;
   onClick?: Core.TOnClick;
 }
@@ -41,7 +42,7 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
     default:
     case 'router':
       Element = (
-        <Link href={link} as={as} {...defaultProps}>
+        <Link href={getDynamicPage(link)} as={as ? as : getDynamicAs(link)} {...defaultProps}>
           {children}
         </Link>
       );

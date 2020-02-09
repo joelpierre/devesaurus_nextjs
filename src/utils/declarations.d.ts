@@ -1,3 +1,7 @@
+interface Window {
+  canvas: object;
+}
+
 declare module '*.svg' {
   const content: any;
   export = content;

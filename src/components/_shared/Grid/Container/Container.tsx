@@ -11,7 +11,7 @@ interface IContainerProps {
 
 export const Container: FunctionComponent<IContainerProps> = (
   {
-    fluid = true,
+    fluid = false,
     children,
     className,
     tagElement = 'div',

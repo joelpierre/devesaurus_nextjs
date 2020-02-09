@@ -25,6 +25,11 @@ export const getOptions = (state: IReduxState): Core.ICoreOptions => {
   return state.core && state.core.options;
 };
 
+export const getSponsors = (state: IReduxState): Core.ISponsor[] | undefined => {
+  const options = getOptions(state);
+  return options && options.sponsors;
+};
+
 export const getMenuState = (state: IReduxState): boolean => {
   return state.core && state.core.isMenuOpen;
 };

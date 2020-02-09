@@ -1,3 +1,26 @@
 .FooterBottom {
   $root: &;
+  background-color: white;
+
+  .row {
+    align-items: center;
+
+    .flex {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__heading {
+    margin-bottom: 0 !important;
+  }
+
+  &__terms-menu {
+    margin: 0 auto;
+
+    @include breakpoint(1024) {
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
 }

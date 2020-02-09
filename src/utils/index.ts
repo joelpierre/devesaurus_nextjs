@@ -208,15 +208,14 @@ export const mapTaxonomyTheme = (slug: string = 'default'): Core.TTheme => {
 
   switch (slug) {
     case 'development':
-    case 'backend-development':
     case 'frontend-development':
-    case 'seo':
     case 'social':
     case 'web-development':
       theme = 'alpha';
       break;
 
     case 'web':
+    case 'backend-development':
     case 'graphic-design':
     case 'design':
     case 'ui-design':
@@ -231,6 +230,7 @@ export const mapTaxonomyTheme = (slug: string = 'default'): Core.TTheme => {
     case 'css3':
     case 'advertisement':
     case 'analytics':
+    case 'seo':
     case 'hosting':
     case 'vps':
     case 'virtual-private-server':

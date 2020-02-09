@@ -3,7 +3,7 @@
   padding: 0;
 
   &--is-loaded {
-    padding: 6rem 0 9rem;
+    padding: 7rem 0 9rem;
   }
 
   &__heading {
@@ -36,6 +36,8 @@
         .slick-slide {
           height: auto;
           filter: blur(1px);
+          transition: transform .4s;
+          transform: scale(1);
 
           > div {
             height: 100%;
@@ -43,6 +45,10 @@
 
           &.slick-active {
             filter: blur(0);
+
+            @include hover-focus {
+              transform: scale(1.05);
+            }
           }
         }
       }
@@ -75,6 +81,7 @@
     justify-content: center;
     text-align: center;
     position: relative;
+    margin-top: spacing(2);
     padding-right: spacing(5) !important;
 
     &-icon {
