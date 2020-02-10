@@ -62,6 +62,7 @@
     "node_modules",
     "__mocks__",
     "src/**/__mocks__/*",
+    "src/services/configProvider/index.ts",
     "config",
     "coverage",
     "next.config.js",
