@@ -49,7 +49,7 @@ class DevinitionPage extends PureComponent<TDevinitionPageProps> {
 
     return (
       <PageHandler
-        layout={ELayout.Basic}
+        layout={ELayout.Core}
         title={yoast.yoast_wpseo_title || title}
         description={yoast.yoast_wpseo_metadesc}
         {...this.props}

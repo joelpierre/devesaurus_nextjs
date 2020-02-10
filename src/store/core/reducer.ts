@@ -55,13 +55,16 @@ export const coreReducer = (
     case actions.SET_INITIAL_FETCH:
       return updateObject(state, { initialFetch: action.payload });
 
-    case actions.SET_APP_ERROR:
+    case actions.SET_APP_ERROR_TRUE:
+    case actions.SET_APP_ERROR_FALSE:
       return updateObject(state, { hasError: action.payload });
 
-    case actions.SET_APP_LOADING:
+    case actions.SET_APP_LOADING_TRUE:
+    case actions.SET_APP_LOADING_FALSE:
       return updateObject(state, { isLoading: action.payload });
 
-    case actions.SET_MENU_STATE:
+    case actions.SET_MENU_STATE_OPEN:
+    case actions.SET_MENU_STATE_CLOSE:
       return updateObject(state, { isMenuOpen: action.payload });
 
     default:

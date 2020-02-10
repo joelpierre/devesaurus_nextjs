@@ -13,10 +13,7 @@ import {
   GET_SITE_META_SUCCESS,
   GET_TERMS_MENU_FAILED,
   GET_TERMS_MENU_SUCCESS,
-  SET_APP_ERROR,
-  SET_APP_LOADING,
-  SET_INITIAL_FETCH,
-  SET_MENU_STATE
+  SET_INITIAL_FETCH
 } from './constants';
 
 import { IReduxDispatch, IReduxState } from '../createStore';
@@ -184,17 +181,29 @@ export const setInitialFetch = (value: boolean) => ({
   payload: value
 });
 
-export const setAppError = (value: boolean) => ({
-  type: SET_APP_ERROR,
-  payload: value
-});
+export const setAppError = (value: boolean) => {
+  const val = `${value}`.toUpperCase();
 
-export const setMenuState = (value: boolean) => ({
-  type: SET_MENU_STATE,
-  payload: value
-});
+  return {
+    type: `SET_APP_ERROR_${val}`,
+    payload: value
+  };
+};
 
-export const setAppLoading = (value: boolean) => ({
-  type: SET_APP_LOADING,
-  payload: value
-});
+export const setMenuState = (value: boolean) => {
+  const val = value ? 'OPEN' : 'CLOSE';
+
+  return {
+    type: `SET_MENU_STATE_${val}`,
+    payload: value
+  };
+};
+
+export const setAppLoading = (value: boolean) => {
+  const val = `${value}`.toUpperCase();
+
+  return {
+    type: `SET_APP_LOADING_${val}`,
+    payload: value
+  };
+};

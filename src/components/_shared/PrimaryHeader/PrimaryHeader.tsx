@@ -28,22 +28,25 @@ export const PrimaryHeader: FunctionComponent<TPrimaryHeader> = (
   }
 ) => {
   return (
-    <header className={styles.primaryHeader}>
-      <Hamburger onClick={() => handleSetMenuState(setMenuState, isMenuOpen)} />
+    <header className={styles.PrimaryHeader}>
+      <Hamburger
+        className={styles.PrimaryHeader__hamburger}
+        onClick={() => handleSetMenuState(setMenuState, isMenuOpen)}
+      />
 
       <Link href="/" as="/">
-        <a className={classNames(styles.primaryHeaderBrandLink)}>
-          <Icons.LogoSymbolDark className={styles.primaryHeaderBrand} />
+        <a className={classNames(styles['PrimaryHeader__brand-link'])}>
+          <Icons.LogoSymbolDark className={styles.PrimaryHeader__brand} />
         </a>
       </Link>
 
-      <Heading className={styles.primaryHeaderHeading} priority={1} innerHTML={true}>
+      <Heading className={styles.PrimaryHeader__heading} priority={1} innerHTML={true}>
         {title}
       </Heading>
 
-      <section className={styles['primary-header__search']}>
+      <section className={styles.PrimaryHeader__search}>
         <SearchForm
-          className={styles['primary-header__search-form']}
+          className={styles['PrimaryHeader__search-form']}
         />
       </section>
     </header>

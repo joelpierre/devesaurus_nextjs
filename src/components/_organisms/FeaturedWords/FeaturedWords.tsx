@@ -64,7 +64,7 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
   }
 
   componentWillUnmount(): void {
-    this.props.onClearFeaturedWords();
+    // this.props.onClearFeaturedWords();
   }
 
   render() {
@@ -88,7 +88,7 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
         <Container fluid={false}>
           {(heading || copy) && (
             <Row>
-              <Flex col={6}>
+              <Flex colLg={6} colSm={10}>
                 {heading && (
                   <Heading priority={2} className={styles.FeaturedWords__heading}>
                     {heading}

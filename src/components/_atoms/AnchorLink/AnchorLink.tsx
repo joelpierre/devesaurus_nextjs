@@ -26,7 +26,6 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
   let Element: JSX.Element;
 
   const defaultProps = {
-    'data-test': 'component-anchor-link',
     className: classNames(styles.anchorLink, className),
     onClick
   };
@@ -42,8 +41,8 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
     default:
     case 'router':
       Element = (
-        <Link href={getDynamicPage(link)} as={as ? as : getDynamicAs(link)} {...defaultProps}>
-          <a>
+        <Link href={getDynamicPage(link)} as={as ? as : getDynamicAs(link)}>
+          <a {...defaultProps}>
             {children}
           </a>
         </Link>
