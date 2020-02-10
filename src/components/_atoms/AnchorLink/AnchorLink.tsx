@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
 
-import styles from './AnchorLink.scss';
 import { getDynamicAs, getDynamicPage } from '../../../utils';
+import styles from './AnchorLink.scss';
 
 interface IAnchorLinkProps {
   className?: string;
@@ -43,7 +43,9 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
     case 'router':
       Element = (
         <Link href={getDynamicPage(link)} as={as ? as : getDynamicAs(link)} {...defaultProps}>
-          {children}
+          <a>
+            {children}
+          </a>
         </Link>
       );
       break;
