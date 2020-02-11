@@ -8,6 +8,7 @@ import { ELayout } from '@jpp/typings/enums';
 import { clearPost, getPost } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
 import { IPostStoreState } from '../../src/store/post/reducer';
+import { getPostFromState } from '../../src/store/post/selectors';
 
 interface IDevegramPageProps {
   error: TReduxError;
@@ -30,7 +31,8 @@ class DevegramPage extends PureComponent<TDevegramPageProps> {
       await store.dispatch(getPost(slug));
     }
 
-    const post: IPostStoreState = store.getState().post;
+    const state: IReduxState = store.getState();
+    const post: IPostStoreState = getPostFromState(state);
 
     if (post.error) {
       res.statusCode = post.error.code;

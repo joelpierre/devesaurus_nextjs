@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
-import { ICategoryStoreState } from '../../../src/store/categories/reducer';
 import { clearWordCategory, getWordCategory, getWordCategoryWords } from '../../../src/store/rootActions';
 import { IWordCategoryStoreState } from '../../../src/store/word_categories/reducer';
 import { PageHandler } from '../../../src/utils/PageHandler/PageHandler';
+import { IReduxState } from '../../../src/store/createStore';
+import { getWordCategoryFromState } from '../../../src/store/word_category/selectors';
 
 interface IDevinitionCategoryProps {
   slug: string;
@@ -13,7 +14,7 @@ interface IDevinitionCategoryProps {
 }
 
 interface IStoreDevinitionCategoryProps {
-  word_category: IWordCategoryStoreState;
+  wordCategory: IWordCategoryStoreState;
 }
 
 interface IDispatchDevinitionCategoryProps {
@@ -32,14 +33,15 @@ class DevinitionCategory extends PureComponent<TDevinitionCategory> {
       await store.dispatch(getWordCategoryWords(slug));
     }
 
-    const word_category: ICategoryStoreState = store.getState().word_category;
+    const state: IReduxState = store.getState();
+    const wordCategory: IWordCategoryStoreState = getWordCategoryFromState(state);
 
-    if (word_category.error) {
-      res.statusCode = word_category.error.code;
-      return { error: word_category.error };
+    if (wordCategory.error) {
+      res.statusCode = wordCategory.error.code;
+      return { error: wordCategory.error };
     }
 
-    return { slug, word_category };
+    return { slug, wordCategory };
   }
 
   componentWillUnmount(): void {
@@ -47,12 +49,12 @@ class DevinitionCategory extends PureComponent<TDevinitionCategory> {
   }
 
   render() {
-    const { word_category } = this.props;
+    const { wordCategory } = this.props;
 
     return (
       <PageHandler
-        title={word_category && word_category.name}
-        description={word_category && word_category.description}
+        title={wordCategory && wordCategory.name}
+        description={wordCategory && wordCategory.description}
         {...this.props}
       />
     );

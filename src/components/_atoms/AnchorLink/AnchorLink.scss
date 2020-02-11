@@ -1,39 +1,42 @@
-.anchor-link {
-  position: relative;
-  z-index: 1;
+.AnchorLink {
+  $root: &;
   width: auto;
+  line-height: 1.3;
   padding-left: 0.1rem;
   padding-right: 0.2rem;
-  line-height: 1.3;
-  text-decoration: none !important;
+  font-size: 1.4rem;
   font-family: $font-heading;
   letter-spacing: 1px;
   font-weight: 600;
-  font-size: 1.4rem;
   text-transform: uppercase;
   color: $color-tint-omega;
-  $root: &;
 
-  &::after {
-    content: '';
-    z-index: -1;
-    position: absolute;
-    top: auto;
-    bottom: -1px;
-    left: 0;
-    height: 3px;
-    width: 100%;
-
-    background-color: $color-brand;
-    transition: $transition-all-base;
-  }
-
-  @include hover-focus {
-    text-decoration: none;
-    color: $color-tint-omega;
+  &--with-styles {
+    position: relative;
+    z-index: 1;
+    text-decoration: none !important;
 
     &::after {
-      height: calc(100% / 2.5);
+      content: '';
+      z-index: -1;
+      position: absolute;
+      top: auto;
+      bottom: -1px;
+      left: 0;
+      height: 3px;
+      width: 100%;
+
+      background-color: $color-brand;
+      transition: $transition-all-base;
+    }
+
+    @include hover-focus {
+      text-decoration: none;
+      color: $color-tint-omega;
+
+      &::after {
+        height: calc(100% / 2.5);
+      }
     }
   }
 }

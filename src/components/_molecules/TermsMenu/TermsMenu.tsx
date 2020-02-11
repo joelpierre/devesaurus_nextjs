@@ -6,7 +6,6 @@ import AnchorLink from '@jpp/atoms/AnchorLink/AnchorLink';
 
 export interface ITermsMenuProps {
   className?: string;
-
 }
 
 export interface IStoreTermsMenuProps {
@@ -25,7 +24,7 @@ export const TermsMenu: FunctionComponent<TTermsMenu> = (
     <ul className={classNames(styles.TermsMenu, className)}>
       {termsMenu.map((menuItem, index) => (
         <li key={index} className={styles.TermsMenu__item}>
-          <AnchorLink link={menuItem.slug}>
+          <AnchorLink className={styles.TermsMenu__link} link={menuItem.slug}>
             {menuItem.title}
           </AnchorLink>
         </li>

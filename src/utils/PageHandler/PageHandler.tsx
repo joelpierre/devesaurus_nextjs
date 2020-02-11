@@ -3,7 +3,7 @@ import ErrorPage from '../../../pages/_error';
 import { APP_TITLE, SITE_DESCRIPTION } from '../constants';
 import BasicLayout from '../../layouts/Basic';
 import CoreLayout from '../../layouts/Core';
-import { ELayout } from '../../typings/enums';
+import { ELayout } from '@jpp/typings/enums';
 
 interface IPageHandlerProps {
   className?: string;

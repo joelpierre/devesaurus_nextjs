@@ -7,6 +7,8 @@ import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/inde
 
 import { clearPage, getPage } from '../src/store/rootActions';
 import { IPageStoreState } from '../src/store/page/reducer';
+import { IReduxState } from '../src/store/createStore';
+import { getPageFromState } from '../src/store/page/selectors';
 
 interface IDefaultPageProps {
   slug: string;
@@ -29,7 +31,8 @@ class DefaultPage extends PureComponent<TDefaultPage> {
       await store.dispatch(getPage(slug));
     }
 
-    const page: IPageStoreState = store.getState().page;
+    const state: IReduxState = store.getState();
+    const page: IPageStoreState = getPageFromState(state);
 
     if (page.error) {
       res.statusCode = page.error.code;

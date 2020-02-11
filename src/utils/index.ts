@@ -1,6 +1,8 @@
 import { IconName } from '@fortawesome/fontawesome-common-types';
 import { EPageType, ETaxonomy } from '@jpp/typings/enums';
 
+export const NOT_FOUND_STATUS_CODE = 404;
+
 /**
  * Update any Object passed through
  */

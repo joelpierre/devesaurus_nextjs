@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { ICategoryStoreState } from '../../../src/store/categories/reducer';
 import { clearCategory, getCategory } from '../../../src/store/rootActions';
+import { getCategoryFromState } from '../../../src/store/category/selectors';
+import { IReduxState } from '../../../src/store/createStore';
 
 interface IDevinitionCategoryProps {
   slug: string;
@@ -29,7 +31,8 @@ class DevinitionCategory extends PureComponent<TDevinitionCategory> {
       await store.dispatch(getCategory(slug));
     }
 
-    const category: ICategoryStoreState = store.getState().category;
+    const state: IReduxState = store.getState();
+    const category: ICategoryStoreState = getCategoryFromState(state);
 
     if (category.error) {
       res.statusCode = category.error.code;

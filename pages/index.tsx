@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 
 import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import AcfComponents from '@jpp/components/_shared/AcfComponents/AcfComponents';
-import { ELayout } from '@jpp/typings/enums';
+import { ELayout, EPageType } from '@jpp/typings/enums';
 
 import { clearPage, getPage } from '../src/store/page/actions';
 import { PageHandler } from '../src/utils/PageHandler/PageHandler';
 import { IPageStoreState } from '../src/store/page/reducer';
+import { IReduxState } from '../src/store/createStore';
+import { getPageFromState } from '../src/store/page/selectors';
 
 interface IHomePageProps {
   slug: string;
@@ -26,8 +28,9 @@ type THomePage = IHomePageProps & IStoreHomePageProps & IDispatchHomePageProps;
 
 class HomePage extends PureComponent<THomePage> {
   static async getInitialProps({ store, isServer, res }: TTemplateInitialProps) {
-    await store.dispatch(getPage('home'));
-    const page: IPageStoreState = store.getState().page;
+    await store.dispatch(getPage(EPageType.Home));
+    const state: IReduxState = store.getState();
+    const page: IPageStoreState = getPageFromState(state);
 
     if (page.error) {
       res.statusCode = page.error.code;
@@ -35,7 +38,7 @@ class HomePage extends PureComponent<THomePage> {
       return { error: page.error };
     }
 
-    return { slug: 'home', page };
+    return { slug: EPageType.Home, page };
   }
 
   componentWillUnmount(): void {

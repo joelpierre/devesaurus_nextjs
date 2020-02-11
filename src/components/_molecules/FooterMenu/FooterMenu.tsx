@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import AnchorLink from '@jpp/atoms/AnchorLink/AnchorLink';
 import styles from './FooterMenu.scss';
+import AnchorLink from '@jpp/atoms/AnchorLink/AnchorLink';
 
 export interface IFooterMenuProps {
   className?: string;
@@ -30,6 +30,7 @@ export const FooterMenu: FunctionComponent<TFooterMenu> = (
           >
             <AnchorLink
               link={item.slug}
+              withStyles={false}
               className={classNames(styles.FooterMenu__link)}
             >
               {item.title}

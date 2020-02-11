@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import { getCategories } from '../../../src/store/rootActions';
 import { IReduxState } from '../../../src/store/createStore';
 
-import { TCategoriesStoreState } from '../../../src/store/categories/reducer';
+import { ICategoryStoreState, TCategoriesStoreState } from '../../../src/store/categories/reducer';
 import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
-import { TPostsStoreState } from '../../../src/store/posts/reducer';
+import { getCategoriesFromState } from '../../../src/store/categories/selectors';
+import { NOT_FOUND_STATUS_CODE } from '../../../src/utils';
 
 interface IDevinitionsCategoriesPage {
   error: TReduxError;
@@ -29,10 +30,11 @@ type TDevinitionsCategoriesPage =
 export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategoriesPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getCategories());
-    const categories: TPostsStoreState = store.getState().categories;
+    const state: IReduxState = store.getState();
+    const categories: ICategoryStoreState[] = getCategoriesFromState(state);
 
-    if (!Array.isArray(categories)) {
-      res.statusCode = categories.code;
+    if (categories.length === 0) {
+      res.statusCode = NOT_FOUND_STATUS_CODE;
       return {
         error: categories
       };

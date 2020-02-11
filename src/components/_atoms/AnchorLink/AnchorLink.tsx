@@ -8,10 +8,10 @@ import styles from './AnchorLink.scss';
 interface IAnchorLinkProps {
   className?: string;
   link: string;
-  as?: string;
   behaviour?: Core.TLinkBehaviour;
   onClick?: Core.TOnClick;
   pageType?: EPageType;
+  withStyles?: boolean;
 }
 
 const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
@@ -20,15 +20,17 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
     className,
     behaviour = 'router',
     link,
-    as,
     onClick,
-    pageType = EPageType.Page
+    pageType = EPageType.Page,
+    withStyles = true
   }
 ) => {
   let Element: JSX.Element;
 
   const defaultProps = {
-    className: classNames(styles.anchorLink, className),
+    className: classNames(styles.AnchorLink, className, {
+      [styles['AnchorLink--with-styles']]: withStyles
+    }),
     onClick
   };
 

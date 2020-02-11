@@ -6,6 +6,8 @@ import { ELayout } from '@jpp/typings/enums';
 import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
 import { clearWord, getWord } from '../../src/store/word/actions';
 import { IWordStoreState } from '../../src/store/word/reducer';
+import { getWordFromState } from '../../src/store/word/selectors';
+import { IReduxState } from '../../src/store/createStore';
 
 interface IDevinitionPageProps {
   error: TReduxError;
@@ -28,7 +30,8 @@ class DevinitionPage extends PureComponent<TDevinitionPageProps> {
       await store.dispatch(getWord(slug));
     }
 
-    const word: IWordStoreState = store.getState().word;
+    const state: IReduxState = store.getState();
+    const word: IWordStoreState = getWordFromState(state);
 
     if (word.error) {
       res.statusCode = word.error.code;
@@ -44,14 +47,13 @@ class DevinitionPage extends PureComponent<TDevinitionPageProps> {
   }
 
   render() {
-    const { word } = this.props;
-    const { yoast, title } = word;
+    const { word = {} as IWordStoreState } = this.props;
 
     return (
       <PageHandler
         layout={ELayout.Core}
-        title={yoast.yoast_wpseo_title || title}
-        description={yoast.yoast_wpseo_metadesc}
+        title={word && word.yoast && word.yoast.yoast_wpseo_title}
+        description={word && word.yoast && word.yoast.yoast_wpseo_metadesc}
         {...this.props}
       >
         this is the {word.title} page

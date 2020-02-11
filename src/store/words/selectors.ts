@@ -11,7 +11,7 @@ export const getFeaturedWordsFromState = (state: IReduxState): IWordStoreState[]
   return [] as IWordStoreState[];
 };
 
-export const getWordsFromState = (state: IReduxState) => {
+export const getWordsFromState = (state: IReduxState): IWordStoreState[] => {
   const words = state.words && state.words.allWords;
 
   if (Array.isArray(words)) {

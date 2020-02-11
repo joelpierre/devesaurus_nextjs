@@ -7,6 +7,9 @@ import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/inde
 import { getPosts } from '../../src/store/rootActions';
 import { IReduxState } from '../../src/store/createStore';
 import { TPostsStoreState } from '../../src/store/posts/reducer';
+import { getPostsFromState } from '../../src/store/posts/selectors';
+import { IPostStoreState } from '../../src/store/post/reducer';
+import { NOT_FOUND_STATUS_CODE } from '../../src/utils';
 
 interface IDevegramPage {
   error: TReduxError;
@@ -28,10 +31,11 @@ type TDevegramPage =
 export class DevegramPage extends PureComponent<TDevegramPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getPosts());
-    const posts: TPostsStoreState = store.getState().posts;
+    const state: IReduxState = store.getState();
+    const posts: IPostStoreState[] = getPostsFromState(state);
 
-    if (!Array.isArray(posts)) {
-      res.statusCode = posts.code;
+    if (posts.length === 0) {
+      res.statusCode = NOT_FOUND_STATUS_CODE;
       return {
         error: posts
       };

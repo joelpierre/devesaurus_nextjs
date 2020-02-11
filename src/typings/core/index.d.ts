@@ -826,22 +826,22 @@ declare namespace Core {
      *
      *
      **/
-    description: string;
+    description?: string;
     /**
      *
      *
      **/
-    url: string;
+    url?: string;
     /**
      *
      *
      **/
-    classes: string[];
+    classes?: string[];
     /**
      *
      *
      **/
-    menu_item_parent: string;
+    menu_item_parent?: string;
   }
 
   export interface IWordAcf {

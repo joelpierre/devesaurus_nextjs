@@ -26,10 +26,10 @@ const initialState = {
   yoast: {} as Core.IYoastMeta,
   word_categories: [] as Core.ITaxonomyTerm[],
   word_tags: [] as Core.ITaxonomyTerm[]
-};
+} as IWordStoreState;
 
 export const wordReducer = (
-  state = initialState as IWordStoreState,
+  state = initialState,
   action: AnyAction
 ): IWordStoreState => {
   switch (action.type) {
@@ -40,7 +40,7 @@ export const wordReducer = (
       return action.payload;
 
     case actions.CLEAR_WORD:
-      return {} as any;
+      return initialState;
 
     default:
       return state;

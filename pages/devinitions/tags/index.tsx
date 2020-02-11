@@ -8,7 +8,9 @@ import { IReduxState } from '../../../src/store/createStore';
 import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { TTagsStoreState } from '../../../src/store/tags/reducer';
 import { getTags } from '../../../src/store/rootActions';
-import { TPostsStoreState } from '../../../src/store/posts/reducer';
+import { getWordTagsFromState } from '../../../src/store/word_tags/selectors';
+import { IWordTagStoreState } from '../../../src/store/word_tags/reducer';
+import { NOT_FOUND_STATUS_CODE } from '../../../src/utils';
 
 interface IDevinitionsTagsPage {
   error: TReduxError;
@@ -30,10 +32,11 @@ type TDevinitionsTagsPage =
 class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getTags());
-    const tags: TPostsStoreState = store.getState().tags;
+    const state: IReduxState = store.getState();
+    const tags: IWordTagStoreState[] = getWordTagsFromState(state);
 
-    if (!Array.isArray(tags)) {
-      res.statusCode = tags.code;
+    if (tags.length === 0) {
+      res.statusCode = NOT_FOUND_STATUS_CODE;
       return {
         error: tags
       };

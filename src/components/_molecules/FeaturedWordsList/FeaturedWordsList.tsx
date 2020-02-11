@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import styles from './FeaturedWordsList.scss';
+import { MenuItem } from '@jpp/atoms/MenuItem/MenuItem';
 import { IWordStoreState } from '../../../store/word/reducer';
-import AnchorLink from '@jpp/atoms/AnchorLink/AnchorLink';
-import { EPageType } from '@jpp/typings/enums';
+import styles from './FeaturedWordsList.scss';
 
 export interface IFeaturedWordsListProps {
   className?: string;
@@ -24,20 +23,16 @@ export const FeaturedWordsList: FunctionComponent<TFeaturedWordsList> = (
     <ul
       className={classNames(styles.FeaturedWordList__list)}
     >
-      {featuredWords.map((word) => {
+      {featuredWords.map((
+        { id, title, slug }
+      ) => {
         return (
-          <li
-            key={word.id}
-            className={classNames(styles.FeaturedWordList__item)}
-          >
-            <AnchorLink
-              pageType={EPageType.Devinition}
-              link={word.slug}
-              className={classNames(styles.FeaturedWordList__link)}
-            >
-              {word.title}
-            </AnchorLink>
-          </li>
+          <MenuItem
+            key={id}
+            className={styles.FeaturedWordList__item}
+            title={title}
+            slug={slug}
+          />
         );
       })}
     </ul>

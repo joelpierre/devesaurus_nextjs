@@ -3,6 +3,10 @@ import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
 import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { getWords } from '../../src/store/rootActions';
 import { TWordsStoreState } from '../../src/store/words/reducer';
+import { IReduxState } from '../../src/store/createStore';
+import { getWordsFromState } from '../../src/store/words/selectors';
+import { IWordStoreState } from '../../src/store/word/reducer';
+import { NOT_FOUND_STATUS_CODE } from '../../src/utils';
 
 interface IDevinitionsPage {
   error: TReduxError;
@@ -24,10 +28,11 @@ type TDevinitionsPage =
 class DevinitionsPage extends PureComponent<TDevinitionsPage> {
   static async getInitialProps({ store, res }: TTemplateInitialProps) {
     await store.dispatch(getWords());
-    const words: TWordsStoreState = store.getState().words.allWords;
+    const state: IReduxState = store.getState();
+    const words: IWordStoreState[] = getWordsFromState(state);
 
-    if (!Array.isArray(words)) {
-      res.statusCode = words.code;
+    if (words.length === 0) {
+      res.statusCode = NOT_FOUND_STATUS_CODE;
       return {
         error: words
       };
