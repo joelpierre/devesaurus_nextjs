@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { DefaultQuery } from 'next-server/router';
+import { NextJSContext } from 'next-redux-wrapper';
 
-interface IErrorPage<Q extends DefaultQuery = DefaultQuery> {
+interface IErrorPage<Q extends NextJSContext = NextJSContext> {
   statusCode?: Core.TErrorCode;
   code?: Core.TErrorCode;
   originalUrl?: string;

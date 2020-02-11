@@ -2,7 +2,7 @@ import { IWordStoreState } from '../word/reducer';
 import { IWordCategoryStoreState } from '../word_categories/reducer';
 import * as actions from './constants';
 import { AnyAction } from 'redux';
-import { updateArray, updateObject } from '../../utils';
+import { updateObject } from '../../utils';
 
 const initialState = {
   words: [] as IWordStoreState[]
@@ -20,13 +20,11 @@ export const wordCategoryReducer = (
       return updateObject(state, payload);
 
     case actions.GET_WORD_CATEGORY_FAILED:
-      return { ...action.payload };
+      return action.payload;
 
     case actions.GET_WORD_CATEGORY_WORDS_SUCCESS:
-      return updateObject(state, { words: updateArray(state.words, action.payload) });
-
     case actions.GET_WORD_CATEGORY_WORDS_FAILED:
-      return updateObject(state, { words: { ...action.payload } });
+      return updateObject(state, { words: action.payload });
 
     case actions.CLEAR_WORD_CATEGORY:
       return initialState;

@@ -1,15 +1,6 @@
 import { connect } from 'react-redux';
-import {
-  Core,
-  ICoreProps,
-  IDispatchCoreProps,
-  IStoreCoreProps
-} from '@jpp/layouts/Core/Core';
-import {
-  getLoadingState,
-  getMenuState,
-  getPrimaryMenuFromState
-} from '../../store/core/selectors';
+import { Core, ICoreProps, IDispatchCoreProps, IStoreCoreProps } from '@jpp/layouts/Core/Core';
+import { getLoadingState, getMenuState, getPrimaryMenuFromState } from '../../store/core/selectors';
 import { IReduxState } from '../../store/createStore';
 import { setMenuState } from '../../store/rootActions';
 
@@ -21,8 +12,10 @@ const mapStateToProps = (state: IReduxState): IStoreCoreProps => (
   }
 );
 
-const mapDispatchToProps = {
-  onSetMenuState: (value: boolean) => setMenuState(value)
+const mapDispatchToProps: IDispatchCoreProps = {
+  onSetMenuState: setMenuState
 };
 
-export default connect<IStoreCoreProps, IDispatchCoreProps, ICoreProps>(mapStateToProps, mapDispatchToProps)(Core);
+export default connect<IStoreCoreProps, IDispatchCoreProps, ICoreProps>(
+  mapStateToProps, mapDispatchToProps
+)(Core);

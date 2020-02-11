@@ -1,4 +1,4 @@
-import { TFuncBooleanVoid } from '@jpp/typings/index';
+import { TFuncValueVoid } from '@jpp/typings/index';
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -15,7 +15,7 @@ export interface IPrimaryHeaderProps {
   className?: string;
   isMenuOpen: boolean;
   title: string;
-  setMenuState: TFuncBooleanVoid;
+  setMenuState: TFuncValueVoid<boolean>;
 }
 
 type TPrimaryHeader = IPrimaryHeaderProps;

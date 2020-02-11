@@ -17,7 +17,7 @@ export const wordTagReducer = (
       return updateObject(state, action.payload);
 
     case actions.GET_WORD_TAG_FAILED:
-      return { ...action.payload };
+      return action.payload;
 
     case actions.CLEAR_WORD_TAG:
       return initialState;

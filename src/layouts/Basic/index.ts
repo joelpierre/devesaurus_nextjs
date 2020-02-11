@@ -1,10 +1,5 @@
 import { connect } from 'react-redux';
-import {
-  Basic,
-  IBasicProps,
-  IDispatchBasicProps,
-  IStoreBasicProps
-} from '@jpp/layouts/Basic/Basic';
+import { Basic, IBasicProps, IDispatchBasicProps, IStoreBasicProps } from '@jpp/layouts/Basic/Basic';
 import {
   getLoadingState,
   getMenuState,
@@ -23,9 +18,10 @@ const mapStateToProps = (state: IReduxState): IStoreBasicProps => (
   }
 );
 
-const mapDispatchToProps = {
-  onSetMenuState: (value: boolean) => setMenuState(value)
+const mapDispatchToProps: IDispatchBasicProps = {
+  onSetMenuState: setMenuState
 };
 
 export default connect<IStoreBasicProps, IDispatchBasicProps, IBasicProps>(
-  mapStateToProps, mapDispatchToProps)(Basic);
+  mapStateToProps, mapDispatchToProps
+)(Basic);

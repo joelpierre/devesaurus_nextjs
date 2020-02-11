@@ -5,15 +5,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 import { EFontAwesomeType } from '../../../utils/fontAwesome';
-import { getDynamicAs, getDynamicPage } from '../../../utils/index';
+import { getDynamicAs, getDynamicPage } from '../../../utils';
 
 import styles from './MenuItem.scss';
+import { EPageType } from '@jpp/typings/enums';
 
 interface IMenuItemProps {
   className?: string;
   linkClassName?: string;
   onClick?: Core.TOnClick;
   iconPosition?: EIconPosition;
+  pageType?: EPageType;
 }
 
 export enum EIconPosition {
@@ -32,7 +34,8 @@ export const MenuItem: FunctionComponent<TMenuItemProps> = (
     classes,
     slug,
     url,
-    onClick
+    onClick,
+    pageType = EPageType.Page
   }
 ) => {
 
@@ -61,7 +64,7 @@ export const MenuItem: FunctionComponent<TMenuItemProps> = (
         })
       }
     >
-      {getEl(title, url, slug, classes, elClasses, iconName, iconClasses)}
+      {getEl(title, url, slug, classes, pageType, elClasses, iconName, iconClasses)}
     </li>
   );
 };
@@ -93,7 +96,16 @@ const getContent = (title: string, iconName?: string, iconClasses?: string): JSX
   </div>
 );
 
-const getEl = (title: string, url: string, slug: string, menuClasses: string[], elClasses?: string, iconName?: string, iconClasses?: string) => {
+const getEl = (
+  title: string,
+  url: string,
+  slug: string,
+  menuClasses: string[],
+  pageType: EPageType,
+  elClasses?: string,
+  iconName?: string,
+  iconClasses?: string
+) => {
   if (menuClasses.includes('external')) {
     return (
       <a
@@ -108,8 +120,8 @@ const getEl = (title: string, url: string, slug: string, menuClasses: string[], 
 
   return (
     <Link
-      href={getDynamicPage(slug)}
-      as={getDynamicAs(slug)}
+      href={getDynamicPage(pageType)}
+      as={getDynamicAs(pageType, slug)}
     >
       <a
         className={elClasses}

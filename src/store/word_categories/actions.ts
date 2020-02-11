@@ -1,7 +1,7 @@
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
 import { ThunkAction } from 'redux-thunk';
-import axios  from '../../utils/axios';
+import axios from '../../utils/axios';
 import { setAppError, setAppLoading } from '../rootActions';
 import { CLEAR_WORD_CATEGORIES, GET_WORD_CATEGORIES_FAILED, GET_WORD_CATEGORIES_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
@@ -37,9 +37,7 @@ export const getWordCategories: ActionCreator<ThunkAction<Promise<any>, IReduxSt
 
 export const getWordCategoriesSuccess = (data: IWordCategoryStoreState[]) => ({
   type: GET_WORD_CATEGORIES_SUCCESS,
-  payload: [
-    ...data
-  ]
+  payload: data
 });
 
 export const getWordCategoriesFailed = (error: Core.IErrorResponse | AxiosError) => ({

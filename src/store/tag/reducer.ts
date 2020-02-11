@@ -14,7 +14,7 @@ export const tagReducer = (
       return updateObject(state, action.payload);
 
     case actions.GET_TAG_FAILED:
-      return { ...action.payload };
+      return action.payload;
 
     case actions.CLEAR_TAG:
       return initialState;

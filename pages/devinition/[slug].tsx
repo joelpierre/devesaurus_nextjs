@@ -60,11 +60,11 @@ class DevinitionPage extends PureComponent<TDevinitionPageProps> {
   }
 }
 
-const mapDispatchToProps = {
-  onClearWord: () => clearWord()
+const mapDispatchToProps: IDispatchDevinitionPageProps = {
+  onClearWord: clearWord
 };
 
-export default connect<IStoreDevinitionPageProps, IDispatchDevinitionPageProps, IDevinitionPageProps>(
+export default connect<never, IDispatchDevinitionPageProps, IDevinitionPageProps>(
   null,
   mapDispatchToProps
 )(DevinitionPage);

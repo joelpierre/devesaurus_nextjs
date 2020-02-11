@@ -1,4 +1,4 @@
-import { TFuncBooleanVoid } from '@jpp/typings/index';
+import { TFuncValueVoid } from '@jpp/typings/index';
 import React, { FunctionComponent } from 'react';
 import { SimpleMenu } from '@jpp/organisms/SimpleMenu/SimpleMenu';
 import { Hamburger } from '@jpp/atoms/Hamburger/Hamburger';
@@ -9,7 +9,7 @@ import styles from './SimpleHeader.scss';
 interface ISimpleHeaderProps {
   className?: string;
   isMenuOpen: boolean;
-  setMenuState: TFuncBooleanVoid;
+  setMenuState: TFuncValueVoid<boolean>;
   menuItems: Core.IMenuItem[];
 }
 

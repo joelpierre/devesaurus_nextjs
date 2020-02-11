@@ -24,10 +24,10 @@ const initialState = {
   acf: {} as Core.IAcfCore,
   categories: [] as Core.ITaxonomyTerm[],
   tags: [] as Core.ITaxonomyTerm[]
-};
+} as IPostStoreState;
 
 export const postReducer = (
-  state = initialState as IPostStoreState,
+  state = initialState,
   action: AnyAction
 ): IPostStoreState => {
   switch (action.type) {
@@ -35,10 +35,10 @@ export const postReducer = (
       return updateObject(state, action.payload);
 
     case actions.GET_POST_FAILED:
-      return { ...action.payload };
+      return action.payload;
 
     case actions.CLEAR_POST:
-      return {} as any;
+      return initialState;
 
     default:
       return state;

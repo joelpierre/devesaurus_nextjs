@@ -29,7 +29,7 @@ export const wordTagsReducer = (
       return updateArray(state, action.payload);
 
     case actions.GET_WORD_TAGS_FAILED:
-      return { ...action.payload };
+      return action.payload;
 
     case actions.CLEAR_WORD_TAGS:
       return initialState;

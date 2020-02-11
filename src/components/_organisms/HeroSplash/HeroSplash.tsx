@@ -1,7 +1,6 @@
-import React, { FunctionComponent, memo } from 'react';
+import React, { FunctionComponent } from 'react';
 import Icon from '@jpp/atoms/Icon/Icon';
 import SearchForm from '@jpp/molecules/SearchForm';
-import { ScrollingMouse } from '@jpp/atoms/ScrollingMouse/ScrollingMouse';
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
 import { Row } from '@jpp/components/_shared/Grid/Row/Row';
@@ -9,9 +8,10 @@ import { Row } from '@jpp/components/_shared/Grid/Row/Row';
 import { Section } from '@jpp/components/_shared/Grid/Section/Section';
 import { ETaxonomy, ETheme } from '@jpp/typings/enums';
 import classNames from 'classnames';
-import LabelCloud from '@jpp/molecules/LabelCloud';
 
 import styles from './HeroSplash.scss';
+import { ScrollingMouse } from '@jpp/atoms/ScrollingMouse/ScrollingMouse';
+import LabelCloud from '@jpp/molecules/LabelCloud';
 
 export const HeroSplash: FunctionComponent<Core.IAcfComponent> = (
   {
@@ -44,5 +44,3 @@ export const HeroSplash: FunctionComponent<Core.IAcfComponent> = (
     </Section>
   );
 };
-
-export default memo(HeroSplash);

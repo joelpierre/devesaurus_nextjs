@@ -1,4 +1,4 @@
-import { TFuncBooleanVoid } from '@jpp/typings/index';
+import { TFuncValueVoid } from '@jpp/typings/index';
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ import styles from './OffCanvasHeader.scss';
 interface IOffCanvasHeader {
   className?: string;
   isMenuOpen: boolean;
-  setMenuState: TFuncBooleanVoid;
+  setMenuState: TFuncValueVoid<boolean>;
 }
 
 const OffCanvasHeader: FunctionComponent<IOffCanvasHeader> = (

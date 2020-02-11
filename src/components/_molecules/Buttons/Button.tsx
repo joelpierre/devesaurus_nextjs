@@ -3,7 +3,7 @@ import Link from 'next/link';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName } from '@fortawesome/fontawesome-common-types';
-import { ESize, ETheme } from '@jpp/typings/enums';
+import { EPageType, ESize, ETheme } from '@jpp/typings/enums';
 import { getDynamicAs, getDynamicPage } from '../../../utils';
 
 import styles from './Button.scss';
@@ -21,6 +21,7 @@ interface IButtonProps {
   outline?: boolean;
   tabIndex?: number;
   icon?: IButtonIcon;
+  pageType?: EPageType;
 }
 
 interface IButtonIcon {
@@ -42,6 +43,7 @@ export const Button: FunctionComponent<IButtonProps> = (
     type,
     onClick,
     icon,
+    pageType = EPageType.Page,
     ...props
   }
 ) => {
@@ -104,7 +106,7 @@ export const Button: FunctionComponent<IButtonProps> = (
     case 'router':
     default:
       return (
-        <Link href={as ? as : getDynamicPage(link)} as={getDynamicAs(link)}>
+        <Link href={as ? as : getDynamicPage(pageType)} as={getDynamicAs(pageType, link)}>
           <a {...defaultProps}>
             {getContent}
           </a>

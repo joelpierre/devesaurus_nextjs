@@ -59,8 +59,8 @@ class HomePage extends PureComponent<THomePage> {
   }
 }
 
-const mapDispatchToProps = {
-  onClearPage: () => clearPage()
+const mapDispatchToProps: IDispatchHomePageProps = {
+  onClearPage: clearPage
 };
 
 export default connect<IStoreHomePageProps, IDispatchHomePageProps, IHomePageProps>(

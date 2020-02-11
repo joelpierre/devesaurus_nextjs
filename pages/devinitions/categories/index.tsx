@@ -64,12 +64,14 @@ export class DevinitionsCategoriesPage extends PureComponent<TDevinitionsCategor
   }
 }
 
-const mapStateToProps = ({ categories }: IReduxState) => ({
+const mapStateToProps = ({ categories }: IReduxState): IStoreDevinitionsCategoriesPageProps => ({
   categories
 });
 
-const mapDispatchToProps = {
-  onGetCategories: () => getCategories()
+const mapDispatchToProps: IDispatchDevinitionsCategoriesPageProps = {
+  onGetCategories: getCategories
 };
 
-export default connect<IStoreDevinitionsCategoriesPageProps, IDispatchDevinitionsCategoriesPageProps, IDevinitionsCategoriesPage>(mapStateToProps, mapDispatchToProps)(DevinitionsCategoriesPage);
+export default connect<IStoreDevinitionsCategoriesPageProps, IDispatchDevinitionsCategoriesPageProps, IDevinitionsCategoriesPage>(
+  mapStateToProps, mapDispatchToProps
+)(DevinitionsCategoriesPage);

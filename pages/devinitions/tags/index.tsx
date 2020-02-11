@@ -67,12 +67,14 @@ class DevinitionsTagsPage extends PureComponent<TDevinitionsTagsPage> {
 
 const mapStateToProps = (
   { tags }: IReduxState
-) => ({
+): IStoreDevinitionsTagsPageProps => ({
   tags
 });
 
-const mapDispatchToProps = {
-  onGetTags: () => getTags()
+const mapDispatchToProps: IDispatchDevinitionsTagsPageProps = {
+  onGetTags: getTags
 };
 
-export default connect<IStoreDevinitionsTagsPageProps, IDispatchDevinitionsTagsPageProps, IDevinitionsTagsPage>(mapStateToProps, mapDispatchToProps)(DevinitionsTagsPage);
+export default connect<IStoreDevinitionsTagsPageProps, IDispatchDevinitionsTagsPageProps, IDevinitionsTagsPage>(
+  mapStateToProps, mapDispatchToProps
+)(DevinitionsTagsPage);

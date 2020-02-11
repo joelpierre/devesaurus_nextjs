@@ -1,42 +1,45 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import Link from 'next/link';
 import styles from './FeaturedWordsList.scss';
+import { IWordStoreState } from '../../../store/word/reducer';
+import AnchorLink from '@jpp/atoms/AnchorLink/AnchorLink';
+import { EPageType } from '@jpp/typings/enums';
 
-interface IFeaturedWordsList {
+export interface IFeaturedWordsListProps {
   className?: string;
-  words: any[];
 }
 
-const FeaturedWordsList: FunctionComponent<IFeaturedWordsList> = ({ className, words }) => (
+export interface IStoreFeaturedWordsListProps {
+  featuredWords: IWordStoreState[];
+}
+
+type TFeaturedWordsList = IFeaturedWordsListProps & IStoreFeaturedWordsListProps;
+
+export const FeaturedWordsList: FunctionComponent<TFeaturedWordsList> = (
+  { className, featuredWords }
+) => (
   <section
-    className={classNames(className, styles.featuredWordsList)}
+    className={classNames(className, styles.FeaturedWordList)}
   >
     <ul
-      className={classNames(styles.featuredWordsListList)}
+      className={classNames(styles.FeaturedWordList__list)}
     >
-      {words.map(({ word }) => {
+      {featuredWords.map((word) => {
         return (
           <li
-            data-test="component-pure-featured-words-list"
             key={word.id}
-            className={classNames(styles['featured-words-list__item'])}
+            className={classNames(styles.FeaturedWordList__item)}
           >
-            <Link
-              href={`/devinition/[slug]`}
-              as={`/devinition/${word.slug}`}
+            <AnchorLink
+              pageType={EPageType.Devinition}
+              link={word.slug}
+              className={classNames(styles.FeaturedWordList__link)}
             >
-              <a
-                className={classNames(styles['featured-words-list__link'])}
-              >
-                {word.title}
-              </a>
-            </Link>
+              {word.title}
+            </AnchorLink>
           </li>
         );
       })}
     </ul>
   </section>
 );
-
-export default FeaturedWordsList;

@@ -20,10 +20,10 @@ export interface IPageStoreState {
 const initialState = {
   yoast: {} as Core.IYoastMeta,
   acf: {} as Core.IAcfCore
-};
+} as IPageStoreState;
 
 export const pageReducer = (
-  state = initialState as IPageStoreState,
+  state = initialState,
   action: AnyAction
 ): IPageStoreState => {
   switch (action.type) {
@@ -31,10 +31,10 @@ export const pageReducer = (
       return updateObject(state, action.payload);
 
     case actions.GET_PAGE_FAILED:
-      return { ...action.payload };
+      return action.payload;
 
     case actions.CLEAR_PAGE:
-      return {} as any;
+      return initialState;
 
     default:
       return state;

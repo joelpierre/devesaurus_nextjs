@@ -14,7 +14,7 @@ export const categoryReducer = (
       return updateObject(state, action.payload);
 
     case actions.GET_CATEGORY_FAILED:
-      return { ...action.payload };
+      return action.payload;
 
     case actions.CLEAR_CATEGORY:
       return initialState;

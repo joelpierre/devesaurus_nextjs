@@ -1,5 +1,5 @@
 import { IconName } from '@fortawesome/fontawesome-common-types';
-import { ETaxonomy } from '@jpp/typings/enums';
+import { EPageType, ETaxonomy } from '@jpp/typings/enums';
 
 /**
  * Update any Object passed through
@@ -395,42 +395,49 @@ export const mapTaxonomyIcon = (slug: string = 'default'): IconName => {
   return icon;
 };
 
-export const getDynamicPage = (slug: string | undefined): string => {
-  switch (slug) {
-    case 'categories':
-    case 'tags':
-      return `/devinitions/${slug}`;
+export const mapTaxonomyToPageType: Record<ETaxonomy, EPageType> = {
+  [ETaxonomy.Category]: EPageType.Category,
+  [ETaxonomy.PostTag]: EPageType.PostTag,
+  [ETaxonomy.WordCategory]: EPageType.WordCategory,
+  [ETaxonomy.WordTag]: EPageType.WordTag
+};
 
-    case 'devinitions':
-    case 'devegram':
-      return `/${slug}`;
+export const getDynamicPage = (pageType: EPageType | undefined): string => {
+  switch (pageType) {
+    case EPageType.Archive:
+    case EPageType.Devinitions:
+    case EPageType.Devinition:
+      return `/${pageType}/[slug]`;
 
-    case ETaxonomy.WordCategory:
-      return '/devinitions/category/[slug]';
+    case EPageType.WordCategory:
+      return `/${EPageType.Devinitions}/category/[slug]`;
 
-    case ETaxonomy.WordTag:
-      return '/devinitions/tag/[slug]';
+    case EPageType.WordTag:
+      return `/${EPageType.Devinitions}/tag/[slug]`;
 
-    case ETaxonomy.Category:
-      return '/devegram/category/[slug]';
+    case EPageType.Category:
+      return `/${EPageType.Devegram}/category/[slug]`;
 
-    case ETaxonomy.PostTag:
-      return '/devegram/tag/[slug]';
+    case EPageType.PostTag:
+      return `/${EPageType.Devegram}/tag/[slug]`;
 
-    case 'home':
+    case EPageType.Home:
       return '/';
 
+    case EPageType.Devegram:
     default:
-      return '[slug]';
+      return '/[slug]';
   }
 };
 
-export const getDynamicAs = (slug: string | undefined): string | undefined => {
-  switch (slug) {
-    case 'categories':
-    case 'tags':
+export const getDynamicAs = (pageType: EPageType, slug: string | undefined): string | undefined => {
+  switch (pageType) {
+    case EPageType.Archive:
       return undefined;
-    case 'home':
+    case EPageType.Devinition:
+    case EPageType.Devegram:
+      return `/${pageType}/${slug}`;
+    case EPageType.Home:
       return '/';
     default:
       return `/${slug}`;

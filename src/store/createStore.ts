@@ -1,4 +1,4 @@
-import { TFuncBooleanVoid, TFuncVoid } from '@jpp/typings/index';
+import { TFuncValueVoid, TFuncVoid } from '@jpp/typings/index';
 import { applyMiddleware, compose, createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
@@ -36,9 +36,9 @@ export interface IReduxState {
 }
 
 export interface IReduxDispatch {
-  onSetMenuState: TFuncBooleanVoid;
-  onSetAppLoading: TFuncBooleanVoid;
-  onSetAppError: TFuncBooleanVoid;
+  onSetMenuState: TFuncValueVoid<boolean>;
+  onSetAppLoading: TFuncValueVoid<boolean>;
+  onSetAppError: TFuncValueVoid<boolean>;
   onGetSiteMeta: () => ICoreStoreState;
   onGetPage: (slug: string) => IPageStoreState;
   onGetPost: (slug: string) => IPostStoreState;
@@ -75,7 +75,7 @@ export type TReduxProps = IReduxState & IReduxDispatch;
  * Configure Store for Application
  * @returns {any}
  */
-const makeStore = (initialState = {}): Store => {
+const makeStore = (initialState = {} as IReduxState): Store => {
   if (ConfigProvider.getValue('NODE_ENV') === 'production') {
     return createStore(rootReducer, initialState, compose(applyMiddleware(thunk)));
   }

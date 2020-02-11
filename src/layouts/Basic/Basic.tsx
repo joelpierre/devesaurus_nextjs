@@ -1,5 +1,4 @@
 import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter';
-import { TFuncBooleanVoid } from '@jpp/typings/index';
 import React, { PureComponent, ReactNode } from 'react';
 
 import { Meta } from '@jpp/components/_shared/Meta/Meta';
@@ -11,6 +10,7 @@ import { SimpleHeader } from '@jpp/components/_shared/SimpleHeader/SimpleHeader'
 import { APP_TITLE, SITE_DESCRIPTION } from '../../utils/constants';
 
 import styles from './Basic.scss';
+import { TFuncValueVoid } from '@jpp/typings/index';
 
 export interface IBasicProps {
   title: string;
@@ -26,7 +26,7 @@ export interface IStoreBasicProps {
 }
 
 export interface IDispatchBasicProps {
-  onSetMenuState: TFuncBooleanVoid;
+  onSetMenuState: TFuncValueVoid<boolean>;
 }
 
 type TBasic = IBasicProps & IStoreBasicProps & IDispatchBasicProps;

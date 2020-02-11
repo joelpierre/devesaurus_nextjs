@@ -1,43 +1,20 @@
-import {
-  LabelCloud,
-  IDispatchLabelCloudProps,
-  ILabelCloudProps,
-  IStoreLabelCloudProps
-} from '@jpp/molecules/LabelCloud/LabelCloud';
+import { ILabelCloudProps, IStoreLabelCloudProps, LabelCloud } from '@jpp/molecules/LabelCloud/LabelCloud';
 import { connect } from 'react-redux';
-import { clearCategories, getCategories } from '../../../store/categories/actions';
 import { IReduxState } from '../../../store/createStore';
-import { clearTags, getTags } from '../../../store/tags/actions';
-import { clearWordCategories, getWordCategories } from '../../../store/word_categories/actions';
-import { clearWordTags, getWordTags } from '../../../store/word_tags/actions';
+import { getTagsFromState } from '../../../store/tags/selectors';
+import { getCategoriesFromState } from '../../../store/categories/selectors';
+import { getWordCategoriesFromState } from '../../../store/word_categories/selectors';
+import { getWordTagsFromState } from '../../../store/word_tags/selectors';
 
-const mapStateToProps = (
-  {
-    word_categories,
-    word_tags,
-    categories,
-    tags
-  }: IReduxState): IStoreLabelCloudProps => {
+const mapStateToProps = (state: IReduxState): IStoreLabelCloudProps => {
   return {
-    word_categories,
-    word_tags,
-    categories,
-    tags
+    wordCategories: getWordCategoriesFromState(state),
+    wordTags: getWordTagsFromState(state),
+    categories: getCategoriesFromState(state),
+    tags: getTagsFromState(state)
   };
 };
 
-const mapDispatchToProps = {
-  onGetWordCategories: () => getWordCategories(),
-  onGetWordTags: () => getWordTags(),
-  onGetTags: () => getTags(),
-  onGetCategories: () => getCategories(),
-  onClearWordCategories: () => clearWordCategories(),
-  onClearWordTags: () => clearWordTags(),
-  onClearCategories: () => clearCategories(),
-  onClearTags: () => clearTags()
-};
-
-export default connect<IStoreLabelCloudProps, IDispatchLabelCloudProps, ILabelCloudProps>(
-  mapStateToProps,
-  mapDispatchToProps
+export default connect<IStoreLabelCloudProps, never, ILabelCloudProps>(
+  mapStateToProps
 )(LabelCloud);

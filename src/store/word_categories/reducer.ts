@@ -2,7 +2,6 @@ import { IWordStoreState } from '../word/reducer';
 import * as actions from './constants';
 import { AnyAction } from 'redux';
 import { TReduxError } from '@jpp/typings/index';
-import { updateArray } from '../../utils';
 
 export interface IWordCategoryStoreState {
   id: number;
@@ -26,7 +25,7 @@ export const wordCategoriesReducer = (
 ): TWordCategoriesStoreState => {
   switch (action.type) {
     case actions.GET_WORD_CATEGORIES_SUCCESS:
-      return updateArray(state, action.payload);
+      return action.payload;
 
     case actions.GET_WORD_CATEGORIES_FAILED:
       return { ...action.payload };

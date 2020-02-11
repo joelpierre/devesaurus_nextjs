@@ -62,12 +62,14 @@ export class DevegramPage extends PureComponent<TDevegramPage> {
   }
 }
 
-const mapStateToProps = ({ posts }: IReduxState) => ({
+const mapStateToProps = ({ posts }: IReduxState): IStoreDevegramPageProps => ({
   posts
 });
 
-const mapDispatchToProps = {
-  onGetPosts: () => getPosts()
+const mapDispatchToProps: IDispatchDevegramPageProps = {
+  onGetPosts: getPosts
 };
 
-export default connect<IStoreDevegramPageProps, IDispatchDevegramPageProps, IDevegramPage>(mapStateToProps, mapDispatchToProps)(DevegramPage);
+export default connect<IStoreDevegramPageProps, IDispatchDevegramPageProps, IDevegramPage>(
+  mapStateToProps, mapDispatchToProps
+)(DevegramPage);

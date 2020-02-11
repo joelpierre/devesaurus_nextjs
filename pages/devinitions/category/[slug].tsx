@@ -59,8 +59,10 @@ class DevinitionCategory extends PureComponent<TDevinitionCategory> {
   }
 }
 
-const mapDispatchToProps = {
-  onClearWordCategory: () => clearWordCategory()
+const mapDispatchToProps: IDispatchDevinitionCategoryProps = {
+  onClearWordCategory: clearWordCategory
 };
 
-export default connect<IStoreDevinitionCategoryProps, IDispatchDevinitionCategoryProps, IDevinitionCategoryProps>(null, mapDispatchToProps)(DevinitionCategory);
+export default connect<IStoreDevinitionCategoryProps, IDispatchDevinitionCategoryProps, IDevinitionCategoryProps>(
+  null, mapDispatchToProps
+)(DevinitionCategory);

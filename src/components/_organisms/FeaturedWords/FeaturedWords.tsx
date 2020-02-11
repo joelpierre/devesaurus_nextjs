@@ -63,10 +63,6 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
     this.props.onGetFeaturedWords();
   }
 
-  componentWillUnmount(): void {
-    // this.props.onClearFeaturedWords();
-  }
-
   render() {
     const { className, heading, copy, featuredWords } = this.props;
 

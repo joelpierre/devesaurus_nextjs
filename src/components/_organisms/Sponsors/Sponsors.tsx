@@ -35,7 +35,7 @@ export const Sponsors: React.FunctionComponent<TSponsors> = (
         classNames(styles.Sponsors, className, `theme--${theme || page_theme}`)
       }
     >
-      <Container fluid={false}>
+      <Container fluid={true}>
         <Row>
           <Flex colLg={3}>
             <Heading priority={2} className={styles.Sponsors__heading}>

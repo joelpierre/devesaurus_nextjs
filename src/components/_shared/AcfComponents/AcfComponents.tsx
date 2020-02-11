@@ -8,7 +8,7 @@ import { PressPack } from '@jpp/organisms/PressPack/PressPack';
 import { Testimonials } from '@jpp/organisms/Testimonials/Testimonials';
 import { TextBlock } from '@jpp/organisms/TextBlock/TextBlock';
 import { InlineQuote } from '@jpp/organisms/InlineQuote/InlineQuote';
-import HeroSplash from '@jpp/organisms/HeroSplash/HeroSplash';
+import { HeroSplash } from '@jpp/organisms/HeroSplash/HeroSplash';
 import { CtaBanner } from '@jpp/organisms/CtaBanner/CtaBanner';
 import Sponsors from '@jpp/organisms/Sponsors';
 

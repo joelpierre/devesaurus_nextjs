@@ -37,7 +37,7 @@ export const wordReducer = (
       return updateObject(state, action.payload);
 
     case actions.GET_WORD_FAILED:
-      return { ...action.payload };
+      return action.payload;
 
     case actions.CLEAR_WORD:
       return {} as any;

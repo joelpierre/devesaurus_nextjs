@@ -45,8 +45,12 @@
     box-shadow: 0 0 1.2rem 0.5rem rgba($color-tint-omega, 0.45);
   }
 
+  &__LabelCloud {
+    margin: 0 auto !important;
+  }
+
   &__ScrollingMouse {
-    margin: spacing(4) auto 0;
+    margin: spacing(4) auto 0 !important;
   }
 
   &__content {

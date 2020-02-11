@@ -1,3 +1,4 @@
+/* tslint:disable */
 import Provider from '../Provider';
 import getConfig from 'next/config';
 
@@ -5,7 +6,6 @@ const { publicRuntimeConfig } = getConfig();
 
 const envConfig = publicRuntimeConfig;
 
-// @ts-ignore
 export type Config = {
   readonly PORT: string;
   readonly PROTOCOL: string;
@@ -26,8 +26,6 @@ export type Config = {
 
   readonly GTM_ID: string;
   readonly GTM_AUTH: string;
-  readonly GTM_PREVIEW: string;
-  readonly GTM_COOKIES_WIN: string;
 
   readonly ITEMS_PER_PAGE: string;
 };

@@ -1,4 +1,4 @@
-import { TFuncBooleanVoid } from '@jpp/typings/index';
+import { TFuncValueVoid } from '@jpp/typings/index';
 import React, { PureComponent } from 'react';
 
 import { Meta } from '@jpp/components/_shared/Meta/Meta';
@@ -24,7 +24,7 @@ export interface IStoreCoreProps {
 }
 
 export interface IDispatchCoreProps {
-  onSetMenuState: TFuncBooleanVoid;
+  onSetMenuState: TFuncValueVoid<boolean>;
 }
 
 type TCore = ICoreProps & IStoreCoreProps & IDispatchCoreProps;

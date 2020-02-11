@@ -66,8 +66,8 @@ class DefaultPage extends PureComponent<TDefaultPage> {
   }
 }
 
-const mapDispatchToProps = {
-  onClearPage: () => clearPage()
+const mapDispatchToProps: IDispatchDefaultPageProps = {
+  onClearPage: clearPage
 };
 
-export default connect<IStoreDefaultPageProps, IDispatchDefaultPageProps, IDefaultPageProps>(null, mapDispatchToProps)(DefaultPage);
+export default connect<never, IDispatchDefaultPageProps, IDefaultPageProps>(null, mapDispatchToProps)(DefaultPage);

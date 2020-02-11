@@ -42,6 +42,19 @@ export enum ETaxonomy {
   WordTag = 'word_tag'
 }
 
+export enum EPageType {
+  Home = 'home',
+  Page = 'page',
+  Devinitions = 'devinitions',
+  Devegram = 'devegram',
+  Devinition = 'devinition',
+  Archive = 'devinitions',
+  Category = 'category',
+  WordCategory = 'word_category',
+  PostTag = 'post_tag',
+  WordTag = 'word_tag'
+}
+
 export enum EPriority {
   One = '1',
   Two = '2',

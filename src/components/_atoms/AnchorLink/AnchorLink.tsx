@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
-
+import { EPageType } from '@jpp/typings/enums';
 import { getDynamicAs, getDynamicPage } from '../../../utils';
 import styles from './AnchorLink.scss';
 
@@ -11,6 +11,7 @@ interface IAnchorLinkProps {
   as?: string;
   behaviour?: Core.TLinkBehaviour;
   onClick?: Core.TOnClick;
+  pageType?: EPageType;
 }
 
 const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
@@ -20,7 +21,8 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
     behaviour = 'router',
     link,
     as,
-    onClick
+    onClick,
+    pageType = EPageType.Page
   }
 ) => {
   let Element: JSX.Element;
@@ -41,7 +43,7 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
     default:
     case 'router':
       Element = (
-        <Link href={getDynamicPage(link)} as={as ? as : getDynamicAs(link)}>
+        <Link href={getDynamicPage(pageType)} as={getDynamicAs(pageType, link)}>
           <a {...defaultProps}>
             {children}
           </a>

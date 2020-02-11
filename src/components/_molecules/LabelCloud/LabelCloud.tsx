@@ -1,17 +1,17 @@
-import { TFuncVoid } from '@jpp/typings/index';
 import React, { PureComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Label } from '@jpp/atoms/Label/Label';
 import classNames from 'classnames';
-import { TCategoriesStoreState } from '../../../store/categories/reducer';
-import { ITagStoreState, TTagsStoreState } from '../../../store/tags/reducer';
-import { IWordStoreState } from '../../../store/word/reducer';
-import { IWordCategoryStoreState, TWordCategoriesStoreState } from '../../../store/word_categories/reducer';
-import { IWordTagStoreState, TWordTagsStoreState } from '../../../store/word_tags/reducer';
+import { ICategoryStoreState } from '../../../store/categories/reducer';
+import { ITagStoreState } from '../../../store/tags/reducer';
+import { IWordCategoryStoreState } from '../../../store/word_categories/reducer';
+import { IWordTagStoreState } from '../../../store/word_tags/reducer';
 import { ETaxonomy } from '@jpp/typings/enums';
-import { getTaxonomySlug, mapTaxonomyIcon, mapTaxonomyTheme } from '../../../utils/index';
+import { getTaxonomySlug, mapTaxonomyIcon, mapTaxonomyTheme, mapTaxonomyToPageType } from '../../../utils/index';
 
 import styles from './LabelCloud.scss';
+import ConfigProvider from '../../../services/configProvider';
+import { TTaxonomyLabel } from '@jpp/typings/index';
 
 export interface ILabelCloudProps {
   className?: string;
@@ -19,81 +19,44 @@ export interface ILabelCloudProps {
 }
 
 export interface IStoreLabelCloudProps {
-  word_categories: TWordCategoriesStoreState;
-  word_tags: TWordTagsStoreState;
-  categories: TCategoriesStoreState;
-  tags: TTagsStoreState;
+  wordCategories: IWordCategoryStoreState[];
+  wordTags: IWordTagStoreState[];
+  categories: ICategoryStoreState[];
+  tags: ITagStoreState[];
 }
 
-export interface IDispatchLabelCloudProps {
-  onGetWordCategories: TFuncVoid;
-  onGetWordTags: TFuncVoid;
-  onGetTags: TFuncVoid;
-  onGetCategories: TFuncVoid;
-  onClearWordCategories: TFuncVoid;
-  onClearWordTags: TFuncVoid;
-  onClearTags: TFuncVoid;
-  onClearCategories: TFuncVoid;
-}
-
-type TLabelCloud = ILabelCloudProps & IStoreLabelCloudProps & IDispatchLabelCloudProps;
+type TLabelCloud = ILabelCloudProps & IStoreLabelCloudProps;
 
 export class LabelCloud extends PureComponent<TLabelCloud> {
 
-  componentDidMount(): void {
-    const { taxonomy, onGetCategories, onGetWordCategories, onGetTags, onGetWordTags } = this.props;
+  get items(): TTaxonomyLabel[] {
+    const { taxonomy, categories, wordTags, wordCategories, tags } = this.props;
+
+    let items: TTaxonomyLabel[] = [];
 
     switch (taxonomy) {
       case ETaxonomy.Category:
-        return onGetCategories();
+        items = categories as ICategoryStoreState[];
+        break;
       case ETaxonomy.PostTag:
-        return onGetTags();
+        items = tags as ITagStoreState[];
+        break;
       case ETaxonomy.WordTag:
-        return onGetWordTags();
+        items = wordTags as IWordTagStoreState[];
+        break;
       default:
       case ETaxonomy.WordCategory:
-        return onGetWordCategories();
+        items = wordCategories as IWordCategoryStoreState[];
+        break;
     }
-  }
 
-  componentWillUnmount(): void {
-    const { taxonomy, onClearCategories, onClearTags, onClearWordCategories, onClearWordTags } = this.props;
-
-    switch (taxonomy) {
-      case ETaxonomy.Category:
-        return onClearCategories();
-      case ETaxonomy.PostTag:
-        return onClearTags();
-      case ETaxonomy.WordTag:
-        return onClearWordTags();
-      default:
-      case ETaxonomy.WordCategory:
-        return onClearWordCategories();
-    }
-  }
-
-  get items(): any[] {
-    const { taxonomy, categories, word_tags, word_categories, tags } = this.props;
-
-    switch (taxonomy) {
-      case ETaxonomy.Category:
-        return categories as unknown as IWordStoreState[];
-      case ETaxonomy.PostTag:
-        return tags as unknown as ITagStoreState[];
-      case ETaxonomy.WordTag:
-        return word_tags as unknown as IWordTagStoreState[];
-      default:
-      case ETaxonomy.WordCategory:
-        return word_categories as unknown as IWordCategoryStoreState[];
-    }
+    return items;
   }
 
   render() {
     const { className, taxonomy } = this.props;
 
-    const splicedItems = this.items.splice(0, 10);
-
-    if (!this.items || this.items && Array.isArray(this.items) && this.items.length === 0) {
+    if (!this.items) {
       return null;
     }
 
@@ -102,32 +65,32 @@ export class LabelCloud extends PureComponent<TLabelCloud> {
         <ul
           className={classNames(styles.LabelCloud__list, className)}
         >
-          {splicedItems && splicedItems.map((
-            {
-              slug,
-              id,
-              name,
-              taxonomy: itemTaxonomy
-            }
-            ) => (
-              <li
-                key={id}
-                className={classNames(styles.LabelCloud__item)}
-              >
-                <Label
-                  taxonomy={itemTaxonomy}
-                  className={styles.LabelCloud__label}
-                  link={`${getTaxonomySlug(taxonomy)}/${slug}`}
-                  theme={mapTaxonomyTheme(slug)}
+          {this.items.map(
+            ({ slug, id, name, taxonomy: itemTaxonomy }, index) => {
+              if (index > ConfigProvider.getValue('ITEMS_PER_PAGE')) {
+                return null;
+              }
+
+              return (
+                <li
+                  key={id}
+                  className={classNames(styles.LabelCloud__item)}
                 >
-                  <FontAwesomeIcon
-                    icon={mapTaxonomyIcon(slug)}
-                    className={styles.LabelCloud__icon}
-                  />
-                  {name}
-                </Label>
-              </li>
-            )
+                  <Label
+                    pageType={mapTaxonomyToPageType[itemTaxonomy]}
+                    className={styles.LabelCloud__label}
+                    link={`${getTaxonomySlug(taxonomy)}/${slug}`}
+                    theme={mapTaxonomyTheme(slug)}
+                  >
+                    <FontAwesomeIcon
+                      icon={mapTaxonomyIcon(slug)}
+                      className={styles.LabelCloud__icon}
+                    />
+                    {name}
+                  </Label>
+                </li>
+              );
+            }
           )}
         </ul>
       </nav>

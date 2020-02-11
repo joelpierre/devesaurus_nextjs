@@ -1,8 +1,8 @@
-import { ETaxonomy } from '@jpp/typings/enums';
+import { EPageType } from '@jpp/typings/enums';
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { getDynamicAs, getDynamicPage } from '../../../utils/index';
+import { getDynamicAs, getDynamicPage } from '../../../utils';
 
 import styles from './Label.scss';
 
@@ -13,7 +13,7 @@ interface ILabelProps {
   theme?: Core.TTheme;
   link?: string;
   as?: string;
-  taxonomy?: ETaxonomy;
+  pageType?: EPageType;
 }
 
 export const Label: FunctionComponent<ILabelProps> = (
@@ -24,7 +24,7 @@ export const Label: FunctionComponent<ILabelProps> = (
     size,
     caps,
     className,
-    taxonomy,
+    pageType = EPageType.Page,
     as
   }
 ) => {
@@ -42,8 +42,8 @@ export const Label: FunctionComponent<ILabelProps> = (
   };
 
   if (link) {
-    const linkHref = as ? as : taxonomy ? getDynamicPage(taxonomy) : getDynamicPage(link);
-    const linkAs = getDynamicAs(link);
+    const linkHref = getDynamicPage(pageType);
+    const linkAs = getDynamicAs(pageType, link);
 
     return (
       <Link
