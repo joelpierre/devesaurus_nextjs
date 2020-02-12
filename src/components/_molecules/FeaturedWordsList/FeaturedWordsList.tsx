@@ -30,6 +30,7 @@ export const FeaturedWordsList: FunctionComponent<TFeaturedWordsList> = (
           <MenuItem
             key={id}
             className={styles.FeaturedWordList__item}
+            linkClassName={styles.FeaturedWordList__link}
             title={title}
             slug={slug}
           />

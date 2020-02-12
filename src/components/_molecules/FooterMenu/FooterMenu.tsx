@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import { MenuItem } from '@jpp/atoms/MenuItem/MenuItem';
 import styles from './FooterMenu.scss';
-import AnchorLink from '@jpp/atoms/AnchorLink/AnchorLink';
 
 export interface IFooterMenuProps {
   className?: string;
@@ -22,20 +22,15 @@ export const FooterMenu: FunctionComponent<TFooterMenu> = (
     <ul
       className={classNames(styles.FooterMenu__list)}
     >
-      {footerMenu.map((item, index) => {
+      {footerMenu.map(({ title, slug }, index) => {
         return (
-          <li
+          <MenuItem
             key={index}
-            className={classNames(styles.FooterMenu__item)}
-          >
-            <AnchorLink
-              link={item.slug}
-              withStyles={false}
-              className={classNames(styles.FooterMenu__link)}
-            >
-              {item.title}
-            </AnchorLink>
-          </li>
+            className={styles.FooterMenu__item}
+            linkClassName={styles.FooterMenu__link}
+            title={title}
+            slug={slug}
+          />
         );
       })}
     </ul>

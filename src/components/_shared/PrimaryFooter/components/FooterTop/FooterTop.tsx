@@ -29,7 +29,7 @@ export const FooterTop: FunctionComponent<IFooterTopProps> = (
     <article className={classNames(className, styles.FooterTop)}>
       <Container fluid={true}>
         <Row>
-          <Flex colLg={4} colMd={12}>
+          <Flex colLg={3} colMd={12}>
             <Link href="/" as="/">
               <a>
                 <Icons.LogoText className={footerStyles.PrimaryFooter__logo} />
@@ -49,7 +49,7 @@ export const FooterTop: FunctionComponent<IFooterTopProps> = (
             </div>
           </Flex>
 
-          <Flex colLg={3} colMd={12}>
+          <Flex colLg={3} colMd={12} className="ml-auto">
             <div className={footerStyles.PrimaryFooter__content}>
               <p className={footerStyles.PrimaryFooter__copy}>
                 {companySlogan}
