@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 
 import styles from './Section.scss';
 
@@ -10,16 +10,14 @@ interface ISection {
   theme?: Core.TTheme;
 }
 
-export const Section: FunctionComponent<ISection> = (
-  {
-    children,
-    className,
-    tagElement = 'article',
-    contrast = false,
-    theme,
-    ...props
-  }
-) => {
+export const Section: FunctionComponent<ISection> = ({
+  children,
+  className,
+  tagElement = 'article',
+  contrast = false,
+  theme,
+  ...props
+}) => {
   const Tag: any = `${tagElement}`;
 
   return (
@@ -28,11 +26,11 @@ export const Section: FunctionComponent<ISection> = (
         className,
         styles.section,
         {
-          [`theme--${theme}`]: !!theme
+          [`theme--${theme}`]: !!theme,
         },
         {
           [styles.themeTintAlpha]: !contrast && !theme,
-          [styles.themeTintBeta]: contrast && !theme
+          [styles.themeTintBeta]: contrast && !theme,
         }
       )}
       {...props}

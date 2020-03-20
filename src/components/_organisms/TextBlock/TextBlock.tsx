@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
+
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
 import { Row } from '@jpp/components/_shared/Grid/Row/Row';
@@ -11,32 +12,27 @@ import styles from './TextBlock.scss';
 
 type TTextBlock = Partial<Core.IAcfComponent>;
 
-export const TextBlock: FunctionComponent<TTextBlock> = (
-  {
-    content,
-    theme,
-    page_theme,
-    highlight,
-    fixed = false,
-    position
-  }
-) => {
+export const TextBlock: FunctionComponent<TTextBlock> = ({
+  content,
+  theme,
+  page_theme,
+  highlight,
+  fixed = false,
+  position,
+}) => {
   return (
     <Section
       className={classNames([
         `theme--${theme ? theme : page_theme}`,
-        styles['text-block']
+        styles['text-block'],
       ])}
     >
       <Container fluid={!fixed}>
         <Row>
           <Flex
-            className={
-              classNames(
-                styles.textBlockContent,
-                { 'mx-auto': position === EPosition.Center }
-              )
-            }
+            className={classNames(styles.textBlockContent, {
+              'mx-auto': position === EPosition.Center,
+            })}
             colLg={8}
           >
             {content && <WYSIWYG content={content} />}

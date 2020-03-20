@@ -1,7 +1,8 @@
 import { ReactWrapper, ShallowWrapper } from 'enzyme';
-import { createStore as reduxCreateStore, applyMiddleware } from 'redux';
-import rootReducer from '../../store/rootReducer';
+import { applyMiddleware, createStore as reduxCreateStore } from 'redux';
 import thunk from 'redux-thunk';
+
+import rootReducer from '../../store/rootReducer';
 
 /**
  * Create a MockStore for testing

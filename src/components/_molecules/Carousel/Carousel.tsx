@@ -1,10 +1,10 @@
+import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
 import Slider, { Settings } from 'react-slick';
-import './utils/Slick.scss';
-import './utils/SlickTheme.scss';
-import classNames from 'classnames';
 
 import styles from './Carousel.scss';
+import './utils/Slick.scss';
+import './utils/SlickTheme.scss';
 
 interface ICarouselProps {
   className: string;
@@ -17,22 +17,17 @@ const defaultSettings = {
   infinite: true,
   speed: 500,
   slidesToShow: 1,
-  slidesToScroll: 1
+  slidesToScroll: 1,
 };
 
-const Carousel: FunctionComponent<Partial<ICarouselProps>> = (
-  {
-    className,
-    settings = defaultSettings,
-    children
-  }
-) => {
-
+const Carousel: FunctionComponent<Partial<ICarouselProps>> = ({
+  className,
+  settings = defaultSettings,
+  children,
+}) => {
   return (
     <div className={classNames(className, styles.Carousel)}>
-      <Slider {...settings}>
-        {children}
-      </Slider>
+      <Slider {...settings}>{children}</Slider>
     </div>
   );
 };

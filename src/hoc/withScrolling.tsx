@@ -1,4 +1,5 @@
 import React, { Component, ComponentType } from 'react';
+
 import { getDisplayName } from './utils';
 
 interface IWithScrolling {
@@ -31,7 +32,7 @@ const withScrolling = <P extends object>(WrappedComponent: ComponentType<P>) =>
       scroll: 0,
       isScrolling: false,
       isScrollingUp: false,
-      isScrollingDown: false
+      isScrollingDown: false,
     };
 
     constructor(props: any) {
@@ -85,7 +86,7 @@ const withScrolling = <P extends object>(WrappedComponent: ComponentType<P>) =>
 
     setScrollPosition() {
       this.setState(() => ({
-        scroll: window.pageYOffset
+        scroll: window.pageYOffset,
       }));
     }
 
@@ -97,7 +98,7 @@ const withScrolling = <P extends object>(WrappedComponent: ComponentType<P>) =>
       this.setState({
         isScrolling,
         isScrollingUp,
-        isScrollingDown
+        isScrollingDown,
       });
     }
 
@@ -115,7 +116,7 @@ const withScrolling = <P extends object>(WrappedComponent: ComponentType<P>) =>
         scroll,
         isScrollingDown,
         isScrollingUp,
-        isScrolling
+        isScrolling,
       } = this.state;
 
       return (

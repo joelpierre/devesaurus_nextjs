@@ -1,11 +1,12 @@
-import React, { FunctionComponent } from 'react';
-import Link from 'next/link';
-import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName } from '@fortawesome/fontawesome-common-types';
-import { EPageType, ESize, ETheme } from '@jpp/typings/enums';
-import { getDynamicAs, getDynamicPage } from '../../../utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import Link from 'next/link';
+import React, { FunctionComponent } from 'react';
 
+import { EPageType, ESize, ETheme } from '@jpp/typings/enums';
+
+import { getDynamicAs, getDynamicPage } from '../../../utils';
 import styles from './Button.scss';
 
 interface IButtonProps {
@@ -29,37 +30,35 @@ interface IButtonIcon {
   name: IconName;
 }
 
-export const Button: FunctionComponent<IButtonProps> = (
-  {
-    behaviour = 'router',
-    theme = ETheme.TintAlpha,
-    size = ESize.Md,
-    caps = false,
-    outline = false,
-    children,
-    link,
-    className,
-    as,
-    type,
-    onClick,
-    icon,
-    pageType = EPageType.Page,
-    ...props
-  }
-) => {
+export const Button: FunctionComponent<IButtonProps> = ({
+  behaviour = 'router',
+  theme = ETheme.TintAlpha,
+  size = ESize.Md,
+  caps = false,
+  outline = false,
+  children,
+  link,
+  className,
+  as,
+  type,
+  onClick,
+  icon,
+  pageType = EPageType.Page,
+  ...props
+}) => {
   const defaultProps: Partial<IButtonProps> = {
     className: classNames([
       styles.btn,
       styles[`btn--${size}`],
       {
         [styles[`btn--${theme}`]]: !!theme,
-        [styles[`btn--outline`]]: outline,
-        [styles[`btn--capitalise`]]: caps
+        [styles['btn--outline']]: outline,
+        [styles['btn--capitalise']]: caps,
       },
-      className
+      className,
     ]),
     onClick,
-    ...props
+    ...props,
   };
 
   const getContent = (
@@ -68,7 +67,7 @@ export const Button: FunctionComponent<IButtonProps> = (
         {children && (
           <span
             className={classNames(styles.btnText, {
-              [styles.btnTextWithIcon]: !!icon
+              [styles.btnTextWithIcon]: !!icon,
             })}
           >
             {children}
@@ -106,10 +105,11 @@ export const Button: FunctionComponent<IButtonProps> = (
     case 'router':
     default:
       return (
-        <Link href={as ? as : getDynamicPage(pageType)} as={getDynamicAs(pageType, link)}>
-          <a {...defaultProps}>
-            {getContent}
-          </a>
+        <Link
+          href={as ? as : getDynamicPage(pageType)}
+          as={getDynamicAs(pageType, link)}
+        >
+          <a {...defaultProps}>{getContent}</a>
         </Link>
       );
   }

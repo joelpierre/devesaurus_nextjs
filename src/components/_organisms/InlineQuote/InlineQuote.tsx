@@ -1,26 +1,25 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
+import { Container } from '@jpp/components/_shared/Grid/Container/Container';
+import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
+import { Section } from '@jpp/components/_shared/Grid/Section/Section';
 
 import styles from './InlineQuote.scss';
-import { Section } from '@jpp/components/_shared/Grid/Section/Section';
-import { Container } from '@jpp/components/_shared/Grid/Container/Container';
-import { Row } from '@jpp/components/_shared/Grid/Row/Row';
-import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
 
-export const InlineQuote: FunctionComponent<Partial<Core.IAcfComponent>> = (
-  {
-    theme,
-    page_theme,
-    author,
-    quote
-  }
-) => {
+export const InlineQuote: FunctionComponent<Partial<Core.IAcfComponent>> = ({
+  theme,
+  page_theme,
+  author,
+  quote,
+}) => {
   return (
     <Section
       data-test="component-inline-quote"
       className={classNames([
         `theme--${theme ? theme : page_theme}`,
-        styles['inline-quote']
+        styles['inline-quote'],
       ])}
     >
       <Container>

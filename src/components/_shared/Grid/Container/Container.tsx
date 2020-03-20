@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 
 import styles from './Container.scss';
 
@@ -9,14 +9,13 @@ interface IContainerProps {
   tagElement?: Core.TTag;
 }
 
-export const Container: FunctionComponent<IContainerProps> = (
-  {
-    fluid = false,
-    children,
-    className,
-    tagElement = 'div',
-    ...props
-  }) => {
+export const Container: FunctionComponent<IContainerProps> = ({
+  fluid = false,
+  children,
+  className,
+  tagElement = 'div',
+  ...props
+}) => {
   const Tag: any = `${tagElement}`;
 
   return (
@@ -25,7 +24,7 @@ export const Container: FunctionComponent<IContainerProps> = (
       className={classNames(
         {
           [styles.container]: !fluid,
-          [styles.containerFluid]: fluid
+          [styles.containerFluid]: fluid,
         },
         className
       )}

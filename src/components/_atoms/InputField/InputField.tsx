@@ -1,6 +1,8 @@
-import { ESize } from '@jpp/typings/enums';
 import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
+
+import { ESize } from '@jpp/typings/enums';
+
 import { FormLabel } from '../FormLabel/FormLabel';
 import styles from './InputField.scss';
 
@@ -17,21 +19,19 @@ interface IInputFieldProps {
   name: string;
 }
 
-export const InputField: FunctionComponent<IInputFieldProps> = (
-  {
-    className,
-    name,
-    label,
-    type,
-    placeholder,
-    disabled,
-    min,
-    max,
-    size,
-    onChange,
-    ...props
-  }
-) => {
+export const InputField: FunctionComponent<IInputFieldProps> = ({
+  className,
+  name,
+  label,
+  type,
+  placeholder,
+  disabled,
+  min,
+  max,
+  size,
+  onChange,
+  ...props
+}) => {
   let inputField;
 
   const defaultProps = {
@@ -40,16 +40,15 @@ export const InputField: FunctionComponent<IInputFieldProps> = (
       {
         [styles['input-field--sm']]: size === ESize.Sm,
         [styles['input-field--md']]: size === ESize.Md,
-        [styles['input-field--lg']]: size === ESize.Lg
+        [styles['input-field--lg']]: size === ESize.Lg,
       },
-      className
+      className,
     ]),
     type,
     name,
-    placeholder,
     disabled,
     onChange,
-    ['aria-label']: `Input for ${name}`
+    ['aria-label']: `Input for ${name}`,
   };
 
   switch (type) {
@@ -59,16 +58,14 @@ export const InputField: FunctionComponent<IInputFieldProps> = (
     case 'date':
     default:
       inputField = (
-        <input
-          {...defaultProps}
-          {...props}
-        />
+        <input {...defaultProps} {...props} placeholder={placeholder} />
       );
       break;
     case 'number':
       inputField = (
         <input
           {...defaultProps}
+          placeholder={placeholder}
           minLength={min}
           maxLength={max}
           {...props}

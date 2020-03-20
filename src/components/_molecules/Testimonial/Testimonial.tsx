@@ -1,8 +1,9 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
+import { Heading } from '@jpp/components/_shared/Heading/Heading';
 
 import styles from './Testimonial.scss';
-import { Heading } from '@jpp/components/_shared/Heading/Heading';
 
 interface ITestimonial {
   className?: string;
@@ -14,14 +15,12 @@ interface ITestimonial {
   };
 }
 
-const Testimonial: FunctionComponent<ITestimonial> = (
-  {
-    name,
-    content,
-    company,
-    className
-  }
-) => {
+const Testimonial: FunctionComponent<ITestimonial> = ({
+  name,
+  content,
+  company,
+  className,
+}) => {
   return (
     <div className={classNames(className, styles.testimonial)}>
       <blockquote className={styles.testimonialQuote}>

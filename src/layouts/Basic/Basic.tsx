@@ -1,16 +1,15 @@
-import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter';
 import React, { PureComponent, ReactNode } from 'react';
 
 import { Meta } from '@jpp/components/_shared/Meta/Meta';
-import { PushWrapper } from '@jpp/components/_shared/PushWrapper/PushWrapper';
-import { PrimaryMain } from '@jpp/components/_shared/PrimaryMain/PrimaryMain';
 import { OffCanvas } from '@jpp/components/_shared/OffCanvas/OffCanvas';
+import PrimaryFooter from '@jpp/components/_shared/PrimaryFooter';
+import { PrimaryMain } from '@jpp/components/_shared/PrimaryMain/PrimaryMain';
+import { PushWrapper } from '@jpp/components/_shared/PushWrapper/PushWrapper';
 import { SimpleHeader } from '@jpp/components/_shared/SimpleHeader/SimpleHeader';
+import { TFuncValueVoid } from '@jpp/typings/index';
 
 import { APP_TITLE, SITE_DESCRIPTION } from '../../utils/constants';
-
 import styles from './Basic.scss';
-import { TFuncValueVoid } from '@jpp/typings/index';
 
 export interface IBasicProps {
   title: string;
@@ -32,12 +31,8 @@ export interface IDispatchBasicProps {
 type TBasic = IBasicProps & IStoreBasicProps & IDispatchBasicProps;
 
 export class Basic extends PureComponent<TBasic> {
-
   get metaData() {
-    const {
-      title = APP_TITLE,
-      description = SITE_DESCRIPTION
-    } = this.props;
+    const { title = APP_TITLE, description = SITE_DESCRIPTION } = this.props;
 
     return <Meta title={title} description={description} />;
   }
@@ -49,7 +44,7 @@ export class Basic extends PureComponent<TBasic> {
       isLoading,
       onSetMenuState,
       primaryMenu,
-      simpleMenu
+      simpleMenu,
     } = this.props;
 
     return (
@@ -58,7 +53,11 @@ export class Basic extends PureComponent<TBasic> {
 
         {isLoading && <></>}
 
-        <OffCanvas isMenuOpen={isMenuOpen} setMenuState={onSetMenuState} menuItems={primaryMenu} />
+        <OffCanvas
+          isMenuOpen={isMenuOpen}
+          setMenuState={onSetMenuState}
+          menuItems={primaryMenu}
+        />
 
         <PushWrapper isMenuOpen={isMenuOpen} setMenuState={onSetMenuState}>
           <SimpleHeader
@@ -67,9 +66,7 @@ export class Basic extends PureComponent<TBasic> {
             setMenuState={onSetMenuState}
           />
 
-          <PrimaryMain>
-            {children}
-          </PrimaryMain>
+          <PrimaryMain>{children}</PrimaryMain>
 
           <PrimaryFooter />
         </PushWrapper>

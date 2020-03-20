@@ -1,7 +1,8 @@
 import { AnyAction } from 'redux';
+
 import { IPostStoreState } from '../post/reducer';
-import * as actions from './constants';
 import { IWordStoreState } from '../word/reducer';
+import * as actions from './constants';
 
 export interface ISearchStoreState {
   words: IWordStoreState[];
@@ -10,7 +11,7 @@ export interface ISearchStoreState {
 
 const initialState: ISearchStoreState = {
   words: [] as IWordStoreState[],
-  posts: [] as IPostStoreState[]
+  posts: [] as IPostStoreState[],
 };
 
 export const searchReducer = (
@@ -22,24 +23,24 @@ export const searchReducer = (
     case actions.GET_POST_SEARCH_RESULTS_FAILED:
       return {
         posts: action.payload,
-        words: state.words
+        words: state.words,
       };
     case actions.GET_WORD_SEARCH_RESULTS_SUCCESS:
     case actions.GET_WORD_SEARCH_RESULTS_FAILED:
       return {
         posts: state.posts,
-        words: action.payload
+        words: action.payload,
       };
 
     case actions.CLEAR_POST_SEARCH_RESULTS:
       return {
         posts: initialState.posts,
-        words: state.words
+        words: state.words,
       };
     case actions.CLEAR_WORD_SEARCH_RESULTS:
       return {
         posts: state.posts,
-        words: initialState.words
+        words: initialState.words,
       };
 
     default:

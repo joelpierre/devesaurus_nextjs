@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
 import styles from './Row.scss';
 
 interface RowInterface {
@@ -10,16 +11,15 @@ interface RowInterface {
   tagElement?: Core.TTag;
 }
 
-export const Row: FunctionComponent<RowInterface> = (
-  {
-    children,
-    row = true,
-    column = false,
-    reverse = false,
-    className,
-    tagElement = 'div',
-    ...props
-  }) => {
+export const Row: FunctionComponent<RowInterface> = ({
+  children,
+  row = true,
+  column = false,
+  reverse = false,
+  className,
+  tagElement = 'div',
+  ...props
+}) => {
   const Tag: any = `${tagElement}`;
 
   return (
@@ -31,8 +31,8 @@ export const Row: FunctionComponent<RowInterface> = (
           [styles.row]: row,
           [styles.rowReverse]: row && reverse && !column,
           [styles.rowColumn]: column && !reverse,
-          [styles.rowColumnReverse]: column && reverse && !row
-        }
+          [styles.rowColumnReverse]: column && reverse && !row,
+        },
       ])}
       {...props}
     >

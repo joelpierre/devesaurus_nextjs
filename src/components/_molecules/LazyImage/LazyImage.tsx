@@ -1,26 +1,31 @@
-import React from 'react';
 import classNames from 'classnames';
-import { TFuncVoid } from '@jpp/typings/index';
+import React from 'react';
+
 import Image from '@jpp/atoms/Image/Image';
-import { isElementNearViewport, loadImageWithCanvas, loadImageWithXhr } from '@jpp/molecules/LazyImage/utils';
+import {
+  isElementNearViewport,
+  loadImageWithCanvas,
+  loadImageWithXhr,
+} from '@jpp/molecules/LazyImage/utils';
+import { TFuncVoid } from '@jpp/typings/index';
 
 import styles from './LazyImage.scss';
 
 export enum ELazyImageMode {
   Immediate = 'Immediate',
-  Deferred = 'Deferred'
+  Deferred = 'Deferred',
 }
 
 export enum ELazyImageLoadMode {
   Direct = 'direct',
   Xhr = 'xhr',
-  Canvas = 'canvas'
+  Canvas = 'canvas',
 }
 
 export enum ELazyImageEffect {
   None = 'None',
   Fade = 'Fade',
-  ZoomOut = 'ZoomOut'
+  ZoomOut = 'ZoomOut',
 }
 
 interface ILazyImageProps {
@@ -40,11 +45,13 @@ interface ILazyImageState {
   isLoaded: boolean;
 }
 
-export class LazyImage extends React.Component<ILazyImageProps, ILazyImageState> {
-
+export class LazyImage extends React.Component<
+  ILazyImageProps,
+  ILazyImageState
+> {
   static defaultProps: Pick<ILazyImageProps, 'mode' | 'effect' | 'ratio'> = {
     mode: ELazyImageMode.Immediate,
-    effect: ELazyImageEffect.None
+    effect: ELazyImageEffect.None,
   };
 
   imageRef = React.createRef<HTMLImageElement>();
@@ -58,7 +65,7 @@ export class LazyImage extends React.Component<ILazyImageProps, ILazyImageState>
   portraitExpansionQuotient = 1;
 
   state: ILazyImageState = {
-    isLoaded: false
+    isLoaded: false,
   };
 
   constructor(props: ILazyImageProps) {
@@ -90,16 +97,20 @@ export class LazyImage extends React.Component<ILazyImageProps, ILazyImageState>
         if (elRef === null || elRef.current === null) {
           return;
         }
-        if (isElementNearViewport(
-          elRef.current,
-          this.portraitExpansionQuotient,
-          this.landscapeExpansionQuotient)) {
+        if (
+          isElementNearViewport(
+            elRef.current,
+            this.portraitExpansionQuotient,
+            this.landscapeExpansionQuotient
+          )
+        ) {
           if (!this.isLoading) {
             this.loadImage();
           }
         }
       },
-      this.isInitialRun ? 0 : this.scrollCheckFrequencyMs);
+      this.isInitialRun ? 0 : this.scrollCheckFrequencyMs
+    );
     this.isInitialRun = false;
   };
 
@@ -107,7 +118,7 @@ export class LazyImage extends React.Component<ILazyImageProps, ILazyImageState>
     const imageSrc = this.props.image.url;
 
     let loadMode: ELazyImageLoadMode = ELazyImageLoadMode.Direct;
-    let imageLoader = (src: string) => new Promise((resolve) => resolve(src));
+    let imageLoader = (src: string) => new Promise(resolve => resolve(src));
 
     if (this.shouldDeferLoading()) {
       if (this.containerRef.current === null) {
@@ -181,7 +192,7 @@ export class LazyImage extends React.Component<ILazyImageProps, ILazyImageState>
           styles[`LazyImage__image--with${this.props.effect}`],
           {
             [styles['LazyImage__image--loaded']]: this.state.isLoaded,
-            [styles['LazyImage__image--loading']]: !this.state.isLoaded
+            [styles['LazyImage__image--loading']]: !this.state.isLoaded,
           }
         )}
       />
@@ -191,7 +202,10 @@ export class LazyImage extends React.Component<ILazyImageProps, ILazyImageState>
   render() {
     const containerStyle = {
       paddingTop: `${(this.props.ratio ? this.props.ratio : 0.5) * 100}%`,
-      backgroundColor: this.props.backgroundColor !== undefined ? this.props.backgroundColor : 'transparent'
+      backgroundColor:
+        this.props.backgroundColor !== undefined
+          ? this.props.backgroundColor
+          : 'transparent',
     };
 
     return (

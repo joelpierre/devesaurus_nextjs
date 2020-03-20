@@ -1,6 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import React, { FunctionComponent, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { InputField } from '@jpp/atoms/InputField/InputField';
 import { Button } from '@jpp/molecules/Buttons/Button';
 import { ETheme } from '@jpp/typings/enums';
@@ -20,19 +21,21 @@ export interface IDispatchSearchFormProps {
 
 type TSearchForm = ISearchFormProps & IDispatchSearchFormProps;
 
-export const SearchForm: FunctionComponent<TSearchForm> = (
-  {
-    className,
-    onWordSearch,
-    onPostSearch,
-    post: searchPosts = false,
-    word: searchWords = true
-  }
-) => {
+export const SearchForm: FunctionComponent<TSearchForm> = ({
+  className,
+  onWordSearch,
+  onPostSearch,
+  post: searchPosts = false,
+  word: searchWords = true,
+}) => {
   const [state, setState] = useState({ searchInput: '' });
 
-  const handleInputOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const { target: { value } } = event;
+  const handleInputOnChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const {
+      target: { value },
+    } = event;
     setState({ searchInput: value });
   };
 

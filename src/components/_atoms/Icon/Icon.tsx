@@ -1,25 +1,31 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import { EIconType, TIconProps } from '@jpp/atoms/Icon/utils/types';
-import IconComponents from '@jpp/atoms/Icon/utils/inline';
+import React, { FunctionComponent } from 'react';
+
 import IconUrls from '@jpp/atoms/Icon/utils/external';
+import IconComponents from '@jpp/atoms/Icon/utils/inline';
+import { EIconType, TIconProps } from '@jpp/atoms/Icon/utils/types';
 
-const Icon = (type: EIconType) => (
-  { className, inline, ...rest }: TIconProps): JSX.Element => {
-
+const Icon = (type: EIconType) => ({
+  className,
+  inline,
+  ...rest
+}: TIconProps): JSX.Element => {
   const classes = classNames('Icon', className);
 
   if (inline) {
     const Component = IconComponents[type];
 
-    return (
-      <Component className={classes} />
-    );
+    return <Component className={classes} />;
   }
 
   return (
     // @ts-ignore
-    <img src={IconUrls[type]} alt="Devesaurus Icon" className={classes} {...rest} />
+    <img
+      src={IconUrls[type]}
+      alt="Devesaurus Icon"
+      className={classes}
+      {...rest}
+    />
   );
 };
 
@@ -35,7 +41,7 @@ const Icons: Record<EIconType, FunctionComponent<TIconProps>> = {
   [EIconType.LogoSocial]: Icon(EIconType.LogoSocial),
   [EIconType.LogoSocialDark]: Icon(EIconType.LogoSocialDark),
   [EIconType.LogoText]: Icon(EIconType.LogoText),
-  [EIconType.LogoTextDark]: Icon(EIconType.LogoTextDark)
+  [EIconType.LogoTextDark]: Icon(EIconType.LogoTextDark),
 };
 
 export default Icons;

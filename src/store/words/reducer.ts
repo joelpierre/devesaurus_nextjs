@@ -1,8 +1,10 @@
 import { AnyAction } from 'redux';
+
 import { TReduxError } from '@jpp/typings/index';
-import * as actions from './constants';
-import { IWordStoreState } from '../word/reducer';
+
 import { updateObject } from '../../utils';
+import { IWordStoreState } from '../word/reducer';
+import * as actions from './constants';
 
 export interface IWordsStoreState {
   allWords: TWordsStoreState;
@@ -13,7 +15,7 @@ export type TWordsStoreState = IWordStoreState[] | TReduxError;
 
 const initialState = {
   allWords: [] as TWordsStoreState,
-  featuredWords: [] as TWordsStoreState
+  featuredWords: [] as TWordsStoreState,
 };
 
 export const wordsReducer = (

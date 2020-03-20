@@ -1,11 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import classNames from 'classnames';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import styles from './SocialItem.scss';
 import { IconName } from '@fortawesome/fontawesome-common-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
 import { EFontAwesomeType } from '../../../utils/fontAwesome';
+import styles from './SocialItem.scss';
 
 interface ISocialItemProps {
   className?: string;
@@ -14,14 +13,12 @@ interface ISocialItemProps {
   onClick: Core.TOnClick;
 }
 
-const SocialItem: FunctionComponent<Partial<ISocialItemProps>> = (
-  {
-    name,
-    link,
-    onClick,
-    className
-  }
-) => {
+const SocialItem: FunctionComponent<Partial<ISocialItemProps>> = ({
+  name,
+  link,
+  onClick,
+  className,
+}) => {
   let iconName: IconName;
 
   switch (name) {

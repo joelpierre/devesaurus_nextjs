@@ -1,7 +1,9 @@
-import * as actions from './constants';
-import { updateObject } from '../../utils';
 import { AnyAction } from 'redux';
+
 import { TReduxError } from '@jpp/typings/index';
+
+import { updateObject } from '../../utils';
+import * as actions from './constants';
 
 export interface IWordStoreState {
   id: number;
@@ -25,7 +27,7 @@ const initialState = {
   acf: {} as Core.IWordAcf,
   yoast: {} as Core.IYoastMeta,
   word_categories: [] as Core.ITaxonomyTerm[],
-  word_tags: [] as Core.ITaxonomyTerm[]
+  word_tags: [] as Core.ITaxonomyTerm[],
 } as IWordStoreState;
 
 export const wordReducer = (

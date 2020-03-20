@@ -1,14 +1,14 @@
-import { TFuncValueVoid } from '@jpp/typings/index';
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import React, { FunctionComponent } from 'react';
 
-import Icons from '@jpp/atoms/Icon/Icon';
-import SearchForm from '@jpp/molecules/SearchForm';
 import { Hamburger } from '@jpp/atoms/Hamburger/Hamburger';
+import Icons from '@jpp/atoms/Icon/Icon';
 import { Heading } from '@jpp/components/_shared/Heading/Heading';
-import { handleSetMenuState } from '../../../store/core/utils';
+import SearchForm from '@jpp/molecules/SearchForm';
+import { TFuncValueVoid } from '@jpp/typings/index';
 
+import { handleSetMenuState } from '../../../store/core/utils';
 import styles from './PrimaryHeader.scss';
 
 export interface IPrimaryHeaderProps {
@@ -20,13 +20,11 @@ export interface IPrimaryHeaderProps {
 
 type TPrimaryHeader = IPrimaryHeaderProps;
 
-export const PrimaryHeader: FunctionComponent<TPrimaryHeader> = (
-  {
-    isMenuOpen,
-    setMenuState,
-    title
-  }
-) => {
+export const PrimaryHeader: FunctionComponent<TPrimaryHeader> = ({
+  isMenuOpen,
+  setMenuState,
+  title,
+}) => {
   return (
     <header className={styles.PrimaryHeader}>
       <Hamburger
@@ -40,14 +38,16 @@ export const PrimaryHeader: FunctionComponent<TPrimaryHeader> = (
         </a>
       </Link>
 
-      <Heading className={styles.PrimaryHeader__heading} priority={1} innerHTML={true}>
+      <Heading
+        className={styles.PrimaryHeader__heading}
+        priority={1}
+        innerHTML={true}
+      >
         {title}
       </Heading>
 
       <section className={styles.PrimaryHeader__search}>
-        <SearchForm
-          className={styles['PrimaryHeader__search-form']}
-        />
+        <SearchForm className={styles['PrimaryHeader__search-form']} />
       </section>
     </header>
   );

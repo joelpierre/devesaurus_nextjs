@@ -1,8 +1,10 @@
-import * as actions from './constants';
 import { AnyAction } from 'redux';
+
 import { TReduxError } from '@jpp/typings/index';
+
 import { updateArray } from '../../utils';
 import { IWordStoreState } from '../word/reducer';
+import * as actions from './constants';
 
 export interface IWordTagStoreState {
   id: number;

@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
 import { Row } from '@jpp/components/_shared/Grid/Row/Row';
@@ -13,12 +14,10 @@ interface IFooterBottomProps {
   companyName: string;
 }
 
-export const FooterBottom: FunctionComponent<IFooterBottomProps> = (
-  {
-    className,
-    companyName
-  }
-) => {
+export const FooterBottom: FunctionComponent<IFooterBottomProps> = ({
+  className,
+  companyName,
+}) => {
   return (
     <article className={classNames(className, styles.FooterBottom)}>
       <Container fluid={true}>

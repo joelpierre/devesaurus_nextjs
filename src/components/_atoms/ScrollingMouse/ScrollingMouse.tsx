@@ -1,6 +1,7 @@
-import { ETheme } from '@jpp/typings/enums';
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
+import { ETheme } from '@jpp/typings/enums';
 
 import styles from './ScrollingMouse.scss';
 
@@ -9,16 +10,12 @@ interface IScrollingMouseProps {
   theme?: Core.TTheme;
 }
 
-export const ScrollingMouse: FunctionComponent<IScrollingMouseProps> = (
-  {
-    className,
-    theme = ETheme.Brand
-  }
-) => {
+export const ScrollingMouse: FunctionComponent<IScrollingMouseProps> = ({
+  className,
+  theme = ETheme.Brand,
+}) => {
   return (
-    <div
-      className={classNames(styles.ScrollingMouse, className)}
-    >
+    <div className={classNames(styles.ScrollingMouse, className)}>
       <div
         className={classNames(
           styles.mouse,

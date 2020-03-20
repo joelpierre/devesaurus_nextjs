@@ -1,17 +1,16 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 
-import { Section } from '@jpp/components/_shared/Grid/Section/Section';
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
-import { Row } from '@jpp/components/_shared/Grid/Row/Row';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
+import { Section } from '@jpp/components/_shared/Grid/Section/Section';
 import { Heading } from '@jpp/components/_shared/Heading/Heading';
 import Carousel from '@jpp/molecules/Carousel/Carousel';
 import Testimonial from '@jpp/molecules/Testimonial/Testimonial';
 
-import './utils/slick-overrides.scss';
-
 import styles from './Testimonials.scss';
+import './utils/slick-overrides.scss';
 
 interface ITestimonialsProps {
   testimonials: Core.ITestimonial[];
@@ -19,14 +18,12 @@ interface ITestimonialsProps {
 
 type TTestimonials = ITestimonialsProps & Core.IAcfComponent;
 
-export const Testimonials: FunctionComponent<TTestimonials> = (
-  {
-    className,
-    page_theme,
-    theme,
-    testimonials
-  }
-) => {
+export const Testimonials: FunctionComponent<TTestimonials> = ({
+  className,
+  page_theme,
+  theme,
+  testimonials,
+}) => {
   const settings = {
     dots: true,
     arrows: false,
@@ -34,7 +31,7 @@ export const Testimonials: FunctionComponent<TTestimonials> = (
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
   };
 
   return (
@@ -74,9 +71,10 @@ export const Testimonials: FunctionComponent<TTestimonials> = (
               )}
               settings={settings}
             >
-              {testimonials && testimonials.map((testimonial: any, index: number) => {
-                return <Testimonial key={index} {...testimonial} />;
-              })}
+              {testimonials &&
+                testimonials.map((testimonial: any, index: number) => {
+                  return <Testimonial key={index} {...testimonial} />;
+                })}
             </Carousel>
           </Flex>
         </Row>

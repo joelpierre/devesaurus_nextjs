@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 
 import styles from './Hamburger.scss';
 
@@ -13,17 +13,15 @@ interface HamburgerInterface {
   alt?: boolean;
 }
 
-export const Hamburger: FunctionComponent<HamburgerInterface> = (
-  {
-    descriptor = 'Menu',
-    className,
-    theme = 'tint-alpha',
-    reverse = false,
-    isMenuOpen,
-    onClick,
-    alt = false
-  }
-) => {
+export const Hamburger: FunctionComponent<HamburgerInterface> = ({
+  descriptor = 'Menu',
+  className,
+  theme = 'tint-alpha',
+  reverse = false,
+  isMenuOpen,
+  onClick,
+  alt = false,
+}) => {
   return (
     <button
       type="button"
@@ -32,7 +30,7 @@ export const Hamburger: FunctionComponent<HamburgerInterface> = (
         {
           [styles.hamburgerIsActive]: isMenuOpen,
           [styles.hamburgerReverse]: reverse,
-          [styles.hamburgerAlt]: alt
+          [styles.hamburgerAlt]: alt,
         },
         className
       )}

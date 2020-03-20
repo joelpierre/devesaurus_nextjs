@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
-import { Section } from '@jpp/components/_shared/Grid/Section/Section';
+import React, { FunctionComponent } from 'react';
+
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
-import { Row } from '@jpp/components/_shared/Grid/Row/Row';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
+import { Section } from '@jpp/components/_shared/Grid/Section/Section';
 import { Heading } from '@jpp/components/_shared/Heading/Heading';
 import { Button } from '@jpp/molecules/Buttons/Button';
 
@@ -11,19 +12,17 @@ import styles from './CtaBanner.scss';
 
 type TCtaBanner = Core.IAcfComponent;
 
-export const CtaBanner: FunctionComponent<TCtaBanner> = (
-  {
-    heading,
-    copy,
-    cta,
-    cta_text,
-    cta_link,
-    cta_theme,
-    theme,
-    page_theme,
-    className
-  }
-) => {
+export const CtaBanner: FunctionComponent<TCtaBanner> = ({
+  heading,
+  copy,
+  cta,
+  cta_text,
+  cta_link,
+  cta_theme,
+  theme,
+  page_theme,
+  className,
+}) => {
   return (
     <Section
       data-test="component-cta-banner"
@@ -47,15 +46,15 @@ export const CtaBanner: FunctionComponent<TCtaBanner> = (
 
             {cta ? (
               <Button
-                caps
-                link={cta_link ? `/${cta_link.post_name}` : `/contact`}
+                caps={true}
+                link={cta_link ? `/${cta_link.post_name}` : '/contact'}
                 as="[slug]"
                 theme={cta_theme}
                 behaviour={'router'}
                 className={styles.ctaBannerButton}
                 icon={{
                   weight: 'far',
-                  name: 'angle-double-right'
+                  name: 'angle-double-right',
                 }}
               >
                 {cta_text}

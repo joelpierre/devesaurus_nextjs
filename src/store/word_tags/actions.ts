@@ -1,25 +1,39 @@
-import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
+import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
+
 import axios from '../../utils/axios';
-import { setAppError, setAppLoading } from '../rootActions';
-import { CLEAR_WORD_TAGS, GET_WORD_TAGS_FAILED, GET_WORD_TAGS_SUCCESS } from './constants';
 import { IReduxDispatch, IReduxState } from '../createStore';
+import { setAppError, setAppLoading } from '../rootActions';
+import {
+  CLEAR_WORD_TAGS,
+  GET_WORD_TAGS_FAILED,
+  GET_WORD_TAGS_SUCCESS,
+} from './constants';
 import { IWordTagStoreState } from './reducer';
 
-export const getWordTags: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getWordTags: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
 
     return axios
-      .get(`/word_tags`)
+      .get('/word_tags')
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'Page not found', hasError: true, code: 404 as Core.TErrorCode };
+          const error = {
+            message: 'Page not found',
+            hasError: true,
+            code: 404 as Core.TErrorCode,
+          };
           dispatch(setAppError(true));
           return dispatch(getWordTagsFailed(error));
         }
@@ -37,18 +51,16 @@ export const getWordTags: ActionCreator<ThunkAction<Promise<any>, IReduxState, I
 
 export const getWordTagsSuccess = (data: IWordTagStoreState[]) => ({
   type: GET_WORD_TAGS_SUCCESS,
-  payload: [
-    ...data
-  ]
+  payload: [...data],
 });
 
 export const getWordTagsFailed = (error: Core.IErrorResponse | AxiosError) => ({
   type: GET_WORD_TAGS_FAILED,
   payload: {
-    error
-  }
+    error,
+  },
 });
 
 export const clearWordTags = () => ({
-  type: CLEAR_WORD_TAGS
+  type: CLEAR_WORD_TAGS,
 });

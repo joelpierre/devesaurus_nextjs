@@ -1,7 +1,9 @@
+import { AnyAction } from 'redux';
+
+import { TReduxError } from '@jpp/typings/index';
+
 import { IWordStoreState } from '../word/reducer';
 import * as actions from './constants';
-import { AnyAction } from 'redux';
-import { TReduxError } from '@jpp/typings/index';
 
 export interface IWordCategoryStoreState {
   id: number;

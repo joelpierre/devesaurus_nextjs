@@ -1,6 +1,7 @@
-import { TFuncValueVoid } from '@jpp/typings/index';
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
+import { TFuncValueVoid } from '@jpp/typings/index';
 
 import styles from './PushWrapper.scss';
 
@@ -10,17 +11,17 @@ interface IPushWrapperProps {
   setMenuState: TFuncValueVoid<boolean>;
 }
 
-export const PushWrapper: FunctionComponent<IPushWrapperProps> = (
-  {
-    className,
-    children,
-    isMenuOpen
-  }
-) => {
+export const PushWrapper: FunctionComponent<IPushWrapperProps> = ({
+  className,
+  children,
+  isMenuOpen,
+}) => {
   return (
-    <div className={classNames(styles.pushWrapper, className, {
-      [styles.pushWrapperIsActive]: isMenuOpen
-    })}>
+    <div
+      className={classNames(styles.pushWrapper, className, {
+        [styles.pushWrapperIsActive]: isMenuOpen,
+      })}
+    >
       {children}
     </div>
   );

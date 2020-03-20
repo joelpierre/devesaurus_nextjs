@@ -1,13 +1,15 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { ELayout } from '@jpp/typings/enums';
-import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+
+import { IReduxState } from '../../src/store/createStore';
 import { clearWord, getWord } from '../../src/store/word/actions';
 import { IWordStoreState } from '../../src/store/word/reducer';
 import { getWordFromState } from '../../src/store/word/selectors';
-import { IReduxState } from '../../src/store/createStore';
+import { NOT_FOUND_STATUS_CODE } from '../../src/utils';
+import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
 
 interface IDevinitionPageProps {
   error: TReduxError;
@@ -27,14 +29,14 @@ type TDevinitionPageProps = IDevinitionPageProps & IStoreDevinitionPageProps & I
 class DevinitionPage extends PureComponent<TDevinitionPageProps> {
   static async getInitialProps({ query: { slug }, store, res }: TTemplateInitialProps) {
     if (slug) {
-      await store.dispatch(getWord(slug));
+      await store.dispatch(getWord(slug) as any);
     }
 
     const state: IReduxState = store.getState();
     const word: IWordStoreState = getWordFromState(state);
 
-    if (word.error) {
-      res.statusCode = word.error.code;
+    if (word.error && res) {
+      res.statusCode = word.error.code ? word.error.code : NOT_FOUND_STATUS_CODE as any;
       return { error: word.error };
     }
 

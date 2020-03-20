@@ -1,4 +1,5 @@
 import { IconName } from '@fortawesome/fontawesome-common-types';
+
 import { EPageType, ETaxonomy } from '@jpp/typings/enums';
 
 export const NOT_FOUND_STATUS_CODE = 404;
@@ -10,7 +11,7 @@ export const updateObject = <T>(oldObject: T, updatedValues: Partial<T>): T => {
   if (Object.keys(updatedValues).length > 0) {
     return {
       ...oldObject,
-      ...updatedValues
+      ...updatedValues,
     };
   }
   return {} as T;
@@ -35,10 +36,7 @@ export const arrayHasLength = <T>(array: T): boolean => {
  */
 export const updateArray = <T>(oldArray: T[], updatedValues: T[]): T[] => {
   if (Array.isArray(updatedValues)) {
-    return [
-      ...oldArray,
-      ...updatedValues
-    ];
+    return [...oldArray, ...updatedValues];
   }
   return [] as T[];
 };
@@ -146,7 +144,7 @@ export const breakpoint = {
       small: '600px',
       medium: '900px',
       large: '1200px',
-      xlarge: '1800px'
+      xlarge: '1800px',
     };
 
     // console.log(window.matchMedia);
@@ -162,7 +160,7 @@ export const breakpoint = {
     throw new ReferenceError(
       `The size ${size} is not a valid breakpoint: ${JSON.stringify(sizes)}`
     );
-  }
+  },
 };
 
 /**
@@ -189,8 +187,7 @@ export const sanitizeUrl = (link: string): string => {
 };
 
 export const isNonEmptyString = value =>
-  typeof value === 'string'
-  && value.trim() !== '';
+  typeof value === 'string' && value.trim() !== '';
 
 export const mapPageIdToPage = (id: number): string => {
   switch (id) {
@@ -401,7 +398,7 @@ export const mapTaxonomyToPageType: Record<ETaxonomy, EPageType> = {
   [ETaxonomy.Category]: EPageType.Category,
   [ETaxonomy.PostTag]: EPageType.PostTag,
   [ETaxonomy.WordCategory]: EPageType.WordCategory,
-  [ETaxonomy.WordTag]: EPageType.WordTag
+  [ETaxonomy.WordTag]: EPageType.WordTag,
 };
 
 export const getDynamicPage = (pageType: EPageType | undefined): string => {
@@ -432,7 +429,10 @@ export const getDynamicPage = (pageType: EPageType | undefined): string => {
   }
 };
 
-export const getDynamicAs = (pageType: EPageType, slug: string | undefined): string | undefined => {
+export const getDynamicAs = (
+  pageType: EPageType,
+  slug: string | undefined
+): string | undefined => {
   switch (pageType) {
     case EPageType.Archive:
       return undefined;

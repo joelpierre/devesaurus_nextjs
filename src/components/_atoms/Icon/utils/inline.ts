@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+
 import { EIconType, TIconProps } from '@jpp/atoms/Icon/utils/types';
 
 const IconComponents: Record<EIconType, FunctionComponent<TIconProps>> = {
@@ -13,7 +14,7 @@ const IconComponents: Record<EIconType, FunctionComponent<TIconProps>> = {
   [EIconType.LogoSymbol]: require('-!svg-react-loader?props[]=class:svg!../../../../assets/svg/logo-symbol.svg'),
   [EIconType.LogoSymbolDark]: require('-!svg-react-loader?props[]=class:svg!../../../../assets/svg/logo-symbol-inv.svg'),
   [EIconType.LogoText]: require('-!svg-react-loader?props[]=class:svg!../../../../assets/svg/logo-text.svg'),
-  [EIconType.LogoTextDark]: require('-!svg-react-loader?props[]=class:svg!../../../../assets/svg/logo-text-inv.svg')
+  [EIconType.LogoTextDark]: require('-!svg-react-loader?props[]=class:svg!../../../../assets/svg/logo-text-inv.svg'),
 };
 
 export default IconComponents;

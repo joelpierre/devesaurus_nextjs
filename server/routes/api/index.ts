@@ -1,4 +1,5 @@
 import express from 'express';
+
 import categoriesRoutes from './categories';
 import categoryRoutes from './category';
 import coreRoutes from './core';
@@ -10,11 +11,11 @@ import searchRoutes from './search/index';
 import tagRoutes from './tag';
 import tagsRoutes from './tags';
 import wordRoutes from './word';
+import wordsRoutes from './words';
 import wordCategoriesRoutes from './word_categories';
 import wordCategoryRoutes from './word_category/index';
 import wordTagRoutes from './word_tag/index';
 import wordTagsRoutes from './word_tags';
-import wordsRoutes from './words';
 
 const server = express();
 const env = process.env.NODE_ENV || 'development';

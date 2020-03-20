@@ -1,14 +1,14 @@
-import React from 'react';
-import App from 'next/app';
-import { Provider } from 'react-redux';
 import { NextComponentType } from 'next';
 import withRedux from 'next-redux-wrapper';
+import App from 'next/app';
+import React from 'react';
+import { Provider } from 'react-redux';
+
 import makeStore, { TReduxProps } from '../src/store/createStore';
 import { preloadStore } from '../src/store/preloadStore';
-import ErrorPage from './_error';
 import fontAwesomeLib from '../src/utils/fontAwesome';
-
 import './_app.scss';
+import ErrorPage from './_error';
 
 interface ICoreAppProps {
   Component: NextComponentType;
@@ -21,7 +21,6 @@ type TCoreAppProps = ICoreAppProps & TReduxProps;
 fontAwesomeLib.init();
 
 class CoreApp extends App<TCoreAppProps> {
-
   static async getInitialProps({ Component, ctx }: ICoreAppProps) {
     const store = ctx.store;
 
@@ -36,7 +35,7 @@ class CoreApp extends App<TCoreAppProps> {
     return {
       pageProps: Component.getInitialProps
         ? await Component.getInitialProps(ctx)
-        : {}
+        : {},
     };
   }
 
@@ -57,5 +56,5 @@ class CoreApp extends App<TCoreAppProps> {
 }
 
 export default withRedux(makeStore, {
-  debug: false
+  debug: false,
 })(CoreApp);

@@ -1,6 +1,8 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
 import { MenuItem } from '@jpp/atoms/MenuItem/MenuItem';
+
 import { IWordStoreState } from '../../../store/word/reducer';
 import styles from './FeaturedWordsList.scss';
 
@@ -12,20 +14,16 @@ export interface IStoreFeaturedWordsListProps {
   featuredWords: IWordStoreState[];
 }
 
-type TFeaturedWordsList = IFeaturedWordsListProps & IStoreFeaturedWordsListProps;
+type TFeaturedWordsList = IFeaturedWordsListProps &
+  IStoreFeaturedWordsListProps;
 
-export const FeaturedWordsList: FunctionComponent<TFeaturedWordsList> = (
-  { className, featuredWords }
-) => (
-  <section
-    className={classNames(className, styles.FeaturedWordList)}
-  >
-    <ul
-      className={classNames(styles.FeaturedWordList__list)}
-    >
-      {featuredWords.map((
-        { id, title, slug }
-      ) => {
+export const FeaturedWordsList: FunctionComponent<TFeaturedWordsList> = ({
+  className,
+  featuredWords,
+}) => (
+  <section className={classNames(className, styles.FeaturedWordList)}>
+    <ul className={classNames(styles.FeaturedWordList__list)}>
+      {featuredWords.map(({ id, title, slug }) => {
         return (
           <MenuItem
             key={id}

@@ -1,0 +1,40 @@
+{
+  "extends": [
+    "tslint-react",
+    "./tslint.json"
+  ],
+  "rules": {
+    "eofline": true,
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape",
+      "avoid-template",
+      "jsx-double"
+    ],
+    "no-trailing-whitespace": true,
+    "ordered-imports": [
+      true,
+      {
+        "grouped-imports": true,
+        "groups": [
+          {
+            "name": "vendors",
+            "match": "^(?!(common|@jpp|\\.)).+",
+            "order": 10
+          },
+          {
+            "name": "jpp",
+            "match": "^(@jpp|common)",
+            "order": 20
+          },
+          {
+            "name": "relative",
+            "match": "^\\.+",
+            "order": 30
+          }
+        ]
+      }
+    ]
+  }
+}

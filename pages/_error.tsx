@@ -1,7 +1,7 @@
+import { NextPageContext } from 'next';
 import React, { PureComponent } from 'react';
-import { NextJSContext } from 'next-redux-wrapper';
 
-interface IErrorPage<Q extends NextJSContext = NextJSContext> {
+interface IErrorPage<Q extends NextPageContext = NextPageContext> {
   statusCode?: Core.TErrorCode;
   code?: Core.TErrorCode;
   originalUrl?: string;
@@ -19,7 +19,7 @@ class Error extends PureComponent<IErrorPage> {
       statusCode,
       originalUrl,
       params,
-      query
+      query,
     };
   }
 
@@ -30,9 +30,7 @@ class Error extends PureComponent<IErrorPage> {
       <>
         <main id="js-main">
           <h1>Hang on {statusCode || code}</h1>
-          <p>
-            We can&apos;t find the page you&apos;re looking for.
-          </p>
+          <p>We can&apos;t find the page you&apos;re looking for.</p>
         </main>
       </>
     );

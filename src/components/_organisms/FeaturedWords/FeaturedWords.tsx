@@ -1,19 +1,23 @@
-import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import React, { PureComponent } from 'react';
 import { Settings } from 'react-slick';
-import { Section } from '@jpp/components/_shared/Grid/Section/Section';
-import { Row } from '@jpp/components/_shared/Grid/Row/Row';
-import { Container } from '@jpp/components/_shared/Grid/Container/Container';
-import { TFuncVoid } from '@jpp/typings/index';
-import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
-import { Heading } from '@jpp/components/_shared/Heading/Heading';
-import Carousel from '@jpp/molecules/Carousel/Carousel';
-import WordCard from '@jpp/molecules/WordCard/WordCard';
-import { Button } from '@jpp/molecules/Buttons/Button';
-import Icons from '@jpp/atoms/Icon/Icon';
-import { CarouselNextArrow, CarouselPrevArrow } from '@jpp/molecules/Carousel/components/CarouselArrows';
-import { TWordsStoreState } from '../../../store/words/reducer';
 
+import Icons from '@jpp/atoms/Icon/Icon';
+import { Container } from '@jpp/components/_shared/Grid/Container/Container';
+import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
+import { Section } from '@jpp/components/_shared/Grid/Section/Section';
+import { Heading } from '@jpp/components/_shared/Heading/Heading';
+import { Button } from '@jpp/molecules/Buttons/Button';
+import Carousel from '@jpp/molecules/Carousel/Carousel';
+import {
+  CarouselNextArrow,
+  CarouselPrevArrow,
+} from '@jpp/molecules/Carousel/components/CarouselArrows';
+import WordCard from '@jpp/molecules/WordCard/WordCard';
+import { TFuncVoid } from '@jpp/typings/index';
+
+import { TWordsStoreState } from '../../../store/words/reducer';
 import styles from './FeaturedWords.scss';
 
 export interface IStoreFeaturedWords {
@@ -25,7 +29,9 @@ export interface IDispatchFeaturedWords {
   onClearFeaturedWords: TFuncVoid;
 }
 
-type TFeaturedWords = Core.IAcfComponent & IStoreFeaturedWords & IDispatchFeaturedWords;
+type TFeaturedWords = Core.IAcfComponent &
+  IStoreFeaturedWords &
+  IDispatchFeaturedWords;
 
 const carouselSettings: Settings = {
   dots: false,
@@ -40,22 +46,22 @@ const carouselSettings: Settings = {
     {
       breakpoint: 1200,
       settings: {
-        slidesToShow: 3
-      }
+        slidesToShow: 3,
+      },
     },
     {
       breakpoint: 992,
       settings: {
-        slidesToShow: 2
-      }
+        slidesToShow: 2,
+      },
     },
     {
       breakpoint: 568,
       settings: {
-        slidesToShow: 1
-      }
-    }
-  ]
+        slidesToShow: 1,
+      },
+    },
+  ],
 };
 
 export class FeaturedWords extends PureComponent<TFeaturedWords> {
@@ -74,11 +80,9 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
 
     return (
       <Section
-        className={
-          classNames(styles.FeaturedWords, className, {
-            [styles['FeaturedWords--is-loaded']]: featuredWordsLength
-          })
-        }
+        className={classNames(styles.FeaturedWords, className, {
+          [styles['FeaturedWords--is-loaded']]: featuredWordsLength,
+        })}
         theme={'gradient-brand'}
       >
         <Container fluid={false}>
@@ -86,16 +90,15 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
             <Row>
               <Flex colLg={6} colSm={10}>
                 {heading && (
-                  <Heading priority={2} className={styles.FeaturedWords__heading}>
+                  <Heading
+                    priority={2}
+                    className={styles.FeaturedWords__heading}
+                  >
                     {heading}
                   </Heading>
                 )}
 
-                {copy && (
-                  <p className={styles.FeaturedWords__copy}>
-                    {copy}
-                  </p>
-                )}
+                {copy && <p className={styles.FeaturedWords__copy}>{copy}</p>}
               </Flex>
             </Row>
           )}
@@ -105,8 +108,11 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
               <Row>
                 <Flex col={12}>
                   <Carousel settings={carouselSettings}>
-                    {featuredWords.map((word) => (
-                      <div key={word.slug} className={styles['FeaturedWords__word-card']}>
+                    {featuredWords.map(word => (
+                      <div
+                        key={word.slug}
+                        className={styles['FeaturedWords__word-card']}
+                      >
                         <WordCard word={word} />
                       </div>
                     ))}
@@ -122,14 +128,14 @@ export class FeaturedWords extends PureComponent<TFeaturedWords> {
                     className={classNames(styles.FeaturedWords__button)}
                   >
                     View all word categories
-
-                    <Icons.ChevronRight className={styles['FeaturedWords__button-icon']} />
+                    <Icons.ChevronRight
+                      className={styles['FeaturedWords__button-icon']}
+                    />
                   </Button>
                 </Flex>
               </Row>
             </>
           )}
-
         </Container>
       </Section>
     );

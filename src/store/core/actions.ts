@@ -1,7 +1,9 @@
-import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
+import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
+
 import axios from '../../utils/axios/';
+import { IReduxDispatch, IReduxState } from '../createStore';
 import {
   GET_FOOTER_MENU_FAILED,
   GET_FOOTER_MENU_SUCCESS,
@@ -13,15 +15,18 @@ import {
   GET_SITE_META_SUCCESS,
   GET_TERMS_MENU_FAILED,
   GET_TERMS_MENU_SUCCESS,
-  SET_INITIAL_FETCH
+  SET_INITIAL_FETCH,
 } from './constants';
 
-import { IReduxDispatch, IReduxState } from '../createStore';
-
-export const getSiteMeta: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getSiteMeta: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     return axios
-      .get(`/options/acf`)
+      .get('/options/acf')
       .then((response: AxiosResponse) => {
         return dispatch(getSiteMetaSuccess(response.data));
       })
@@ -32,10 +37,15 @@ export const getSiteMeta: ActionCreator<ThunkAction<Promise<any>, IReduxState, I
   };
 };
 
-export const getPrimaryMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getPrimaryMenu: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     return axios
-      .get(`/menus/primary-menu`)
+      .get('/menus/primary-menu')
       .then((response: AxiosResponse) => {
         return dispatch(getPrimaryMenuSuccess(response.data));
       })
@@ -46,10 +56,15 @@ export const getPrimaryMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState
   };
 };
 
-export const getSimpleMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getSimpleMenu: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     return axios
-      .get(`/menus/simple-menu`)
+      .get('/menus/simple-menu')
       .then((response: AxiosResponse) => {
         return dispatch(getSimpleMenuSuccess(response.data));
       })
@@ -60,10 +75,15 @@ export const getSimpleMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState,
   };
 };
 
-export const getFooterMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getFooterMenu: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     return axios
-      .get(`/menus/footer-menu`)
+      .get('/menus/footer-menu')
       .then((response: AxiosResponse) => {
         return dispatch(getFooterMenuSuccess(response.data));
       })
@@ -74,10 +94,15 @@ export const getFooterMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState,
   };
 };
 
-export const getTermsMenu: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getTermsMenu: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     return axios
-      .get(`/menus/terms-menu`)
+      .get('/menus/terms-menu')
       .then((response: AxiosResponse) => {
         return dispatch(getTermsMenuSuccess(response.data));
       })
@@ -92,93 +117,85 @@ export const getSiteMetaSuccess = (data: Core.ICoreOptions) => ({
   type: GET_SITE_META_SUCCESS,
   payload: {
     options: {
-      ...data
-    }
-  }
+      ...data,
+    },
+  },
 });
 
 export const getPrimaryMenuSuccess = (data: Core.IMenuItem[]) => ({
   type: GET_PRIMARY_MENU_SUCCESS,
   payload: {
-    primaryMenu: [
-      ...data
-    ]
-  }
+    primaryMenu: [...data],
+  },
 });
 
 export const getPrimaryMenuFailed = (error: AxiosError) => ({
   type: GET_PRIMARY_MENU_FAILED,
   payload: {
     primaryMenu: {
-      error
-    }
-  }
+      error,
+    },
+  },
 });
 
 export const getSimpleMenuSuccess = (data: Core.IMenuItem[]) => ({
   type: GET_SIMPLE_MENU_SUCCESS,
   payload: {
-    simpleMenu: [
-      ...data
-    ]
-  }
+    simpleMenu: [...data],
+  },
 });
 
 export const getSimpleMenuFailed = (error: AxiosError) => ({
   type: GET_SIMPLE_MENU_FAILED,
   payload: {
     simpleMenu: {
-      error
-    }
-  }
+      error,
+    },
+  },
 });
 
 export const getFooterMenuSuccess = (data: Core.IMenuItem[]) => ({
   type: GET_FOOTER_MENU_SUCCESS,
   payload: {
-    footerMenu: [
-      ...data
-    ]
-  }
+    footerMenu: [...data],
+  },
 });
 
 export const getFooterMenuFailed = (error: AxiosError) => ({
   type: GET_FOOTER_MENU_FAILED,
   payload: {
     footerMenu: {
-      error
-    }
-  }
+      error,
+    },
+  },
 });
 
 export const getTermsMenuSuccess = (data: Core.IMenuItem[]) => ({
   type: GET_TERMS_MENU_SUCCESS,
   payload: {
-    termsMenu: [
-      ...data
-    ]
-  }
+    termsMenu: [...data],
+  },
 });
 
 export const getTermsMenuFailed = (error: AxiosError) => ({
   type: GET_TERMS_MENU_FAILED,
   payload: {
     termsMenu: {
-      error
-    }
-  }
+      error,
+    },
+  },
 });
 
 export const getSiteMetaFailed = (error: AxiosError) => ({
   type: GET_SITE_META_FAILED,
   payload: {
-    error
-  }
+    error,
+  },
 });
 
 export const setInitialFetch = (value: boolean) => ({
   type: SET_INITIAL_FETCH,
-  payload: value
+  payload: value,
 });
 
 export const setAppError = (value: boolean) => {
@@ -186,7 +203,7 @@ export const setAppError = (value: boolean) => {
 
   return {
     type: `SET_APP_ERROR_${val}`,
-    payload: value
+    payload: value,
   };
 };
 
@@ -195,7 +212,7 @@ export const setMenuState = (value: boolean) => {
 
   return {
     type: `SET_MENU_STATE_${val}`,
-    payload: value
+    payload: value,
   };
 };
 
@@ -204,6 +221,6 @@ export const setAppLoading = (value: boolean) => {
 
   return {
     type: `SET_APP_LOADING_${val}`,
-    payload: value
+    payload: value,
   };
 };

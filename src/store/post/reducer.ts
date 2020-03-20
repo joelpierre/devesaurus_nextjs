@@ -1,7 +1,9 @@
 import { AnyAction } from 'redux';
+
 import { TReduxError } from '@jpp/typings/index';
-import * as actions from './constants';
+
 import { updateObject } from '../../utils';
+import * as actions from './constants';
 
 export interface IPostStoreState {
   id: number;
@@ -23,7 +25,7 @@ const initialState = {
   yoast: {} as Core.IYoastMeta,
   acf: {} as Core.IAcfCore,
   categories: [] as Core.ITaxonomyTerm[],
-  tags: [] as Core.ITaxonomyTerm[]
+  tags: [] as Core.ITaxonomyTerm[],
 } as IPostStoreState;
 
 export const postReducer = (

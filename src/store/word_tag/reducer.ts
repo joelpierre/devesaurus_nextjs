@@ -1,11 +1,12 @@
-import { IWordTagStoreState } from '../word_tags/reducer';
-import * as actions from './constants';
 import { AnyAction } from 'redux';
+
 import { updateObject } from '../../utils';
 import { IWordStoreState } from '../word/reducer';
+import { IWordTagStoreState } from '../word_tags/reducer';
+import * as actions from './constants';
 
 const initialState = {
-  words: [] as IWordStoreState[]
+  words: [] as IWordStoreState[],
 } as IWordTagStoreState;
 
 export const wordTagReducer = (

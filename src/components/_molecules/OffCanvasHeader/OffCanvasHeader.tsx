@@ -1,10 +1,10 @@
-import { TFuncValueVoid } from '@jpp/typings/index';
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
 import Router from 'next/router';
+import React, { FunctionComponent } from 'react';
 
 import Icon from '@jpp/atoms/Icon/Icon';
+import { TFuncValueVoid } from '@jpp/typings/index';
 
 import styles from './OffCanvasHeader.scss';
 
@@ -14,11 +14,12 @@ interface IOffCanvasHeader {
   setMenuState: TFuncValueVoid<boolean>;
 }
 
-const OffCanvasHeader: FunctionComponent<IOffCanvasHeader> = (
-  { className, setMenuState, isMenuOpen }
-) => {
-
-  const handleSetMenuState = (event) => {
+const OffCanvasHeader: FunctionComponent<IOffCanvasHeader> = ({
+  className,
+  setMenuState,
+  isMenuOpen,
+}) => {
+  const handleSetMenuState = event => {
     setMenuState(!isMenuOpen);
     Router.push('/');
     event.preventDefault();

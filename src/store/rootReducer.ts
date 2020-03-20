@@ -1,20 +1,21 @@
 import { combineReducers, Reducer } from 'redux';
+
+import { categoriesReducer } from './categories/reducer';
 import { categoryReducer } from './category/reducer';
+import { coreReducer } from './core/reducer';
 import { IReduxState } from './createStore';
 import { pageReducer } from './page/reducer';
-import { coreReducer } from './core/reducer';
 import { postReducer } from './post/reducer';
+import { postsReducer } from './posts/reducer';
 import { searchReducer } from './search/reducer';
 import { tagReducer } from './tag/reducer';
-import { wordReducer } from './word/reducer';
 import { tagsReducer } from './tags/reducer';
-import { categoriesReducer } from './categories/reducer';
+import { wordReducer } from './word/reducer';
+import { wordsReducer } from './words/reducer';
+import { wordCategoriesReducer } from './word_categories/reducer';
 import { wordCategoryReducer } from './word_category/reducer';
 import { wordTagReducer } from './word_tag/reducer';
 import { wordTagsReducer } from './word_tags/reducer';
-import { wordCategoriesReducer } from './word_categories/reducer';
-import { wordsReducer } from './words/reducer';
-import { postsReducer } from './posts/reducer';
 
 /**
  * Root Reducer
@@ -34,7 +35,7 @@ export const rootReducer: Reducer<IReduxState> = combineReducers<IReduxState>({
   word_tags: wordTagsReducer,
   word_category: wordCategoryReducer,
   word_categories: wordCategoriesReducer,
-  search: searchReducer
+  search: searchReducer,
 });
 
 export default rootReducer;

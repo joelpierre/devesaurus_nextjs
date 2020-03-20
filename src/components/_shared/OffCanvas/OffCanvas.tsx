@@ -1,9 +1,10 @@
-import { TFuncValueVoid } from '@jpp/typings/index';
-import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { PrimaryMenu } from '@jpp/organisms/PrimaryMenu/PrimaryMenu';
-import OffCanvasHeader from '@jpp/molecules/OffCanvasHeader/OffCanvasHeader';
+import React, { PureComponent } from 'react';
+
 import OffCanvasFooter from '@jpp/molecules/OffCanvasFooter/OffCanvasFooter';
+import OffCanvasHeader from '@jpp/molecules/OffCanvasHeader/OffCanvasHeader';
+import { PrimaryMenu } from '@jpp/organisms/PrimaryMenu/PrimaryMenu';
+import { TFuncValueVoid } from '@jpp/typings/index';
 
 import styles from './OffCanvas.scss';
 
@@ -15,7 +16,6 @@ interface IOffCanvasProps {
 }
 
 export class OffCanvas extends PureComponent<IOffCanvasProps> {
-
   handleSetMenuState = (event): void => {
     const { setMenuState, isMenuOpen } = this.props;
     setMenuState(!isMenuOpen);
@@ -26,21 +26,16 @@ export class OffCanvas extends PureComponent<IOffCanvasProps> {
     const { menuItems, isMenuOpen, className, setMenuState } = this.props;
 
     return (
-      <aside className={classNames(
-        styles.OffCanvas,
-        className,
-        {
-          [styles.offCanvasIsActive]: isMenuOpen
-        }
-      )}>
-
+      <aside
+        className={classNames(styles.OffCanvas, className, {
+          [styles.offCanvasIsActive]: isMenuOpen,
+        })}
+      >
         <div
           role="button"
-          className={
-            classNames(styles.offCanvasOverlayToggle, {
-              [styles.offCanvasOverlayToggleIsActive]: isMenuOpen
-            })
-          }
+          className={classNames(styles.offCanvasOverlayToggle, {
+            [styles.offCanvasOverlayToggleIsActive]: isMenuOpen,
+          })}
           onClick={this.handleSetMenuState}
         />
 
@@ -60,7 +55,6 @@ export class OffCanvas extends PureComponent<IOffCanvasProps> {
 
           <OffCanvasFooter className={styles.offCanvasFooter} />
         </div>
-
       </aside>
     );
   }

@@ -1,17 +1,23 @@
-import React, { PureComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Label } from '@jpp/atoms/Label/Label';
 import classNames from 'classnames';
+import React, { PureComponent } from 'react';
+
+import { Label } from '@jpp/atoms/Label/Label';
+import { ETaxonomy } from '@jpp/typings/enums';
+import { TTaxonomyLabel } from '@jpp/typings/index';
+
+import ConfigProvider from '../../../services/configProvider';
 import { ICategoryStoreState } from '../../../store/categories/reducer';
 import { ITagStoreState } from '../../../store/tags/reducer';
 import { IWordCategoryStoreState } from '../../../store/word_categories/reducer';
 import { IWordTagStoreState } from '../../../store/word_tags/reducer';
-import { ETaxonomy } from '@jpp/typings/enums';
-import { getTaxonomySlug, mapTaxonomyIcon, mapTaxonomyTheme, mapTaxonomyToPageType } from '../../../utils/index';
-
+import {
+  getTaxonomySlug,
+  mapTaxonomyIcon,
+  mapTaxonomyTheme,
+  mapTaxonomyToPageType,
+} from '../../../utils/index';
 import styles from './LabelCloud.scss';
-import ConfigProvider from '../../../services/configProvider';
-import { TTaxonomyLabel } from '@jpp/typings/index';
 
 export interface ILabelCloudProps {
   className?: string;
@@ -28,7 +34,6 @@ export interface IStoreLabelCloudProps {
 type TLabelCloud = ILabelCloudProps & IStoreLabelCloudProps;
 
 export class LabelCloud extends PureComponent<TLabelCloud> {
-
   get items(): TTaxonomyLabel[] {
     const { taxonomy, categories, wordTags, wordCategories, tags } = this.props;
 
@@ -61,10 +66,13 @@ export class LabelCloud extends PureComponent<TLabelCloud> {
     }
 
     return (
-      <nav className={classNames(styles.LabelCloud, styles[`LabelCloud--${taxonomy}`])}>
-        <ul
-          className={classNames(styles.LabelCloud__list, className)}
-        >
+      <nav
+        className={classNames(
+          styles.LabelCloud,
+          styles[`LabelCloud--${taxonomy}`]
+        )}
+      >
+        <ul className={classNames(styles.LabelCloud__list, className)}>
           {this.items.map(
             ({ slug, id, name, taxonomy: itemTaxonomy }, index) => {
               if (index > ConfigProvider.getValue('ITEMS_PER_PAGE')) {
@@ -72,10 +80,7 @@ export class LabelCloud extends PureComponent<TLabelCloud> {
               }
 
               return (
-                <li
-                  key={id}
-                  className={classNames(styles.LabelCloud__item)}
-                >
+                <li key={id} className={classNames(styles.LabelCloud__item)}>
                   <Label
                     pageType={mapTaxonomyToPageType[itemTaxonomy]}
                     className={styles.LabelCloud__label}

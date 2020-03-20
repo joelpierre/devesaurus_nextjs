@@ -1,12 +1,12 @@
-import React, { FunctionComponent, ReactText } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import Link from 'next/link';
+import React, { FunctionComponent, ReactText } from 'react';
 
-import { Section } from '@jpp/components/_shared/Grid/Section/Section';
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
-import { Row } from '@jpp/components/_shared/Grid/Row/Row';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
+import { Row } from '@jpp/components/_shared/Grid/Row/Row';
+import { Section } from '@jpp/components/_shared/Grid/Section/Section';
 
 import styles from './Pagination.scss';
 
@@ -17,7 +17,10 @@ interface IPaginationProps {
   currentPage: number;
 }
 
-export const getPages = (totalPages: number, currentPage: number): ReactText[] => {
+export const getPages = (
+  totalPages: number,
+  currentPage: number
+): ReactText[] => {
   if (totalPages <= 7) {
     return [1, 2, 3, 4, 5, 6, 7].slice(0, totalPages);
   }
@@ -55,10 +58,15 @@ export const getPages = (totalPages: number, currentPage: number): ReactText[] =
   return pages;
 };
 
-export const getUrlForPage = (location: Location, page: string | number): string => {
+export const getUrlForPage = (
+  location: Location,
+  page: string | number
+): string => {
   const currentPath = location.pathname;
   const currentPathArr = currentPath.split('/');
-  const lastUrlSegment = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
+  const lastUrlSegment = location.pathname.substring(
+    location.pathname.lastIndexOf('/') + 1
+  );
   let finalPath = currentPath;
 
   if (!isNaN(+lastUrlSegment)) {
@@ -73,15 +81,13 @@ export const getUrlForPage = (location: Location, page: string | number): string
   return `${finalPath}/${page}`;
 };
 
-export const Pagination: FunctionComponent<IPaginationProps> = (
-  {
-    className,
-    totalPages,
-    location,
-    currentPage,
-    ...props
-  }
-) => {
+export const Pagination: FunctionComponent<IPaginationProps> = ({
+  className,
+  totalPages,
+  location,
+  currentPage,
+  ...props
+}) => {
   if (location === null) {
     return null;
   }
@@ -97,17 +103,16 @@ export const Pagination: FunctionComponent<IPaginationProps> = (
       <Container fluid={false}>
         <Row>
           <Flex col={12}>
-            <nav className={classNames(styles[`pagination`], className)} {...props}>
-              <ul className={classNames(styles[`pagination__list`])}>
+            <nav
+              className={classNames(styles.pagination, className)}
+              {...props}
+            >
+              <ul className={classNames(styles.pagination__list)}>
                 <li
-                  className={
-                    classNames(
-                      [
-                        styles[`pagination__prev`],
-                        styles[`pagination__item`]
-                      ]
-                    )
-                  }
+                  className={classNames([
+                    styles.pagination__prev,
+                    styles.pagination__item,
+                  ])}
                 >
                   {currentPage > 1 && (
                     <Link
@@ -117,9 +122,9 @@ export const Pagination: FunctionComponent<IPaginationProps> = (
                     >
                       <a
                         className={classNames(
-                          styles[`pagination__btn`],
-                          styles[`pagination__prev-btn`],
-                          styles[`pagination__prev-text`]
+                          styles.pagination__btn,
+                          styles['pagination__prev-btn'],
+                          styles['pagination__prev-text']
                         )}
                       >
                         Previous
@@ -133,49 +138,40 @@ export const Pagination: FunctionComponent<IPaginationProps> = (
                     case '...':
                       return (
                         <li
-                          className={
-                            classNames(
-                              [
-                                styles[`pagination__pages`],
-                                styles[`pagination__item`]
-                              ]
-                            )
-                          }
+                          className={classNames([
+                            styles.pagination__pages,
+                            styles.pagination__item,
+                          ])}
                           key={index === 1 ? 'e1' : 'e2'}
                         >
                           <span
-                            className={styles[`pagination__ellipsis`]}
+                            className={styles.pagination__ellipsis}
                             data-test="ellipsis"
                           >
-                    ...
-                  </span>
+                            ...
+                          </span>
                         </li>
                       );
                     case currentPage:
                       return (
                         <li
-                          className={
-                            classNames(
-                              [
-                                styles[`pagination__pages`],
-                                styles[`pagination__item`]
-                              ]
-                            )
-                          }
+                          className={classNames([
+                            styles.pagination__pages,
+                            styles.pagination__item,
+                          ])}
                           key={page}
                         >
                           <span
                             data-test="page-active"
-                            className={
-                              classNames(
-                                [
-                                  styles[`pagination__btn`],
-                                  styles[`pagination__active`]
-                                ]
-                              )
-                            }
+                            className={classNames([
+                              styles.pagination__btn,
+                              styles.pagination__active,
+                            ])}
                           >
-                            <FontAwesomeIcon className={styles.paginationActiveIcon} icon={['far', 'arrow-up']} />
+                            <FontAwesomeIcon
+                              className={styles.paginationActiveIcon}
+                              icon={['far', 'arrow-up']}
+                            />
                             {page}
                           </span>
                         </li>
@@ -184,30 +180,24 @@ export const Pagination: FunctionComponent<IPaginationProps> = (
                       return (
                         <li
                           key={page}
-                          className={
-                            classNames(
-                              [
-                                styles[`pagination__pages`],
-                                styles[`pagination__item`]
-                              ]
-                            )
-                          }
+                          className={classNames([
+                            styles.pagination__pages,
+                            styles.pagination__item,
+                          ])}
                         >
                           <Link
-                            href={getUrlForPage(location, page)} key={page}
+                            href={getUrlForPage(location, page)}
+                            key={page}
                             data-test="page-btn"
                           >
                             <a
-                              className={
-                                classNames(
-                                  [
-                                    styles[`pagination__btn`],
-                                    {
-                                      [styles[`pagination__active`]]: currentPage === page
-                                    }
-                                  ]
-                                )
-                              }
+                              className={classNames([
+                                styles.pagination__btn,
+                                {
+                                  [styles.pagination__active]:
+                                    currentPage === page,
+                                },
+                              ])}
                             >
                               {page}
                             </a>
@@ -217,14 +207,10 @@ export const Pagination: FunctionComponent<IPaginationProps> = (
                   }
                 })}
                 <li
-                  className={
-                    classNames(
-                      [
-                        styles[`pagination__next`],
-                        styles[`pagination__item`]
-                      ]
-                    )
-                  }
+                  className={classNames([
+                    styles.pagination__next,
+                    styles.pagination__item,
+                  ])}
                 >
                   {currentPage < totalPages && (
                     <Link
@@ -234,9 +220,9 @@ export const Pagination: FunctionComponent<IPaginationProps> = (
                     >
                       <a
                         className={classNames(
-                          styles[`pagination__btn`],
-                          styles[`pagination__next-btn`],
-                          styles[`pagination__next-text`]
+                          styles.pagination__btn,
+                          styles['pagination__next-btn'],
+                          styles['pagination__next-text']
                         )}
                       >
                         Next

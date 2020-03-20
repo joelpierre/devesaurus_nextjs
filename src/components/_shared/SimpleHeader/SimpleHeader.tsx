@@ -1,9 +1,10 @@
-import { TFuncValueVoid } from '@jpp/typings/index';
 import React, { FunctionComponent } from 'react';
-import { SimpleMenu } from '@jpp/organisms/SimpleMenu/SimpleMenu';
-import { Hamburger } from '@jpp/atoms/Hamburger/Hamburger';
-import { handleSetMenuState } from '../../../store/core/utils';
 
+import { Hamburger } from '@jpp/atoms/Hamburger/Hamburger';
+import { SimpleMenu } from '@jpp/organisms/SimpleMenu/SimpleMenu';
+import { TFuncValueVoid } from '@jpp/typings/index';
+
+import { handleSetMenuState } from '../../../store/core/utils';
 import styles from './SimpleHeader.scss';
 
 interface ISimpleHeaderProps {
@@ -13,21 +14,18 @@ interface ISimpleHeaderProps {
   menuItems: Core.IMenuItem[];
 }
 
-export const SimpleHeader: FunctionComponent<ISimpleHeaderProps> = (
-  {
-    menuItems,
-    isMenuOpen,
-    setMenuState
-  }
-) => {
+export const SimpleHeader: FunctionComponent<ISimpleHeaderProps> = ({
+  menuItems,
+  isMenuOpen,
+  setMenuState,
+}) => {
+  const handleOnClick = () => {
+    handleSetMenuState(setMenuState, isMenuOpen);
+  };
 
   return (
     <header className={styles.simpleHeader}>
-      <Hamburger
-        theme={'brand'}
-        onClick={() => handleSetMenuState(setMenuState, isMenuOpen)}
-        descriptor="Menu"
-      />
+      <Hamburger theme={'brand'} onClick={handleOnClick} descriptor="Menu" />
 
       <SimpleMenu menuItems={menuItems} />
     </header>

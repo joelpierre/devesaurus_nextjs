@@ -1,5 +1,6 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
 import { Row } from '@jpp/components/_shared/Grid/Row/Row';
@@ -16,7 +17,11 @@ export class ContentBlock extends React.PureComponent<Core.IAcfComponent> {
     const { cta_text, cta_link, cta_theme } = this.props;
 
     return (
-      <Button className={styles.ContentBlock__button} theme={cta_theme} link={cta_link.post_name}>
+      <Button
+        className={styles.ContentBlock__button}
+        theme={cta_theme}
+        link={cta_link.post_name}
+      >
         {cta_text}
       </Button>
     );
@@ -50,7 +55,7 @@ export class ContentBlock extends React.PureComponent<Core.IAcfComponent> {
           colLg={6}
           className={styles.ContentBlock__image}
           style={{
-            backgroundImage: image && `url(${image.url})`
+            backgroundImage: image && `url(${image.url})`,
           }}
         />
       </>
@@ -58,12 +63,7 @@ export class ContentBlock extends React.PureComponent<Core.IAcfComponent> {
   }
 
   render() {
-    const {
-      className,
-      position,
-      theme,
-      page_theme
-    } = this.props;
+    const { className, position, theme, page_theme } = this.props;
 
     const ROOT_CLASSES = classNames(
       styles.ContentBlock,
@@ -73,14 +73,9 @@ export class ContentBlock extends React.PureComponent<Core.IAcfComponent> {
     );
 
     return (
-      <Section
-        tagElement="article"
-        className={ROOT_CLASSES}
-      >
+      <Section tagElement="article" className={ROOT_CLASSES}>
         <Container fluid={true}>
-          <Row>
-            {this.content}
-          </Row>
+          <Row>{this.content}</Row>
         </Container>
       </Section>
     );

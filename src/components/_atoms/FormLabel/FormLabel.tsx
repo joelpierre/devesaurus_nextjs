@@ -1,6 +1,8 @@
-import { ESize } from '@jpp/typings/enums';
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
+import { ESize } from '@jpp/typings/enums';
+
 import styles from './FormLabel.scss';
 
 interface IFormLabelProps {
@@ -9,7 +11,11 @@ interface IFormLabelProps {
   name: string;
 }
 
-export const FormLabel: FunctionComponent<IFormLabelProps> = ({ text, name, size = ESize.Md }) => {
+export const FormLabel: FunctionComponent<IFormLabelProps> = ({
+  text,
+  name,
+  size = ESize.Md,
+}) => {
   return (
     <label
       id={name}

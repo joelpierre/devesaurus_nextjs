@@ -1,11 +1,16 @@
 import { connect } from 'react-redux';
+
 import {
   IPrimaryFooterProps,
   IStorePrimaryFooterProps,
-  PrimaryFooter
+  PrimaryFooter,
 } from '@jpp/components/_shared/PrimaryFooter/PrimaryFooter';
+
+import {
+  getFooterMenuFromState,
+  getOptions,
+} from '../../../store/core/selectors';
 import { IReduxState } from '../../../store/createStore';
-import { getFooterMenuFromState, getOptions } from '../../../store/core/selectors';
 
 const mapStateToProps = (state: IReduxState) => {
   const options = getOptions(state);
@@ -14,8 +19,10 @@ const mapStateToProps = (state: IReduxState) => {
     footerMenu: getFooterMenuFromState(state),
     company_name: options.company_name,
     company_slogan: options.company_slogan,
-    general_email: options.general_email
+    general_email: options.general_email,
   };
 };
 
-export default connect<IStorePrimaryFooterProps, never, IPrimaryFooterProps>(mapStateToProps)(PrimaryFooter);
+export default connect<IStorePrimaryFooterProps, never, IPrimaryFooterProps>(
+  mapStateToProps
+)(PrimaryFooter);

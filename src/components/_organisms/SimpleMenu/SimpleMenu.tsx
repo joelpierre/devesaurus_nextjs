@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 
-import { MenuItem, EIconPosition } from '@jpp/atoms/MenuItem/MenuItem';
+import { EIconPosition, MenuItem } from '@jpp/atoms/MenuItem/MenuItem';
 
 import styles from './SimpleMenu.scss';
 
@@ -10,13 +10,10 @@ interface ISimpleMenuProps {
   menuItems: Core.IMenuItem[];
 }
 
-export const SimpleMenu: FunctionComponent<ISimpleMenuProps> = (
-  {
-    className,
-    menuItems
-  }
-) => {
-
+export const SimpleMenu: FunctionComponent<ISimpleMenuProps> = ({
+  className,
+  menuItems,
+}) => {
   return (
     <nav className={classNames(className, styles.simpleMenu)}>
       <ul className={styles.simpleMenuList}>

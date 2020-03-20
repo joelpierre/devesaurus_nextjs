@@ -1,8 +1,9 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
+import AnchorLink from '@jpp/atoms/AnchorLink/AnchorLink';
 
 import styles from './TermsMenu.scss';
-import AnchorLink from '@jpp/atoms/AnchorLink/AnchorLink';
 
 export interface ITermsMenuProps {
   className?: string;
@@ -14,12 +15,10 @@ export interface IStoreTermsMenuProps {
 
 export type TTermsMenu = ITermsMenuProps & IStoreTermsMenuProps;
 
-export const TermsMenu: FunctionComponent<TTermsMenu> = (
-  {
-    className,
-    termsMenu
-  }
-) => {
+export const TermsMenu: FunctionComponent<TTermsMenu> = ({
+  className,
+  termsMenu,
+}) => {
   return (
     <ul className={classNames(styles.TermsMenu, className)}>
       {termsMenu.map((menuItem, index) => (

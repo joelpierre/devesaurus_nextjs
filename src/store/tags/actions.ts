@@ -1,25 +1,35 @@
-import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
+import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import axios  from '../../utils/axios';
+
+import axios from '../../utils/axios';
+import { IReduxDispatch, IReduxState } from '../createStore';
 import { setAppError, setAppLoading } from '../rootActions';
 import { CLEAR_TAGS, GET_TAGS_FAILED, GET_TAGS_SUCCESS } from './constants';
-import { IReduxDispatch, IReduxState } from '../createStore';
 import { ITagStoreState } from './reducer';
 
-export const getTags: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getTags: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
 
     return axios
-      .get(`/tags`)
+      .get('/tags')
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'Page not found', hasError: true, code: 404 as Core.TErrorCode };
+          const error = {
+            message: 'Page not found',
+            hasError: true,
+            code: 404 as Core.TErrorCode,
+          };
           dispatch(setAppError(true));
           return dispatch(getTagsFailed(error));
         }
@@ -37,18 +47,16 @@ export const getTags: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRedu
 
 export const getTagsSuccess = (data: ITagStoreState[]) => ({
   type: GET_TAGS_SUCCESS,
-  payload: [
-    ...data
-  ]
+  payload: [...data],
 });
 
 export const getTagsFailed = (error: Core.IErrorResponse | AxiosError) => ({
   type: GET_TAGS_FAILED,
   payload: {
-    error
-  }
+    error,
+  },
 });
 
 export const clearTags = () => ({
-  type: CLEAR_TAGS
+  type: CLEAR_TAGS,
 });

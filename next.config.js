@@ -14,7 +14,7 @@ const withFonts = require("next-fonts");
 const env = require("./config");
 const aliases = require("./config/webpack/aliases");
 
-const { PHASE_PRODUCTION_SERVER } = require("next/constants");
+const { PHASE_PRODUCTION_SERVER, PHASE_PRODUCTION_BUILD } = require("next/constants");
 
 const {
   ...publicRuntimeConfig
@@ -85,11 +85,16 @@ module.exports = (phase) => {
         );
 
         if (options.isServer) {
+          // Do not run type checking twice
+          const tslintConfig = phase === PHASE_PRODUCTION_BUILD
+            ? path.join(__dirname, 'tslint.json')
+            : undefined;
+
           // Do not run type checking twice:
           config.plugins.push(new ForkTsCheckerWebpackPlugin({
             watch: path.join(__dirname, "src"),
             tsconfig: path.join(__dirname, "tsconfig.json"),
-            tslint: path.join(__dirname, "tslint.json")
+            tslint: tslintConfig
           }));
         }
 

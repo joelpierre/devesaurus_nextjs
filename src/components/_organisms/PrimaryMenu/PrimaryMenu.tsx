@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 
 import { MenuItem } from '@jpp/atoms/MenuItem/MenuItem';
 
@@ -12,13 +12,11 @@ interface IPrimaryMenuProps {
   setMenuState: (e: any) => void;
 }
 
-export const PrimaryMenu: FunctionComponent<IPrimaryMenuProps> = (
-  {
-    className,
-    menuItems,
-    setMenuState
-  }
-) => (
+export const PrimaryMenu: FunctionComponent<IPrimaryMenuProps> = ({
+  className,
+  menuItems,
+  setMenuState,
+}) => (
   <nav className={classNames(className, styles.primaryMenu)}>
     <ul className={styles.primaryMenuList}>
       {menuItems.map((menuItem: Core.IMenuItem, index: number) => {

@@ -1,7 +1,8 @@
+import { AnyAction } from 'redux';
+
+import { updateObject } from '../../utils';
 import { ITagStoreState } from '../tags/reducer';
 import * as actions from './constants';
-import { AnyAction } from 'redux';
-import { updateObject } from '../../utils';
 
 const initialState = {} as ITagStoreState;
 

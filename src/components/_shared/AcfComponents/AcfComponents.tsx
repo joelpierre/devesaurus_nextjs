@@ -1,16 +1,17 @@
 import React, { ComponentType, FunctionComponent, memo } from 'react';
-import FeaturedWords from '@jpp/organisms/FeaturedWords';
+
 import { ContentBlock } from '@jpp/organisms/ContentBlock/ContentBlock';
+import { CtaBanner } from '@jpp/organisms/CtaBanner/CtaBanner';
+import FeaturedWords from '@jpp/organisms/FeaturedWords';
+import { HeroSplash } from '@jpp/organisms/HeroSplash/HeroSplash';
 import { ImageBlock } from '@jpp/organisms/ImageBlock/ImageBlock';
 import { ImageScroller } from '@jpp/organisms/ImageScroller/ImageScroller';
+import { InlineQuote } from '@jpp/organisms/InlineQuote/InlineQuote';
 import { PageHero } from '@jpp/organisms/PageHero/PageHero';
 import { PressPack } from '@jpp/organisms/PressPack/PressPack';
+import Sponsors from '@jpp/organisms/Sponsors';
 import { Testimonials } from '@jpp/organisms/Testimonials/Testimonials';
 import { TextBlock } from '@jpp/organisms/TextBlock/TextBlock';
-import { InlineQuote } from '@jpp/organisms/InlineQuote/InlineQuote';
-import { HeroSplash } from '@jpp/organisms/HeroSplash/HeroSplash';
-import { CtaBanner } from '@jpp/organisms/CtaBanner/CtaBanner';
-import Sponsors from '@jpp/organisms/Sponsors';
 
 interface IAcfComponentsProps {
   className?: string;
@@ -34,7 +35,7 @@ enum EAcfComponentType {
   Testimonials = 'testimonials',
   TextBlock = 'text_block',
   FeaturedWords = 'featured_words',
-  Sponsors = 'sponsors'
+  Sponsors = 'sponsors',
 }
 
 const ACF_COMPONENT_MAP: IAcfComponentMap = {
@@ -49,42 +50,39 @@ const ACF_COMPONENT_MAP: IAcfComponentMap = {
   [EAcfComponentType.Testimonials]: Testimonials,
   [EAcfComponentType.TextBlock]: TextBlock,
   [EAcfComponentType.FeaturedWords]: FeaturedWords,
-  [EAcfComponentType.Sponsors]: Sponsors
+  [EAcfComponentType.Sponsors]: Sponsors,
 };
 
-export const AcfComponents: FunctionComponent<IAcfComponentsProps> = (
-  {
-    components,
-    page_theme
-  }
-) => {
+export const AcfComponents: FunctionComponent<IAcfComponentsProps> = ({
+  components,
+  page_theme,
+}) => {
   return (
     <>
-      {components && components.map(
-        (component, index): JSX.Element => {
-          const componentName: string = component.acf_fc_layout!;
+      {components &&
+        components.map(
+          (component, index): JSX.Element => {
+            const componentName: string = component.acf_fc_layout!;
 
-          const componentProps = {
-            ...component,
-            page_theme
-          };
+            const componentProps = {
+              ...component,
+              page_theme,
+            };
 
-          const Component: ComponentType<any> = ACF_COMPONENT_MAP[componentName];
+            const Component: ComponentType<any> =
+              ACF_COMPONENT_MAP[componentName];
 
-          if (!Component) {
-            console.warn('componentName', componentName);
+            if (!Component) {
+              console.warn('componentName', componentName);
+            }
+
+            return Component ? (
+              <Component key={index} {...componentProps} />
+            ) : (
+              <React.Fragment key={index} />
+            );
           }
-
-          return Component ? (
-            <Component
-              key={index}
-              {...componentProps}
-            />
-          ) : (
-            <React.Fragment key={index} />
-          );
-        }
-      )}
+        )}
     </>
   );
 };

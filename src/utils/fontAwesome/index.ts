@@ -1,70 +1,72 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faCode,
-  faBracketsCurly,
-  faTerminal,
-  faCodeCommit,
-  faCodeBranch,
-  faAtomAlt,
-  faTint,
-  faPaintBrush,
-  faBooks,
-  faFont,
-  faSitemap,
-  faAnalytics,
-  faServer,
-  faUsers,
-  faIcons,
-  faAd,
-  faObjectGroup,
-  faNewspaper,
-  faBuilding,
-  faCheck,
-  faTimes,
-  faLink,
-  faAngleDoubleRight,
-  faEnvelope,
-  faEnvelopeSquare,
-  faArrowUp,
-  faChartLine,
-  faBrowser,
-  faPalette
-} from '@fortawesome/pro-regular-svg-icons';
-import {
-  faHeart,
-  faPhone,
-  faSearch,
-  faHandsHelping
-} from '@fortawesome/pro-solid-svg-icons';
-import {
-  faFacebookSquare,
+  faAws,
+  faBitbucket,
+  faCss3,
   faFacebook,
   faFacebookF,
+  faFacebookSquare,
   faGit,
-  faAws,
-  faNodeJs,
+  faGithub,
   faGoogle,
-  faCss3,
   faHtml5,
+  faInstagram,
+  faLinkedin,
+  faLinkedinIn,
+  faNodeJs,
   faPhp,
   faPython,
   faTwitter,
   faTwitterSquare,
+  faWhatsapp,
+  faWhatsappSquare,
   faYoutube,
   faYoutubeSquare,
-  faInstagram,
-  faLinkedin,
-  faLinkedinIn,
-  faGithub,
-  faBitbucket, faWhatsappSquare, faWhatsapp
 } from '@fortawesome/free-brands-svg-icons';
+import {
+  faAd,
+  faAnalytics,
+  faAngleDoubleRight,
+  faArrowUp,
+  faAtomAlt,
+  faBooks,
+  faBracketsCurly,
+  faBrowser,
+  faBuilding,
+  faChartLine,
+  faCheck,
+  faCode,
+  faCodeBranch,
+  faCodeCommit,
+  faEnvelope,
+  faEnvelopeSquare,
+  faFont,
+  faIcons,
+  faLink,
+  faNewspaper,
+  faObjectGroup,
+  faPaintBrush,
+  faPalette,
+  faServer,
+  faSitemap,
+  faTerminal,
+  faTimes,
+  faTint,
+  faUsers,
+} from '@fortawesome/pro-regular-svg-icons';
+import {
+  faHandsHelping,
+  faHeart,
+  faPhone,
+  faSearch,
+} from '@fortawesome/pro-solid-svg-icons';
 
 export enum EFontAwesomeType {
   solid = 'fas',
   regular = 'far',
   light = 'fal',
   brand = 'fab',
-  duotone = 'fad'
+  duotone = 'fad',
 }
 
 /**
@@ -128,5 +130,5 @@ export default {
       faGithub,
       faBitbucket,
       faLink
-    )
+    ),
 };

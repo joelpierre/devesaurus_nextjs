@@ -101,6 +101,7 @@
       true,
       "allow-null-check"
     ],
+    "adjacent-overload-signatures": true,
     "typedef": [
       true,
       "parameter",
@@ -167,6 +168,7 @@
     "no-unused-expression": {
       "severity": "warning"
     },
+    "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "only-arrow-functions": {
       "severity": "warning"

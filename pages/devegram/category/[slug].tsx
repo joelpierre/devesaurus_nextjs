@@ -2,10 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+
 import { ICategoryStoreState } from '../../../src/store/categories/reducer';
-import { clearCategory, getCategory } from '../../../src/store/rootActions';
 import { getCategoryFromState } from '../../../src/store/category/selectors';
 import { IReduxState } from '../../../src/store/createStore';
+import { clearCategory, getCategory } from '../../../src/store/rootActions';
+import { NOT_FOUND_STATUS_CODE } from '../../../src/utils';
 
 interface IDevinitionCategoryProps {
   slug: string;
@@ -28,14 +30,14 @@ export type TDevinitionCategory =
 class DevinitionCategory extends PureComponent<TDevinitionCategory> {
   static async getInitialProps({ query: { slug }, store, res }: TTemplateInitialProps) {
     if (slug) {
-      await store.dispatch(getCategory(slug));
+      await store.dispatch(getCategory(slug) as any);
     }
 
     const state: IReduxState = store.getState();
     const category: ICategoryStoreState = getCategoryFromState(state);
 
-    if (category.error) {
-      res.statusCode = category.error.code;
+    if (category.error && res) {
+      res.statusCode = category.error.code ? category.error.code : NOT_FOUND_STATUS_CODE as any;
       return { error: category.error };
     }
 

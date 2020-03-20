@@ -1,7 +1,9 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import React, { FunctionComponent } from 'react';
+
 import { EPageType } from '@jpp/typings/enums';
+
 import { getDynamicAs, getDynamicPage } from '../../../utils';
 import styles from './AnchorLink.scss';
 
@@ -14,30 +16,28 @@ interface IAnchorLinkProps {
   withStyles?: boolean;
 }
 
-const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
-  {
-    children,
-    className,
-    behaviour = 'router',
-    link,
-    onClick,
-    pageType = EPageType.Page,
-    withStyles = true
-  }
-) => {
+const AnchorLink: FunctionComponent<IAnchorLinkProps> = ({
+  children,
+  className,
+  behaviour = 'router',
+  link,
+  onClick,
+  pageType = EPageType.Page,
+  withStyles = true,
+}) => {
   let Element: JSX.Element;
 
   const defaultProps = {
     className: classNames(styles.AnchorLink, className, {
-      [styles['AnchorLink--with-styles']]: withStyles
+      [styles['AnchorLink--with-styles']]: withStyles,
     }),
-    onClick
+    onClick,
   };
 
   switch (behaviour) {
     case 'anchor':
       Element = (
-        <a href={link} {...defaultProps} >
+        <a href={link} {...defaultProps}>
           {children}
         </a>
       );
@@ -46,9 +46,7 @@ const AnchorLink: FunctionComponent<IAnchorLinkProps> = (
     case 'router':
       Element = (
         <Link href={getDynamicPage(pageType)} as={getDynamicAs(pageType, link)}>
-          <a {...defaultProps}>
-            {children}
-          </a>
+          <a {...defaultProps}>{children}</a>
         </Link>
       );
       break;

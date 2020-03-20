@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import React, { PureComponent } from 'react';
+
 import { FooterBottom } from './components/FooterBottom/FooterBottom';
 import { FooterTop } from './components/FooterTop/FooterTop';
-
 import styles from './PrimaryFooter.scss';
 
 export interface IPrimaryFooterProps {
@@ -25,7 +25,7 @@ export class PrimaryFooter extends PureComponent<TPrimaryFooter> {
       footerMenu,
       company_name,
       company_slogan,
-      general_email
+      general_email,
     } = this.props;
 
     return (

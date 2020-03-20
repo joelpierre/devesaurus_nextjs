@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+
+import { IReduxState } from '../../../src/store/createStore';
 import { clearWordCategory, getWordCategory, getWordCategoryWords } from '../../../src/store/rootActions';
 import { IWordCategoryStoreState } from '../../../src/store/word_categories/reducer';
-import { PageHandler } from '../../../src/utils/PageHandler/PageHandler';
-import { IReduxState } from '../../../src/store/createStore';
 import { getWordCategoryFromState } from '../../../src/store/word_category/selectors';
+import { PageHandler } from '../../../src/utils/PageHandler/PageHandler';
 
 interface IDevinitionCategoryProps {
   slug: string;
@@ -29,15 +30,15 @@ export type TDevinitionCategory =
 class DevinitionCategory extends PureComponent<TDevinitionCategory> {
   static async getInitialProps({ query: { slug }, store, res }: TTemplateInitialProps) {
     if (slug) {
-      await store.dispatch(getWordCategory(slug));
-      await store.dispatch(getWordCategoryWords(slug));
+      await store.dispatch(getWordCategory(slug) as any);
+      await store.dispatch(getWordCategoryWords(slug) as any);
     }
 
     const state: IReduxState = store.getState();
     const wordCategory: IWordCategoryStoreState = getWordCategoryFromState(state);
 
-    if (wordCategory.error) {
-      res.statusCode = wordCategory.error.code;
+    if (wordCategory.error && res) {
+      res.statusCode = wordCategory.error.code ? wordCategory.error.code : 404 as any;
       return { error: wordCategory.error };
     }
 

@@ -1,26 +1,35 @@
+import { AxiosError, AxiosResponse } from 'axios';
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
+
 import axios from '../../utils/axios/';
-
-import { CLEAR_POSTS, GET_POSTS_FAILED, GET_POSTS_SUCCESS } from './constants';
-import { IReduxDispatch, IReduxState } from '../createStore';
 import { setAppError, setAppLoading } from '../core/actions';
-import { AxiosError, AxiosResponse } from 'axios';
+import { IReduxDispatch, IReduxState } from '../createStore';
 import { IWordStoreState } from '../word/reducer';
+import { CLEAR_POSTS, GET_POSTS_FAILED, GET_POSTS_SUCCESS } from './constants';
 
-export const getPosts: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getPosts: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
 
     return axios
-      .get(`/posts`)
+      .get('/posts')
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'Posts not found', hasError: true, code: 404 as Core.TErrorCode };
+          const error = {
+            message: 'Posts not found',
+            hasError: true,
+            code: 404 as Core.TErrorCode,
+          };
           dispatch(setAppError(true));
           return dispatch(getPostsFailed(error));
         }
@@ -36,7 +45,12 @@ export const getPosts: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRed
   };
 };
 
-export const getCategoryPosts: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = (slug: string) => {
+export const getCategoryPosts: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = (slug: string) => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
@@ -48,7 +62,11 @@ export const getCategoryPosts: ActionCreator<ThunkAction<Promise<any>, IReduxSta
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'No words found for that category', hasError: true, code: 404 as Core.TErrorCode };
+          const error = {
+            message: 'No words found for that category',
+            hasError: true,
+            code: 404 as Core.TErrorCode,
+          };
           dispatch(setAppError(true));
           return dispatch(getPostsFailed(error));
         }
@@ -64,7 +82,12 @@ export const getCategoryPosts: ActionCreator<ThunkAction<Promise<any>, IReduxSta
   };
 };
 
-export const getTagPosts: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = (slug: string) => {
+export const getTagPosts: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = (slug: string) => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
@@ -76,7 +99,11 @@ export const getTagPosts: ActionCreator<ThunkAction<Promise<any>, IReduxState, I
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'No words found for that tag', hasError: true, code: 404 as Core.TErrorCode };
+          const error = {
+            message: 'No words found for that tag',
+            hasError: true,
+            code: 404 as Core.TErrorCode,
+          };
           dispatch(setAppError(true));
           return dispatch(getPostsFailed(error));
         }
@@ -94,18 +121,16 @@ export const getTagPosts: ActionCreator<ThunkAction<Promise<any>, IReduxState, I
 
 export const getPostsSuccess = (data: IWordStoreState[]) => ({
   type: GET_POSTS_SUCCESS,
-  payload: [
-    ...data
-  ]
+  payload: [...data],
 });
 
 export const getPostsFailed = (error: Core.IErrorResponse | AxiosError) => ({
   type: GET_POSTS_FAILED,
   payload: {
-    error
-  }
+    error,
+  },
 });
 
 export const clearPosts = () => ({
-  type: CLEAR_POSTS
+  type: CLEAR_POSTS,
 });

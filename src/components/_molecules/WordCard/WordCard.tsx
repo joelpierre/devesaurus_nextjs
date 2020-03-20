@@ -1,12 +1,13 @@
-import React, { PureComponent } from 'react';
-import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import Link from 'next/link';
-import { Heading } from '@jpp/components/_shared/Heading/Heading';
-import { mapTaxonomyIcon, mapTaxonomyTheme } from '../../../utils';
-import { Label } from '@jpp/atoms/Label/Label';
-import { IWordStoreState } from '../../../store/word/reducer';
+import React, { PureComponent } from 'react';
 
+import { Label } from '@jpp/atoms/Label/Label';
+import { Heading } from '@jpp/components/_shared/Heading/Heading';
+
+import { IWordStoreState } from '../../../store/word/reducer';
+import { mapTaxonomyIcon, mapTaxonomyTheme } from '../../../utils';
 import styles from './WordCard.scss';
 
 interface IWordCardProps {
@@ -27,34 +28,34 @@ class WordCard extends PureComponent<IWordCardProps> {
           className,
           {
             'theme--tint-alpha': !contrast,
-            'theme--tint-beta': contrast
-          }
+            'theme--tint-beta': contrast,
+          },
         ])}
       >
-        <Link href={`/devinition/[slug]`} as={`/devinition/${slug}`}>
+        <Link href={'/devinition/[slug]'} as={`/devinition/${slug}`}>
           <a className={styles.WordCard__link}>
             <span className={styles['WordCard__link-text']}>{title}</span>
           </a>
         </Link>
 
-        <header
-          className={styles.WordCard__header}
-        >
-          <Heading
-            priority="3"
-            className={styles.WordCard__heading}
-          >
+        <header className={styles.WordCard__header}>
+          <Heading priority="3" className={styles.WordCard__heading}>
             {title}
           </Heading>
         </header>
 
-        {(pronunciation) && (
+        {pronunciation && (
           <div className={styles.WordCard__body}>
             {pronunciation && (
               <p className={styles.WordCard__copy}>
                 <strong
-                  className={classNames(styles['WordCard__copy--strong'], 'display-block')}
-                >Pronunciation:&nbsp;</strong>
+                  className={classNames(
+                    styles['WordCard__copy--strong'],
+                    'display-block'
+                  )}
+                >
+                  Pronunciation:&nbsp;
+                </strong>
                 {acf.pronunciation}
               </p>
             )}

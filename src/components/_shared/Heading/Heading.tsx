@@ -1,6 +1,8 @@
-import React, { CSSProperties, FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { CSSProperties, FunctionComponent } from 'react';
+
 import { EPriority } from '@jpp/typings/enums';
+
 import styles from './Heading.scss';
 
 interface IHeadingProps {
@@ -10,19 +12,17 @@ interface IHeadingProps {
   innerHTML: boolean;
 }
 
-export const Heading: FunctionComponent<Partial<IHeadingProps>> = (
-  {
-    priority = EPriority.One,
-    children,
-    className,
-    style,
-    innerHTML = true
-  }
-) => {
+export const Heading: FunctionComponent<Partial<IHeadingProps>> = ({
+  priority = EPriority.One,
+  children,
+  className,
+  style,
+  innerHTML = true,
+}) => {
   const Tag: any = `h${priority}`;
   const defaultProps = {
     className: classNames([`${styles[`heading-${priority}`]}`, className]),
-    style
+    style,
   };
 
   if (innerHTML) {

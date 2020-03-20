@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 
+import Image from '@jpp/atoms/Image/Image';
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
 import { Row } from '@jpp/components/_shared/Grid/Row/Row';
@@ -11,19 +12,17 @@ import { ETheme } from '@jpp/typings/enums';
 
 import styles from './PressPack.scss';
 
-export const PressPack: FunctionComponent<Partial<Core.IAcfComponent>> = (
-  {
-    className,
-    heading,
-    copy,
-    brand_zip_file,
-    image,
-    theme
-  }
-) => {
-  const { url: { source_url: ZIP_URL } } = brand_zip_file;
-  const { source_url, media_details: { width, height } } = image;
-  const imageAttrs = { loading: 'lazy' };
+export const PressPack: FunctionComponent<Partial<Core.IAcfComponent>> = ({
+  className,
+  heading,
+  copy,
+  brand_zip_file,
+  image,
+  theme,
+}) => {
+  const {
+    url: { source_url: ZIP_URL },
+  } = brand_zip_file;
 
   return (
     <Section
@@ -55,14 +54,7 @@ export const PressPack: FunctionComponent<Partial<Core.IAcfComponent>> = (
             colLg={6}
             className={classNames(styles.pressPackImageWrapper, 'ml-auto')}
           >
-            <img
-              src={source_url}
-              className={styles.pressPackImage}
-              width={width}
-              height={height}
-              alt="Press pack supportive image"
-              {...imageAttrs}
-            />
+            <Image className={styles.pressPackImage} image={image} />
           </Flex>
         </Row>
       </Container>

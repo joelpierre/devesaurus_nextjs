@@ -1,13 +1,15 @@
 import { IReduxState } from '../createStore';
 import { IPostStoreState } from '../post/reducer';
-import { ISearchStoreState } from './reducer';
 import { IWordStoreState } from '../word/reducer';
+import { ISearchStoreState } from './reducer';
 
 export const getSearchFromState = (state: IReduxState): ISearchStoreState => {
   return state && state.search;
 };
 
-export const getSearchPostsFromState = (state: IReduxState): IPostStoreState[] => {
+export const getSearchPostsFromState = (
+  state: IReduxState
+): IPostStoreState[] => {
   const search = getSearchFromState(state);
   const posts = search.posts;
 
@@ -18,7 +20,9 @@ export const getSearchPostsFromState = (state: IReduxState): IPostStoreState[] =
   return [] as IPostStoreState[];
 };
 
-export const getSearchWordsFromState = (state: IReduxState): IWordStoreState[] => {
+export const getSearchWordsFromState = (
+  state: IReduxState
+): IWordStoreState[] => {
   const search = getSearchFromState(state);
   const words = search.words;
 

@@ -1,7 +1,9 @@
 import { AnyAction } from 'redux';
-import * as actions from './constants';
-import { IPostStoreState } from '../post/reducer';
+
 import { TReduxError } from '@jpp/typings/index';
+
+import { IPostStoreState } from '../post/reducer';
+import * as actions from './constants';
 
 const initialState = [] as IPostStoreState[];
 

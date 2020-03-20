@@ -1,15 +1,16 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import React, { FunctionComponent } from 'react';
+
 import Icons from '@jpp/atoms/Icon/Icon';
 import { Container } from '@jpp/components/_shared/Grid/Container/Container';
 import { Flex } from '@jpp/components/_shared/Grid/Flex/Flex';
 import { Row } from '@jpp/components/_shared/Grid/Row/Row';
+import FeaturedWordsList from '@jpp/molecules/FeaturedWordsList';
+import FooterMenu from '@jpp/molecules/FooterMenu';
 
 import footerStyles from '../../PrimaryFooter.scss';
 import styles from './FooterTop.scss';
-import FeaturedWordsList from '@jpp/molecules/FeaturedWordsList';
-import FooterMenu from '@jpp/molecules/FooterMenu';
 
 interface IFooterTopProps {
   className?: string;
@@ -18,13 +19,11 @@ interface IFooterTopProps {
   footerMenu: Core.IMenuItem[];
 }
 
-export const FooterTop: FunctionComponent<IFooterTopProps> = (
-  {
-    className,
-    companySlogan,
-    generalEmail
-  }
-) => {
+export const FooterTop: FunctionComponent<IFooterTopProps> = ({
+  className,
+  companySlogan,
+  generalEmail,
+}) => {
   return (
     <article className={classNames(className, styles.FooterTop)}>
       <Container fluid={true}>
@@ -54,9 +53,7 @@ export const FooterTop: FunctionComponent<IFooterTopProps> = (
               <p className={footerStyles.PrimaryFooter__copy}>
                 {companySlogan}
               </p>
-              <p className={footerStyles.PrimaryFooter__copy}>
-                {generalEmail}
-              </p>
+              <p className={footerStyles.PrimaryFooter__copy}>{generalEmail}</p>
             </div>
           </Flex>
 

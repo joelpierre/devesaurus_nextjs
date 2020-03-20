@@ -1,21 +1,28 @@
-import { TFuncValueVoid, TFuncVoid } from '@jpp/typings/index';
 import { applyMiddleware, compose, createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import rootReducer from './rootReducer';
 
+import { TFuncValueVoid, TFuncVoid } from '@jpp/typings/index';
+
+import ConfigProvider from '../services/configProvider';
+import {
+  ICategoryStoreState,
+  TCategoriesStoreState,
+} from './categories/reducer';
 import { ICoreStoreState } from './core/reducer';
 import { IPageStoreState } from './page/reducer';
 import { IPostStoreState } from './post/reducer';
-import { ISearchStoreState } from './search/reducer';
-import { IWordStoreState } from './word/reducer';
-import { ITagStoreState, TTagsStoreState } from './tags/reducer';
-import { ICategoryStoreState, TCategoriesStoreState } from './categories/reducer';
-import { IWordTagStoreState, TWordTagsStoreState } from './word_tags/reducer';
-import { IWordCategoryStoreState, TWordCategoriesStoreState } from './word_categories/reducer';
 import { TPostsStoreState } from './posts/reducer';
+import rootReducer from './rootReducer';
+import { ISearchStoreState } from './search/reducer';
+import { ITagStoreState, TTagsStoreState } from './tags/reducer';
+import { IWordStoreState } from './word/reducer';
 import { IWordsStoreState, TWordsStoreState } from './words/reducer';
-import ConfigProvider from '../services/configProvider';
+import {
+  IWordCategoryStoreState,
+  TWordCategoriesStoreState,
+} from './word_categories/reducer';
+import { IWordTagStoreState, TWordTagsStoreState } from './word_tags/reducer';
 
 export interface IReduxState {
   core: ICoreStoreState;
@@ -77,7 +84,11 @@ export type TReduxProps = IReduxState & IReduxDispatch;
  */
 const makeStore = (initialState = {} as IReduxState): Store => {
   if (ConfigProvider.getValue('NODE_ENV') === 'production') {
-    return createStore(rootReducer, initialState, compose(applyMiddleware(thunk)));
+    return createStore(
+      rootReducer,
+      initialState,
+      compose(applyMiddleware(thunk))
+    );
   }
 
   return createStore(

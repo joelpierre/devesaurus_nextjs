@@ -1,13 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconName } from '@fortawesome/fontawesome-svg-core';
+import React, { FunctionComponent } from 'react';
+
 import { EPageType } from '@jpp/typings/enums';
 
-import { EFontAwesomeType } from '../../../utils/fontAwesome';
 import { getDynamicAs, getDynamicPage } from '../../../utils';
-
+import { EFontAwesomeType } from '../../../utils/fontAwesome';
 import styles from './MenuItem.scss';
 
 interface IMenuItemProps {
@@ -20,51 +20,61 @@ interface IMenuItemProps {
 
 export enum EIconPosition {
   Left = 'left',
-  Right = 'right'
+  Right = 'right',
 }
 
 type TMenuItemProps = IMenuItemProps & Core.IMenuItem;
 
-export const MenuItem: FunctionComponent<TMenuItemProps> = (
-  {
-    className,
-    linkClassName,
-    iconPosition = EIconPosition.Left,
-    title,
-    classes,
-    slug,
-    url,
-    onClick,
-    pageType = EPageType.Page
-  }
-) => {
-
+export const MenuItem: FunctionComponent<TMenuItemProps> = ({
+  className,
+  linkClassName,
+  iconPosition = EIconPosition.Left,
+  title,
+  classes,
+  slug,
+  url,
+  onClick,
+  pageType = EPageType.Page,
+}) => {
   if (title === 'divider') {
     return null;
   }
 
   const elClasses = classNames(styles.menuItemLink, linkClassName);
   const excludedClasses = ['external', 'divider'];
-  const updatedClasses = classes && classes.filter((classItem: string) => !excludedClasses.includes(classItem));
+  const updatedClasses =
+    classes &&
+    classes.filter((classItem: string) => !excludedClasses.includes(classItem));
   const iconName = updatedClasses && updatedClasses[0];
   const iconClasses = classNames(styles.menuItemIcon, {
-    [styles.menuItemIconRed]: iconName === 'heart'
+    [styles.menuItemIconRed]: iconName === 'heart',
   });
 
   return (
     <li
-      role={classes && !classes.includes('external') && onClick ? 'button' : undefined}
-      onClick={classes && !classes.includes('external') ? onClick : undefined}
-      className={classNames(
-        styles.menuItem,
-        className,
-        {
-          [styles.menuItemIconLeft]: iconPosition === EIconPosition.Left && !!iconName,
-          [styles.menuItemIconRight]: iconPosition === EIconPosition.Right && !!iconName
-        })
+      role={
+        classes && !classes.includes('external') && onClick
+          ? 'button'
+          : undefined
       }
+      onClick={classes && !classes.includes('external') ? onClick : undefined}
+      className={classNames(styles.menuItem, className, {
+        [styles.menuItemIconLeft]:
+          iconPosition === EIconPosition.Left && !!iconName,
+        [styles.menuItemIconRight]:
+          iconPosition === EIconPosition.Right && !!iconName,
+      })}
     >
-      {getEl(title, url, slug, classes, pageType, elClasses, iconName, iconClasses)}
+      {getEl(
+        title,
+        url,
+        slug,
+        classes,
+        pageType,
+        elClasses,
+        iconName,
+        iconClasses
+      )}
     </li>
   );
 };
@@ -80,10 +90,14 @@ const getIconPrefix = (iconName): EFontAwesomeType => {
   }
 };
 
-const getContent = (title: string, iconName?: string, iconClasses?: string): JSX.Element => (
+const getContent = (
+  title: string,
+  iconName?: string,
+  iconClasses?: string
+): JSX.Element => (
   <div
     className={classNames(styles.menuItemContent, {
-      [styles.menuItemContentHasIcon]: !!iconName
+      [styles.menuItemContentHasIcon]: !!iconName,
     })}
   >
     {!!iconName && (
@@ -108,26 +122,15 @@ const getEl = (
 ) => {
   if (menuClasses.includes('external')) {
     return (
-      <a
-        href={url}
-        target="_blank"
-        className={elClasses}
-      >
+      <a href={url} target="_blank" className={elClasses}>
         {getContent(title, iconName, iconClasses)}
       </a>
     );
   }
 
   return (
-    <Link
-      href={getDynamicPage(pageType)}
-      as={getDynamicAs(pageType, slug)}
-    >
-      <a
-        className={elClasses}
-      >
-        {getContent(title, iconName, iconClasses)}
-      </a>
+    <Link href={getDynamicPage(pageType)} as={getDynamicAs(pageType, slug)}>
+      <a className={elClasses}>{getContent(title, iconName, iconClasses)}</a>
     </Link>
   );
 };

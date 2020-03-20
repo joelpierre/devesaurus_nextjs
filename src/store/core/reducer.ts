@@ -1,8 +1,10 @@
 import { AnyAction } from 'redux';
+
 import { TReduxError } from '@jpp/typings/index';
-import * as actions from './constants';
+
 import { updateObject } from '../../utils';
 import { APP_TITLE, SITE_DESCRIPTION } from '../../utils/constants';
+import * as actions from './constants';
 
 export interface ICoreStoreState {
   title: string;
@@ -30,7 +32,7 @@ const initialState: ICoreStoreState = {
   simpleMenu: [],
   footerMenu: [],
   termsMenu: [],
-  initialFetch: false
+  initialFetch: false,
 };
 
 export const coreReducer = (

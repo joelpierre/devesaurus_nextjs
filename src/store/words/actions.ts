@@ -1,33 +1,42 @@
+import { AxiosError, AxiosResponse } from 'axios';
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import axios from '../../utils/axios/';
 
+import axios from '../../utils/axios/';
+import { setAppError, setAppLoading } from '../core/actions';
+import { IReduxDispatch, IReduxState } from '../createStore';
+import { IWordStoreState } from '../word/reducer';
 import {
   CLEAR_FEATURED_WORDS,
   CLEAR_WORDS,
   GET_FEATURED_WORDS_FAILED,
   GET_FEATURED_WORDS_SUCCESS,
   GET_WORDS_FAILED,
-  GET_WORDS_SUCCESS
+  GET_WORDS_SUCCESS,
 } from './constants';
-import { IReduxDispatch, IReduxState } from '../createStore';
-import { setAppError, setAppLoading } from '../core/actions';
-import { AxiosError, AxiosResponse } from 'axios';
-import { IWordStoreState } from '../word/reducer';
 
-export const getWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getWords: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
 
     return axios
-      .get(`/words`)
+      .get('/words')
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'Words not found', hasError: true, code: 404 as Core.TErrorCode };
+          const error = {
+            message: 'Words not found',
+            hasError: true,
+            code: 404 as Core.TErrorCode,
+          };
           dispatch(setAppError(true));
           return dispatch(getWordsFailed(error));
         }
@@ -43,19 +52,28 @@ export const getWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, IRed
   };
 };
 
-export const getFeaturedWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = () => {
+export const getFeaturedWords: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = () => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
 
     return axios
-      .get(`/featured-words`)
+      .get('/featured-words')
       .then((response: AxiosResponse) => {
         dispatch(setAppLoading(false));
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'Words not found', hasError: true, code: 404 as Core.TErrorCode };
+          const error = {
+            message: 'Words not found',
+            hasError: true,
+            code: 404 as Core.TErrorCode,
+          };
           dispatch(setAppError(true));
           return dispatch(getFeaturedWordsFailed(error));
         }
@@ -71,7 +89,12 @@ export const getFeaturedWords: ActionCreator<ThunkAction<Promise<any>, IReduxSta
   };
 };
 
-export const getCategoryWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = (slug: string) => {
+export const getCategoryWords: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = (slug: string) => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
@@ -83,7 +106,11 @@ export const getCategoryWords: ActionCreator<ThunkAction<Promise<any>, IReduxSta
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'No words found for that category', hasError: true, code: 404 as Core.TErrorCode };
+          const error = {
+            message: 'No words found for that category',
+            hasError: true,
+            code: 404 as Core.TErrorCode,
+          };
           dispatch(setAppError(true));
           return dispatch(getWordsFailed(error));
         }
@@ -99,7 +126,12 @@ export const getCategoryWords: ActionCreator<ThunkAction<Promise<any>, IReduxSta
   };
 };
 
-export const getTagWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, IReduxDispatch, AnyAction>> = (slug: string) => {
+export const getTagWords: ActionCreator<ThunkAction<
+  Promise<any>,
+  IReduxState,
+  IReduxDispatch,
+  AnyAction
+>> = (slug: string) => {
   return (dispatch: Dispatch): Promise<AnyAction> => {
     dispatch(setAppLoading(true));
     dispatch(setAppError(false));
@@ -111,7 +143,11 @@ export const getTagWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, I
 
         // We check for the error as wordpress doesn't return a 404.
         if (response.data.length === 0) {
-          const error = { message: 'No words found for that tag', hasError: true, code: 404 as Core.TErrorCode };
+          const error = {
+            message: 'No words found for that tag',
+            hasError: true,
+            code: 404 as Core.TErrorCode,
+          };
           dispatch(setAppError(true));
           return dispatch(getWordsFailed(error));
         }
@@ -129,36 +165,34 @@ export const getTagWords: ActionCreator<ThunkAction<Promise<any>, IReduxState, I
 
 export const getWordsSuccess = (data: IWordStoreState[]) => ({
   type: GET_WORDS_SUCCESS,
-  payload: [
-    ...data
-  ]
+  payload: [...data],
 });
 
 export const getWordsFailed = (error: Core.IErrorResponse | AxiosError) => ({
   type: GET_WORDS_FAILED,
   payload: {
-    error
-  }
+    error,
+  },
 });
 
 export const getFeaturedWordsSuccess = (data: IWordStoreState[]) => ({
   type: GET_FEATURED_WORDS_SUCCESS,
-  payload: [
-    ...data
-  ]
+  payload: [...data],
 });
 
-export const getFeaturedWordsFailed = (error: Core.IErrorResponse | AxiosError) => ({
+export const getFeaturedWordsFailed = (
+  error: Core.IErrorResponse | AxiosError
+) => ({
   type: GET_FEATURED_WORDS_FAILED,
   payload: {
-    error
-  }
+    error,
+  },
 });
 
 export const clearWords = () => ({
-  type: CLEAR_WORDS
+  type: CLEAR_WORDS,
 });
 
 export const clearFeaturedWords = () => ({
-  type: CLEAR_FEATURED_WORDS
+  type: CLEAR_FEATURED_WORDS,
 });

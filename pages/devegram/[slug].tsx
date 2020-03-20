@@ -1,14 +1,16 @@
-import React, { PureComponent } from 'react';
 import Link from 'next/link';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
-import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 import { ELayout } from '@jpp/typings/enums';
-import { clearPost, getPost } from '../../src/store/rootActions';
+import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
+
 import { IReduxState } from '../../src/store/createStore';
 import { IPostStoreState } from '../../src/store/post/reducer';
 import { getPostFromState } from '../../src/store/post/selectors';
+import { clearPost, getPost } from '../../src/store/rootActions';
+import { NOT_FOUND_STATUS_CODE } from '../../src/utils';
+import { PageHandler } from '../../src/utils/PageHandler/PageHandler';
 
 interface IDevegramPageProps {
   error: TReduxError;
@@ -28,14 +30,14 @@ type TDevegramPageProps = IDevegramPageProps & IStoreDevegramPageProps & IDispat
 class DevegramPage extends PureComponent<TDevegramPageProps> {
   static async getInitialProps({ query: { slug }, store, res }: TTemplateInitialProps) {
     if (slug) {
-      await store.dispatch(getPost(slug));
+      await store.dispatch(getPost(slug) as any);
     }
 
     const state: IReduxState = store.getState();
     const post: IPostStoreState = getPostFromState(state);
 
-    if (post.error) {
-      res.statusCode = post.error.code;
+    if (post.error && res) {
+      res.statusCode = post.error.code ? post.error.code : NOT_FOUND_STATUS_CODE as any;
 
       return { error: post.error };
     }

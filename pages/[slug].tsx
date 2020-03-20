@@ -2,13 +2,14 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import AcfComponents from '@jpp/components/_shared/AcfComponents/AcfComponents';
-import { PageHandler } from '../src/utils/PageHandler/PageHandler';
 import { TFuncVoid, TReduxError, TTemplateInitialProps } from '@jpp/typings/index';
 
-import { clearPage, getPage } from '../src/store/rootActions';
-import { IPageStoreState } from '../src/store/page/reducer';
 import { IReduxState } from '../src/store/createStore';
+import { IPageStoreState } from '../src/store/page/reducer';
 import { getPageFromState } from '../src/store/page/selectors';
+import { clearPage, getPage } from '../src/store/rootActions';
+import { NOT_FOUND_STATUS_CODE } from '../src/utils';
+import { PageHandler } from '../src/utils/PageHandler/PageHandler';
 
 interface IDefaultPageProps {
   slug: string;
@@ -28,20 +29,20 @@ export type TDefaultPage = IDefaultPageProps & IStoreDefaultPageProps & IDispatc
 class DefaultPage extends PureComponent<TDefaultPage> {
   static async getInitialProps({ query: { slug }, store, res }: TTemplateInitialProps) {
     if (slug) {
-      await store.dispatch(getPage(slug));
+      await store.dispatch(getPage(slug) as any);
     }
 
     const state: IReduxState = store.getState();
     const page: IPageStoreState = getPageFromState(state);
 
-    if (page.error) {
-      res.statusCode = page.error.code;
+    if (page.error && res) {
+      res.statusCode = page.error.code ? page.error.code : NOT_FOUND_STATUS_CODE as any;
       return { error: page.error };
     }
 
     // Because /home is a page in Wordpress we have to ensure that
     // users cannot navigate to this page
-    if (slug === 'home') {
+    if (slug === 'home' && res) {
       res.writeHead(301, { Location: '/' });
       res.end();
     }

@@ -1,20 +1,21 @@
-import 'source-map-support/register';
-import 'isomorphic-unfetch';
-import express, { Request, Response } from 'express';
-import path from 'path';
-import compression from 'compression';
 import bodyParser from 'body-parser';
+import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import helmet from 'helmet';
+import express, { Request, Response } from 'express';
 import frameGuard from 'frameguard';
-import nodeCache from 'node-cache';
+import helmet from 'helmet';
+import 'isomorphic-unfetch';
 import nextJs from 'next';
+import nodeCache from 'node-cache';
+import path from 'path';
+import 'source-map-support/register';
+
+import cacheControlMiddleware from './middleware/cache-control';
+import apiRoutes from './routes/api';
 
 // Import Middleware
-import cacheControlMiddleware from './middleware/cache-control';
 
 // Routes
-import apiRoutes from './routes/api';
 
 // Establish some basics
 const port = parseInt(process.env.SERVER_PORT || '3000', 10);
@@ -40,7 +41,7 @@ app.prepare().then(() => {
   server.use(
     cacheControlMiddleware({
       cache: cacheStore,
-      defaultTTL: process.env.CACHE_TTL
+      defaultTTL: process.env.CACHE_TTL,
     })
   );
 
@@ -58,7 +59,7 @@ app.prepare().then(() => {
     '/static',
     express.static(staticPath, {
       maxAge: '30d',
-      immutable: true
+      immutable: true,
     })
   );
 

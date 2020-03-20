@@ -1,8 +1,9 @@
-import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
+
+import { TFuncVoid } from '@jpp/typings/index';
 
 import styles from './Image.scss';
-import { TFuncVoid } from '@jpp/typings/index';
 
 interface IImageProps {
   className?: string;
@@ -12,18 +13,16 @@ interface IImageProps {
 }
 
 const Image: FunctionComponent<IImageProps> = (
-  props,
+  { className, image, onLoad, onError },
   ref: React.RefObject<HTMLImageElement>
 ) => {
-  const { className, image, onLoad, onError } = props;
-
   const imageAttributes = {
+    ref,
     src: image.url,
     className: classNames(styles.Image, className),
-    ref,
     height: image.height,
     width: image.width,
-    loading: 'lazy'
+    loading: 'lazy' as any,
   };
 
   return (
@@ -37,6 +36,7 @@ const Image: FunctionComponent<IImageProps> = (
 };
 
 Image.displayName = 'Image';
+// @ts-ignore
 const RefImage = React.forwardRef(Image);
 RefImage.displayName = 'RefImage';
 
