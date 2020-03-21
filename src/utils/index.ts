@@ -431,31 +431,26 @@ export const getDynamicPage = (pageType: EPageType | undefined): string => {
 
 export const getDynamicAs = (
   pageType: EPageType,
-  slug: string | undefined
-): string | undefined => {
+  slug: string = ''
+): string => {
   switch (pageType) {
-    case EPageType.Archive:
-      return undefined;
     case EPageType.Devinition:
     case EPageType.Devegram:
       return `/${pageType}/${slug}`;
     case EPageType.Home:
       return '/';
+    case EPageType.Archive:
     default:
       return `/${slug}`;
   }
 };
 
 export const getTaxonomySlug = (slug: ETaxonomy): string => {
-  switch (slug) {
-    case ETaxonomy.Category:
-      return 'category';
-    case ETaxonomy.PostTag:
-      return 'tag';
-    case ETaxonomy.WordTag:
-      return 'devinitions/tag';
-    default:
-    case ETaxonomy.WordCategory:
-      return 'devinitions/category';
-  }
+  const taxonomySlugMap: Record<ETaxonomy, string> = {
+    [ETaxonomy.Category]: 'category',
+    [ETaxonomy.PostTag]: 'tag',
+    [ETaxonomy.WordCategory]: 'devinitions/category',
+    [ETaxonomy.WordTag]: 'devinitions/tag',
+  };
+  return taxonomySlugMap[slug];
 };

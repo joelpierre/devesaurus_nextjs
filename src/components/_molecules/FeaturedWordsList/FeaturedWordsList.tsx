@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
 
 import { MenuItem } from '@jpp/atoms/MenuItem/MenuItem';
+import { EPageType } from '@jpp/typings/enums';
 
 import { IWordStoreState } from '../../../store/word/reducer';
 import styles from './FeaturedWordsList.scss';
@@ -30,6 +31,7 @@ export const FeaturedWordsList: FunctionComponent<TFeaturedWordsList> = ({
             className={styles.FeaturedWordList__item}
             linkClassName={styles.FeaturedWordList__link}
             title={title}
+            pageType={EPageType.Devinition}
             slug={slug}
           />
         );
