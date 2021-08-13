@@ -46,7 +46,7 @@
     "lodash": "^4.17.15",
     "lodash-es": "^4.17.15",
     "moxios": "^0.4.0",
-    "next": "^9.3.1",
+    "next": "^11.1.0",
     "next-fonts": "^1.0.3",
     "next-redux-wrapper": "^5.0.0",
     "next-routes": "^1.4.2",
